@@ -4248,6 +4248,16 @@
     ]
   },
   {
+    "path": "assets/items/event-shard.png",
+    "bytes": 241,
+    "sha256": "3d127f63067921483cf47f1007b2baf28c0e77f8a37e413c034eb32e7832f759",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/event-shard.png",
+    "reasons": [
+      "Verified runtime request during final browser QA; upstream HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/exp-candy-m.png",
     "bytes": 510,
     "sha256": "b1f1508b56f1591228f971f7b790699f14af3185cef0b6237db38ad7f6f88dd2",
@@ -4830,6 +4840,16 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/point-card.png",
+    "bytes": 229,
+    "sha256": "fed703c108d534ba4066cc07ab111dd4fa98de08d107166f113342ef93e847e1",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/point-card.png",
+    "reasons": [
+      "Verified runtime request during final browser QA; upstream HTTP 200"
     ]
   },
   {

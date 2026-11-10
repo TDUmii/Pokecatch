@@ -4,7 +4,7 @@ Bản chạy riêng để chơi trên máy tính và điện thoại, dựa trê
 
 Chơi trực tiếp: **https://tdumii.github.io/Pokecatch/**
 
-Bộ tài nguyên đã thu thập gồm 4.837 tệp, khoảng 72,2 MiB: 3.132 PNG, 1.318 GIF, 374 WEBP cùng SVG, intro và font. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Sự hiện diện của tài nguyên Mega không có nghĩa là tích hợp các chức năng quản trị hoặc mở khóa mọi tính năng của máy chủ gốc.
+Bộ tài nguyên đã thu thập gồm 4.839 tệp, khoảng 72,2 MiB: 3.134 PNG, 1.318 GIF, 374 WEBP cùng SVG, intro và font. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Sự hiện diện của tài nguyên Mega không có nghĩa là tích hợp các chức năng quản trị hoặc mở khóa mọi tính năng của máy chủ gốc.
 
 Tiến trình chơi được lưu trong trình duyệt trên từng thiết bị. Bản này không đồng bộ tài khoản, không sử dụng bảng xếp hạng hay giao dịch trực tuyến của trang gốc. Không nhập mật khẩu tài khoản gốc vào bản này.
 
