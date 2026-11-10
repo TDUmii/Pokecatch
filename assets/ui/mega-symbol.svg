@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="mg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3cac"/>
+      <stop offset="50%" stop-color="#784ba0"/>
+      <stop offset="100%" stop-color="#2b86c5"/>
+    </linearGradient>
+    <linearGradient id="dna" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffdf0"/>
+      <stop offset="45%" stop-color="#ffd54f"/>
+      <stop offset="100%" stop-color="#ff6ec7"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="29" fill="url(#mg)" stroke="#ffd54f" stroke-width="3"/>
+  <path d="M22 14 C42 14, 22 50, 42 50 M42 14 C22 14, 42 50, 22 50" fill="none" stroke="url(#dna)" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="25" y1="22" x2="39" y2="22" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <line x1="23" y1="32" x2="41" y2="32" stroke="#ffd54f" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="25" y1="42" x2="39" y2="42" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+</svg>

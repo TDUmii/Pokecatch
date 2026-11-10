@@ -1,0 +1,6 @@
+dist/
+.research/
+node_modules/
+*.log
+.playwright-cli/
+.impeccable/review/

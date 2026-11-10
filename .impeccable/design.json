@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T22:54:09.2786411+07:00",
+  "title": "Design System: PokéCatch của Umi",
+  "extensions": {
+    "shadows": [
+      {
+        "name": "utility-entry",
+        "value": "0 3px 12px #0005",
+        "purpose": "Separate the persistent offline entry from game art."
+      },
+      {
+        "name": "utility-dialog",
+        "value": "0 16px 48px #0008",
+        "purpose": "Lift the native modal over the dimmed game."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "utility-desktop",
+        "value": "901px"
+      }
+    ],
+    "motion": []
+  },
+  "components": [
+    {
+      "name": "Offline download button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The full-width primary action in the native offline dialog.",
+      "html": "<button class=\"offline-download\">Tải trọn bộ để chơi offline</button>",
+      "css": ".offline-download{display:block;width:100%;min-height:44px;padding:10px 14px;background:#f3cb53;color:#242334;border:1px solid #f3cb53;border-radius:8px;font:650 14px/1.3 system-ui;cursor:pointer}.offline-download:hover{background:#ffe18b}.offline-download:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}.offline-download:disabled{opacity:.6;cursor:wait}"
+    },
+    {
+      "name": "Save transfer actions",
+      "kind": "custom",
+      "refersTo": "button-secondary",
+      "description": "Balanced secondary export and import actions.",
+      "html": "<div class=\"save-actions\"><button>Xuất bản lưu</button><button>Nhập bản lưu</button></div>",
+      "css": ".save-actions{display:flex;gap:10px}.save-actions button{flex:1;min-height:44px;padding:10px 14px;background:#343b55;color:#fff;border:1px solid #737f9f;border-radius:8px;font:650 14px/1.3 system-ui;cursor:pointer}.save-actions button:hover{background:#465374}.save-actions button:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Hành trình pixel mang theo mình",
+    "overview": "Preserve the inherited dark pixel-game world and use a quiet, readable Vietnamese utility layer for offline downloads and local saves. The document records the scoped implementation and browser screenshots, not a redesign or physical-device test.",
+    "keyCharacteristics": [
+      "Inherited pixel art and dark game panels",
+      "Warm yellow primary utility action",
+      "Readable system type for Vietnamese instructions",
+      "Compact persistent offline entry",
+      "Native modal with clear progress and save transfer"
+    ],
+    "rules": [
+      {
+        "name": "The Action Hierarchy Rule",
+        "body": "One full-width yellow download action; save transfer remains a balanced secondary pair.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Instructions Rule",
+        "body": "System type for utility explanations; pixel type for inherited game surfaces.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do preserve game art and attribution.",
+      "Do report download status honestly.",
+      "Do preserve visible focus and touch-friendly controls."
+    ],
+    "donts": [
+      "Don't replace the game with dashboard styling.",
+      "Don't claim physical-device validation from browser screenshots.",
+      "Don't imply functional cloud or multiplayer features."
+    ]
+  }
+}
