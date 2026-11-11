@@ -81,5 +81,3 @@ overlapHunt.api.claim('umi-missing-pass',huntChoice.id);overlapHunt.game.S.dex[+
 assert.equal(overlapHunt.context.__umiArcadeEncounter(4,{ch:0}),4);assert.equal(overlapHunt.api.state().pendingEncounter,null);assert.equal(overlapHunt.api.quantity('umi-missing-pass'),1,'Completed species must refund the hunt pass');
 const protectedItem=fixture();protectedItem.game.S.items['key-item']=1;protectedItem.game.S.items['exp-candy-s']=1;
 assert.throws(()=>protectedItem.api.scrapItem('key-item'));assert.equal(protectedItem.game.S.items['key-item'],1,'Quest items must not be recyclable');
-
-
