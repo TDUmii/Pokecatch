@@ -8,6 +8,8 @@ Bộ tài nguyên đã thu thập gồm 4.839 tệp, khoảng 72,2 MiB: 3.134 PN
 
 Giao diện tiếng Việt dùng **Be Vietnam Pro**, có đầy đủ dấu tiếng Việt và được lưu cùng game để chơi offline. Logo Latin giữ nét chữ pixel gốc. Các tệp font và giấy phép nằm trong `assets/fonts/`.
 
+Gói tiếng Việt bao gồm giao diện, mô tả của 493 loài gốc (các dạng dùng chung mô tả của loài), thẻ giới thiệu và 38 bản ghi cập nhật. Tên Pokémon, tên chiêu thức và tên riêng được giữ nguyên. Các thuật ngữ thống nhất: Pokémon khác màu, trận đột kích, Tháp Chiến Đấu, Hầm Ngầm, Điểm Chiến Đấu và chế độ ngoại tuyến.
+
 Tiến trình chơi được lưu trong trình duyệt trên từng thiết bị. Bản này không đồng bộ tài khoản, không sử dụng bảng xếp hạng hay giao dịch trực tuyến của trang gốc. Không nhập mật khẩu tài khoản gốc vào bản này.
 
 ## Chạy trên máy
@@ -24,7 +26,7 @@ Mở `http://localhost:4173`. Máy chủ lắng nghe mạng nội bộ để th�
 
 ## Chơi khi mất mạng
 
-Mở bản HTTPS, bấm **Offline** rồi **Tải trọn bộ để chơi offline** và giữ trang mở đến khi hoàn tất. Lần tải đầu khoảng 80 MB gồm game, ảnh và font, nên dùng Wi-Fi. Khi tải gián đoạn, bấm lại để tiếp tục với các tệp đã lưu. Chỉ khi không còn tệp lỗi, ứng dụng mới thông báo sẵn sàng offline. Trên iPhone, chọn Chia sẻ rồi Thêm vào MH chính; trên Android, chọn cài ứng dụng trong menu trình duyệt hoặc nút cài trong hộp Offline.
+Mở bản HTTPS, bấm **Ngoại tuyến** rồi **Tải trọn bộ để chơi ngoại tuyến** và giữ trang mở đến khi hoàn tất. Lần tải đầu khoảng 80 MB gồm game, ảnh và font, nên dùng Wi-Fi. Khi tải gián đoạn, bấm lại để tiếp tục với các tệp đã lưu. Chỉ khi không còn tệp lỗi, ứng dụng mới thông báo sẵn sàng ngoại tuyến. Trên iPhone, chọn Chia sẻ rồi Thêm vào MH chính; trên Android, chọn cài ứng dụng trong menu trình duyệt hoặc nút cài trong hộp Ngoại tuyến.
 
 Dữ liệu chơi và tệp ngoại tuyến phụ thuộc bộ nhớ trình duyệt. Xóa dữ liệu trang hoặc dùng chế độ riêng tư có thể mất tiến trình; hãy dùng tính năng xuất bản lưu trong game trước khi đổi thiết bị hoặc dọn trình duyệt.
 

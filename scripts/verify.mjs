@@ -98,3 +98,4 @@ assert.equal(requested.length, 0, 'Completed readiness check used the network');
 const cached = await trigger('fetch', {request:new Request(scope + 'assets/a.png?v=1')});
 assert.equal(await cached.text(), 'test');
 console.log(`Verified ${files.length} packaged files, ${assets.length} assets; offline failure/retry, concurrency, project scope and cache checks passed.`);
+await import('./verify-localization.mjs');

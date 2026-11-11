@@ -47578,8 +47578,8 @@
   },
   {
     "path": "intros/legend-intros.html",
-    "bytes": 1354790,
-    "sha256": "cb120076ac4afd67b2fb3a2d726d8758a6663a6e226f59284754b32b6d0bc7bf",
+    "bytes": 1362455,
+    "sha256": "62c8b27a2e564b5e39ce89e8268739bef44202e540167bacbb82af9917b9975d",
     "format": "html",
     "reasons": [
       "boot.js intro URL"

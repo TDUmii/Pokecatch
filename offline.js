@@ -26,7 +26,7 @@
     if (localStorage.getItem(READY_KEY)) status.textContent = 'Đang kiểm tra các tài nguyên đã lưu trên thiết bị...';
     navigator.serviceWorker?.ready.then(registration => registration.active?.postMessage({ type: 'CHECK_OFFLINE' })).catch(() => {});
     if (!navigator.serviceWorker) {
-      status.textContent = 'Trình duyệt này chưa hỗ trợ cài offline. Hãy dùng Safari hoặc Chrome và mở bằng HTTPS.';
+      status.textContent = 'Trình duyệt này chưa hỗ trợ cài ngoại tuyến. Hãy dùng Safari hoặc Chrome và mở bằng HTTPS.';
       download.disabled = true;
     }
     navigator.serviceWorker?.addEventListener('message', event => {
@@ -36,7 +36,7 @@
         if (data.total > 0 && !data.failed) ready();
         else if (localStorage.getItem(READY_KEY)) {
           localStorage.removeItem(READY_KEY);
-          status.textContent = 'Gói offline chưa đủ. Bấm tải tiếp để khôi phục các tài nguyên còn thiếu.';
+          status.textContent = 'Gói ngoại tuyến chưa đủ. Bấm tải tiếp để khôi phục các tài nguyên còn thiếu.';
         }
         return;
       }
@@ -56,10 +56,10 @@
     });
     download.onclick = async () => {
       if (downloading) return;
-      downloading = true; download.disabled = true; status.textContent = 'Đang chuẩn bị gói offline...';
+      downloading = true; download.disabled = true; status.textContent = 'Đang chuẩn bị gói ngoại tuyến...';
       try {
         if (!navigator.onLine) throw Error('Cần có mạng để tải các tài nguyên còn thiếu.');
-        const registration = await Promise.race([navigator.serviceWorker.ready, new Promise((_, reject) => setTimeout(() => reject(Error('Chưa khởi động được chế độ offline. Hãy tải lại trang.')), 15000))]);
+        const registration = await Promise.race([navigator.serviceWorker.ready, new Promise((_, reject) => setTimeout(() => reject(Error('Chưa khởi động được chế độ ngoại tuyến. Hãy tải lại trang.')), 15000))]);
         (registration.active || navigator.serviceWorker.controller).postMessage({ type: 'DOWNLOAD_OFFLINE' });
       } catch (error) { downloading = false; download.disabled = false; status.textContent = error.message; }
     };
@@ -100,7 +100,7 @@
       if (document.querySelector('.ti-go') || document.querySelector('.topbar')) $('loading-game')?.remove();
       const logo = document.querySelector('.ti-logo');
       if (logo && !document.querySelector('.umi-title-note')) {
-        const note = document.createElement('p'); note.className = 'umi-title-note'; note.textContent = 'Bản riêng của Umi · Hành trình offline'; logo.after(note);
+        const note = document.createElement('p'); note.className = 'umi-title-note'; note.textContent = 'Bản riêng của Umi · Hành trình ngoại tuyến'; logo.after(note);
       }
       for (const item of document.querySelectorAll('[data-screen="friends"],[data-screen="market"],[data-screen="trade"],[data-screen="admin"],.ti-login,.ti-register')) item.hidden = true;
     });

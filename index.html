@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#191b2b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="PokéCatch của Umi: khám phá, chiến đấu, bắt Pokémon và xây dựng đội hình. Tải một lần để chơi offline.">
+  <meta name="description" content="PokéCatch của Umi: khám phá, chiến đấu, bắt Pokémon và xây dựng đội hình. Tải một lần để chơi ngoại tuyến.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob: data:; connect-src 'self'; frame-src 'self' blob:; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>PokéCatch của Umi</title>
   <link rel="icon" href="icons/pokeball.svg" type="image/svg+xml">
@@ -21,15 +21,15 @@
 <body>
   <noscript>Bật JavaScript trong trình duyệt để chơi PokéCatch.</noscript>
   <div id="loading-game" role="status">Đang mở hành trình của bạn...</div>
-  <button id="personal-menu" type="button" aria-label="Mở lưu game và chế độ offline" title="Lưu game và offline">
+  <button id="personal-menu" type="button" aria-label="Mở lưu game và chế độ ngoại tuyến" title="Lưu game và ngoại tuyến">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16a4 4 0 0 1-.4-8A7 7 0 0 1 18 7a4.5 4.5 0 0 1 1 8.9M12 11v10m-4-4 4 4 4-4"/></svg>
-    <span>Offline</span><i id="offline-dot"></i>
+    <span>Ngoại tuyến</span><i id="offline-dot"></i>
   </button>
   <dialog id="personal-dialog" aria-labelledby="personal-title">
     <form method="dialog" class="personal-heading"><h2 id="personal-title">Hành trình của Umi</h2><button aria-label="Đóng" class="personal-close">×</button></form>
     <p class="personal-description">Game riêng của bạn. Tiến trình tự lưu trên thiết bị này.</p>
-    <section aria-labelledby="offline-title"><h3 id="offline-title">Mang cả thế giới theo bạn</h3><p id="offline-status" role="status" aria-live="polite">Tải tài nguyên để tiếp tục hành trình khi không có mạng.</p><progress id="offline-progress" max="100" value="0" hidden></progress><button type="button" id="download-offline" class="personal-primary">Tải trọn bộ để chơi offline</button><button type="button" id="install-game" hidden>Thêm vào màn hình chính</button><p class="personal-hint">Hãy giữ trang mở trong lúc tải. Trên iPhone, chọn Chia sẻ rồi Thêm vào MH chính. Chờ báo tải xong trước khi ngắt mạng.</p></section>
-    <section aria-labelledby="save-title"><h3 id="save-title">Giữ lại chuyến phiêu lưu</h3><p>Xuất tệp lưu để cất giữ hoặc chuyển sang điện thoại khác.</p><div class="personal-actions"><button type="button" id="export-save">Xuất bản lưu</button><button type="button" id="import-save">Nhập bản lưu</button></div><input id="save-file" type="file" accept=".json,application/json" hidden><p class="personal-hint">Nhập bản lưu sẽ thay tiến trình trên thiết bị này sau khi bạn xác nhận. Xóa dữ liệu trình duyệt cũng xóa tiến trình và gói offline.</p><p id="save-status" role="status" aria-live="polite"></p></section>
+    <section aria-labelledby="offline-title"><h3 id="offline-title">Mang cả thế giới theo bạn</h3><p id="offline-status" role="status" aria-live="polite">Tải tài nguyên để tiếp tục hành trình khi không có mạng.</p><progress id="offline-progress" max="100" value="0" hidden></progress><button type="button" id="download-offline" class="personal-primary">Tải trọn bộ để chơi ngoại tuyến</button><button type="button" id="install-game" hidden>Thêm vào màn hình chính</button><p class="personal-hint">Hãy giữ trang mở trong lúc tải. Trên iPhone, chọn Chia sẻ rồi Thêm vào MH chính. Chờ báo tải xong trước khi ngắt mạng.</p></section>
+    <section aria-labelledby="save-title"><h3 id="save-title">Giữ lại chuyến phiêu lưu</h3><p>Xuất tệp lưu để cất giữ hoặc chuyển sang điện thoại khác.</p><div class="personal-actions"><button type="button" id="export-save">Xuất bản lưu</button><button type="button" id="import-save">Nhập bản lưu</button></div><input id="save-file" type="file" accept=".json,application/json" hidden><p class="personal-hint">Nhập bản lưu sẽ thay tiến trình trên thiết bị này sau khi bạn xác nhận. Xóa dữ liệu trình duyệt cũng xóa tiến trình và gói ngoại tuyến.</p><p id="save-status" role="status" aria-live="polite"></p></section>
     <footer>Bản fan game cá nhân, phi thương mại. Asset và nền tảng game từ <a href="https://pokecatchvn.xyz/" target="_blank" rel="noopener noreferrer">Pokecatch VN</a>. Pokémon thuộc các chủ sở hữu tương ứng.</footer>
   </dialog>
 </body>
