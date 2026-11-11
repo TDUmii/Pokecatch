@@ -176,24 +176,10 @@ Keep the inherited scene framing, Pokémon art and local game controls. The pers
 - **Don't** treat a tall full-page screenshot as proof that all content fits simultaneously within a phone screen.
 
 
-## Khu quà Umi
+## Quà trong Sòng bạc
 
-Phần thưởng là một mặt chơi trong thế giới pixel tối hiện có, không phải trang quảng bá. Mọi selector mới dùng tiền tố `ua-`; font kế thừa Be Vietnam Pro tự lưu với năm trọng lượng 400/500/600/700/800. Không thay typography, cảnh hoặc nút của engine bên ngoài mặt này.
+Giữ nguyên Sòng bạc của engine với máy quay, Pachinko, cách đặt cược và hình ảnh gốc. Không có màn hình hay nút điều hướng Khu quà riêng. Các vật phẩm mới nằm trong ngăn details “Quà của tôi” ngay dưới khung Sòng bạc, mặc định thu gọn; mở ngăn để dùng quà, đổi thưởng, xem lịch sử và trang bị Mega. Vé và lượt miễn phí được máy quay gốc tự dùng, giá trên nút QUAY hiển thị Miễn phí khi có vé.
 
-### Cấu trúc và trạng thái
+Phần hỗ trợ `ua-` dùng Be Vietnam Pro cùng nền tối, điểm nhấn vàng/cyan/hồng và các biểu tượng vật phẩm đã có. Nút và select tối thiểu 44px. Lưới lựa chọn và native dialog nhận Pokémon giữ nguyên; cập nhật số lượng không tự mở ngăn quà. Thông tin tỷ lệ và luật trả thưởng của máy gốc vẫn nằm ở phần Tiền thưởng, kèm hướng dẫn không quá hai lượt trượt liên tiếp.
 
-Tiêu đề và ví nằm trên các thẻ Máy quay, Túi quà, Đổi quà và Lịch sử. Ba lựa chọn máy dẫn tới một khung máy ba ô quay; giá, phương thức thanh toán, tiến độ bảo đảm quà và vòng thưởng nằm ngay trong khung. Kết quả là danh sách vật phẩm thực nhận theo lượt, không dùng bố cục thẻ tiếp thị. Kho dùng ô vật phẩm nhỏ với số lượng và hành động; đổi quà có mục tiêu mảnh và thanh tiến độ. Tỷ lệ, vé, bảo đảm quà và phần thưởng lưu cùng tiến trình cá nhân.
-
-Bộ chọn phần thưởng dùng lưới ba cột, xuống hai cột ở 700px. Hộp chọn và nhận Pokémon dùng native dialog có nút đóng rõ ràng; phần thưởng dùng ảnh Pokémon sẵn có, hoạt ảnh xuất hiện 500ms và tắt chuyển động khi người dùng chọn giảm chuyển động. Máy đang quay có chuyển động nhẹ trong ô; nội dung vẫn hiện khi không chạy hoạt ảnh.
-
-### Token riêng của mặt Khu quà
-
-CSS nguồn: `bundle/umi-arcade.css`. Màu vàng `#ffcf55`, cyan `#64e1ef`, hồng `#f58bbc` biểu thị thao tác và độ hiếm; tím `#acb5ff`/`#b6beff` là bậc trung gian. Nền kế thừa `--panel`/`--panel-2`; các nền tối và viền riêng được ghi đầy đủ trong sidecar. Chữ phụ `#c3cce0`, chữ sáng `#d1d8e8`/`#dce3f1`, focus `#a8dfff`, lỗi `#ffc7ca` trên `#3c222d`. Nền ô quay sáng `#e1e7ee` tách ảnh vật phẩm khỏi vỏ máy tối.
-
-Thang chữ riêng: 11/12px chỉ cho chú thích gọn, 13px tên quà và mô tả kho, 14px nhãn, 15px nội dung, 17px số lượng, 18/20/21px tiêu đề bộ phận; tiêu đề trang 22-30px và kết quả 15-22px theo viewport. Trọng lượng CSS 600/700/750 kế thừa cùng font (750 được trình duyệt ánh xạ vào các trọng lượng tự lưu). Bán kính 3px thanh tiến độ, 4px ô quay, 6px nút và quà, 7px vật phẩm, 8px cụm ô quay, 12px máy và dialog. Các giá trị này là mở rộng có chủ đích trong phạm vi `ua-`.
-
-Tất cả nút và select tương tác có chiều cao tối thiểu **44px**, gồm nút điều khiển cấp trang trong override cuối CSS; ví 32/38px là nhãn trạng thái, không phải nút. Focus bàn phím 3px có khoảng cách 3px; giữ trạng thái vô hiệu hóa và lỗi. Mốc responsive 700px và 370px; dưới 370px thanh bảo đảm quà xếp một cột.
-
-### Bằng chứng kiểm tra
-
-Ảnh kiểm tra tại `.impeccable/review/arcade/` bao gồm máy quay, điều khiển, kho, đổi quà, lựa chọn, kết quả, ấp trứng và Mega ở viewport 360/390/1366px. Kiểm tra trình duyệt của tác vụ chính xác nhận không tràn ngang ở các chiều rộng này; lượt ×10, lưu tiến độ bảo đảm và nhận quà đã được kiểm tra. Tốc độ mô phỏng ×10 được đo ở mức 10,0004× trong Chrome cô lập. Đây là bằng chứng trình duyệt, không xác nhận thiết bị điện thoại thật.
+Bằng chứng kiểm tra trình duyệt 390px và 1366px trong `.impeccable/review/casino/`: máy gốc còn nguyên, không có màn hình riêng, giao dịch máy quay/Pachinko trao quà một lần, dữ liệu cũ và bản lưu sau tải lại được giữ. Đây là kiểm tra trình duyệt, không phải điện thoại thật.

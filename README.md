@@ -10,11 +10,11 @@ Giao diện tiếng Việt dùng **Be Vietnam Pro**, có đầy đủ dấu ti�
 
 Gói tiếng Việt bao gồm giao diện, mô tả của 493 loài gốc (các dạng dùng chung mô tả của loài), thẻ giới thiệu và 38 bản ghi cập nhật. Tên Pokémon, tên chiêu thức và tên riêng được giữ nguyên. Các thuật ngữ thống nhất: Pokémon khác màu, trận đột kích, Tháp Chiến Đấu, Hầm Ngầm, Điểm Chiến Đấu và chế độ ngoại tuyến.
 
-## Khu quà Umi và tốc độ ×10
+## Sòng bạc dễ trúng hơn và tốc độ ×10
 
-Mở **Hoạt động → Khu quà Umi**. Có 3 máy: Tiếp tế (500 ₽), Tiến hóa (2.500 ₽), Pokémon (1 vé). Quay 1 hoặc 10 lượt; ba lượt Pokémon và một thùng tiếp tế được tặng một lần khi dùng bản nâng cấp. Quà được ghi vào bản lưu trước hoạt ảnh, tránh mất quà khi đóng trang.
+Mở **Hoạt động → Sòng bạc** và dùng máy quay hoặc Pachinko có sẵn. Không có khu hay ba máy quay riêng. Thuật toán chỉ hỗ trợ kết quả trượt, giữ nguyên các kết quả vốn đã thắng; sau hai lượt trượt liên tiếp, lượt tiếp theo trúng. Kiểm tra 20.000 lượt mỗi cấu hình hàng ghi nhận tỷ lệ trúng khoảng 82-87%, thay vì 7-35% trước đó. Đây là tỷ lệ trúng xu, không phải lợi nhuận theo tiền cược. Túi quà Pachinko rộng gấp ba, hai túi trượt thu hẹp; vị trí và cách chơi gốc được giữ nguyên.
 
-Tỷ lệ cơ bản: Thường 50%, Ít gặp 30%, Hiếm 15%, Sử thi 4%, Độc đắc 1%. Bộ đếm riêng từng máy bảo đảm ít nhất Hiếm mỗi 10 lượt và Sử thi mỗi 50 lượt. Lượt thường từ bậc Hiếm có 12% cơ hội mở 5 lượt miễn phí; lượt miễn phí có 10% cơ hội nhân đôi quà và không tạo vòng mới.
+Mỗi lần quay hoặc mua một đợt bóng Pachinko có thêm vật phẩm, ghi vào cùng bản lưu. Mở ngăn **Quà của tôi** ngay dưới Sòng bạc để dùng quà, tái chế, đổi thưởng hoặc trang bị Mega. Quà bổ sung có tỷ lệ cơ bản Thường 50%, Ít gặp 30%, Hiếm 15%, Sử thi 4%, Độc đắc 1%, với bảo đảm quà Hiếm sau 10 lần và Sử thi sau 50 lần. Các lượt thưởng miễn phí và vé cũ chuyển sang lượt quay ở máy Sòng bạc gốc; hệ thống tự dùng vé trước khi trừ tiền cược. Mọi quà, mảnh, mục tiêu và Mega của bản trước được giữ lại.
 
 Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn quà, rương tiến hóa, mảnh Mega, vé chọn Đá Mega, trứng tự chọn, vé săn loài còn thiếu, Bùa chiến lợi phẩm, vé chọn Pokémon khác màu, thùng tiếp tế và thỏi vàng. Trứng nở sau 3 phút hoặc 5 trận thắng. Vé săn ưu tiên cuộc gặp phù hợp tiếp theo trong vùng hiện tại; tỷ lệ bắt vẫn áp dụng bình thường. Bùa tăng phần thưởng sau mỗi 5 trận thắng trong 60 phút. Đồ dư phù hợp có thể tái chế thành mảnh, đặt mục tiêu và đổi phần thưởng.
 

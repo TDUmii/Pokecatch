@@ -75,3 +75,13 @@
 .ua-root>.ua-controls{justify-content:flex-start;margin:4px 0 12px}
 .ua-root>.ua-controls button{font-size:12px;padding:7px 10px;min-height:44px}
 @media(max-width:700px){.ua-header{margin-bottom:10px}.ua-wallet{gap:6px;margin:8px 0}.ua-wallet-chip{font-size:12px;min-height:32px;padding:4px 7px}.ua-wallet-chip img{width:20px;height:20px}.ua-tabs{margin-bottom:12px}.ua-tabs button{font-size:12px;padding:8px;flex:1 0 auto}.ua-modal{padding:16px}.ua-root{padding-bottom:100px}}
+/* Native casino extension: a collapsed prize drawer below the original machines. */
+#screen-casino>.ua-casino-drawer{margin:16px 0 28px;border:1px solid var(--ua-line,#566079);border-radius:8px;background:var(--panel,#1c2030);color:var(--text,#eef1f8)}
+.ua-casino-drawer>summary{min-height:44px;padding:12px 16px;cursor:pointer;font:700 15px/1.5 var(--font,inherit);color:var(--yellow,#ffcf55);overflow-wrap:anywhere}
+.ua-casino-drawer>summary:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}
+.ua-casino-drawer[open]>summary{border-bottom:1px solid var(--ua-line,#566079)}
+.ua-casino-drawer .ua-root{width:100%;padding:12px 16px 20px;margin:0}
+.ua-casino-drawer .ua-header{margin-bottom:10px}.ua-casino-drawer .ua-header h2{font-size:20px}
+.ua-casino-drawer :is(button,select){min-height:44px}
+.ua-casino-drawer .ua-panel:last-child{border-bottom:0;margin-bottom:0}
+@media(max-width:700px){#screen-casino>.ua-casino-drawer{margin:12px 0 20px}.ua-casino-drawer>summary{padding:12px}.ua-casino-drawer .ua-root{padding:10px 8px 16px}}

@@ -22,15 +22,19 @@ function fixture(initial = {}) {
     evolveMon(uid,to){this.S.mons.find(mon=>mon.uid===uid).id=to},
     useBuffBerry(id){if(!this.itemCount(id))return false;this.addItem(id,-1);return true},sellPrice:()=>500
   };
-  const engine={Game:game,ITEM_NAMES:names,CONFIG:{BUFF_BERRIES:{'razz-berry':{},'pinap-berry':{}},EXP_CANDIES:{'exp-candy-s':{},'exp-candy-m':{},'exp-candy-xl':{},'exp-candy-big':{}}},UI:{itemName:id=>id,itemSrc:id=>'assets/items/'+id+'.png',types:()=>'<b>Cỏ</b>',monSrc:mon=>'assets/pokemon/'+mon.id+'.png',toast(){}},App:{current:'adventure',refreshHeader(){},show(){}},Screens:{},_t:x=>x};
+  const legacyEnter = function legacyEnter() {};
+  const casino = {init(){},render(){},enter:legacyEnter};
+  const engine={Game:game,ITEM_NAMES:names,CONFIG:{BUFF_BERRIES:{'razz-berry':{},'pinap-berry':{}},EXP_CANDIES:{'exp-candy-s':{},'exp-candy-m':{},'exp-candy-xl':{},'exp-candy-big':{}}},UI:{itemName:id=>id,itemSrc:id=>'assets/items/'+id+'.png',types:()=>'<b>Cỏ</b>',monSrc:mon=>'assets/pokemon/'+mon.id+'.png',toast(){}},App:{current:'adventure',refreshHeader(){},show(){}},Screens:{casino},_t:x=>x};
   const mega={catalog:[{key:'venusaur',base:3,name:'Mega Venusaur',src:'assets/a.png'}],install(){},unlocked:()=>game.S.umiArcade?.megaUnlocks||[],unlock(key){const list=game.S.umiArcade.megaUnlocks;if(list.includes(key))return false;list.push(key);return true},equip(){},unequip(){}};
   class Clock extends Date {static now(){return now}}
   const math=Object.create(Math);math.random=()=>roll;
-  const context=vm.createContext({Date:Clock,Math:math,console,setInterval:fn=>{timers.push(fn);return timers.length},UmiMega:mega,__setInternalPoke(){previousCalled=true}});
+  const context=vm.createContext({document:{getElementById:()=>null,querySelector:()=>null},Date:Clock,Math:math,console,setInterval:fn=>{timers.push(fn);return timers.length},UmiMega:mega,__setInternalPoke(){previousCalled=true}});
   context.window=context;
   for(const file of ['bundle/umi-arcade-rules.js','bundle/umi-arcade.js'])vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
   context.__setInternalPoke(engine);
   assert(previousCalled,'Prior engine hook was not chained');
+  assert.equal(engine.Screens.casino,casino,'Legacy casino screen replaced');
+  assert.equal(casino.enter,legacyEnter,'Legacy enter replaced');
   const api=context.UmiArcade;api.state();
   return {api,game,context,timers,setRoll:v=>{roll=v},advance:n=>{now+=n},setRegion:key=>{regionKey=key},saved:()=>JSON.parse(saved),grant(id,n=1){api.state().items[id]=(api.state().items[id]||0)+n}};
 }
@@ -81,3 +85,40 @@ overlapHunt.api.claim('umi-missing-pass',huntChoice.id);overlapHunt.game.S.dex[+
 assert.equal(overlapHunt.context.__umiArcadeEncounter(4,{ch:0}),4);assert.equal(overlapHunt.api.state().pendingEncounter,null);assert.equal(overlapHunt.api.quantity('umi-missing-pass'),1,'Completed species must refund the hunt pass');
 const protectedItem=fixture();protectedItem.game.S.items['key-item']=1;protectedItem.game.S.items['exp-candy-s']=1;
 assert.throws(()=>protectedItem.api.scrapItem('key-item'));assert.equal(protectedItem.game.S.items['key-item'],1,'Quest items must not be recyclable');
+
+// The inherited casino settles its own bets; the hook adds actual saved gifts only once.
+const native = fixture(); native.setRoll(.4);
+let nativeMoney=native.game.S.money;
+let nativeTickets=native.api.quantity('umi-spin-ticket');
+native.context.__umiCasinoReward('slots',{spin:1,cost:0,bet:1000,pay:2});
+assert.equal(native.api.quantity('umi-spin-ticket'),nativeTickets-1);
+assert.equal(native.game.itemCount('exp-candy-s'),3);
+assert.equal(native.game.S.money,nativeMoney,'Gift hook charged free native turn');
+assert.equal(native.api.state().total,1);
+let settled=clean(native.game.S);
+native.context.__umiCasinoReward('slots',{spin:1,cost:0,bet:1000,pay:2});
+assert.deepEqual(clean(native.game.S),settled,'Duplicate native receipt granted twice');
+native.game.S.money-=1000;nativeMoney=native.game.S.money;
+native.context.__umiCasinoReward('slots',{spin:2,cost:1000,bet:1000,pay:0});
+assert.equal(native.game.S.money,nativeMoney,'Native paid bet charged twice');
+assert.equal(native.game.itemCount('exp-candy-s'),6);
+assert.equal(native.api.state().history.length,2);
+native.context.__umiCasinoReward('pachi',{batch:10,cost:50,count:10});
+assert.equal(native.api.state().total,3,'Pachinko batch must award exactly once');
+assert.equal(native.game.itemCount('fire-stone'),1);
+settled=clean(native.game.S);
+native.context.__umiCasinoReward('pachi',{batch:10,cost:50,count:10});
+assert.deepEqual(clean(native.game.S),settled);
+const migrated=fixture({umiArcade:{welcomed:true,bonus:['supply','pokemon','evolution'],items:{'umi-spin-ticket':2,'umi-gold-ingot':7},goal:'umi-mega-selector',scrap:123,eggs:[{key:'old-egg',id:4,readyAt:1200000,winAt:5,reg:'kanto'}],megaUnlocks:['venusaur'],unknownAdapter:'keep'}});
+assert.equal(migrated.api.state().nativeFree,3);assert.equal(migrated.api.state().bonus.length,0);assert.equal(migrated.api.quantity('umi-spin-ticket'),2);
+migrated.setRoll(.4);
+migrated.context.__umiCasinoReward('slots',{spin:1,cost:0,bet:1000,pay:0});
+assert.equal(migrated.api.state().nativeFree,2,'Native free queue not consumed first');
+assert.equal(migrated.api.quantity('umi-spin-ticket'),2,'Ticket consumed before migrated free turn');
+migrated.game.save();const reload=fixture(migrated.saved());
+assert.equal(reload.api.state().nativeFree,2,'Migration repeated on reload');
+assert.equal(reload.api.quantity('umi-gold-ingot'),7);assert.equal(reload.api.quantity('umi-spin-ticket'),2);
+assert.equal(reload.api.state().goal,'umi-mega-selector');assert.equal(reload.api.state().scrap,123);
+assert.equal(reload.api.state().eggs[0].key,'old-egg');assert.equal(reload.api.state().megaUnlocks[0],'venusaur');assert.equal(reload.api.state().unknownAdapter,'keep');
+assert.equal(reload.api.snapshot().customBonusRemaining,4);
+console.log('Native casino integration passed: legacy screen preserved, receipt idempotence, no double bet charge, one Pachinko gift per batch, old free turns before tickets and complete save migration.');

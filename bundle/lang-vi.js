@@ -3491,7 +3491,7 @@
   "Tu échanges <b>{n} jetons</b> contre un Pokémon !": "Bạn đổi <b>{n} xu</b> lấy một Pokémon!",
   "Pas de Casino dans cette région": "Vùng này không có Khu Trò Chơi",
   "Obtiens le Badge {b} pour l'ouvrir": "Nhận Huy hiệu {b} để mở",
-  "Machine": "Số ô gửi",
+  "Machine": "Máy quay",
   "Machine à sous": "Máy quay thưởng",
   "Pachinko": "Pachinko",
   "JETONS": "XU",

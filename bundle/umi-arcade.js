@@ -18,6 +18,13 @@
     s.lootWins = integer(s.lootWins);
     s.eggs = Array.isArray(s.eggs) ? s.eggs.filter(egg => egg && G().DEX[egg.id] && typeof egg.key === 'string').slice(0, 20) : [];
     s.megaUnlocks = Array.isArray(s.megaUnlocks) ? s.megaUnlocks.filter(key => window.UmiMega.catalog.some(form => form.key === key)) : [];
+    s.nativeFree = integer(s.nativeFree);
+    s.nativeReceipts = s.nativeReceipts && typeof s.nativeReceipts === 'object' ? s.nativeReceipts : {};
+    if (!s.casinoMerged) {
+      s.nativeFree += s.bonus.length;
+      s.bonus = [];
+      s.casinoMerged = true;
+    }
     if (!s.welcomed) {
       s.items['umi-spin-ticket'] += 3;
       s.items['umi-supply-crate'] += 1;
@@ -43,7 +50,7 @@
   }
   function refresh() {
     engine.App?.refreshHeader?.();
-    if (engine.App?.current === 'umiArcade') window.UmiArcadeUI?.render?.();
+    if (engine.App?.current === 'casino') window.UmiArcadeUI?.render?.();
   }
   function transact(action) {
     if (busy) fail('Đang xử lý phần thưởng, hãy đợi một chút.');
@@ -163,8 +170,8 @@
     return transact(() => {
       const s = state();
       let result = { message: `Đã dùng ${itemName(itemId)}.` };
-      if (itemId === 'umi-spin-ticket') fail('Chọn máy Pokémon hoặc dùng vé làm cách thanh toán cho máy quay.');
-      else if (itemId === 'umi-ten-ticket') { add(itemId,-1); add('umi-spin-ticket',10); result.message='Đã đổi thành 10 vé quay Pokémon.'; }
+      if (itemId === 'umi-spin-ticket') { result.message='Vé sẽ tự dùng khi bạn nhấn QUAY ở máy Sòng bạc. Không trừ tiền cho lượt đó.'; }
+      else if (itemId === 'umi-ten-ticket') { add(itemId,-1); add('umi-spin-ticket',10); result.message='Đã nhận 10 lượt quay miễn phí cho máy Sòng bạc.'; }
       else if (itemId === 'umi-gold-ingot') { add(itemId,-1);G().earn(5000);result.message='Đã đổi thỏi vàng lấy 5.000 ₽.'; }
       else if (itemId === 'umi-supply-crate') {
         add(itemId,-1);
@@ -242,7 +249,7 @@
   function snapshot() {
     const s=state();
     const inventory=Object.keys(G().S.items||{}).filter(id=>!R.ITEMS[id]&&quantity(id)>0&&engine.ITEM_NAMES[id]).map(id=>{const usable=!!engine.CONFIG.EXP_CANDIES[id]||id==='rare-candy'||!!engine.CONFIG.BUFF_BERRIES[id]||EVOLUTION.includes(id);return{id,name:itemName(id),icon:itemIcon(id),qty:quantity(id),usable,scrappable:usable}});
-    return {state:s,money:G().S.money,items:Object.values(R.ITEMS).map(item=>({...item,qty:quantity(item.id)})),machines:R.MACHINES,rarities:R.RARITIES,inventory,
+    return {state:s,money:G().S.money,items:Object.values(R.ITEMS).map(item=>({...item,qty:quantity(item.id)})),machines:R.MACHINES,rarities:R.RARITIES,inventory,customBonusRemaining:s.nativeFree+quantity('umi-spin-ticket'),
       eggs:s.eggs.map(egg=>({...egg,name:G().DEX[egg.id].name,icon:`assets/pokemon/${egg.id}.png`,ready:Date.now()>=egg.readyAt||integer(G().S.stats.wins)>=egg.winAt,remainingMs:Math.max(0,egg.readyAt-Date.now()),winsLeft:Math.max(0,egg.winAt-integer(G().S.stats.wins))})),
       pendingEncounter:s.pendingEncounter?{...s.pendingEncounter,name:G().DEX[s.pendingEncounter.id]?.name,icon:`assets/pokemon/${s.pendingEncounter.id}.png`}:null,
       lootRemainingMs:Math.max(0,s.lootUntil-Date.now())};
@@ -250,11 +257,30 @@
   function megaOptions(){return{forms:window.UmiMega.catalog,unlocked:window.UmiMega.unlocked(),mons:G().S.mons.filter(mon=>window.UmiMega.catalog.some(form=>form.base===mon.id)).map(mon=>({uid:mon.uid,id:mon.id,name:G().DEX[mon.id].name,level:mon.level,megaKey:mon.umiMegaKey||null,icon:engine.UI.monSrc(mon,mon.shiny)}))};}
   function install(value) {
     engine=value;window.UmiMega.install(engine);
-    engine.Screens.umiArcade={
-      lockWhy:()=>null,
-      init(){if(!mounted){mounted=true;window.UmiArcadeUI.mount(engine,api)}},
-      render(){this.init();window.UmiArcadeUI.render()},
-      enter(){this.init();state();G().save();window.UmiArcadeUI.render()},leave(){}
+    const casino=engine.Screens.casino;
+    if(casino){
+      const init=casino.init,render=casino.render;
+      casino.init=function(){init?.call(this);mounted=false;mountCasino()};
+      casino.render=function(){render?.call(this);mountCasino();window.UmiArcadeUI.render()};
+    }
+    window.__umiCasinoStops=R.boostNativeStops;
+    window.__umiCasinoFreeAvailable=()=>state().nativeFree+quantity('umi-spin-ticket')>0;
+    window.__umiCasinoReward=(kind,meta)=>{
+      try{
+        const key=kind==='slots'?meta.spin:meta.batch;
+        if(!Number.isFinite(key)||key<=integer(state().nativeReceipts[kind]))return;
+        transact(()=>{
+          const s=state(),free=kind==='slots'&&meta.cost===0;
+          if(free){if(s.nativeFree>0)s.nativeFree--;else add('umi-spin-ticket',-1)}
+          const machine=kind==='slots'?'supply':'evolution';
+          const result=R.spin(s,machine,{bonus:free});result.rewards.forEach(apply);
+          s.nativeFree+=result.bonusSpins;
+          s.nativeReceipts[kind]=key;s.lastNativeReward={...result,kind,at:Date.now()};
+          s.history[s.history.length-1].at=Date.now();
+        });
+        const bet=document.querySelector('#screen-casino .cs-slots .cs-betv');
+        if(bet&&kind==='slots')bet.textContent=window.__umiCasinoFreeAvailable()?'Miễn phí':`${Number(meta.bet||meta.cost).toLocaleString('vi-VN')} ₽`;
+      }catch(error){console.error('Casino reward:',error);engine.UI.toast('Chưa nhận được quà bổ sung. Các phần thưởng máy gốc vẫn được giữ.');}
     };
     window.__umiArcadeEncounter=(original,node)=>{
       const s=state(),pending=s.pendingEncounter;
@@ -270,9 +296,12 @@
     };
     setInterval(lootTick,2500);
   }
+  function mountCasino(){
+    if(!mounted&&document.getElementById('screen-casino')){mounted=true;window.UmiArcadeUI.mount(engine,api)}
+  }
   const api=window.UmiArcade={state,snapshot,spin,buyTickets,choices,claim,claimEgg,scrapItem,redeem,setGoal,megaOptions,quantity,itemName,itemIcon,
     equipMega:(uid,key)=>window.UmiMega.equip(uid,key),unequipMega:uid=>window.UmiMega.unequip(uid),
-    open:()=>engine.App.show('umiArcade'),install};
+    open:()=>engine.App.show('casino'),install};
   const previous=window.__setInternalPoke;
   window.__setInternalPoke=value=>{previous?.(value);install(value)};
 })();

@@ -28,7 +28,7 @@ Chơi một người. Lưu tiến trình trên thiết bị. Tải game và tài
 - Tài nguyên phải được lưu trong dự án, không phụ thuộc CDN lúc chơi offline.
 - Tiến trình riêng, có xuất và nhập bản lưu.
 - Các tính năng cần người chơi khác hoặc máy chủ không thuộc vòng chơi offline.
-- Khu quà Umi có 3 máy quay, 12 vật phẩm riêng, tỷ lệ quà 50/30/15/4/1, bảo đảm quà Hiếm mỗi 10 lượt và Sử thi mỗi 50 lượt, vòng 5 lượt miễn phí và cơ hội nhân đôi quà.
+- Giữ một Sòng bạc với máy quay và Pachinko gốc, không có khu quay riêng. Máy quay tăng khả năng trúng và bảo đảm không quá hai lượt trượt liên tiếp; ô quà Pachinko rộng hơn, ô trượt hẹp hơn. Mười hai vật phẩm bổ sung nằm trong ngăn “Quà của tôi” thu gọn ngay trong Sòng bạc.
 - Vé, phần thưởng, mảnh đổi quà, mục tiêu, trứng đang ấp, lịch sử và mở khóa Mega nằm trong cùng bản lưu cá nhân. Chỉ dùng tiền và vật phẩm kiếm trong game.
 - Hỗ trợ 48 dạng Mega/Nguyên thủy có dữ liệu và tài nguyên đã kiểm tra; mỗi lúc trang bị cho một Pokémon trên toàn bộ bộ sưu tập.
 - Tốc độ phiêu lưu có mức ×10; hoạt ảnh vẫn giữ các giới hạn riêng để dễ đọc và giảm tải.

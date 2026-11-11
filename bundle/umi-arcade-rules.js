@@ -1,8 +1,8 @@
 (function (root) {
   'use strict';
   const definitions = [
-    ['umi-spin-ticket', 'Vé quay Pokémon', 'Đổi lấy một lượt quay tại máy Pokémon.', 25, 100],
-    ['umi-ten-ticket', 'Vé quay 10 lượt', 'Đổi lấy 10 lượt quay Pokémon.', 200, 900],
+    ['umi-spin-ticket', 'Vé quay miễn phí', 'Tự động dùng cho một lượt quay ở máy Sòng bạc gốc.', 25, 100],
+    ['umi-ten-ticket', 'Vé quay 10 lượt', 'Đổi lấy 10 lượt quay miễn phí tại Sòng bạc.', 200, 900],
     ['umi-choice-ticket', 'Vé chọn quà', 'Chọn một trong 3 gói cùng bậc Hiếm: huấn luyện, tiến hóa hoặc vé Pokémon.', 80, 350],
     ['umi-evolution-chest', 'Rương tiến hóa', 'Mở để chọn vật phẩm tiến hóa.', 100, 450],
     ['umi-mega-shard', 'Mảnh Mega', 'Đổi 20 mảnh để nhận một vé chọn Đá Mega.', 30, 120],
@@ -104,5 +104,20 @@
     Object.assign(state, next);
     return result;
   }
-  root.UmiArcadeRules = { ITEMS, MACHINES, RARITIES, POOLS, fresh, normalize, spin };
+  function boostNativeStops(stops, reels, lines, ledger, evaluate, random = Math.random) {
+    let result = stops;
+    if (!evaluate(stops).total && ((ledger.umiMisses || 0) >= 2 || random() < 0.8)) {
+      const line = lines[Math.floor(random() * lines.length)];
+      const symbol = random() < 0.5 ? 'berry' : 'koki';
+      result = stops.slice();
+      for (let col = 0; col < 2; col++) {
+        const indexes = reels[col].map((value, index) => value === symbol ? index : -1).filter(index => index >= 0);
+        const index = indexes[Math.floor(random() * indexes.length)];
+        result[col] = (index - line.rows[col] + reels[col].length) % reels[col].length;
+      }
+    }
+    ledger.umiMisses = evaluate(result).total > 0 ? 0 : (ledger.umiMisses || 0) + 1;
+    return result;
+  }
+  root.UmiArcadeRules = { ITEMS, MACHINES, RARITIES, POOLS, fresh, normalize, spin, boostNativeStops };
 })(typeof globalThis === 'object' ? globalThis : window);

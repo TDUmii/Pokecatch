@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T09:55:58.099Z",
+  "generatedAt": "2026-11-11T10:21:49.577Z",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -176,7 +176,7 @@
     {
       "name": "Umi reward arcade",
       "kind": "custom",
-      "description": "Scoped ua- operating surface: wallet and five tabs; framed three-reel console with cost and pity meters; actual received-item results; compact inventory actions, scrap goal, history, responsive choice grid and native reward dialog.",
+      "description": "Scoped ua- operating surface: a collapsed prize drawer inside the original casino; four tabs for inventory, exchange, history and Mega; no separate machines or navigation; existing assets, controls and save preserved.",
       "source": "bundle/umi-arcade-ui.js",
       "cssSource": "bundle/umi-arcade.css"
     }

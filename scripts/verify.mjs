@@ -111,3 +111,4 @@ await import('./verify-localization.mjs');
 await import('./verify-arcade.mjs');
 await import('./verify-arcade-integration.mjs');
 await import('./verify-mega.mjs');
+await import('./verify-native-casino.mjs');
