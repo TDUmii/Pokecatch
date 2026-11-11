@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=name=>fs.readFileSync(path.join(root,name),'utf8');
 const fullSource=read('bundle/app.f9da276408.js');
-const source=fullSource.slice(fullSource.indexOf('const lt={seven:')); 
+const source=fullSource.slice(fullSource.indexOf('const lt={seven:'));
 const context={};vm.runInNewContext(read('bundle/umi-arcade-rules.js'),context);
 const boost=context.UmiArcadeRules.boostNativeStops;
 const between=(start,end)=>{const a=source.indexOf(start);assert.ok(a>=0,start);const b=source.indexOf(end,a+start.length);assert.ok(b>a,end);return source.slice(a+start.length,b);};
