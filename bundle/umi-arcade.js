@@ -260,8 +260,7 @@
   function install(value) {
     engine=value;window.UmiMega.install(engine);
     window.UmiCasinoRewards.install(engine, api);
-    window.UmiCasinoBatch.install(engine, api, window.UmiCasinoNative);
-    window.UmiCasinoUI.install(engine, api, window.UmiCasinoBatch);
+    window.UmiCasinoUI.install(engine, api);
     window.__umiArcadeEncounter=(original,node)=>{
       const s=state(),pending=s.pendingEncounter;
       if(!pending||(!node?.ch&&node?.ch!==0)||region().key!==pending.reg)return original;

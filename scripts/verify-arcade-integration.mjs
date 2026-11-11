@@ -31,7 +31,7 @@ function fixture(initial = {}) {
   const context=vm.createContext({document:{getElementById:()=>null,querySelector:()=>null},Date:Clock,Math:math,console,setInterval:fn=>{timers.push(fn);return timers.length},UmiMega:mega,__setInternalPoke(){previousCalled=true}});
   context.window=context;
   context.UmiCasinoUI={install(){},render(){}};
-  context.UmiCasinoBatch={install(){}};
+
   for(const file of ['bundle/umi-arcade-rules.js','bundle/casino-rewards.js','bundle/umi-arcade.js'])vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
   context.__setInternalPoke(engine);
   assert(previousCalled,'Prior engine hook was not chained');

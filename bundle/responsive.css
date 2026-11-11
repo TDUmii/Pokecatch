@@ -1,0 +1,88 @@
+/* Narrow-screen refinements. Native pixel artwork and machine sizing stay with the game. */
+#app > main,
+#app .screen,
+#app :is(.team-panel,.shop-panel,.dex-hero,.sh-item,.sh-name,.pc-filters,.cs-ca) { min-width: 0; }
+#app :is(.slot > .name,.sh-name h4,.map-head h2,.zone-head > b) { overflow-wrap: anywhere; }
+#app .slot > .name { max-width: 100%; text-align: center; }
+#app .sh-name { flex: 1; }
+#app .sh-name h4 { white-space: normal; }
+
+/* Coin exchange is a normal list, so every regional group remains reachable by page scroll. */
+#app #screen-casino[data-tab="shop"] .cs-shop {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+#app #screen-casino .cs-cas { display: grid; gap: 24px; }
+#app #screen-casino .cs-ca > .zone-head { flex-wrap: wrap; gap: 8px 12px; }
+#app #screen-casino .cs-ca > .zone-head .muted { margin-left: auto; white-space: normal; }
+#app #screen-casino .cs-prizes { grid-template-columns: repeat(auto-fit,minmax(min(290px,100%),1fr)); }
+#app #screen-casino .sh-prize .sh-top { display: grid; grid-template-columns: 68px minmax(0,1fr) auto; gap: 12px; align-items: center; }
+#app #screen-casino .sh-prize .btn { min-height: 44px; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  #app > main { padding-bottom: calc(var(--nav-h,72px) + 76px + env(safe-area-inset-bottom,0px)); }
+  #app .topbar { padding-top: env(safe-area-inset-top,0px); min-height: var(--topbar-h); height: auto; }
+  #app .side-nav { left: max(8px,env(safe-area-inset-left,0px)); right: max(8px,env(safe-area-inset-right,0px)); }
+  #app .side-nav > button,
+  #app .side-nav > .nav-grp > .nav-grp-h { min-width: 0; min-height: 48px; }
+  #app .nav-grp-in { max-height: calc(100dvh - var(--nav-h,72px) - var(--topbar-h,60px) - 28px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)); overflow-y: auto; overscroll-behavior: contain; }
+  #app .nav-grp-in button .l { white-space: normal; overflow-wrap: anywhere; }
+  #app .pc-filters :is(input[type="search"],select,.chip) { min-height: 44px; }
+  #app .sh-buy { height: auto; min-height: 44px; }
+  #app .sh-buy :is(.seg,.buy) { min-height: 44px; }
+  #app .sh-buy .buy { height: auto; white-space: normal; }
+  #app .sh-bottom { flex-wrap: wrap; }
+  body .toasts { bottom: calc(var(--nav-h,72px) + 64px + env(safe-area-inset-bottom,0px)); }
+}
+
+@media (max-width: 480px) {
+  #app #screen-casino .sh-prize .sh-top { grid-template-columns: 68px minmax(0,1fr); gap: 8px 12px; }
+  #app #screen-casino .sh-prize .sh-top > .btn { grid-column: 1 / -1; width: 100%; justify-content: center; }
+  #app #screen-casino .cs-shop { padding: 12px; }
+  #app #screen-casino .sh-prize { padding: 12px; }
+  #app .shop-cats { padding: 12px; }
+  #app .dex-hero-body { padding: 12px; }
+}
+
+@media (max-width: 380px) {
+  #app .topbar { gap: 4px; padding-inline: 8px; }
+  #app .tb-prof { flex: 0 0 40px; padding: 0; gap: 0; }
+  #app .tb-who { min-width: 0; }
+  #app .topbar .side-wallet { flex: 1; min-width: 0; }
+  #app .topbar .side-money { padding-inline: 4px; font-size: 13px; }
+  #app .tb-acts { gap: 4px; }
+  #app .tb-acts :is(.tb-sleep,.tb-save,.side-gear) { width: 44px; min-width: 44px; height: 44px; }
+  #app #team-slots { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #app #screen-pokedex .dex-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+  #app .pc-filters { flex-wrap: wrap; }
+  #app .pc-filters input[type="search"] { flex: 1 1 100%; width: 100%; }
+  #app .pc-filters .pc-more { max-width: 100%; }
+  #app .sh-buy { flex-wrap: wrap; gap: 6px; }
+  #app .sh-buy .seg { flex-basis: 100%; border-right: 2px solid var(--line); border-radius: var(--r-sm); }
+  #app .sh-buy .buy { width: 100%; border-radius: var(--r-sm); }
+}
+
+@media (max-height: 540px) and (max-width: 900px) {
+  #app .topbar { position: relative; }
+}
+
+
+/* At 320px, give every casino destination its own complete label and tap target. */
+@media (max-width: 370px) {
+  #app #screen-casino .cs-frame > .map-head {
+    display: grid;
+    grid-template-columns: 24px minmax(0,1fr);
+    gap: 6px 8px;
+    padding: 12px;
+    min-height: 0;
+    align-items: center;
+  }
+  #app #screen-casino .cs-frame > .map-head > img { width: 24px; height: 24px; margin: 0; }
+  #app #screen-casino #cs-name { font-size: 18px; line-height: 1.4; min-width: 0; }
+  #app #screen-casino #cs-sum { grid-column: 2; margin: 0; font-size: 13px; }
+  #app #screen-casino .cs-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px; padding: 4px; }
+  #app #screen-casino .cs-tabs button { min-height: 44px; padding: 8px 4px; font-size: 12px; }
+  #app #screen-casino .cs-tabs button:not(.on) + button:not(.on)::before { content: none; }
+}

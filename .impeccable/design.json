@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T12:15:11.754Z",
+  "generatedAt": "2026-11-11T13:05:02.694Z",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -154,27 +154,9 @@
       "source": "bundle/casino-ui.css",
       "moduleMap": "docs/CASINO_MODULES.md",
       "mode": "operate",
-      "pricePerPackage": 1000,
-      "counts": [
-        10,
-        100
-      ],
-      "placement": "below native tabs, above original cabinet",
-      "colors": [
-        "#a87828",
-        "#302718",
-        "#ffe49b",
-        "#f4deb0",
-        "#44351d",
-        "#ffcb55",
-        "#c3c9d8"
-      ],
-      "smallType": [
-        12,
-        13,
-        15
-      ],
-      "radius": 7
+      "packageSpins": "removed by user request",
+      "exchangeSource": "bundle/casino-exchange-ui.css",
+      "responsiveSource": "bundle/responsive.css"
     }
   },
   "components": [
@@ -197,7 +179,7 @@
     {
       "name": "Umi reward arcade",
       "kind": "custom",
-      "description": "Native Vé & quà casino tab with bag, exchange, history and Mega; instant x10/x100 controls above original cabinet. No separate area; local save and inherited art preserved.",
+      "description": "Native casino tabs and focused exchange catalogue; no package spins; local save and inherited artwork preserved.",
       "source": "bundle/umi-arcade-ui.js",
       "cssSource": "bundle/umi-arcade.css"
     }

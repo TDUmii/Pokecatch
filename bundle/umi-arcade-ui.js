@@ -24,8 +24,7 @@
     return '<section class="ua-panel"><h3>Trứng đang ấp</h3>' + button('Cập nhật tiến độ', 'refresh') + '<p>Trứng sẵn sàng sau 3 phút hoặc 5 trận thắng. Tiến độ được lưu khi trở lại.</p><div class="ua-grid">' + (snapshot.eggs || []).map(egg => '<article class="ua-item">' + img(egg.icon) + '<h3>' + esc(egg.name) + '</h3><span>' + (egg.ready ? 'Sẵn sàng nở!' : 'Còn ' + Math.ceil((egg.remainingMs || 0) / 60000) + ' phút hoặc ' + fmt(egg.winsLeft) + ' trận thắng') + '</span><div class="ua-item-actions">' + button(egg.ready ? 'Nhận Pokémon' : 'Đang ấp trứng', 'hatch', 'data-key="' + esc(egg.key) + '"', !egg.ready) + '</div></article>').join('') + '</div>' + (!(snapshot.eggs || []).length ? '<p class="ua-empty">Chưa có trứng đang ấp. Dùng Trứng tự chọn để bắt đầu.</p>' : '') + (snapshot.pendingEncounter ? '<p class="ua-bonus-banner">' + esc(snapshot.pendingEncounter.name) + ' sẽ xuất hiện trong cuộc chạm trán hoang dã phù hợp tiếp theo.</p>' : '') + (snapshot.lootRemainingMs > 0 ? '<p class="ua-bonus-banner">Bùa chiến lợi phẩm: còn ' + Math.ceil(snapshot.lootRemainingMs / 60000) + ' phút. Nhận thêm quả mọng hoặc Kẹo Kinh Nghiệm sau mỗi 5 trận thắng.</p>' : '') + '</section>';
   }
   function exchange(snapshot) {
-    const goal = definitions()[snapshot.state.goal];
-    return `<section class="ua-panel"><h3>Quầy đổi quà</h3><p>Mảnh đổi thưởng: <b>${fmt(snapshot.state.scrap)}</b>. Tái chế vật phẩm trong Túi quà để tích lũy.</p>${goal ? `<div class="ua-goal"><b>Mục tiêu: ${esc(goal.name)}</b><small>${fmt(snapshot.state.scrap)} / ${fmt(goal.cost)} mảnh</small><progress value="${Math.min(snapshot.state.scrap || 0, goal.cost)}" max="${goal.cost}" aria-label="Tiến độ đổi ${esc(goal.name)}"></progress></div>` : ''}<div class="ua-grid">${Object.values(definitions()).map(info => itemCard(info, snapshot.state.items?.[info.id] || 0, true, true)).join('')}</div></section>`;
+    return root.UmiCasinoExchangeUI.render(snapshot, { items: definitions(), esc, fmt, img, button });
   }
   function history(snapshot) {
     return `<section class="ua-panel"><h3>Lịch sử 100 lượt gần nhất</h3><ol class="ua-log">${[...(snapshot.state.history || [])].reverse().map(entry => `<li><b class="ua-tier" data-tier="${entry.tier}">${symbol(entry.tier)} ${esc(rarity(entry.tier).name)}</b> · ${entry.machineId === 'evolution' ? 'Pachinko' : 'Máy quay Sòng bạc'}<small>${(entry.rewards || []).map(reward => reward.kind === 'money' ? `${fmt(reward.amount)} ₽` : `${esc(itemInfo(reward.id).name)} ×${fmt(reward.qty)}`).join(' · ')}${entry.multiplier > 1 ? ' · Quà ×2' : ''}${entry.bonusSpins ? ` · +${entry.bonusSpins} lượt miễn phí` : ''}</small></li>`).join('') || '<li class="ua-empty">Chưa có lượt quay nào.</li>'}</ol></section>`;
@@ -38,6 +37,7 @@
     if (!host || !service || !host.closest('.active')) return;
     const focused = host.contains(document.activeElement) ? { ...document.activeElement.dataset } : null;
     try {
+      host.dataset.view = tab;
       const snapshot = service.snapshot();
       snapshot.state ||= service.state();
       const giftCount = Object.values(snapshot.state.items || {}).reduce((sum, qty) => sum + Math.max(0, Number(qty) || 0), 0) + (snapshot.eggs || []).length;
@@ -113,6 +113,7 @@
     error = ''; notice = '';
     try {
       if (target.dataset.tab) { tab = target.dataset.tab; render(); return; }
+      if (target.dataset.exchangeFilter) { root.UmiCasinoExchangeUI.setFilter(target.dataset.exchangeFilter); render(); return; }
       const id = target.dataset.id;
       switch (target.dataset.action) {
         case 'claim': claim(id); break;
@@ -148,6 +149,7 @@
     host.classList.add('ua-root');
     host.removeEventListener('click', action);
     host.addEventListener('click', action);
+    host.onchange = event => { if (event.target.matches('[data-exchange-category]')) { root.UmiCasinoExchangeUI.setFilter(event.target.value); render(); host.querySelector('[data-exchange-category]')?.focus({ preventScroll: true }); } };
     render();
   }
   root.UmiArcadeUI = { mount, render };

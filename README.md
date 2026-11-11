@@ -16,7 +16,9 @@ Mở **Hoạt động → Sòng bạc** và dùng máy quay hoặc Pachinko có 
 
 Mỗi lần quay hoặc mua một đợt bóng Pachinko có thêm vật phẩm, ghi vào cùng bản lưu. Mở tab **Vé & quà** trên hàng tab Sòng bạc để dùng quà, tái chế, đổi thưởng hoặc trang bị Mega. Quà bổ sung có tỷ lệ cơ bản Thường 50%, Ít gặp 30%, Hiếm 15%, Sử thi 4%, Độc đắc 1%, với bảo đảm quà Hiếm sau 10 lần và Sử thi sau 50 lần. Các lượt thưởng miễn phí và vé cũ chuyển sang lượt quay ở máy Sòng bạc gốc; hệ thống tự dùng vé trước khi trừ tiền cược. Mọi quà, mảnh, mục tiêu và Mega của bản trước được giữ lại.
 
-Hai nút **QUAY ×10** và **QUAY ×100** nằm ngay dưới hàng tab, trước máy quay. Mỗi gói có tổng giá **1.000 ₽** khi còn lượt trả tiền; toàn bộ gói đủ vé thì miễn phí. Máy dành trước lượt miễn phí đang có (lượt thưởng trước, rồi vé), các lượt mới trúng giữ cho lần tiếp theo. Xử lý toàn bộ gói ngay ở mức thưởng ×1, cộng xu và quà thật, hiển thị tổng kết; không chờ hoạt ảnh của từng lượt. Giao dịch lưu một lần và phục hồi dữ liệu nếu có lỗi.
+Các gói quay nhanh ×10/×100 giá 1.000 tiền đã được gỡ theo yêu cầu. Máy quay thường và Pachinko tiếp tục hoạt động; vé, xu và phần thưởng đã nhận được giữ trong cùng bản lưu.
+
+Quầy **Đổi thưởng** chia quà thành Vé & tiếp tế, Bạn đồng hành, Tiến hóa & Mega. Có bộ lọc đủ mảnh, giá, số đang có, số còn thiếu và mục tiêu đổi quà. Điện thoại dùng hàng rộng, màn hình lớn dùng hai cột. Quầy **Đổi xu** cuộn cùng trang; đội hình, Pokédex, cửa hàng, header và thanh điều hướng có điều chỉnh cho màn hình nhỏ.
 
 Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn quà, rương tiến hóa, mảnh Mega, vé chọn Đá Mega, trứng tự chọn, vé săn loài còn thiếu, Bùa chiến lợi phẩm, vé chọn Pokémon khác màu, thùng tiếp tế và thỏi vàng. Trứng nở sau 3 phút hoặc 5 trận thắng. Vé săn ưu tiên cuộc gặp phù hợp tiếp theo trong vùng hiện tại; tỷ lệ bắt vẫn áp dụng bình thường. Bùa tăng phần thưởng sau mỗi 5 trận thắng trong 60 phút. Đồ dư phù hợp có thể tái chế thành mảnh, đặt mục tiêu và đổi phần thưởng.
 
@@ -52,4 +54,4 @@ Workflow `.github/workflows/pages.yml` tự build, kiểm tra rồi xuất bản
 
 ## Sửa theo tính năng
 
-Xem [bản đồ mô-đun Sòng bạc](docs/CASINO_MODULES.md) trước khi sửa. Giao diện, quay nhanh, cầu nối engine, quà quay thường và thao tác quà có tệp riêng cùng kiểm tra liên quan; không cần đọc lại toàn bộ bundle gốc cho các thay đổi cục bộ. Quy ước này cũng nằm trong [AGENTS.md](AGENTS.md).
+Xem [bản đồ mô-đun Sòng bạc](docs/CASINO_MODULES.md) trước khi sửa. Giao diện tab, quầy đổi mảnh, quà quay thường, thao tác quà và bố cục toàn app có tệp riêng cùng kiểm tra liên quan; không cần đọc lại toàn bộ bundle gốc cho các thay đổi cục bộ. Quy ước này cũng nằm trong [AGENTS.md](AGENTS.md).

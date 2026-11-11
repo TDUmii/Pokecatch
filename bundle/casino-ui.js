@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  let engine, arcade, batch, screen, pending = false, resultText = '', rewardText = '';
+  let engine, arcade, screen;
   const fmt = value => Number(value || 0).toLocaleString('vi-VN');
   function select() {
     const gifts = screen.dataset.tab === 'prizes';
@@ -34,7 +34,7 @@
           screen.dataset.tab = 'prizes';
         }
         select();
-        root.UmiArcadeUI.render();
+        root.UmiArcadeUI.render(); updateFreeHint();
         if (tabs.getBoundingClientRect().top < 0) tabs.scrollIntoView({ block: 'start', behavior: 'instant' });
       });
       tabs.addEventListener('keydown', event => {
@@ -50,45 +50,24 @@
     root.UmiArcadeUI.mount(engine, arcade);
     const giftPanel = screen.querySelector('#umi-casino-prizes');
     giftPanel.setAttribute('role', 'tabpanel'); giftPanel.setAttribute('aria-labelledby', 'umi-casino-prize-tab');
-    let controls = screen.querySelector('#umi-casino-batch');
-    if (!controls) {
-      controls = document.createElement('section'); controls.id = 'umi-casino-batch';
-      controls.setAttribute('aria-label', 'Quay nhiều lượt');
-      controls.innerHTML = '<p class="uc-free"></p><div class="uc-batch-buttons"><button type="button" data-batch="10"><b>QUAY ×10</b><small></small></button><button type="button" data-batch="100"><b>QUAY ×100</b><small></small></button></div><p class="uc-batch-result" role="status" aria-live="polite"></p><details class="uc-reward-details" hidden><summary>Quà nhận được</summary><p></p></details>';
-      screen.querySelector('.cs-stagebox').before(controls);
-      controls.addEventListener('click', async event => {
-        const button = event.target.closest('[data-batch]');
-        if (!button || pending) return;
-        pending = true; rewardText = ''; resultText = 'Đang quay…'; updateControls();
-        try {
-          const result = await batch.spin(Number(button.dataset.batch));
-          const rewards = (result.rewards || []).map(reward => reward.kind === 'money' ? `${fmt(reward.amount)} ₽` : `${root.UmiArcadeRules?.ITEMS?.[reward.id]?.name || engine.UI.itemName?.(reward.id) || 'Quà'} ×${fmt(reward.qty)}`);
-          resultText = `${fmt(result.count)} lượt · ${fmt(result.wins)} lượt trúng · Nhận ${fmt(result.coins)} xu.`;
-          rewardText = rewards.join(' · ');
-        } catch (failure) { resultText = failure.message || 'Chưa thể quay. Hãy kiểm tra tiền và thử lại.'; }
-        finally { pending = false; render(); }
-      });
+    let hint = screen.querySelector('.uc-free-hint');
+    if (!hint) {
+      hint = document.createElement('p'); hint.className = 'uc-free-hint';
+      tabs.after(hint);
     }
-    select(); updateControls();
+    select(); updateFreeHint();
   }
-  function updateControls() {
-    const controls = screen?.querySelector('#umi-casino-batch');
-    if (!controls) return;
-    const quote = batch.quote(10);
-    controls.querySelector('.uc-free').textContent = `${fmt(arcade.snapshot().customBonusRemaining)} lượt miễn phí · Gói thưởng ×1`;
-    controls.querySelectorAll('[data-batch]').forEach(button => {
-      const offer = Number(button.dataset.batch) === 10 ? quote : batch.quote(100);
-      button.disabled = pending || !offer.available;
-      button.querySelector('small').textContent = `${offer.cost ? fmt(offer.cost) + ' ₽ cho cả gói' : 'Miễn phí cả gói'}`;
-      button.title = offer.reason || '';
-    });
-    controls.querySelector('.uc-batch-result').textContent = resultText || quote.reason || '';
-    const details = controls.querySelector('.uc-reward-details');
-    details.hidden = !rewardText; details.querySelector('p').textContent = rewardText;
+  function updateFreeHint() {
+    const hint = screen?.querySelector('.uc-free-hint');
+    if (!hint) return;
+    const free = arcade.state().nativeFree + arcade.quantity('umi-spin-ticket');
+    hint.hidden = screen.dataset.tab !== 'slots' || !free;
+    hint.textContent = fmt(free) + ' lượt miễn phí. Vé tự dùng khi nhấn QUAY.';
   }
-  function install(game, service, adapter) {
+
+  function install(game, service) {
     if (engine) return;
-    engine = game; arcade = service; batch = adapter;
+    engine = game; arcade = service;
     const casino = engine.Screens.casino;
     ['init', 'render', 'enter'].forEach(name => {
       const original = casino[name];
@@ -96,5 +75,5 @@
     });
     render();
   }
-  root.UmiCasinoUI = { install, mount: render, render, refresh: updateControls };
+  root.UmiCasinoUI = { install, mount: render, render, refresh: updateFreeHint };
 })(globalThis);

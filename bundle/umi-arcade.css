@@ -45,3 +45,13 @@
 #umi-casino-prizes .ua-header{margin-bottom:5px}#umi-casino-prizes .ua-header h2{font-size:19px;margin-bottom:2px}
 #umi-casino-prizes .ua-header p,#umi-casino-prizes .ua-gift-help{font-size:12px;line-height:1.45;margin:3px 0}
 #umi-casino-prizes .ua-panel{padding-top:10px}#umi-casino-prizes .ua-panel>p{margin-bottom:10px}
+
+/* Keep the shop's own wallet, with one clear page heading. */
+#umi-casino-prizes[data-view=exchange]>.ua-header,#umi-casino-prizes[data-view=exchange]>.ua-gift-help,#umi-casino-prizes[data-view=exchange]>.ua-wallet{display:none}
+@media(max-width:700px){
+  #umi-casino-prizes[data-view=bag] .ua-grid{grid-template-columns:minmax(0,1fr)}
+  #umi-casino-prizes[data-view=bag] .ua-item{grid-template-columns:44px minmax(0,1fr);padding:13px;gap:5px 12px}
+  #umi-casino-prizes[data-view=bag] .ua-item>img{width:44px;height:44px}
+  #umi-casino-prizes[data-view=bag] .ua-item-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #umi-casino-prizes[data-view=bag] .ua-item p{grid-column:2;margin:3px 0;font-size:13px}
+}

@@ -176,12 +176,14 @@ Keep the inherited scene framing, Pokémon art and local game controls. The pers
 - **Don't** treat a tall full-page screenshot as proof that all content fits simultaneously within a phone screen.
 
 
-## Tab và quay nhanh trong Sòng bạc
+## Sòng bạc và quầy đổi quà
 
-Giữ Sòng bạc của engine với máy quay, Pachinko và hình ảnh gốc. Hàng tab gồm Máy quay, Pachinko, Đổi xu, Vé & quà. Tab Vé & quà mở ngay trong cùng khung; không còn ngăn quà dưới máy. Giao diện quà ưu tiên vật phẩm đang có, rồi trứng, vật phẩm huấn luyện; quầy đổi vẫn cho xem toàn bộ danh mục. Giữ Be Vietnam Pro, nền tối và biểu tượng đã có.
+Giữ Sòng bạc với máy quay, Pachinko và hình ảnh gốc. Hàng tab gồm Máy quay, Pachinko, Đổi xu, Vé & quà. Gỡ gói quay nhanh ×10/×100 giá 1.000 tiền theo yêu cầu; không còn module, nút hay giao dịch của gói. Lượt miễn phí được dùng ở máy thường, dữ liệu quà đã nhận giữ nguyên.
 
-Hai nút quay nhanh ×10 và ×100 ở ngay dưới hàng tab, trước phần máy quay, có tổng giá rõ ràng 1.000 tiền cho cả gói. Hiện lượt miễn phí sẵn có, kết quả gộp số lượt trúng và xu, chi tiết quà có thể mở khi cần. Mức thưởng gói dùng ×1. Nút ít nhất 44px; trên điện thoại chừa vùng an toàn trên thanh điều hướng. Bốn tab dùng cùng lưới và hỗ trợ phím mũi tên, Home, End.
+Quầy đổi mảnh có ví và mục tiêu trước danh mục, bộ lọc Tất cả/Đủ mảnh và nhóm Vé & tiếp tế, Bạn đồng hành, Tiến hóa & Mega. Mỗi món có biểu tượng, tên, mô tả, số đang có, giá, số mảnh còn thiếu và nút Đổi quà chính. Điện thoại dùng hàng rộng một cột, màn hình từ 850px dùng hai cột. Đặt mục tiêu là hành động phụ; không đổi giá hay phần thưởng trong lượt thiết kế này.
 
-Các tệp sở hữu bố cục và thao tác được ghi tại docs/CASINO_MODULES.md. Phần quà dùng namespace ua-, phần tab/quay nhanh nằm trong casino-ui.css. Màu nâu vàng của nút quay nhanh, tông quà cũ và cỡ chữ phụ 12-13px được giữ để đồng nhất với máy pixel. Cảnh báo cơ học về màu/cỡ chữ ngoài danh mục là advisory cho các tông kế thừa này, không thay thế đánh giá bố cục thực tế.
+Giữ Be Vietnam Pro và thế giới pixel tối. Phần quà dùng ua-, quầy đổi mảnh dùng ux- và casino-exchange-ui.css; hướng dẫn sở hữu tính năng nằm trong docs/CASINO_MODULES.md. Tab và nút đổi có vùng bấm tối thiểu 44px. Màu vàng và tông quà kế thừa, cỡ chữ phụ 12-13px giữ trong các phần đặc của game; cảnh báo cơ học về danh mục màu/cỡ chữ là advisory cần đối chiếu ảnh thực.
 
-Bằng chứng kiểm tra trình duyệt ở 360px, 390px và 1366px nằm trong .impeccable/review/casino-tabs/. Xác nhận chuyển tab, gói 10/100 giá 1.000 mỗi gói, cộng xu và vật phẩm thật, quay thường sau gói, giữ dữ liệu sau tải lại. Đây là kiểm tra trình duyệt, không phải điện thoại thật.
+Bố cục toàn app nằm trong responsive.css: tên dài xuống dòng, cột con không ép tràn ngang, đội hình và Pokédex ít cột hơn ở 320px, nút mua có thể xuống hàng, quầy Đổi xu cuộn cùng trang và thanh điều hướng chừa safe area. Không cắt tràn toàn trang để che lỗi, không thay cách scale hình máy gốc.
+
+Kiểm tra trình duyệt ở 320px, 390px, 768px và 1366px trong .impeccable/review/exchange/: không còn gói quay; máy thường vẫn cộng thưởng; đổi mảnh, bộ lọc và mục tiêu hoạt động, giữ dữ liệu sau tải lại. Đây là kiểm tra trình duyệt, không phải điện thoại thật.
