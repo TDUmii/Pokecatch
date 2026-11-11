@@ -11,4 +11,6 @@ Với lệnh qua PowerShell của Codex Desktop, thêm `rtk` trước CLI đư�
 - Giữ quà quay thường trong `casino-rewards.js`, tab Sòng bạc trong `casino-ui.js`, quầy đổi mảnh trong `casino-exchange-ui.js` và CSS riêng, thao tác quà trong `umi-arcade-ui.js`, bố cục toàn app trong `responsive.css`.
 - Không thêm tính năng mới vào `app.f9da276408.js`. Bundle này chỉ giữ các callback nối với engine gốc; sửa điểm nối khi thay đổi native thật sự yêu cầu.
 - Sửa nhỏ chạy kiểm tra của tính năng đó. Trước phát hành chạy build rồi bộ kiểm tra tổng; thay đổi UI phải xem cả màn hình hẹp và rộng.
-- Giữ bản lưu hiện có và tương thích dữ liệu cũ. Người dùng đã yêu cầu gỡ gói quay nhanh ×10/×100 giá 1.000 tiền vì lỗi; không thêm lại. Tốc độ phiêu lưu ×10 vẫn là tính năng riêng.
+- Giữ bản lưu hiện có và tương thích dữ liệu cũ. Người dùng đã yêu cầu gỡ gói quay nhanh ×10/×100 giá 1.000 tiền vì lỗi; không thêm lại. Tốc độ phiêu lưu ×10/×20 là tính năng riêng.
+
+- Trước khi sửa Cẩm nang, tooltip thẻ hoặc tốc độ phiêu lưu, đọc `docs/PLAY_GUIDE_MODULES.md` để chọn đúng mô-đun và kiểm tra.

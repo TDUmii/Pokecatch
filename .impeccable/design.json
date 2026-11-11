@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T13:05:02.694Z",
+  "generatedAt": "2026-11-11T14:38:36.803Z",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -157,6 +157,22 @@
       "packageSpins": "removed by user request",
       "exchangeSource": "bundle/casino-exchange-ui.css",
       "responsiveSource": "bundle/responsive.css"
+    },
+    "playGuide": {
+      "mode": "operate",
+      "source": "bundle/guide-ui.js",
+      "cssSource": "bundle/guide-ui.css",
+      "rulesSource": "bundle/guide-rules.js",
+      "scope": ".umi-guide-root",
+      "identity": "inherited handbook and pixel world",
+      "readOnly": true
+    },
+    "pokemonCard": {
+      "cssSource": "bundle/pokemon-card.css",
+      "scriptSource": "bundle/pokemon-card.js",
+      "scope": ".dexcard.v2 and #umi-pokemon-tooltip",
+      "nature": "full-width row after level and HP",
+      "tooltip": "fixed viewport-clamped portal"
     }
   },
   "components": [

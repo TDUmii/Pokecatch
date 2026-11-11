@@ -187,3 +187,11 @@ Giữ Be Vietnam Pro và thế giới pixel tối. Phần quà dùng ua-, quầy
 Bố cục toàn app nằm trong responsive.css: tên dài xuống dòng, cột con không ép tràn ngang, đội hình và Pokédex ít cột hơn ở 320px, nút mua có thể xuống hàng, quầy Đổi xu cuộn cùng trang và thanh điều hướng chừa safe area. Không cắt tràn toàn trang để che lỗi, không thay cách scale hình máy gốc.
 
 Kiểm tra trình duyệt ở 320px, 390px, 768px và 1366px trong .impeccable/review/exchange/: không còn gói quay; máy thường vẫn cộng thưởng; đổi mảnh, bộ lọc và mục tiêu hoạt động, giữ dữ liệu sau tải lại. Đây là kiểm tra trình duyệt, không phải điện thoại thật.
+
+## Cẩm nang chiến thuật và thẻ Pokémon
+
+Giữ Cẩm nang có sẵn, thêm hai mục Khắc hệ và Đội theo bản đồ ở nhóm Chiến thuật. Phần mới dùng namespace umi-guide- để không trùng CSS Hầm Ngầm. Nội dung đọc và thao tác chọn hệ/bản đồ nằm trong vùng cuộn của Cẩm nang, dùng font và bảng màu kế thừa. Đội gợi ý ưu tiên Pokémon đang có, ghi rõ cấp, hệ, lý do và giới hạn của cách xếp hạng; không tạo thao tác tự thay đội. Màn hình nhỏ dùng một cột, hai cột chỉ khi chính vùng nội dung đủ rộng.
+
+Thẻ Pokémon giữ artwork và vùng cuộn. Cấp và HP đứng cùng hàng; Tính cách chiếm hàng rộng riêng bên dưới. Tooltip được sao chép sang lớp nổi độc lập, đặt gần mục được trỏ và giới hạn trong viewport, không bị header/vùng cuộn cắt. Các tooltip gốc chỉ ẩn trong thẻ đã hỗ trợ; hỗ trợ focus và chạm.
+
+Tốc độ ×20 là lựa chọn phiêu lưu riêng trong nhóm tốc độ; không khôi phục gói quay thưởng đã gỡ. Bộ kiểm tra trích thuật toán gốc xác nhận 200 nhịp/28 giây ở ×20 so với 100 nhịp ở ×10; hoạt ảnh và phần tiến trình khi đóng game giữ giới hạn riêng.

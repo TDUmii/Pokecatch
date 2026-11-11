@@ -24,7 +24,7 @@ Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn 
 
 20 mảnh Mega đổi một vé chọn Đá Mega. Có 48 dạng tương thích với dữ liệu Pokémon của bản này (46 Mega và 2 Nguyên thủy); mở khóa xong, vào mục Đá Mega để trang bị cho đúng loài. Mỗi lúc chỉ một cá thể dùng Mega; thay đổi giữ tỷ lệ HP. Chỉ số, hệ và sprite được dùng trong chiến đấu thật.
 
-Nút **×10** tăng tốc xử lý phiêu lưu thực tế và giữ lựa chọn qua lần mở lại. Các hoạt ảnh mở quà, bắt Pokémon và cảnh giới thiệu có giới hạn riêng để dễ đọc trên điện thoại.
+Nút **×10** và **×20** tăng tốc xử lý phiêu lưu thực tế và giữ lựa chọn qua lần mở lại. Các hoạt ảnh mở quà, bắt Pokémon và cảnh giới thiệu có giới hạn riêng để dễ đọc trên điện thoại.
 
 Tiến trình chơi được lưu trong trình duyệt trên từng thiết bị. Bản này không đồng bộ tài khoản, không sử dụng bảng xếp hạng hay giao dịch trực tuyến của trang gốc. Không nhập mật khẩu tài khoản gốc vào bản này.
 
@@ -55,3 +55,11 @@ Workflow `.github/workflows/pages.yml` tự build, kiểm tra rồi xuất bản
 ## Sửa theo tính năng
 
 Xem [bản đồ mô-đun Sòng bạc](docs/CASINO_MODULES.md) trước khi sửa. Giao diện tab, quầy đổi mảnh, quà quay thường, thao tác quà và bố cục toàn app có tệp riêng cùng kiểm tra liên quan; không cần đọc lại toàn bộ bundle gốc cho các thay đổi cục bộ. Quy ước này cũng nằm trong [AGENTS.md](AGENTS.md).
+
+## Cẩm nang chiến thuật và thẻ Pokémon
+
+Trong **Cẩm nang → Khắc hệ**, chọn một hoặc hai hệ để xem tấn công, điểm yếu, kháng và miễn nhiễm. Hệ số đọc từ engine chiến đấu, có trường hợp ×4, ×0,25 và ×0 của Pokémon hai hệ.
+
+Trong **Cẩm nang → Đội theo bản đồ**, chọn chương để xem tối đa sáu Pokémon đang sở hữu phù hợp với đối thủ và chiêu đã học. Gợi ý tính hệ Mega đang trang bị, cấp hiệu dụng, chỉ số và độ phủ. Có đối thủ cần chú ý và nơi săn thêm đã mở. Đây là xếp hạng hỗ trợ, chưa mô phỏng toàn bộ thời tiết, kỹ năng và trạng thái; không tự đổi đội hay dùng vật phẩm. Trên điện thoại mở Cẩm nang từ Cài đặt → Bản tin & Cẩm nang → Cẩm nang.
+
+Thẻ Pokémon dùng hai ô cấp/HP và một hàng Tính cách rộng. Tooltip nổi ngoài vùng cuộn, hỗ trợ trỏ chuột, bàn phím và chạm, giới hạn trong màn hình. Các mô-đun và kiểm tra liên quan ở [docs/PLAY_GUIDE_MODULES.md](docs/PLAY_GUIDE_MODULES.md).

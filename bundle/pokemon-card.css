@@ -1,0 +1,8 @@
+/* Pokémon detail facts and floating help retain the inherited game palette. */
+.dexcard.v2 .dc-facts:has(>.dc-nature){grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.dexcard.v2 .dc-facts>.dc-nature{grid-column:1/-1;min-width:0;min-height:44px;text-align:left;font:inherit;font-size:var(--fs-micro,12px);line-height:1.4;border:0;color:var(--muted);padding:8px 10px}
+.dexcard.v2 .dc-nature>b{display:block;font-size:var(--fs-sm,14px);line-height:1.45;margin-top:3px;white-space:normal;overflow-wrap:break-word;color:var(--text)}
+.dexcard.v2 :is(.bag-tip,.info-tip-box,[role=tooltip]){display:none!important}
+.dexcard.v2 [data-umi-card-help]:focus-visible{outline:3px solid #a8dfff;outline-offset:3px;border-radius:6px}
+#umi-pokemon-tooltip{position:fixed;z-index:100100;box-sizing:border-box;width:max-content;max-width:min(300px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;padding:10px 12px;border:2px solid #566079;border-radius:9px;background:#10131f;color:#eef1f8;font:400 13px/1.5 var(--font,"Be Vietnam Pro",system-ui,sans-serif);box-shadow:0 8px 24px #0007;pointer-events:none;white-space:normal;overflow-wrap:anywhere}
+#umi-pokemon-tooltip[hidden]{display:none!important}#umi-pokemon-tooltip b{color:#eef1f8;font-weight:700}#umi-pokemon-tooltip p{margin:4px 0 0;color:#c3cce0}#umi-pokemon-tooltip img{max-width:100%;height:auto;image-rendering:pixelated}

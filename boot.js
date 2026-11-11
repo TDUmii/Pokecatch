@@ -77,7 +77,7 @@
             <div class="banner" id="banner"></div>
             <div class="battle-log" id="battle-log">En route pour l'aventure !</div>
             <div class="adv-controls">
-              <div class="seg" id="speed-btns"><button data-speed="1">×1</button><button data-speed="2">×2</button><button data-speed="4">×3</button><button data-speed="10">×10</button></div>
+              <div class="seg" id="speed-btns"><button data-speed="1">×1</button><button data-speed="2">×2</button><button data-speed="4">×3</button><button data-speed="10">×10</button><button data-speed="20">×20</button></div>
             </div>
             <div class="empty-arena" id="adv-empty" hidden><p>Ton équipe est vide ! Choisis jusqu'à 6 Pokémon dans ton PC.</p><button class="btn gold">Gérer l'équipe</button></div>
           </div>
