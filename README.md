@@ -24,7 +24,7 @@ Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn 
 
 20 mảnh Mega đổi một vé chọn Đá Mega. Có 48 dạng tương thích với dữ liệu Pokémon của bản này (46 Mega và 2 Nguyên thủy); mở khóa xong, vào mục Đá Mega để trang bị cho đúng loài. Có một ô Mega miễn phí, mở dần tối đa sáu ô bằng huy hiệu đạo quán và mảnh Mega. Không tự tháo dạng của con khác; thay đổi giữ tỷ lệ HP. Chỉ số, hệ và sprite được dùng trong chiến đấu thật.
 
-Nút **×10** và **×20** tăng tốc xử lý phiêu lưu thực tế và giữ lựa chọn qua lần mở lại. Các hoạt ảnh mở quà, bắt Pokémon và cảnh giới thiệu có giới hạn riêng để dễ đọc trên điện thoại.
+Nút **×10** và **×20** tăng tốc xử lý phiêu lưu thực tế và giữ lựa chọn qua lần mở lại. Từ ×10, trận và lượt bắt thường dùng hiển thị gọn để tránh chờ chuyển cảnh lâu; ×20 có chu kỳ khung ngắn hơn ×10. Các lựa chọn, tiến hóa, Pokémon mới/khác màu và mốc quan trọng giữ luồng tương tác gốc.
 
 Tiến trình chơi được lưu trong trình duyệt trên từng thiết bị. Bản này không đồng bộ tài khoản, không sử dụng bảng xếp hạng hay giao dịch trực tuyến của trang gốc. Không nhập mật khẩu tài khoản gốc vào bản này.
 

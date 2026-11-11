@@ -114,5 +114,6 @@ await import('./verify-mega.mjs');
 await import('./verify-native-casino.mjs');
 await import('./verify-casino-exchange.mjs');
 await import('./verify-adventure-speed.mjs');
+await import('./verify-adventure-presentation.mjs');
 await import('./verify-guide-rules.mjs');
 await import('./verify-pokemon-card.mjs');

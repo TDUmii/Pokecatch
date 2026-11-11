@@ -194,7 +194,7 @@ Giữ Cẩm nang có sẵn, thêm hai mục Khắc hệ và Đội theo bản đ
 
 Thẻ Pokémon giữ artwork và vùng cuộn. Cấp và HP đứng cùng hàng; Tính cách chiếm hàng rộng riêng bên dưới. Tooltip được sao chép sang lớp nổi độc lập, đặt gần mục được trỏ và giới hạn trong viewport, không bị header/vùng cuộn cắt. Các tooltip gốc chỉ ẩn trong thẻ đã hỗ trợ; hỗ trợ focus và chạm.
 
-Tốc độ ×20 là lựa chọn phiêu lưu riêng trong nhóm tốc độ; không khôi phục gói quay thưởng đã gỡ. Bộ kiểm tra trích thuật toán gốc xác nhận 200 nhịp/28 giây ở ×20 so với 100 nhịp ở ×10; hoạt ảnh và phần tiến trình khi đóng game giữ giới hạn riêng.
+Tốc độ ×20 là lựa chọn phiêu lưu riêng trong nhóm tốc độ; không khôi phục gói quay thưởng đã gỡ. Bộ kiểm tra trích thuật toán gốc xác nhận 200 nhịp/28 giây ở ×20 so với 100 nhịp ở ×10; hiển thị trận thường ở ×10/×20 nay dùng nhịp gọn 280/140ms; mốc quan trọng, lựa chọn và tiến trình khi đóng game giữ luồng riêng.
 
 ## Tiến trình ô Mega
 

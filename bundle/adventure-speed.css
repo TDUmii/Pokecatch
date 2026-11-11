@@ -1,0 +1,2 @@
+/* Fast presentation keeps the current arena readable without lagging health bars. */
+#arena[data-umi-fast=true] .hp>div{transition-duration:.04s,.04s}
