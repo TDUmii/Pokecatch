@@ -45,7 +45,7 @@ for (const path of files) {
 
 // Exercise the shipped worker with native Response objects and an in-memory Cache API.
 const handlers = {}, messages = [], stored = new Map();
-let active = 0, maximum = 0, fail = true, requested = [];
+let active = 0, maximum = 0, fail = true, requested = [], reloads = [];
 const scope = 'https://example.test/Pokecatch/';
 const key = value => new URL(typeof value === 'string' ? value : value.url, scope).href.split('?')[0];
 const cache = {
@@ -55,6 +55,7 @@ const cache = {
   addAll: async values => { for (const value of values) await cache.add(value); }
 };
 async function fetchMock(value) {
+  if (value instanceof Request && value.cache === 'reload') reloads.push(value.url);
   const url = key(value); requested.push(url);
   if (url.endsWith('shell-manifest.json')) return Response.json({ files: ['index.html', 'offline.js', 'assets-manifest.json'] });
   if (url.endsWith('assets-manifest.json')) return Response.json({ files: ['assets/a.png', 'assets/b.png', 'assets/c.png', 'assets/d.png', 'assets/e.png'] });
@@ -64,13 +65,14 @@ async function fetchMock(value) {
 }
 const self = { registration:{ scope }, location:{ origin:'https://example.test' }, addEventListener:(name, fn) => { handlers[name] = fn; }, skipWaiting:async()=>{}, clients:{ claim:async()=>{}, matchAll:async()=>[{postMessage: message => messages.push(message)}] } };
 const removedCaches = [];
-vm.runInNewContext(await readFile(join(root, 'sw.js'), 'utf8'), { self, URL, fetch:fetchMock, caches:{open:async()=>cache, keys:async()=>['pokecatch-personal-old', 'unrelated-cache'], delete:async name => { removedCaches.push(name); return true; }}, Response, Set, Promise });
+vm.runInNewContext(await readFile(join(root, 'sw.js'), 'utf8'), { self, URL, fetch:fetchMock, caches:{open:async()=>cache, keys:async()=>['pokecatch-personal-old', 'unrelated-cache'], delete:async name => { removedCaches.push(name); return true; }}, Request, Response, Set, Promise });
 async function trigger(name, extra = {}) {
   let pending;
   handlers[name]({ ...extra, waitUntil: promise => { pending = promise; }, respondWith:promise => { pending = promise; } });
   return await pending;
 }
 await trigger('install');
+assert(reloads.some(url => url.endsWith('offline.js')), 'Updated shell may reuse an old browser HTTP-cache entry');
 await trigger('activate');
 assert.deepEqual(removedCaches, ['pokecatch-personal-old'], 'Activation removed unrelated cache');
 requested = [];

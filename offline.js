@@ -5,7 +5,7 @@
   const state = window.PokeOffline = { engine: null };
   window.__setInternalPoke = engine => { state.engine = engine; };
   window.SW_REG = 'serviceWorker' in navigator
-    ? navigator.serviceWorker.register('./sw.js').catch(() => null)
+    ? navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).catch(() => null)
     : Promise.resolve(null);
   window.BOOT_FAIL = () => {
     const box = document.getElementById('loading-game');

@@ -11,7 +11,7 @@ async function manifest(path) {
 }
 self.addEventListener('install', event => event.waitUntil((async () => {
   const cache = await caches.open(CACHE);
-  await cache.addAll((await manifest('shell-manifest.json')).map(urlFor));
+  await cache.addAll((await manifest('shell-manifest.json')).map(path => new Request(urlFor(path), { cache: 'reload' })));
   await cache.add(urlFor('shell-manifest.json'));
   await self.skipWaiting();
 })()));
