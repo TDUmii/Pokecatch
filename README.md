@@ -1,10 +1,10 @@
 # Pokecatch - bản cá nhân ngoại tuyến
 
-Bản chạy riêng để chơi trên máy tính và điện thoại, dựa trên frontend công khai của [Pokecatch Việt Nam](https://pokecatchvn.xyz/). Giữ engine chơi đơn, khám phá, chiến đấu tự động, bắt Pokémon, đội hình, tiến hóa và các khu vực có trong dữ liệu gốc. Đây là bản fan game cá nhân, không phải máy chủ chính thức. Pokémon và các tài sản gốc thuộc chủ sở hữu tương ứng. Xem [nguồn tài nguyên](THIRD_PARTY.md).
+Game cá nhân của Umi để chơi trên máy tính và điện thoại: khám phá, chiến đấu tự động, bắt Pokémon, quản lý đội hình và tiến hóa. Các liên kết cộng đồng, quảng bá và ủng hộ của dự án khác đã được gỡ khỏi giao diện. Pokémon và các tài nguyên bên thứ ba thuộc chủ sở hữu tương ứng; thông tin nguồn và giấy phép được giữ trong [THIRD_PARTY.md](THIRD_PARTY.md).
 
 Chơi trực tiếp: **https://tdumii.github.io/Pokecatch/**
 
-Bộ tài nguyên đã thu thập gồm 4.839 tệp, khoảng 72,2 MiB: 3.134 PNG, 1.318 GIF, 374 WEBP cùng SVG, intro và font. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Sự hiện diện của tài nguyên Mega không có nghĩa là tích hợp các chức năng quản trị hoặc mở khóa mọi tính năng của máy chủ gốc.
+Bộ tài nguyên gồm 4.871 tệp trong manifest, khoảng 73 MiB: 3.160 PNG, 1.318 GIF, 374 WEBP cùng SVG, intro, font và giấy phép. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Danh mục vật phẩm được kiểm tra đủ 136 biểu tượng, bao gồm các cỡ kẹo EXP. Sự hiện diện của tài nguyên Mega không có nghĩa là tích hợp các chức năng quản trị hoặc mở khóa mọi tính năng của máy chủ gốc.
 
 Giao diện tiếng Việt dùng **Be Vietnam Pro**, có đầy đủ dấu tiếng Việt và được lưu cùng game để chơi offline. Logo Latin giữ nét chữ pixel gốc. Các tệp font và giấy phép nằm trong `assets/fonts/`.
 

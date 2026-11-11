@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
 import { createHash } from 'node:crypto';
+import { itemCatalog } from './item-catalog.mjs';
 const origin='https://pokecatchvn.xyz/';
 const files=['app.js','app.css','boot.js','original.html'];
 const sources=await Promise.all(files.map(f=>fs.readFile('.research/'+f,'utf8')));
@@ -32,10 +33,7 @@ for(const k of ['common','uncommon','rare','legendary'])add(`assets/ui/undergrou
 for(const k of [...new Set([...js.matchAll(/types:\[([^\]]+)\]/g)].flatMap(m=>[...m[1].matchAll(/"(\w+)"/g)].map(x=>x[1])))])add(`assets/items/gem-${k}.png`,'GeodeFx type rule');
 
 // Item icon renderer takes keys from the game's ITEM_NAMES dictionary.
-const itemAt=js.indexOf('t.ITEM_NAMES={')+'t.ITEM_NAMES='.length;
-const itemEnd=js.indexOf('}',itemAt)+1;
-const itemNames=vm.runInNewContext('('+js.slice(itemAt,itemEnd)+')');
-for(const k of Object.keys(itemNames))if(!['coin','link-cable'].includes(k))add(`assets/items/${k}.png`,'ITEM_NAMES icon rule');
+for(const item of itemCatalog(js))add(item.path,'complete ITEM_NAMES icon rule');
 
 // Public supplementary source is read solely for its Mega artwork mapping.
 let megaSource='';try{megaSource=await fs.readFile('.research/admin-suite.js','utf8')}catch{}

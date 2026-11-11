@@ -3978,6 +3978,61 @@
     ]
   },
   {
+    "path": "assets/fonts/BeVietnamPro-Bold.ttf",
+    "bytes": 140300,
+    "sha256": "7f738fe5c43c8872807b20e2d30d42163618de8a4daf7f48a939adac32c16847",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Bold.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-ExtraBold.ttf",
+    "bytes": 139680,
+    "sha256": "44dbfa01553d227bec76ba6446c5618870a76a4a3297f41630dde859d0650d02",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-ExtraBold.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-Medium.ttf",
+    "bytes": 135980,
+    "sha256": "b60832bfa0fcd015158112c64d7e3fdad3b0c6287d1823f85a3103636e845268",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Medium.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-OFL.txt",
+    "bytes": 4397,
+    "sha256": "6b7f8f73609a25ea78c891e34cf37b06f8a676b7ea986e941e43b009110f2a85"
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-Regular.ttf",
+    "bytes": 132948,
+    "sha256": "cd1ef6e9d7db28ad5cdb88a65ccbe693870e60d340b791f349d248342b4fe4c3",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Regular.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-SemiBold.ttf",
+    "bytes": 136736,
+    "sha256": "bd8e27eb02720b9d91e59e4f10a90878643219f25ce6a8d9a4f06a8a88d3bb71",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-SemiBold.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
     "path": "assets/fonts/GftH7vZKsggXMf9n_J5X-A.ttf",
     "bytes": 75864,
     "sha256": "47405193f6ef4e993e60078dd6f70c3b83e685b59ce2be07956f5119aa2d7ef6",
@@ -4020,6 +4075,16 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/adamant-orb.png",
+    "bytes": 316,
+    "sha256": "6940a0cc3acca898c61b1a4c31d42b55df937d9958fb5ddaa53066db8f7d1c4a",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/adamant-orb.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4074,6 +4139,26 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/armor-fossil.png",
+    "bytes": 430,
+    "sha256": "f3fbddc661213127c558f18492c058e6ff13a8d7efc6ddf717affd11a231e289",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/armor-fossil.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
+    "path": "assets/items/auroraticket.png",
+    "bytes": 262,
+    "sha256": "872c93acb4885fda270783886b41e27b7c6e61f5589eb529efc20b8255176a3a",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/auroraticket.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4158,6 +4243,16 @@
     ]
   },
   {
+    "path": "assets/items/claw-fossil.png",
+    "bytes": 370,
+    "sha256": "c059ad7fcac8cafcf7298d5db506bd404531dec2a7dd491f337d78876097689a",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/claw-fossil.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/clefableite.png",
     "bytes": 332,
     "sha256": "75d4889dc6df81bed32e9ba5d938c8e5ec964ffba8e23e453f9b3e845eae37ed",
@@ -4212,6 +4307,16 @@
     ]
   },
   {
+    "path": "assets/items/dome-fossil.png",
+    "bytes": 366,
+    "sha256": "fa5e5bb26d2cfa7a0487d143117de6d0186d645beacbd464852c20f37a8b4243",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/dome-fossil.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/dragon-scale.png",
     "bytes": 233,
     "sha256": "5df87e270a5633d8bc11c26dd82865f7da317e0a98fc689c4467a10f4b329710",
@@ -4248,6 +4353,16 @@
     ]
   },
   {
+    "path": "assets/items/enigma-berry.png",
+    "bytes": 295,
+    "sha256": "4345e1917c62fa5a079a6e6cf1e2eb9065825a05003c5c2aa24a25cbf8970ab0",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/enigma-berry.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/event-shard.png",
     "bytes": 241,
     "sha256": "3d127f63067921483cf47f1007b2baf28c0e77f8a37e413c034eb32e7832f759",
@@ -4258,12 +4373,42 @@
     ]
   },
   {
+    "path": "assets/items/exp-candy-big.png",
+    "bytes": 509,
+    "sha256": "36b7513c730785511d2ecd8b8ddc5108e31429819e611fe9cafe6c956b023b47",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/exp-candy-big.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/exp-candy-m.png",
     "bytes": 510,
     "sha256": "b1f1508b56f1591228f971f7b790699f14af3185cef0b6237db38ad7f6f88dd2",
     "format": "png",
     "reasons": [
       "app.js"
+    ]
+  },
+  {
+    "path": "assets/items/exp-candy-s.png",
+    "bytes": 502,
+    "sha256": "046accbf42180b4277c007430b20c4f7599ba011e65597dc78e3ef8f7948259f",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/exp-candy-s.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
+    "path": "assets/items/exp-candy-xl.png",
+    "bytes": 499,
+    "sha256": "bc03a1cb913e8fe71b49726fe7871fecee3b57b22306ae6af8c3eb9649bf30b4",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/exp-candy-xl.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4520,12 +4665,42 @@
     ]
   },
   {
+    "path": "assets/items/golden-razz-berry.png",
+    "bytes": 618,
+    "sha256": "094c61a3827b1b29a96136af4a336caca9f77d39b754b79020072954f2c5e894",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/golden-razz-berry.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
+    "path": "assets/items/gracidea.png",
+    "bytes": 403,
+    "sha256": "cbc6fb821d29f17332b0b34d32f39d49d3f2c143a24c159ed0fed374daca0a20",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/gracidea.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/great-ball.png",
     "bytes": 317,
     "sha256": "7a4e84e7b071fa0b47a0c8ab1820c14b761ba556ee725e14cb1749ce5767a40e",
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/griseous-orb.png",
+    "bytes": 373,
+    "sha256": "c1bf8f9b15a9172a577bed483e5d59e50d49f90693d8fe239b019e5253de6ad6",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/griseous-orb.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4544,6 +4719,16 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/helix-fossil.png",
+    "bytes": 378,
+    "sha256": "daee0c962ae27dbd1e3a744d10bb5e9f22a79036983267788ce2ef57439d978e",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/helix-fossil.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4598,6 +4783,16 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/lansat-berry.png",
+    "bytes": 322,
+    "sha256": "7d523bb2e32e494b2234da467bd5642f348d08565ccad6ee2ab0eafa94ca32b0",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/lansat-berry.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4661,6 +4856,16 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/lustrous-orb.png",
+    "bytes": 351,
+    "sha256": "13ba9f64469e8f07dceedcf7892da847cb49181818a95fa331ad8c4d0030fb61",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/lustrous-orb.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4806,6 +5011,16 @@
     ]
   },
   {
+    "path": "assets/items/nanab-berry.png",
+    "bytes": 318,
+    "sha256": "14f05547bbab26af1c54b05b3e0f3f8a1e2a57d8c38d252a697e2f9df1d03ca7",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/nanab-berry.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/nature-capsule.png",
     "bytes": 257,
     "sha256": "b11bf6319eea90f9186493dccc70860c1f807d7ea4289b8608c5652de4b0b9f7",
@@ -4813,6 +5028,16 @@
     "reasons": [
       "ITEM_NAMES icon rule",
       "public supplementary source literals"
+    ]
+  },
+  {
+    "path": "assets/items/old-amber.png",
+    "bytes": 331,
+    "sha256": "1d24d520e63bb33aa320ece17f13df2bddde06dc5e065b2ee22a03cada93620e",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/old-amber.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4831,6 +5056,16 @@
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/pinap-berry.png",
+    "bytes": 704,
+    "sha256": "4e55bb73348e75aca10a2a56af553c152e4b3dbab8b64e8265b3164b1be186f2",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/pinap-berry.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -4973,12 +5208,62 @@
     ]
   },
   {
+    "path": "assets/items/root-fossil.png",
+    "bytes": 405,
+    "sha256": "7b45c34ed481420b29c3ba010e6b7645f665d08528356dd3f925f4087011cce3",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/root-fossil.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/rotom-fan.png",
     "bytes": 257,
     "sha256": "1a38a0cc6e53bd4f52da458efd3729a9fae5ea3583697cf102ddb9380d2e5d28",
     "format": "png",
     "reasons": [
       "app.js"
+    ]
+  },
+  {
+    "path": "assets/items/rotom-fridge.png",
+    "bytes": 181,
+    "sha256": "acf6f2d30363ebdc46bfcef8886e50a2b368b895b63399067d83f80928b56f79",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/rotom-fridge.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
+    "path": "assets/items/rotom-mower.png",
+    "bytes": 234,
+    "sha256": "0a049e2a464a9a8a1b6eb91b423949f9c75f9c59ede029cd7d65a171173d538c",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/rotom-mower.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
+    "path": "assets/items/rotom-oven.png",
+    "bytes": 203,
+    "sha256": "1b24eda7b276b1cb8ac7d2f29f56ab5692e09c159722dec0a2a429fb69ea4eb1",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/rotom-oven.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
+    "path": "assets/items/rotom-washer.png",
+    "bytes": 224,
+    "sha256": "bdd8677398b915bdb5a52d3160ef3b8614de593e23f7e95239cc3db982f8becb",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/rotom-washer.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -5063,6 +5348,16 @@
     ]
   },
   {
+    "path": "assets/items/skull-fossil.png",
+    "bytes": 411,
+    "sha256": "d34672be4e04d24fb869e8ac5b5917a8980249d0c80d72067e290d4073ba9582",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/skull-fossil.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/slowbronite.png",
     "bytes": 348,
     "sha256": "9859473573258dff914c73c55e682799412890c93d5076162f27b6a3594c9fcb",
@@ -5081,12 +5376,32 @@
     ]
   },
   {
+    "path": "assets/items/soul.png",
+    "bytes": 446,
+    "sha256": "3f985e37e30420c63e5ed59dd493e2e6ea93984b358c7f1298f9fb32c76c912d",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/soul.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
+    ]
+  },
+  {
     "path": "assets/items/staraptorite.png",
     "bytes": 352,
     "sha256": "6764f0c60fc40ed26eb098b54dd538b2bc59fae12a98d33cc7c5a177982a35a5",
     "format": "png",
     "reasons": [
       "ITEM_NAMES icon rule"
+    ]
+  },
+  {
+    "path": "assets/items/starf-berry.png",
+    "bytes": 320,
+    "sha256": "4578681fbc1f9a61df4cc78e558167d6cad6d1a24cedc392f4c74cd9cf1c1b57",
+    "format": "png",
+    "origin": "https://pokecatchvn.xyz/assets/items/starf-berry.png",
+    "reasons": [
+      "Exact UI.itemSrc key from complete ITEM_NAMES Object.assign augmentation; public HTTP 200"
     ]
   },
   {
@@ -47583,61 +47898,6 @@
     "format": "html",
     "reasons": [
       "boot.js intro URL"
-    ]
-  },
-  {
-    "path": "assets/fonts/BeVietnamPro-Bold.ttf",
-    "bytes": 140300,
-    "sha256": "7f738fe5c43c8872807b20e2d30d42163618de8a4daf7f48a939adac32c16847",
-    "format": "ttf",
-    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Bold.ttf",
-    "reasons": [
-      "Vietnamese typography replacement"
-    ]
-  },
-  {
-    "path": "assets/fonts/BeVietnamPro-ExtraBold.ttf",
-    "bytes": 139680,
-    "sha256": "44dbfa01553d227bec76ba6446c5618870a76a4a3297f41630dde859d0650d02",
-    "format": "ttf",
-    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-ExtraBold.ttf",
-    "reasons": [
-      "Vietnamese typography replacement"
-    ]
-  },
-  {
-    "path": "assets/fonts/BeVietnamPro-Medium.ttf",
-    "bytes": 135980,
-    "sha256": "b60832bfa0fcd015158112c64d7e3fdad3b0c6287d1823f85a3103636e845268",
-    "format": "ttf",
-    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Medium.ttf",
-    "reasons": [
-      "Vietnamese typography replacement"
-    ]
-  },
-  {
-    "path": "assets/fonts/BeVietnamPro-OFL.txt",
-    "bytes": 4397,
-    "sha256": "6b7f8f73609a25ea78c891e34cf37b06f8a676b7ea986e941e43b009110f2a85"
-  },
-  {
-    "path": "assets/fonts/BeVietnamPro-Regular.ttf",
-    "bytes": 132948,
-    "sha256": "cd1ef6e9d7db28ad5cdb88a65ccbe693870e60d340b791f349d248342b4fe4c3",
-    "format": "ttf",
-    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Regular.ttf",
-    "reasons": [
-      "Vietnamese typography replacement"
-    ]
-  },
-  {
-    "path": "assets/fonts/BeVietnamPro-SemiBold.ttf",
-    "bytes": 136736,
-    "sha256": "bd8e27eb02720b9d91e59e4f10a90878643219f25ce6a8d9a4f06a8a88d3bb71",
-    "format": "ttf",
-    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-SemiBold.ttf",
-    "reasons": [
-      "Vietnamese typography replacement"
     ]
   }
 ]

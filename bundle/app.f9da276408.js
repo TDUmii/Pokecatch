@@ -830,7 +830,7 @@ ${O} { background: ${me(te.frames[0][1],tt)}; animation: ${re} ${te.dur}s step-e
           ${ee.message?`<div class="gift-note">${e("« {msg} »",{msg:m(ee.message)})}</div>`:""}</div></div></div>`);t.Sfx.caught?.(),await ne({className:"dexcard-modal ot-dlg gift-dlg",body:Me,actions:[{label:e("Super !"),cls:"gold"}]})}let k=null;async function r(){const ee=t.Cloud.ban,ot=ee&&JSON.stringify(ee);if(!ee||ot===k)return;k=ot;const Be=ee.until&&new Date(ee.until).toLocaleDateString(t.I18n?.lang||"fr",{day:"numeric",month:"long",year:"numeric"}),pe=c(`<div><div class="dc-head"><h2>${e("Compte suspendu")}</h2><div class="dc-sum"><button class="dc-x" aria-label="${e("Fermer")}">✕</button></div></div>
       <p class="cl-note">${Be?e("Ton compte est suspendu jusqu'au {date}.",{date:m(Be)}):"until"in ee?e("Ton compte est suspendu définitivement."):e("Ton compte est suspendu.")}</p>
       ${ee.reason?`<div class="gift-note">${e("Motif : {reason}",{reason:m(ee.reason)})}</div>`:""}
-      <p class="cl-note">${e("Tu peux continuer à jouer sur cet appareil, mais plus en ligne : sauvegarde, classements, échanges et amis.")}</p></div>`);await ne({className:"dexcard-modal cl-wiped",body:pe,actions:[{label:e("Compris !"),cls:"primary",value:!0}],onOpen:(rt,ut)=>{rt.querySelector(".dc-x").onclick=()=>ut(!0)}})}async function Rt(){if(!(!He||w)){w=!0;try{await r();for(const ee of t.Cloud.gifts.take()){const ot=a.S.giftsGot=a.S.giftsGot||[];if(ot.includes(ee.id))continue;const Be=H(ee);ot.push(ee.id),ot.length>200&&ot.splice(0,ot.length-200),a.save(),t.Cloud.gifts.claim(ee.id).then(pe=>{pe.error&&console.warn("Gift claim failed",pe.error)}),t.Cloud.pushNow(),Be&&await Je(ee,Be),t.App.refresh()}}finally{w=!1}}}function oe(){He=!0,r(),t.Cloud.onChecked(Rt),t.Cloud.onSynced(Rt)}return{start:oe,drain:Rt}}(),function(){const a=t.ADMIN_FILES||["js/screens/admin-habitats.js","js/screens/admin-raids.js","js/screens/admin-worldboss.js","js/screens/admin-stats.js","js/screens/admin-server.js","js/screens/admin-economy.js","js/screens/admin-progress.js","js/screens/admin-mod.js","js/screens/admin-player.js","js/screens/admin.js","js/cheats.js"];let m=!1;const c=()=>{m=!0;const ne=a.map(U=>new Promise((gt,z)=>document.head.appendChild(Object.assign(document.createElement("script"),{src:U,async:!1,onload:gt,onerror:()=>z(new Error(U))}))));Promise.all(ne).then(()=>t.Screens.admin.init(),U=>console.warn("Admin mode failed to load:",U.message))};t.Screens.admin={init(){const ne=()=>{!m&&a.length&&t.Cloud.isAdmin&&c()};t.Cloud.on(ne),ne()},render(){}}}(),function(){const a=t.UI,{$:m,$$:c,h:ne,modal:U,confirm:gt}=a,z=t.Game,J=t.CONFIG,Fe=()=>t.Perf,He=[["newpopup",()=>e("Fiche des nouveaux Pokémon"),()=>e("Affiche la fiche Pokédex à chaque nouvelle capture. Un chromatique a toujours la sienne"),()=>!z.S.noNewPopup,()=>{z.S.noNewPopup=!z.S.noNewPopup}],["autoswitch",()=>e("Switch auto"),()=>e("Envoie le Pokémon le plus adapté face à l'adversaire"),()=>z.S.autoSwitch!==!1,()=>{z.S.autoSwitch=z.S.autoSwitch===!1}],["feed",()=>e("Apparaître dans le fil"),()=>e("Tes exploits s'affichent chez les autres dresseurs (compte connecté)"),()=>!z.S.feedHidden,()=>{z.S.feedHidden=!z.S.feedHidden}]],w=[["flash",()=>e("Flashs lumineux"),()=>e("Éclairs blancs et assombrissements des attaques, des orages et des cinématiques"),()=>!z.S.noFlash,()=>{z.S.noFlash=!z.S.noFlash,a.syncCalm()}],["shake",()=>e("Tremblements de l'écran"),()=>e("Secousses sur les coups puissants, les captures et les évolutions"),()=>!z.S.noShake,()=>{z.S.noShake=!z.S.noShake}],["dull",()=>e("Badges ternis"),()=>"",()=>!z.S.noDullBadges,()=>{z.S.noDullBadges=!z.S.noDullBadges},()=>t.BadgeShine.on(),()=>e("Désactivé : aucun badge ne s'affiche terne, ni les tiens ni ceux des autres, sur ton écran seulement. Ils continuent de ternir : réactive l'option pour voir leur vrai état.")]],x=[["calm",()=>e("Animations réduites"),()=>e("Cinématiques raccourcies, effets figés")],["weather",()=>e("Météo animée"),()=>e("Pluie, neige, sable qui bougent")],["bg",()=>e("Fond animé"),()=>e("Les Poké Balls qui défilent derrière le jeu")],["glass",()=>e("Effets de verre"),()=>Fe().touch?e("Flou derrière les barres de la scène. Peut ralentir certains téléphones"):e("Flou derrière les barres de la scène")],["glint",()=>e("Scintillement chromatique"),()=>e("Les étoiles autour des chromatiques")]].map(([ke,Ve,ze])=>[ke,Ve,ze,()=>Fe().get(ke),()=>Fe().set(ke,!Fe().get(ke))]),de=[["eco","🔋",()=>e("Économie"),()=>e("Effets coupés")],["balanced","⚖️",()=>e("Équilibré"),()=>e("Recommandé")],["max","✨",()=>e("Maximum"),()=>e("Tout activé")]],H=[[12e4,()=>e("{n} min",{n:2})],[3e5,()=>e("{n} min",{n:5})],[0,()=>e("Jamais")]],Je=[...He,...w,...x],k=(ke,Ve,ze,je,at)=>`<div class="op-row ${je?"on":""}" data-sw="${ke}" role="switch" aria-checked="${je}" tabindex="0">
+      <p class="cl-note">${e("Tu peux continuer à jouer sur cet appareil, mais plus en ligne : sauvegarde, classements, échanges et amis.")}</p></div>`);await ne({className:"dexcard-modal cl-wiped",body:pe,actions:[{label:e("Compris !"),cls:"primary",value:!0}],onOpen:(rt,ut)=>{rt.querySelector(".dc-x").onclick=()=>ut(!0)}})}async function Rt(){if(!(!He||w)){w=!0;try{await r();for(const ee of t.Cloud.gifts.take()){const ot=a.S.giftsGot=a.S.giftsGot||[];if(ot.includes(ee.id))continue;const Be=H(ee);ot.push(ee.id),ot.length>200&&ot.splice(0,ot.length-200),a.save(),t.Cloud.gifts.claim(ee.id).then(pe=>{pe.error&&console.warn("Gift claim failed",pe.error)}),t.Cloud.pushNow(),Be&&await Je(ee,Be),t.App.refresh()}}finally{w=!1}}}function oe(){He=!0,r(),t.Cloud.onChecked(Rt),t.Cloud.onSynced(Rt)}return{start:oe,drain:Rt}}(),function(){const a=t.ADMIN_FILES||["js/screens/admin-habitats.js","js/screens/admin-raids.js","js/screens/admin-worldboss.js","js/screens/admin-stats.js","js/screens/admin-server.js","js/screens/admin-economy.js","js/screens/admin-progress.js","js/screens/admin-mod.js","js/screens/admin-player.js","js/screens/admin.js","js/cheats.js"];let m=!1;const c=()=>{m=!0;const ne=a.map(U=>new Promise((gt,z)=>document.head.appendChild(Object.assign(document.createElement("script"),{src:U,async:!1,onload:gt,onerror:()=>z(new Error(U))}))));Promise.all(ne).then(()=>t.Screens.admin.init(),U=>console.warn("Admin mode failed to load:",U.message))};t.Screens.admin={init(){const ne=()=>{!m&&a.length&&t.Cloud.isAdmin&&c()};t.Cloud.on(ne),ne()},render(){}}}(),function(){const a=t.UI,{$:m,$$:c,h:ne,modal:U,confirm:gt}=a,z=t.Game,J=t.CONFIG,Fe=()=>t.Perf,He=[["newpopup",()=>e("Fiche des nouveaux Pokémon"),()=>e("Affiche la fiche Pokédex à chaque nouvelle capture. Un chromatique a toujours la sienne"),()=>!z.S.noNewPopup,()=>{z.S.noNewPopup=!z.S.noNewPopup}],["autoswitch",()=>e("Switch auto"),()=>e("Envoie le Pokémon le plus adapté face à l'adversaire"),()=>z.S.autoSwitch!==!1,()=>{z.S.autoSwitch=z.S.autoSwitch===!1}]],w=[["flash",()=>e("Flashs lumineux"),()=>e("Éclairs blancs et assombrissements des attaques, des orages et des cinématiques"),()=>!z.S.noFlash,()=>{z.S.noFlash=!z.S.noFlash,a.syncCalm()}],["shake",()=>e("Tremblements de l'écran"),()=>e("Secousses sur les coups puissants, les captures et les évolutions"),()=>!z.S.noShake,()=>{z.S.noShake=!z.S.noShake}],["dull",()=>e("Badges ternis"),()=>"",()=>!z.S.noDullBadges,()=>{z.S.noDullBadges=!z.S.noDullBadges},()=>t.BadgeShine.on(),()=>e("Désactivé : aucun badge ne s'affiche terne, ni les tiens ni ceux des autres, sur ton écran seulement. Ils continuent de ternir : réactive l'option pour voir leur vrai état.")]],x=[["calm",()=>e("Animations réduites"),()=>e("Cinématiques raccourcies, effets figés")],["weather",()=>e("Météo animée"),()=>e("Pluie, neige, sable qui bougent")],["bg",()=>e("Fond animé"),()=>e("Les Poké Balls qui défilent derrière le jeu")],["glass",()=>e("Effets de verre"),()=>Fe().touch?e("Flou derrière les barres de la scène. Peut ralentir certains téléphones"):e("Flou derrière les barres de la scène")],["glint",()=>e("Scintillement chromatique"),()=>e("Les étoiles autour des chromatiques")]].map(([ke,Ve,ze])=>[ke,Ve,ze,()=>Fe().get(ke),()=>Fe().set(ke,!Fe().get(ke))]),de=[["eco","🔋",()=>e("Économie"),()=>e("Effets coupés")],["balanced","⚖️",()=>e("Équilibré"),()=>e("Recommandé")],["max","✨",()=>e("Maximum"),()=>e("Tout activé")]],H=[[12e4,()=>e("{n} min",{n:2})],[3e5,()=>e("{n} min",{n:5})],[0,()=>e("Jamais")]],Je=[...He,...w,...x],k=(ke,Ve,ze,je,at)=>`<div class="op-row ${je?"on":""}" data-sw="${ke}" role="switch" aria-checked="${je}" tabindex="0">
       <span class="t"><b>${Ve}${at?` ${a.infoTip(`<b>${Ve}</b><p>${at}</p>`)}`:""}</b>${ze?`<small>${ze}</small>`:""}</span><span class="op-sw"></span></div>`,r=ke=>ke.filter(Ve=>!Ve[5]||Ve[5]()).map(([Ve,ze,je,at,,,$t])=>k(Ve,ze(),je(),at(),$t?.())).join(""),Rt=ke=>`<svg class="op-flag" viewBox="0 0 30 20" aria-hidden="true">${ke}</svg>`,oe={fr:Rt('<rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/>'),en:Rt('<rect width="30" height="20" fill="#012169"/><path d="M0 0l30 20M30 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0l30 20M30 0L0 20" stroke="#c8102e" stroke-width="1.5"/><path d="M15 0v20M0 10h30" stroke="#fff" stroke-width="6"/><path d="M15 0v20M0 10h30" stroke="#c8102e" stroke-width="3.5"/>'),es:Rt('<rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/>'),de:Rt('<rect width="30" height="20" fill="#ffce00"/><rect width="30" height="13.34" fill="#dd0000"/><rect width="30" height="6.67" fill="#000"/>'),ko:Rt('<rect width="30" height="20" fill="#fff"/><path d="M10 10a5 5 0 0 1 10 0a2.5 2.5 0 0 1-5 0a2.5 2.5 0 0 0-5 0" fill="#cd2e3a"/><path d="M10 10a2.5 2.5 0 0 0 5 0a2.5 2.5 0 0 1 5 0a5 5 0 0 1-10 0" fill="#0047a0"/><path d="M4 3.5l3 2.5M3 5l3 2.5M23 12.5l3 2.5M24 11l3 2.5M23 7.5l3-2.5M24 9l3-2.5M4 16.5l3-2.5M3 15l3-2.5" stroke="#000" stroke-width="1"/>'),ja:Rt('<rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/>')},ee=ke=>oe[ke]||`<span class="op-flag op-flag-txt" aria-hidden="true">${{"zh-Hans":"简","zh-Hant":"繁"}[ke]||""}</span>`,ot=()=>{const ke=t.I18n;return ke.LANGS.map(Ve=>`<div class="op-row op-langrow${ke.lang===Ve?" on":""}" data-lang="${Ve}" lang="${Ve}" role="radio" aria-checked="${ke.lang===Ve}" tabindex="0">
       ${ee(Ve)}<span class="t"><b>${ke.NAMES[Ve]}</b></span>${ke.lang===Ve?'<span class="op-tick">✓</span>':""}</div>`).join("")},Be=[["dark",()=>"🌙 "+e("Sombre")],["light",()=>"☀️ "+e("Clair")],["auto",()=>e("Auto")]],pe=()=>t.Theme.pref==="auto"?e("Suit le réglage de ton appareil"):t.Theme.pref==="light"?e("Clair"):e("Sombre"),rt=()=>`<div class="op-row op-static op-lang op-theme"><span class="t"><b>${e("Thème")}</b><small>${pe()}</small></span>
       <div class="seg" role="radiogroup" aria-label="${e("Thème")}">${Be.map(([ke,Ve])=>`<button type="button" role="radio" aria-checked="${t.Theme.pref===ke}" data-theme-pref="${ke}" class="${t.Theme.pref===ke?"on":""}">${Ve()}</button>`).join("")}</div></div>`,ut=ke=>{if(!ke)return"—";const Ve=Math.round((Date.now()-ke)/1e3);return Ve<60?e("il y a {n} s",{n:Ve}):e("il y a {n} min",{n:Math.round(Ve/60)})},Me=()=>(document.querySelector('a.side-disc[href*="discord"] svg')||document.querySelector(".side-disc svg"))?.outerHTML||"";function Te(){const ke=t.Cloud,Ve=ke.profile();return(Ve?`<div class="op-row op-discord on" style="cursor:pointer" onclick="window.__pokeOpenAuthModal&&window.__pokeOpenAuthModal('account')"><span class="op-ic">${Ve.avatar?`<img src="${a.esc(Ve.avatar)}" alt="" referrerpolicy="no-referrer">`:Me()}</span>
@@ -839,10 +839,7 @@ ${O} { background: ${me(te.frames[0][1],tt)}; animation: ${re} ${te.dur}s step-e
         <span class="t"><b>Đăng nhập tài khoản</b><small>Đăng nhập để tải và đồng bộ bản lưu trên Server VPS</small></span><span class="chev">›</span></div>
       <div class="op-row op-google" data-act="login-google" tabindex="0"><span class="op-ic">✨</span>
         <span class="t"><b>Đăng ký tài khoản mới</b><small>Tạo tài khoản miễn phí để lưu game đám mây & giao lưu online</small></span><span class="chev">›</span></div>`)+`
-      <div class="op-row" data-act="migrate" tabindex="0" onclick="window.__pokeOpenMigrationModal&&window.__pokeOpenMigrationModal()" style="border:1px solid rgba(59,130,246,0.45);background:linear-gradient(90deg,rgba(37,99,235,0.18),rgba(15,23,42,0.4));margin-top:8px;"><span class="op-ic">🔄</span><span class="t"><b style="color:#60a5fa;">Chuyển đổi / Nhập & Xuất dữ liệu Save</b><small>Lấy dữ liệu từ bản gốc sang bản Việt Hóa Mega hoặc sao lưu file Save (.json)</small></span><span class="chev" style="color:#60a5fa;">›</span></div>`}const T=ke=>`<img src="${ke}" alt="">`;let le="general";function Se(){const ke=matchMedia("(max-width: 640px)").matches,Ve=t.I18n;return[[e("Jeu"),[{id:"general",name:e("Général"),ic:T("assets/ui/town-map.png"),c:"var(--red)",html:()=>Z(r(He))},{id:"lang",name:e("Langue"),ic:ee(Ve.lang),c:"var(--blue)",html:()=>Z(ot())}]],[e("Affichage"),[{id:"graphics",name:e("Graphismes"),ic:T("assets/items/silph-scope.png"),c:"var(--gold-soft)",html:()=>Z(rt()+r(w))},{id:"perf",name:e("Performances"),ic:T("assets/items/rotom-fan.png"),c:"var(--green)",html:lt}]],[e("Compte"),[t.Cloud?.available&&{id:"account",name:e("Sauvegarde"),ic:T("assets/ui/floppy.svg"),c:"var(--blue)",html:()=>'<div class="op-card op-account"></div>'},ke&&{id:"community",name:e("Communauté"),ic:T("assets/ui/link-cable.svg"),c:"var(--blue-vivid)",html:()=>Z(`
-          <a class="op-row" href="https://discord.gg/zXGpNAvqc" target="_blank" rel="noopener"><span class="op-ic">${Me()}</span><span class="t"><b>${e("Rejoindre le Discord")}</b><small>${e("Les news, l'entraide et les autres dresseurs")}</small></span><span class="chev">›</span></a>
-          <a class="op-row" href="https://discord.gg/zXGpNAvqc" target="_blank" rel="noopener"><span class="t"><b>${e("Signaler un bug")}</b><small>${e("Salon #bugs du Discord")}</small></span><span class="chev">›</span></a>
-          ${t.App?.supportOn?`<div class="op-row op-static op-soon"><span class="t"><b>♥ ${e("Soutenir le jeu")}</b><small>${e("Bientôt disponible")}</small></span></div>`:""}`)}].filter(Boolean)],[e("Aide"),[{id:"news",name:e("Nouveautés"),ic:T("assets/ui/orange-mail.png"),c:"var(--yellow)",isNew:()=>t.Changelog.isNew()||t.Guide.isNew(),html:()=>Z(`
+      <div class="op-row" data-act="migrate" tabindex="0" onclick="window.__pokeOpenMigrationModal&&window.__pokeOpenMigrationModal()" style="border:1px solid rgba(59,130,246,0.45);background:linear-gradient(90deg,rgba(37,99,235,0.18),rgba(15,23,42,0.4));margin-top:8px;"><span class="op-ic">🔄</span><span class="t"><b style="color:#60a5fa;">Chuyển đổi / Nhập & Xuất dữ liệu Save</b><small>Lấy dữ liệu từ bản gốc sang bản Việt Hóa Mega hoặc sao lưu file Save (.json)</small></span><span class="chev" style="color:#60a5fa;">›</span></div>`}const T=ke=>`<img src="${ke}" alt="">`;let le="general";function Se(){const ke=matchMedia("(max-width: 640px)").matches,Ve=t.I18n;return[[e("Jeu"),[{id:"general",name:e("Général"),ic:T("assets/ui/town-map.png"),c:"var(--red)",html:()=>Z(r(He))},{id:"lang",name:e("Langue"),ic:ee(Ve.lang),c:"var(--blue)",html:()=>Z(ot())}]],[e("Affichage"),[{id:"graphics",name:e("Graphismes"),ic:T("assets/items/silph-scope.png"),c:"var(--gold-soft)",html:()=>Z(rt()+r(w))},{id:"perf",name:e("Performances"),ic:T("assets/items/rotom-fan.png"),c:"var(--green)",html:lt}]],[e("Compte"),[t.Cloud?.available&&{id:"account",name:e("Sauvegarde"),ic:T("assets/ui/floppy.svg"),c:"var(--blue)",html:()=>'<div class="op-card op-account"></div>'}].filter(Boolean)],[e("Aide"),[{id:"news",name:e("Nouveautés"),ic:T("assets/ui/orange-mail.png"),c:"var(--yellow)",isNew:()=>t.Changelog.isNew()||t.Guide.isNew(),html:()=>Z(`
           <div class="op-row op-cl" data-act="changelog" tabindex="0"><span class="op-ic"><img class="pn-ic" src="assets/ui/orange-mail.png" alt=""></span><span class="t"><b>${e("Changelogs")}</b><small>${e("Notes de mise à jour")}</small></span>${t.Changelog.isNew()?'<span class="new">'+e("NEW")+'</span>':""}<span class="chev">›</span></div>
           <div class="op-row op-cl" data-act="guide" tabindex="0"><span class="op-ic"><img class="pn-ic" src="assets/items/adventure-guide.png" alt=""></span><span class="t"><b>${e("Guide")}</b><small>${e("Chaque fonctionnalité expliquée")}</small></span>${t.Guide.isNew()?'<span class="new">'+e("NEW")+'</span>':""}<span class="chev">›</span></div>`)},{id:"advanced",name:e("Avancé"),ic:T("assets/ui/padlock.svg"),c:"var(--red)",html:()=>Z(`
           <div class="op-row" data-act="migrate" tabindex="0" onclick="window.__pokeOpenMigrationModal&&window.__pokeOpenMigrationModal()" style="border:1px solid rgba(59,130,246,0.45);background:linear-gradient(90deg,rgba(37,99,235,0.18),rgba(15,23,42,0.4));margin-bottom:10px;"><span class="t"><b style="color:#60a5fa;">🔄 Chuyển đổi / Nhập & Xuất dữ liệu Save</b><small>Chuyển dữ liệu từ bản gốc sang bản Việt Hóa Mega hoặc sao lưu file Save (.json)</small></span><span class="chev" style="color:#60a5fa;">›</span></div>
@@ -855,2995 +852,408 @@ ${O} { background: ${me(te.frames[0][1],tt)}; animation: ${re} ${te.dur}s step-e
       <div class="dc-head"><span class="gd-head-ic op-head-ic" aria-hidden="true">⚙</span><h2>${e("Options")}</h2><div class="dc-sum"><button class="dc-x" aria-label="${e("Fermer")}">✕</button></div></div>
       <div class="gd-wrap"><nav class="gd-nav"></nav><div class="gd-page"></div></div>
       <div class="gd-foot op-foot"><span class="op-saved"></span><span>Poke'Catch v${J.VERSION}</span></div></div>`);let at,$t;const na=()=>{m(".op-saved",je).textContent=e("Sauvegarde auto · {ago}",{ago:ut(z.savedAt)})};return na(),U({className:"dexcard-modal gd-modal opt-modal",body:je,onOpen:(et,K,Y)=>{const Ce=m(".gd-nav",je),vt=m(".gd-page",je),xt=$=>{clearInterval(at),K($)},N=($,R,F)=>{const Ee=m(`[data-act="${R}"]`,$);Ee&&(Ee.onclick=F,Ee.onkeydown=l=>{(l.key==="Enter"||l.key===" ")&&(l.preventDefault(),F())})};function V(){Ce.innerHTML=Ve.map(([$,R])=>`<div class="gd-grp">${$}</div>`+R.map(F=>`<button class="gd-item${F.id===le?" on":""}" data-p="${F.id}" style="--ic:${F.c}">
-            <span class="gd-ic">${F.ic}</span><span class="gd-lbl">${F.name}</span>${F.isNew?.()?'<span class="gd-new">'+e("NEW")+'</span>':""}</button>`).join("")).join(""),c(".gd-item",Ce).forEach($=>{$.onclick=()=>X($.dataset.p)}),m(".on",Ce)?.scrollIntoView({block:"nearest",inline:"nearest"})}function we(){const $=m(".op-account",vt);$&&($.innerHTML=Te(),N($,"login",()=>t.Cloud.signIn("discord")),N($,"login-google",()=>t.Cloud.signIn("google")),N($,"logout",()=>t.Cloud.signOut()))}function X($){le=$;const R=ze.find(F=>F.id===$);vt.innerHTML=`<div class="op-page"><h3>${R.name}</h3>${R.html()}</div>`,vt.scrollTop=0,V(),he()}function he(){we(),c("[data-sw]",vt).forEach($=>{const R=()=>{const F=Je.find(l=>l[0]===$.dataset.sw);if(F[4](),x.includes(F))return X("perf");const Ee=F[3]();$.classList.toggle("on",Ee),$.setAttribute("aria-checked",Ee),z.save()};$.onclick=F=>{F.target.closest(".info-tip")||R()},$.onkeydown=F=>{(F.key===" "||F.key==="Enter")&&!F.target.closest(".info-tip")&&(F.preventDefault(),R())}}),c("[data-preset]",vt).forEach($=>{$.onclick=()=>{Fe().set("preset",$.dataset.preset),X("perf")}}),c("[data-sleep]",vt).forEach($=>{$.onclick=()=>{Fe().set("sleep",+$.dataset.sleep),X("perf")}}),c("[data-theme-pref]",vt).forEach($=>{$.onclick=()=>{t.Theme.set($.dataset.themePref),c("[data-theme-pref]",vt).forEach(R=>{const F=R===$;R.classList.toggle("on",F),R.setAttribute("aria-checked",F)}),m(".op-theme small",vt).textContent=pe()}}),c("[data-lang]",vt).forEach($=>{const R=()=>{$.dataset.lang!==t.I18n.lang&&(z.save(),t.I18n.set($.dataset.lang))};$.onclick=R,$.onkeydown=F=>{(F.key==="Enter"||F.key===" ")&&(F.preventDefault(),R())}}),N(vt,"changelog",()=>{xt(null),t.Changelog.open()}),N(vt,"guide",()=>{xt(null),t.Guide.open()}),N(vt,"migrate",()=>{xt(null),window.__pokeOpenMigrationModal&&window.__pokeOpenMigrationModal()}),N(vt,"reset",async()=>{xt(null);const $=t.Cloud?.profile(),R=e("Ton équipe, ton Pokédex, tes badges et ta carte de dresseur seront perdus. C'est définitif.")+($?" "+e("La sauvegarde en ligne de ce compte sera aussi effacée et tes amis retirés."):t.Cloud?.linked()?" "+e("Ta sauvegarde en ligne ne sera pas touchée : connecte-toi d'abord pour l'effacer aussi."):"");if(!await gt(R,e("Tout effacer"))||t.TabLock?.mine()===!1)return;const F=JSON.stringify(z.S);if(z.reset(),t.Cloud&&!await t.Cloud.wipe())return localStorage.setItem(t.CONFIG.SAVE_KEY,F),t.onbeforeunload=null,z.stopSaving(),await gt(e("Impossible de joindre la sauvegarde en ligne. Rien n'a été effacé, réessaie une fois connecté."),"OK"),location.reload();t.onbeforeunload=null,z.stopSaving(),location.reload()})}m(".dc-x",je).onclick=()=>xt(null),$t=t.Cloud?.on(we),at=ys(()=>{if(na(),t.Cloud?.pushedAt){const $=m(".op-discord.on small",vt);$&&($.textContent=e("Sauvegarde en ligne · {ago}",{ago:ut(t.Cloud.pushedAt)}))}},1e3);const S=()=>et.classList.toggle("narrow",et.offsetWidth<600);S();const P=new ResizeObserver(S);P.observe(et),Y.addEventListener("abort",()=>P.disconnect()),X(le)}}).then(()=>{clearInterval(at),$t?.()})}t.Options={open:me}}(),t.CHANGELOG=[{date:"2026-11-03",title:"⚖️ v0.4.71 · Équilibrage",md:`
-Cette version teste une vitesse maximale plus basse. C'est un test temporaire.
-
-## ⏱️ Vitesse
-• La vitesse la plus rapide passe de ×4 à ×3, le temps de faire des mesures.
-• Ces mesures portent sur les performances, la batterie des téléphones et le rythme des régions, qui se terminent plus vite que prévu.
-• Elles portent aussi sur l'écart entre les joueurs très actifs et les autres : le temps hors du jeu compte comme du ×1 et rapporte moins, et cet écart se creusait beaucoup en ×4.
-• Le temps passé hors du jeu n'est pas concerné.
-• Les temps de raid déjà enregistrés sont ajustés à la nouvelle vitesse, pour que les classements restent à portée.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"⚖️ v0.4.71 · Balance",md:`
-This version tests a lower top speed. It is a temporary test.
-
-## ⏱️ Speed
-• The fastest speed goes from ×4 to ×3 while we take measurements.
-• They cover performance, phone battery and the pace of regions, which are finished faster than planned.
-• They also cover the gap between very active players and the others: time away counts as ×1 and earns less, and that gap was growing fast at ×4.
-• Time spent away from the game is not affected.
-• Raid times already recorded are adjusted to the new speed, so the leaderboards stay within reach.
-
-To report a bug: #bugs channel on Discord, or Options › Community › "Report a bug" on mobile.
-`},es:{title:"⚖️ v0.4.71 · Equilibrio",md:`
-Esta versión prueba una velocidad máxima más baja. Es una prueba temporal.
-
-## ⏱️ Velocidad
-• La velocidad más rápida pasa de ×4 a ×3 mientras hacemos mediciones.
-• Estas mediciones tratan del rendimiento, la batería de los teléfonos y el ritmo de las regiones, que se terminan más rápido de lo previsto.
-• También tratan de la diferencia entre los jugadores muy activos y los demás: el tiempo fuera del juego cuenta como ×1 y da menos, y esa diferencia crecía mucho en ×4.
-• El tiempo que pasas fuera del juego no cambia.
-• Los tiempos de incursión ya registrados se ajustan a la nueva velocidad, para que las clasificaciones sigan a tu alcance.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un fallo» en el móvil.
-`}},{date:"2026-11-03",title:"✨ v0.4.7 · Nouveautés",md:`
-Cette version te laisse choisir quel doublon garder, sépare les échanges d'une nouvelle région des autres et ajoute des récompenses.
-
-## 🔁 Doublons
-• Quand un doublon n'a pas la même nature que le tien, la fenêtre « Lequel gardes-tu ? » te laisse garder le nouveau. Il prend la place du tien dans tes équipes. Dans les deux cas, la famille reçoit l'XP du doublon.
-• La question s'affiche après une éclosion, un échange, un achat au Marché noir, un cadeau ou un lot du comptoir du Casino.
-• Pour les captures, active « Garder les doublons » sur la famille. Quand elle est pleine, la question s'affiche dans un coin de l'écran et l'aventure continue.
-• Si le Pokémon remplacé a plus de niveaux ou un rang, le jeu demande confirmation et indique ce qui sera perdu.
-
-## 🌍 Régions liées
-• Tant qu'une nouvelle région est à part, jusqu'à sa Ligue, les Échanges et le Marché noir ont deux onglets : « Régions liées » et celui de la nouvelle région. Chaque onglet montre les Pokémon de son côté et utilise son propre argent.
-• Une seule offre d'échange à la fois : l'autre onglet indique de quel côté elle se trouve.
-• Équipes enregistrées : chaque côté a ses 5 équipes, comme son Sac. Une équipe qui ne contenait que des Pokémon de l'autre côté se modifie de nouveau.
-• Tour de Combat : seuls les Pokémon des régions liées montent. Les achats de la boutique arrivent dans le Sac des régions liées.
-• Souterrain : les ₽, Éclats et trouvailles reviennent toujours au côté de sa région, où que tu joues.
-
-## 🎁 Récompenses
-• Tour de Combat : la Baie Framby dorée, la Baie Nanab et la Baie Enigma sont en vente contre 75 Points Combat, et la Baie Frista contre 400 à partir de l'étage 75.
-• Pension : un œuf a une chance sur deux d'avoir la nature de son parent.
-• Le pachinko, les routes et les villes donnent les pierres d'évolution de chaque région atteinte, comme la Boutique.
-• Souterrain : une gemme légendaire de type Ténèbres rejoint les géodes légendaires et le comptoir.
-
-## 🧭 Confort
-• Zones légendaires : « Voir les capacités » montre les attaques du légendaire, comme pour les raids.
-• Chaque région a sa cérémonie de remise de badge, comme Kanto.
-• La recherche ignore les accents partout : « evoli » trouve Évoli.
-• Le Pokédex complet d'une région compte maintenant tous ses Pokémon fabuleux, pour le bonus ×2 de chromatiques comme sur la carte.
-
-## ⚖️ Équilibrage
-• Ligue de la région la plus récente : l'équipe du Maître va du niveau 91 au 95, avec une puissance cachée plus basse. Il faut une équipe proche du niveau 95 pour gagner.
-
-## 🐛 Correctifs
-• Raids chromatiques : à l'ouverture du jeu, une victoire contre un autre boss pouvait terminer le raid du jour sans capture. C'est corrigé.
-• Carte de dresseur : les badges de la région la plus récente sont rangés dans l'ordre des arènes.
-• Sur certains iPhone, les prix des boutiques du Casino et du Souterrain étaient invisibles, et la carte d'un raid n'affichait pas le bouton Raid. C'est corrigé.
-• Revoir la cinématique d'un légendaire n'affiche plus un autre écran pendant un instant.
-• Marché noir : l'aide en chinois est réécrite, merci au joueur qui l'a proposée.
-
-## 🛡️ Fair-play
-• Les records de la Tour de Combat sont mieux contrôlés.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"✨ v0.4.7 · New features",md:`
-This version lets you choose which duplicate to keep, separates a new region's trades from the others and adds rewards.
-
-## 🔁 Duplicates
-• When a duplicate doesn't have the same nature as yours, the "Which one do you keep?" window lets you keep the new one. It takes your Pokémon's place in your teams. Either way, the family gets the duplicate's XP.
-• The question shows after a hatch, a trade, a Black Market purchase, a gift or a Casino counter prize.
-• For catches, turn on "Keep duplicates" for the family. When it's full, the question shows in a corner of the screen and the adventure goes on.
-• If the Pokémon being replaced has more levels or a rank, the game asks you to confirm and shows what will be lost.
-
-## 🌍 Linked regions
-• While a new region is apart, until its League, Trades and the Black Market have two tabs: "Linked regions" and the new region's. Each tab shows the Pokémon of its side and uses its own money.
-• One trade offer at a time: the other tab shows which side it's on.
-• Saved teams: each side has its own 5 teams, like its Bag. A team holding only Pokémon from the other side can be edited again.
-• Battle Tower: only the linked regions' Pokémon climb. The shop's purchases go to the linked regions' Bag.
-• Underground: ₽, Shards and finds always go to its region's side, wherever you play.
-
-## 🎁 Rewards
-• Battle Tower: the Golden Razz Berry, the Nanab Berry and the Enigma Berry are on sale for 75 Battle Points, and the Starf Berry for 400 from floor 75.
-• Day Care: an Egg has a one-in-two chance of getting its parent's nature.
-• The pachinko, routes and towns give the evolution stones of every region you've reached, like the Shop.
-• Underground: a Dark-type legendary gem joins the legendary Geodes and the counter.
-
-## 🧭 Quality of life
-• Legendary zones: "See moves" shows the legendary's moves, as in raids.
-• Every region has its own badge ceremony, like Kanto.
-• Search ignores accents everywhere, in every language.
-• A region's complete Pokédex now counts all its Mythical Pokémon, for the ×2 Shiny bonus as on the map.
-
-## ⚖️ Balance
-• The newest region's League: the Champion's team goes from level 91 to 95, with lower hidden power. You need a team close to level 95 to win.
-
-## 🐛 Bug fixes
-• Shiny raids: as the game opened, a win against another boss could end the day's raid without a catch. It is fixed.
-• Trainer Card: the newest region's badges are in the Gyms' order.
-• On some iPhones, prices in the Casino and Underground shops were invisible, and a raid's card didn't show the Raid button. It is fixed.
-• Replaying a legendary's cutscene no longer flashes another screen for a moment.
-• Black Market: the Chinese help text is rewritten, thanks to the player who suggested it.
-
-## 🛡️ Fair play
-• Battle Tower records are checked more closely.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on phones.
-`},es:{title:"✨ v0.4.7 · Novedades",md:`
-Esta versión te deja elegir qué repetido conservar, separa los intercambios de una región nueva de los demás y añade recompensas.
-
-## 🔁 Repetidos
-• Cuando un repetido no tiene la misma naturaleza que el tuyo, la ventana «¿Con cuál te quedas?» te deja quedarte el nuevo. Ocupa el lugar del tuyo en tus equipos. En ambos casos, la familia recibe la Exp. del repetido.
-• La pregunta aparece tras una eclosión, un intercambio, una compra en el Mercado negro, un regalo o un premio del mostrador del Casino.
-• Para las capturas, activa «Conservar repetidos» en la familia. Cuando está completa, la pregunta aparece en una esquina de la pantalla y la aventura sigue.
-• Si el Pokémon sustituido tiene más niveles o un rango, el juego pide confirmación e indica lo que se perderá.
-
-## 🌍 Regiones vinculadas
-• Mientras una región nueva está aparte, hasta su Liga, Intercambios y el Mercado negro tienen dos pestañas: «Regiones vinculadas» y la de la región nueva. Cada pestaña muestra los Pokémon de su lado y usa su propio dinero.
-• Una sola oferta de intercambio a la vez: la otra pestaña indica en qué lado está.
-• Equipos guardados: cada lado tiene sus 5 equipos, como su Mochila. Un equipo que solo tenía Pokémon del otro lado vuelve a poder editarse.
-• Torre Batalla: solo suben los Pokémon de las regiones vinculadas. Las compras de la tienda llegan a la Mochila de las regiones vinculadas.
-• Subsuelo: los ₽, Fragmentos y hallazgos van siempre al lado de su región, juegues donde juegues.
-
-## 🎁 Recompensas
-• Torre Batalla: la Baya Frambu Dorada, la Baya Latano y la Baya Enigma se venden por 75 Puntos Batalla, y la Baya Arabol por 400 a partir del piso 75.
-• Guardería: un Huevo tiene una posibilidad entre dos de tener la naturaleza de su progenitor.
-• El pachinko, las rutas y las ciudades dan las piedras evolutivas de cada región alcanzada, como la Tienda.
-• Subsuelo: una gema legendaria de tipo Siniestro se une a las geodas legendarias y al mostrador.
-
-## 🧭 Comodidad
-• Zonas legendarias: «Ver movimientos» muestra los movimientos del legendario, como en las incursiones.
-• Cada región tiene su ceremonia de entrega de medalla, como Kanto.
-• La búsqueda ignora los acentos en todas partes, en todos los idiomas.
-• La Pokédex completa de una región cuenta ahora todos sus Pokémon singulares, para el bonus ×2 de variocolor como en el mapa.
-
-## ⚖️ Equilibrio
-• Liga de la región más reciente: el equipo del Campeón va del nivel 91 al 95, con un poder oculto más bajo. Hace falta un equipo cercano al nivel 95 para ganar.
-
-## 🐛 Correcciones
-• Incursiones variocolor: al abrir el juego, una victoria contra otro jefe podía terminar la incursión del día sin captura. Está corregido.
-• Ficha de Entrenador: las medallas de la región más reciente están en el orden de los Gimnasios.
-• En algunos iPhone, los precios de las tiendas del Casino y del Subsuelo no se veían, y la ficha de una incursión no mostraba el botón Incursión. Está corregido.
-• Volver a ver la cinemática de un legendario ya no muestra otra pantalla durante un instante.
-• Mercado negro: la ayuda en chino se ha reescrito, gracias al jugador que la propuso.
-
-## 🛡️ Juego limpio
-• Los récords de la Torre Batalla se controlan mejor.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un fallo» en el móvil.
-`}},{date:"2026-11-03",title:"⚖️ v0.4.61 · Équilibrage",md:`
-Cette version modifie les rangs du Souterrain.
-
-## ⛏️ Souterrain
-• Un Pokémon qui a pris un rang ne peut plus évoluer, ni par niveau, ni avec un objet.
-• La fenêtre de passage au rang le précise avant de dépenser les gemmes, et la fiche du Pokémon l'indique à la place de ses évolutions.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"⚖️ v0.4.61 · Balance",md:`
-This version changes Underground ranks.
-
-## ⛏️ Underground
-• A Pokémon that has gained a rank can no longer evolve, by level or with an item.
-• The rank-up window says so before you spend your gems, and the Pokémon's card shows it in place of its evolutions.
-
-To report a bug: #bugs channel on Discord, or Options › Community › "Report a bug" on mobile.
-`},es:{title:"⚖️ v0.4.61 · Equilibrio",md:`
-Esta versión cambia los rangos del Subsuelo.
-
-## ⛏️ Subsuelo
-• Un Pokémon que ha subido de rango ya no puede evolucionar, ni por nivel ni con un objeto.
-• La ventana de subida de rango lo indica antes de gastar las gemas, y la ficha del Pokémon lo muestra en lugar de sus evoluciones.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un fallo» en el móvil.
-`}},{date:"2026-11-03",title:"🐛 v0.4.6 · Correctifs",md:`
-Cette version montre mieux les gains de rang du Souterrain, rend les expéditions plus lisibles et corrige plusieurs bugs.
-
-## 📊 Statistiques
-• Les barres de stats d'un Pokémon suivent une échelle de couleurs, de l'orange au vert, puis des couleurs que seuls les rangs atteignent.
-• Pour un Pokémon qui a pris des rangs au Souterrain, la part gagnée par ses rangs s'affiche au bout de chaque barre, avec « +n » après chaque valeur. Le total de la fiche indique le bonus du rang.
-
-## ⛏️ Souterrain
-• Le thème d'une expédition affiche son bonus : « ▲ +30 % » de stats pour les Pokémon de ses types.
-• Dans le choix de l'équipe, les Pokémon de ton équipe d'aventure sont signalés. Ceux déjà envoyés dans une autre expédition apparaissent grisés en fin de liste, avec le numéro de leur équipe.
-• Équipe / PC : les Pokémon partis en expédition apparaissent en fin de liste. Touche-en un pour savoir quand il revient.
-• Un Pokémon à deux types prend un rang avec une gemme de l'un ou l'autre de ses types.
-• Le bouton qui lance une expédition s'appelle « En route ».
-
-## 🐛 Correctifs
-• Le bouton qui suit l'ouverture d'une géode ne bouge plus quand tu appuies dessus. Celui du choix d'un fossile non plus.
-• Carte de dresseur : sous les cadres, le bouton s'appelle « Voir les cadres » et ouvre les Succès sur les cadres. Même chose pour les apparences.
-• Pension : si l'heure de l'appareil avait été en avance, les Pokémon restaient figés jusqu'à ce que l'heure réelle les rattrape. Ils reprennent tout de suite.
-• Souterrain : avec « Animations réduites » activé ou « Météo animée » désactivé, le décor reste fixe au lieu de s'animer par à-coups.
-• Panthéon : une Ligue battue pendant qu'un chapitre d'une autre région tourne en boucle montre bien l'équipe qui a gagné.
-• Combats : les Pokémon adverses ne se superposent plus après un passage sur un autre écran.
-• Tour de Combat : les Pokémon partis en expédition au Souterrain font partie de ta prochaine ascension.
-• Un chromatique reçu par échange ou acheté au Marché noir, et transformé en XP pour sa famille, s'affiche bien en chromatique dans le message.
-• Un légendaire de zone de la région la plus récente avait beaucoup trop de PV. Son combat dure maintenant autant que celui des autres.
-
-## 🛡️ Fair-play
-• Des joueurs voyaient « Activité anormale détectée » à tort, notamment quand l'heure de leur appareil était décalée à l'ouverture du jeu. C'est corrigé.
-• Plusieurs protections contre la triche sont renforcées.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"🐛 v0.4.6 · Bug fixes",md:`
-This version shows Underground rank gains more clearly, makes expeditions easier to read and fixes several bugs.
-
-## 📊 Stats
-• A Pokémon's stat bars follow a colour scale, from orange to green, then colours only ranks can reach.
-• For a Pokémon that gained ranks in the Underground, the part its ranks add shows at the end of each bar, with "+n" after each value. The card's total shows the rank bonus.
-
-## ⛏️ Underground
-• An expedition's theme shows its bonus: "▲ +30%" stats for Pokémon of its types.
-• In the team picker, the Pokémon in your adventure team are marked. Those already sent on another expedition show greyed out at the end of the list, with their team's number.
-• Team / PC: Pokémon away on an expedition show at the end of the list. Tap one to see when it comes back.
-• A dual-type Pokémon ranks up with a gem of either of its types.
-• The button that starts an expedition now says "Start".
-
-## 🐛 Bug fixes
-• The button after opening a Geode no longer moves when you press it. Neither does the one after choosing a fossil.
-• Trainer Card: under the frames, the button says "See frames" and opens Achievements on the frames. Same for looks.
-• Day Care: if the device's clock had been ahead, the Pokémon stayed frozen until real time caught up. They resume right away.
-• Underground: with "Reduced animations" on or "Animated weather" off, the scenery stays still instead of moving in jerks.
-• Hall of Fame: a League beaten while a chapter of another region is on repeat shows the team that won.
-• Battles: opposing Pokémon no longer stack up after you visit another screen.
-• Battle Tower: Pokémon away on an Underground expedition are part of your next climb.
-• A shiny received in a trade or bought at the Black Market, and turned into XP for its family, now shows as shiny in the message.
-• A zone legendary of the newest region had far too much HP. Its battle now lasts as long as the others.
-
-## 🛡️ Fair play
-• Some players saw "Unusual activity detected" by mistake, especially when their device's clock was off as the game opened. It is fixed.
-• Several protections against cheating are stronger.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on phones.
-`},es:{title:"🐛 v0.4.6 · Correcciones",md:`
-Esta versión muestra mejor lo que aportan los rangos del Subsuelo, hace las expediciones más claras y corrige varios errores.
-
-## 📊 Estadísticas
-• Las barras de estadísticas de un Pokémon siguen una escala de colores, del naranja al verde, y luego colores que solo alcanzan los rangos.
-• En un Pokémon que ha subido de rango en el Subsuelo, lo que aportan sus rangos aparece al final de cada barra, con «+n» tras cada valor. El total de la ficha indica el bonus del rango.
-
-## ⛏️ Subsuelo
-• El tema de una expedición muestra su bonus: «▲ +30 %» de estadísticas para los Pokémon de sus tipos.
-• Al elegir el equipo, los Pokémon de tu equipo de aventura están señalados. Los que ya están en otra expedición aparecen en gris al final de la lista, con el número de su equipo.
-• Equipo / PC: los Pokémon que están de expedición aparecen al final de la lista. Toca uno para saber cuándo vuelve.
-• Un Pokémon de dos tipos sube de rango con una gema de cualquiera de sus tipos.
-• El botón que inicia una expedición se llama «Explorar».
-
-## 🐛 Correcciones
-• El botón que aparece al abrir una geoda ya no se mueve al pulsarlo. Tampoco el que aparece al elegir un fósil.
-• Ficha de Entrenador: bajo los marcos, el botón se llama «Ver marcos» y abre los Logros en los marcos. Lo mismo para los aspectos.
-• Guardería: si el reloj del dispositivo había ido adelantado, los Pokémon se quedaban parados hasta que la hora real los alcanzaba. Ahora siguen enseguida.
-• Subsuelo: con «Animaciones reducidas» activado o «Clima animado» desactivado, el decorado se queda fijo en vez de moverse a tirones.
-• Hall de la Fama: una Liga ganada mientras un capítulo de otra región se repite muestra el equipo que ganó.
-• Combates: los Pokémon rivales ya no se superponen tras pasar por otra pantalla.
-• Torre Batalla: los Pokémon que están de expedición en el Subsuelo forman parte de tu próximo ascenso.
-• Un variocolor recibido en un intercambio o comprado en el Mercado negro, y convertido en EXP para su familia, ya aparece como variocolor en el mensaje.
-• Un legendario de zona de la región más reciente tenía demasiados PS. Su combate dura ahora lo mismo que los demás.
-
-## 🛡️ Juego limpio
-• Algunos jugadores veían «Actividad anómala detectada» por error, sobre todo cuando el reloj de su dispositivo iba desfasado al abrir el juego. Ya está corregido.
-• Varias protecciones contra las trampas son más sólidas.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un fallo» en el móvil.
-`}},{date:"2026-11-02",title:"⚖️ v0.4.5 · Équilibrage",md:`
-Cette version revoit la commission du Marché noir, met les combats contre les Champions en 1 contre 1 et corrige plusieurs bugs.
-
-## 🛒 Marché noir
-• La commission Rocket est de 30 % du prix, plus une part fixe selon la rareté du Pokémon : de 50 000 à 500 000 ₽, et de 500 000 à 2 500 000 ₽ pour un chromatique. Un échange reste la façon la moins chère de céder un Pokémon.
-• Tu peux acheter 3 Pokémon par jour, dont un seul chromatique. Le compteur repart à minuit, heure de Paris. Les ventes ne sont pas limitées.
-• Quand un autre joueur achète un Pokémon juste avant toi, la liste se met à jour.
-
-## ⚖️ Équilibrage
-• Les combats contre les Champions d'Arène, le Conseil 4 et les boss se jouent toujours en 1 contre 1. Les combats à 2 contre 2 restent possibles contre les autres dresseurs, et les Champions qui combattent en duo gardent leur combat à deux.
-• Les capes rares de Cheniti sont plus faciles à trouver.
-
-## 🐛 Correctifs
-• Après un échange ou un changement d'appareil, garder une sauvegarde plus ancienne pouvait faire perdre un Pokémon reçu, capturé ou éclos. Ce n'est plus le cas.
-• « Deux sauvegardes trouvées » indique ce que chaque sauvegarde a de plus que l'autre : « Seulement ici : » et ses Pokémon les plus précieux.
-• Un jeu resté ouvert sans être touché vérifie la sauvegarde en ligne dès que tu reviens dessus.
-• Le jour du jeu est le même pour tous les joueurs : il change à minuit, heure de Paris, comme celui des raids. Les expéditions du Souterrain en dépendent.
-• Certains joueurs ne pouvaient plus vendre ni acheter au Marché noir. C'est corrigé.
-• Sur téléphone, le montant de la commission ne se coupe plus avant « ₽ ».
-• Des joueurs voyaient à nouveau « Activité anormale détectée » à tort, après une vérification ou après une capture dans certains lieux. C'est corrigé.
-• Un joueur écarté pour triche n'est plus visible des autres joueurs : listes d'amis, code ami, alliés de raid.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"⚖️ v0.4.5 · Balance",md:`
-This version reworks the Black Market commission, makes battles against Gym Leaders 1 vs 1 and fixes several bugs.
-
-## 🛒 Black Market
-• The Rocket commission is 30% of the price, plus a fixed part based on the Pokémon's rarity: ₽50,000 to ₽500,000, and ₽500,000 to ₽2,500,000 for a shiny. A trade stays the cheapest way to hand over a Pokémon.
-• You can buy 3 Pokémon a day, only one of them shiny. The count restarts at midnight, Paris time. Sales are not limited.
-• When another player buys a Pokémon just before you, the list updates.
-
-## ⚖️ Balance
-• Battles against Gym Leaders, the Elite Four and bosses are always 1 vs 1. 2 vs 2 battles can still happen against other trainers, and Gym Leaders who fight as a pair keep their double battle.
-• Burmy's rarer cloaks are easier to find.
-
-## 🐛 Bug fixes
-• After a trade or a device switch, keeping an older save could lose a Pokémon you received, caught or hatched. That no longer happens.
-• "Two saves found" shows what each save has that the other lacks: "Only here:" and its most valuable Pokémon.
-• A game left open without being touched checks the online save as soon as you come back to it.
-• The game day is the same for every player: it changes at midnight, Paris time, like the raids' day. The Underground expeditions follow it.
-• Some players could no longer sell or buy at the Black Market. It is fixed.
-• On phones, the commission amount no longer breaks before "₽".
-• Some players saw "Unusual activity detected" again by mistake, after a review or after a catch in some places. It is fixed.
-• A player set aside for cheating is no longer visible to other players: friends lists, friend code, raid allies.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on phones.
-`},es:{title:"⚖️ v0.4.5 · Equilibrio",md:`
-Esta versión revisa la comisión del Mercado negro, pone los combates contra los Líderes de Gimnasio en 1 contra 1 y corrige varios errores.
-
-## 🛒 Mercado negro
-• La comisión Rocket es del 30 % del precio, más una parte fija según la rareza del Pokémon: de 50 000 ₽ a 500 000 ₽, y de 500 000 ₽ a 2 500 000 ₽ para un variocolor. Un intercambio sigue siendo la forma más barata de ceder un Pokémon.
-• Puedes comprar 3 Pokémon al día, solo uno de ellos variocolor. El contador vuelve a empezar a medianoche, hora de París. Las ventas no tienen límite.
-• Cuando otro jugador compra un Pokémon justo antes que tú, la lista se actualiza.
-
-## ⚖️ Equilibrio
-• Los combates contra los Líderes de Gimnasio, el Alto Mando y los jefes son siempre de 1 contra 1. Los combates de 2 contra 2 siguen siendo posibles contra los demás entrenadores, y los Líderes que combaten en pareja conservan su combate doble.
-• Los tipos de capa poco comunes de Burmy son más fáciles de encontrar.
-
-## 🐛 Correcciones
-• Tras un intercambio o un cambio de dispositivo, conservar una partida más antigua podía hacer perder un Pokémon recibido, capturado o eclosionado. Ya no ocurre.
-• «Se han encontrado dos partidas» indica lo que cada partida tiene y la otra no: «Solo aquí:» y sus Pokémon más valiosos.
-• Un juego que se queda abierto sin tocarlo comprueba la partida en línea en cuanto vuelves a él.
-• El día del juego es el mismo para todos los jugadores: cambia a medianoche, hora de París, como el de las incursiones. Las expediciones del Subsuelo dependen de él.
-• Algunos jugadores ya no podían vender ni comprar en el Mercado negro. Ya está corregido.
-• En el móvil, el importe de la comisión ya no se corta antes de «₽».
-• Algunos jugadores volvían a ver «Actividad anómala detectada» por error, tras una revisión o tras una captura en ciertos lugares. Ya está corregido.
-• Un jugador apartado por hacer trampas ya no es visible para los demás jugadores: listas de amigos, código de amigo, aliados de incursión.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un fallo» en el móvil.
-`}},{date:"2026-11-02",title:"🐛 v0.4.4 · Correctifs",md:`
-Cette version corrige de nombreux bugs, montre les attaques des boss de raid et ajuste quelques réglages.
-
-## ⚔️ Raids
-• Un bouton « Voir les capacités » sur la carte du raid et dans le choix de l'équipe montre toutes les attaques du boss. Sa riposte est en tête de liste.
-
-## ⚖️ Équilibrage
-• Les attaques puissantes ratent un peu moins souvent, pour tous les combattants.
-• Dans le Souterrain, les objets d'évolution de la région la plus récente sont environ cinq fois plus fréquents, dès l'étage 25. Leur description et la Boutique indiquent qu'ils se trouvent dans le Souterrain.
-• La mise du Casino le plus récent passe de 3 000 à 2 500 ₽ par partie.
-• Un Pokémon échangé ou acheté appartient à la région de son espèce, si tu as déjà voyagé jusqu'à elle.
-• Tant que la Ligue de la nouvelle région n'est pas battue, les anciennes régions restent séparées d'elle. Un Pokémon de la nouvelle région placé dans l'équipe d'une ancienne région retourne au PC quand tu changes de région.
-
-## 🐛 Correctifs
-• Après une cinématique passée avec « Passer », comme une éclosion, l'Aventure pouvait s'accélérer fortement pendant que tu étais sur un autre écran. Elle garde maintenant son rythme normal.
-• L'éclosion d'un œuf suit l'option « Animations réduites ».
-• Avec « Flashs lumineux » désactivé, l'écran ne s'assombrit plus pendant les attaques puissantes.
-• Les fiches Pokédex de quelques Pokémon ne s'ouvraient plus. Elles s'ouvrent à nouveau.
-• Tour de Combat : un combat à 2 contre 2 restait à 1 contre 2 si tu touchais un Pokémon pendant l'arrivée du dresseur.
-• Tour de Combat : les attaques qui rendent des PV, comme Giga-Sangsue, ne font plus refuser un record.
-• Certaines évolutions étaient bloquées à tort par la place disponible dans une famille.
-• Un objet clé rangé dans le Sac de l'autre région est bien reconnu. Un lieu ne reste plus fermé et un ticket ne se rachète plus chaque semaine.
-• Pension : changer l'heure de l'appareil ne fait plus compter deux fois le même temps.
-• Pension : sur ordinateur, la liste des emplacements épinglée en haut ne déborde plus.
-• Marché noir : la grille de vente ne s'empile plus sur iPhone et iPad.
-• Le bandeau d'un chapitre sans arène montrait un autre lieu. Il montre maintenant le lieu de son légendaire.
-• Le look Pokémaniac de Kanto reprenait le dessin d'une autre région. Il a maintenant le sien.
-• Boîte à badges : un seul geste frotte tous les badges qu'il traverse.
-• Des joueurs voyaient « Activité anormale détectée » à tort : jeu laissé dans une fenêtre en arrière-plan, ou partie commencée en invité avant de se connecter. C'est corrigé.
-• Plusieurs protections contre la triche sont renforcées.
-
-## 📝 Textes
-• Le compteur d'une famille compte une place par espèce, plus une avec « Garder les doublons » ou pour un chromatique. Les bulles d'aide l'expliquent.
-• Une famille dont des membres sont hors du PC l'indique : « Pas tous au PC ».
-• La carte d'un raid verrouillé indique la Ligue à battre.
-• Le porte-monnaie de l'ancienne région porte le nom de la région jouée.
-• Un objet d'évolution absent de ton Sac mais présent dans celui de l'autre région le signale sous le bouton.
-• « Bon retour ! » indique ce que la Pension a donné pendant ton absence.
-• La Bel'Écaille indique qu'on ne la trouve qu'à marée basse.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"🐛 v0.4.4 · Bug fixes",md:`
-This version fixes many bugs, shows raid bosses' moves and adjusts a few settings.
-
-## ⚔️ Raids
-• A "See moves" button on the raid card and in the team picker shows all the boss's moves. Its counter is at the top of the list.
-
-## ⚖️ Balance
-• Powerful moves miss a little less often, for every fighter.
-• In the Underground, the evolution items of the newest region are about five times more common, from floor 25. Their description and the Shop say they are found in the Underground.
-• The bet at the newest Casino goes from ₽3,000 to ₽2,500 per game.
-• A traded or bought Pokémon belongs to its species' region, if you have already travelled there.
-• Until the new region's League is beaten, the older regions stay cut off from it. A Pokémon of the new region placed in an older region's team goes back to the PC when you switch regions.
-
-## 🐛 Bug fixes
-• After a cutscene skipped with "Skip", such as a hatching, the Adventure could speed up a lot while you were on another screen. It now keeps its normal pace.
-• Egg hatching follows the "Reduced animations" option.
-• With "Bright flashes" off, the screen no longer darkens during powerful moves.
-• The Pokédex entries of a few Pokémon would no longer open. They open again.
-• Battle Tower: a 2 vs 2 battle stayed at 1 vs 2 if you tapped a Pokémon while the trainer was coming in.
-• Battle Tower: moves that restore HP, such as Giga Drain, no longer get a record refused.
-• Some evolutions were wrongly blocked by the room left in a family.
-• A key item kept in the other region's Bag is now recognized. A place no longer stays locked and a ticket is no longer bought again every week.
-• Day Care: changing the device's time no longer counts the same time twice.
-• Day Care: on a computer, the slot list pinned at the top no longer overflows.
-• Black Market: the sell grid no longer piles up on iPhone and iPad.
-• The banner of a chapter without a gym showed another place. It now shows its legendary's place.
-• Kanto's Poké Maniac look used another region's drawing. It now has its own.
-• Badge Case: a single stroke rubs every badge it crosses.
-• Some players wrongly saw "Unusual activity detected": the game left in a background window, or a game started as a guest before signing in. This is fixed.
-• Several protections against cheating are stronger.
-
-## 📝 Texts
-• A family's counter counts one spot per species, plus one with "Keep duplicates" or for a shiny. The help bubbles explain it.
-• A family with members outside the PC says so: "Not all in the PC".
-• A locked raid's card shows the League to beat.
-• The older region's wallet is named after the region being played.
-• An evolution item missing from your Bag but held in the other region's Bag is noted under the button.
-• "Welcome back!" shows what the Day Care gave while you were away.
-• The Prism Scale says it can only be found at low tide.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on a phone.
-`},es:{title:"🐛 v0.4.4 · Correcciones",md:`
-Esta versión corrige muchos errores, muestra los movimientos de los jefes de incursión y ajusta algunos parámetros.
-
-## ⚔️ Incursiones
-• Un botón «Ver movimientos» en la tarjeta de la incursión y en la elección del equipo muestra todos los movimientos del jefe. Su contraataque aparece el primero de la lista.
-
-## ⚖️ Equilibrio
-• Los movimientos potentes fallan un poco menos, para todos los combatientes.
-• En el Subsuelo, los objetos de evolución de la región más reciente son unas cinco veces más frecuentes, desde el piso 25. Su descripción y la Tienda indican que se encuentran en el Subsuelo.
-• La apuesta del Casino más reciente pasa de 3000 ₽ a 2500 ₽ por partida.
-• Un Pokémon intercambiado o comprado pertenece a la región de su especie, si ya has viajado hasta ella.
-• Mientras no venzas a la Liga de la nueva región, las regiones antiguas siguen separadas de ella. Un Pokémon de la nueva región colocado en el equipo de una región antigua vuelve al PC cuando cambias de región.
-
-## 🐛 Correcciones
-• Tras una escena saltada con «Saltar», como una eclosión, la Aventura podía acelerarse mucho mientras estabas en otra pantalla. Ahora mantiene su ritmo normal.
-• La eclosión de un huevo sigue la opción «Animaciones reducidas».
-• Con «Destellos» desactivado, la pantalla ya no se oscurece durante los movimientos potentes.
-• Las fichas de la Pokédex de algunos Pokémon ya no se abrían. Vuelven a abrirse.
-• Torre Batalla: un combate de 2 contra 2 se quedaba en 1 contra 2 si tocabas un Pokémon mientras llegaba el entrenador.
-• Torre Batalla: los movimientos que recuperan PS, como Gigadrenado, ya no hacen rechazar un récord.
-• Algunas evoluciones se bloqueaban por error por el espacio disponible en una familia.
-• Un objeto clave guardado en la Mochila de la otra región ya se reconoce. Un lugar ya no se queda cerrado y un ticket ya no se vuelve a comprar cada semana.
-• Guardería: cambiar la hora del dispositivo ya no cuenta dos veces el mismo tiempo.
-• Guardería: en ordenador, la lista de espacios fijada arriba ya no se desborda.
-• Mercado negro: la cuadrícula de venta ya no se amontona en iPhone y iPad.
-• El banner de un capítulo sin gimnasio mostraba otro lugar. Ahora muestra el lugar de su legendario.
-• El aspecto Pokémaníaco de Kanto usaba el dibujo de otra región. Ahora tiene el suyo.
-• Estuche de medallas: un solo gesto frota todas las medallas que cruza.
-• Algunos jugadores veían «Actividad anómala detectada» por error: el juego dejado en una ventana en segundo plano, o una partida empezada como invitado antes de iniciar sesión. Ya está corregido.
-• Varias protecciones contra las trampas son más fuertes.
-
-## 📝 Textos
-• El contador de una familia cuenta un espacio por especie, más uno con «Conservar repetidos» o por un variocolor. Las burbujas de ayuda lo explican.
-• Una familia con miembros fuera del PC lo indica: «No todos en el PC».
-• La tarjeta de una incursión bloqueada indica la Liga que hay que vencer.
-• El monedero de la región antigua lleva el nombre de la región que juegas.
-• Un objeto de evolución que no está en tu Mochila pero sí en la de la otra región lo indica bajo el botón.
-• «¡Bienvenido de nuevo!» muestra lo que la Guardería dio durante tu ausencia.
-• La Escama Bella indica que solo se encuentra con la marea baja.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un fallo» en el móvil.
-`}},{date:"2026-11-02",title:"✨ v0.4.3 · Nouveautés",md:`
-Cette version change la façon d'obtenir les formes de Motisma, rééquilibre les raids et les zones légendaires les plus difficiles, et corrige plusieurs bugs.
-
-## ⚡ Motisma
-• Le Motisma de base s'obtient toujours de la même façon.
-• Une fois qu'il est capturé, chacune de ses cinq formes peut apparaître dans un lieu qui lui correspond, sous une météo ou à un moment précis de la journée. L'apparition est rare et n'a lieu qu'une fois par forme.
-• Chaque forme est un Pokémon à part, mais une équipe ne peut avoir qu'un seul Motisma à la fois, de base ou d'une forme.
-• Chaque forme apprend son attaque propre au niveau 50 : Surchauffe, Hydrocanon, Blizzard, Lame d'Air ou Tempête Verte.
-• La fiche Pokédex de chaque forme indique où et quand la trouver.
-• Les appareils sont retirés du jeu. Chaque appareil que tu avais a été remplacé par la forme correspondante, et un Motisma transformé a repris sa forme normale.
-
-## ⚖️ Raids et zones légendaires
-• Les boss de raid qu'aucune bonne équipe ne pouvait battre sont moins résistants. Les autres boss ne changent pas.
-• Plusieurs zones légendaires sont plus abordables avec une équipe peu adaptée, sans devenir faciles avec la meilleure équipe.
-
-## 🐛 Correctifs
-• Tacle Lourd, Presse, Balayage, Nœud Herbe, Gyroballe, Boule Élek et Dégommage manquaient aux Pokémon qui les apprennent. Ils les apprennent à nouveau, à leur niveau habituel.
-• Une défaite dans une Ligue ramène toujours ton équipe au premier membre. Avant, un membre déjà battu laissait passer l'équipe, et une Ligue pouvait être validée un membre à la fois.
-• La liste des rencontres de certaines zones affichait des Pokémon qui n'y vivent pas. C'est corrigé.
-• Sur le parcours de l'Aventure, l'étape de l'Arbre à Miel affiche l'icône du Miel.
-• L'accueil des Raids affiche la même bannière, que tu sois connecté ou non. Les boss du jour sont sur la page Raids chroma.
-• Certains joueurs qui jouaient sur plusieurs appareils voyaient « Activité anormale détectée » à tort. C'est corrigé.
-• La coupure du serveur dans la nuit du 1er au 2 novembre ne devrait plus se reproduire.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"✨ v0.4.3 · New features",md:`
-This version changes how Rotom's forms are obtained, rebalances the hardest raids and legendary zones, and fixes several bugs.
-
-## ⚡ Rotom
-• The base Rotom is still obtained the same way.
-• Once it is caught, each of its five forms can appear in a place that suits it, under a given weather or at a given time of day. The encounter is rare and happens only once per form.
-• Each form is a Pokémon of its own, but a team can only have one Rotom at a time, base or form.
-• Each form learns its own move at level 50: Overheat, Hydro Pump, Blizzard, Air Slash or Leaf Storm.
-• Each form's Pokédex entry shows where and when to find it.
-• Appliances are removed from the game. Each appliance you had was replaced by the matching form, and a transformed Rotom went back to its normal form.
-
-## ⚖️ Raids and legendary zones
-• Raid bosses that no good team could beat are less tough. The other bosses don't change.
-• Several legendary zones are more within reach with a poorly suited team, without becoming easy with the best team.
-
-## 🐛 Bug fixes
-• Heavy Slam, Crush Grip, Low Kick, Grass Knot, Gyro Ball, Electro Ball and Fling were missing from the Pokémon that learn them. They learn them again, at their usual level.
-• A defeat in a League always sends your team back to the first member. Before, a member already beaten let the team through, and a League could be cleared one member at a time.
-• The encounter list of some zones showed Pokémon that don't live there. This is fixed.
-• On the Adventure path, the Honey Tree step shows the Honey icon.
-• The Raids home shows the same banner whether you are signed in or not. The day's bosses are on the Shiny Raids page.
-• Some players who played on several devices wrongly saw "Unusual activity detected". This is fixed.
-• The server outage during the night of November 1 to 2 should not happen again.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on a phone.
-`},es:{title:"✨ v0.4.3 · Novedades",md:`
-Esta versión cambia la forma de obtener las formas de Rotom, reequilibra las incursiones y las zonas legendarias más difíciles, y corrige varios errores.
-
-## ⚡ Rotom
-• El Rotom base se sigue obteniendo de la misma forma.
-• Una vez capturado, cada una de sus cinco formas puede aparecer en un lugar que le corresponde, con un clima o en un momento concreto del día. La aparición es rara y solo ocurre una vez por forma.
-• Cada forma es un Pokémon aparte, pero un equipo solo puede tener un Rotom a la vez, base o de una forma.
-• Cada forma aprende su propio movimiento al nivel 50: Sofoco, Hidrobomba, Ventisca, Tajo Aéreo o Lluevehojas.
-• La ficha de la Pokédex de cada forma indica dónde y cuándo encontrarla.
-• Los electrodomésticos se retiran del juego. Cada electrodoméstico que tenías se ha sustituido por la forma correspondiente, y un Rotom transformado ha vuelto a su forma normal.
-
-## ⚖️ Incursiones y zonas legendarias
-• Los jefes de incursión que ningún buen equipo podía vencer son menos resistentes. Los demás jefes no cambian.
-• Varias zonas legendarias son más asequibles con un equipo poco adaptado, sin volverse fáciles con el mejor equipo.
-
-## 🐛 Correcciones
-• Cuerpo Pesado, Agarrón, Patada Baja, Hierba Lazo, Giro Bola, Bola Voltio y Lanzamiento faltaban a los Pokémon que los aprenden. Vuelven a aprenderlos, a su nivel habitual.
-• Una derrota en una Liga siempre devuelve a tu equipo al primer miembro. Antes, un miembro ya vencido dejaba pasar al equipo, y una Liga podía superarse un miembro cada vez.
-• La lista de encuentros de algunas zonas mostraba Pokémon que no viven allí. Ya está corregido.
-• En el recorrido de la Aventura, la etapa del Árbol de Miel muestra el icono de la Miel.
-• El inicio de Incursiones muestra el mismo banner, tanto si has iniciado sesión como si no. Los jefes del día están en la página de Incursiones variocolor.
-• Algunos jugadores que jugaban en varios dispositivos veían «Actividad anómala detectada» por error. Ya está corregido.
-• El corte del servidor durante la noche del 1 al 2 de noviembre no debería repetirse.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un error» en el móvil.
-`}},{date:"2026-11-02",title:"🐛 v0.4.2 · Correctifs",md:`
-Cette version empêche d'utiliser le Sac d'une ancienne région pour faire progresser les Pokémon de la nouvelle.
-
-## 🎒 Sac
-• Jusqu'à la Ligue de la nouvelle région, les Bonbons Exp., Super Bonbons, pierres d'évolution et Capsules Nature du Sac d'une ancienne région ne servent plus à ses Pokémon. Sur leur fiche, ces objets sont grisés.
-• Une baie de bonus mangée dans une ancienne région, ou juste avant d'en partir, n'a plus d'effet quand tu joues la nouvelle. Son heure continue de passer, et elle refait effet si tu retournes dans l'ancienne région.
-• Le Sac de la nouvelle région sert toujours à tous tes Pokémon. Après sa Ligue, tous les Sacs servent à nouveau à tous.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"🐛 v0.4.2 · Bug fixes",md:`
-This version stops the Bag of a previous region from being used to power up the new region's Pokémon.
-
-## 🎒 Bag
-• Until the new region's League, Exp. Candies, Rare Candies, evolution stones and Nature Capsules from a previous region's Bag can no longer be used on its Pokémon. On their card, these items are greyed out.
-• A bonus berry eaten in a previous region, or just before leaving it, has no effect while you play the new one. Its hour keeps running, and it works again if you go back to the previous region.
-• The new region's Bag still works on all your Pokémon. After its League, every Bag works on everyone again.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on a phone.
-`},es:{title:"🐛 v0.4.2 · Correcciones",md:`
-Esta versión impide usar la Mochila de una región anterior para hacer progresar a los Pokémon de la nueva.
-
-## 🎒 Mochila
-• Hasta la Liga de la nueva región, los Caramelos Exp., Caramelos Raros, piedras evolutivas y Cápsulas Naturaleza de la Mochila de una región anterior ya no sirven para sus Pokémon. En su ficha, estos objetos aparecen en gris.
-• Una baya de bonificación comida en una región anterior, o justo antes de salir de ella, no tiene efecto mientras juegas la nueva. Su hora sigue corriendo, y vuelve a funcionar si regresas a la región anterior.
-• La Mochila de la nueva región sigue sirviendo para todos tus Pokémon. Tras su Liga, todas las Mochilas vuelven a servir para todos.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un error» en el móvil.
-`}},{date:"2026-11-02",title:"🐛 v0.4.1 · Correctifs",md:`
-Cette version corrige le Souterrain, les doublons de famille, les raids chromatiques et le compteur de la Tour de Combat, et rééquilibre les zones légendaires.
-
-## ⛏️ Souterrain
-• Les expéditions lancées dans la nouvelle région ne restent plus bloquées à l'étage 1 pendant plusieurs jours.
-• Les expéditions déjà bloquées sont rappelées au chargement : « Récupérer » ramène les Pokémon et rend l'expédition du jour.
-• Jusqu'à la Ligue de la nouvelle région, seuls ses Pokémon peuvent partir en expédition, comme dans son aventure. Après la Ligue, tous les Pokémon peuvent y aller.
-
-## 🧬 Doublons de famille
-• Option « Garder les doublons » désactivée : une évolution vers une espèce déjà possédée attend, comme le ferait une nouvelle capture, au lieu de créer un doublon.
-• Option activée, ou Pokémon chromatique : rien ne change.
-• Aucun Pokémon n'est retiré du PC.
-
-## ✨ Raids chromatiques
-• Un raid gagné ne recommence plus à l'ouverture du jeu, avant que les raids du jour ne soient chargés.
-
-## 🌟 Zones légendaires
-• Rééquilibrage : une équipe peu adaptée au légendaire gagne moins souvent. La meilleure équipe gagne toujours environ 9 fois sur 10.
-• « Les plus choisis » s'affiche aussi dans la vue Zone, au-dessus de l'équipe.
-
-## 🏰 Tour de Combat
-• Le compteur de Pokémon ne baisse plus à chaque nouvel étage. Les Pokémon trop faibles pour l'étage restent debout et ne combattent pas ; le journal de l'étage indique combien.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"🐛 v0.4.1 · Bug fixes",md:`
-This version fixes the Underground, family duplicates, Shiny Raids and the Battle Tower counter, and rebalances legendary zones.
-
-## ⛏️ Underground
-• Expeditions sent in the new region no longer stay stuck on floor 1 for days.
-• Expeditions already stuck are called back on load: "Take back" brings the Pokémon home and gives the day's expedition back.
-• Until the new region's League, only its Pokémon can go on expeditions, as in its adventure. After the League, every Pokémon can go.
-
-## 🧬 Family duplicates
-• "Keep duplicates" off: an evolution into a species you already own waits, as a new catch would, instead of creating a duplicate.
-• Option on, or a shiny Pokémon: nothing changes.
-• No Pokémon is taken from your PC.
-
-## ✨ Shiny Raids
-• A raid you won no longer starts again when the game opens, before the day's raids are loaded.
-
-## 🌟 Legendary zones
-• Rebalance: a team poorly suited to the legendary wins less often. The best team still wins about 9 times out of 10.
-• "Most picked" also shows in the Zone view, above the team.
-
-## 🏰 Battle Tower
-• The Pokémon counter no longer drops on each new floor. Pokémon too weak for the floor stay standing and sit it out; the floor's log says how many.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on a phone.
-`},es:{title:"🐛 v0.4.1 · Correcciones",md:`
-Esta versión corrige el Subsuelo, los repetidos de familia, las incursiones variocolor y el contador de la Torre Batalla, y reequilibra las zonas legendarias.
-
-## ⛏️ Subsuelo
-• Las expediciones enviadas en la nueva región ya no se quedan bloqueadas en el piso 1 durante días.
-• Las expediciones ya bloqueadas se recuperan al cargar: «Recoger» devuelve los Pokémon y la expedición del día.
-• Hasta la Liga de la nueva región, solo sus Pokémon pueden ir de expedición, como en su aventura. Tras la Liga, todos los Pokémon pueden ir.
-
-## 🧬 Repetidos de familia
-• «Conservar repetidos» desactivado: una evolución hacia una especie que ya tienes espera, como lo haría una nueva captura, en lugar de crear un repetido.
-• Opción activada, o Pokémon variocolor: nada cambia.
-• No se retira ningún Pokémon de tu PC.
-
-## ✨ Incursiones variocolor
-• Una incursión ganada ya no vuelve a empezar al abrir el juego, antes de que se carguen las incursiones del día.
-
-## 🌟 Zonas legendarias
-• Reequilibrio: un equipo poco adaptado al legendario gana menos a menudo. El mejor equipo sigue ganando unas 9 veces de cada 10.
-• «Los más elegidos» también aparece en la vista Zona, encima del equipo.
-
-## 🏰 Torre Batalla
-• El contador de Pokémon ya no baja en cada piso nuevo. Los Pokémon demasiado débiles para el piso siguen en pie y no combaten; el registro del piso indica cuántos.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un error» en el móvil.
-`}},{date:"2026-11-01",title:"🗺️ v0.4.0 · Nouvelle région",md:`
-Cette version ouvre une nouvelle région, ajoute le Souterrain et le Marché noir, revoit la Tour de Combat et apporte un mode veille pour économiser la batterie.
-
-## 🗺️ Nouvelle région
-• Elle s'ouvre après la Ligue de la troisième région : 107 nouveaux Pokémon, 8 arènes, une Ligue et un chapitre après la Ligue.
-• Comme pour la région précédente, elle a son argent, son sac et son équipe jusqu'à sa Ligue, et s'y joue avec les Pokémon capturés sur place. Battre sa Ligue relie les deux côtés.
-• Elle est environ 20 % plus longue que la précédente. Sa Ligue est plus difficile à chaque membre, jusqu'au Maître.
-• Zones légendaires, cinématiques d'entrée, apparences de dresseur, succès et cadres d'avatar propres à la région.
-• Une nouvelle météo, de nouvelles façons de rencontrer certains Pokémon, et un Casino avec ses propres lots.
-• Tour de Combat : ses adversaires incluent maintenant les Pokémon de la nouvelle région.
-
-## ⛏️ Souterrain
-• Nouvel écran Activités › Souterrain, ouvert au 2e badge de la nouvelle région.
-• Envoie une équipe de 3 Pokémon en expédition : elle descend étage par étage, combat, creuse des murs et campe, jusqu'au K.O. Plus elle descend, meilleur est le butin : ₽, objets, géodes, Éclats et fossiles.
-• Chaque expédition a un thème : les Pokémon de ses types y gagnent +30 % de stats.
-• 8 expéditions par jour, chaque Pokémon une seule fois par jour. 1 emplacement au départ, 3 autres à acheter avec des Éclats : 150, 500 puis 1 000.
-• Une fois atteints, les étages 25, 50, 75 et 100 servent de point de départ. Les étages sautés ne donnent ni butin ni XP.
-• Paliers de record : étage 100, 150 et 200, avec géodes légendaires, apparences de dresseur et un cadre d'avatar.
-• Géodes : elles s'ouvrent en les tapant et peuvent monter de rareté en cours d'ouverture. Elles donnent des gemmes, classées par type et par rareté.
-• Comptoir : 8 gemmes à acheter avec des Éclats, renouvelées toutes les 3 h. Un nouveau tirage est possible contre des ₽. Une gemme en trop se recycle en Éclats.
-
-## 💎 Rangs
-• Un Pokémon au niveau 100 peut monter de rang, du rang I au rang V, avec des gemmes de son type et de sa rareté : 1 gemme pour le rang I, 5 pour le rang V.
-• Chaque rang multiplie ses stats par 1,15 (×2 au rang V). Il repart au niveau 5 et garde son évolution et sa nature. L'XP pour remonter est multipliée par 1,25 par rang.
-• Le rang s'affiche en chiffre doré sur le Pokémon, partout : PC, équipe, classements, échanges. Il compte en raids, en zones légendaires et à la Tour de Combat.
-
-## 🚀 Marché noir
-• On dit que la Team Rocket fait des affaires en coulisses… Ceux qui trouvent son marché noir y achètent et vendent des Pokémon à prix fixe.
-• Le premier acheteur reçoit le Pokémon tout de suite, au niveau 5. Le vendeur reçoit le prix entier au rafraîchissement suivant ou au prochain lancement.
-• Mettre en vente coûte une commission de 20 % du prix, jamais rendue. 3 ventes à la fois, 3 jours chacune ; un Pokémon non vendu revient.
-
-## 🏰 Tour de Combat
-• Récompenses de la semaine selon ta place : n° 1 à 3, un cadre, un œuf chromatique et 1 500 / 1 200 / 1 000 Points Combat ; top 5 %, un cadre, un œuf chromatique et 800 ; top 10 %, un œuf chromatique et 600 ; top 25 %, 400 ; les autres, 150 dès l'étage 10.
-• Élite : le top 5 % d'une semaine passe dans le classement Élite, pour de bon. Chaque semaine jouée y rapporte les récompenses du top 10 %, et son podium un cadre « Élite de la Tour ». Les premiers à y entrer sont le top 5 % de la semaine du 26 octobre au 1er novembre.
-• L'apparence du Meneur de la semaine revient à tous ceux qui franchissent l'étage 100, au lieu du n° 1.
-• 5 nouveaux Meneurs entre les étages 80 et 120. Leurs apparences et celles des 6 autres Meneurs entrent dans la rotation : 12 au total.
-• Cadres d'avatar « Étage 50 », « Étage 100 » et « Étage 150 », d'après ton meilleur étage.
-• L'œuf chromatique de la semaine contient une espèce d'une région dont tu as gagné la Ligue.
-• Chaque espèce ne combat qu'une fois par course : son exemplaire le plus fort. La barre de combat montre le Pokémon actif et le nombre de Pokémon encore debout.
-• Un Pokémon à plus de 10 niveaux sous les adversaires d'un étage ne combat plus ; la course s'arrête quand plus personne n'est au niveau.
-• La boutique de la Tour passe dans un onglet de l'écran Tour.
-
-## ✨ Nouveautés
-• Équipe/PC : 5 équipes enregistrées à côté du titre. Un appui charge une équipe (au prochain Centre Pokémon), « + » en crée une vide.
-• Raids : l'onglet devient « Raids », avec un accueil à deux bannières : les raids chromatiques et un événement à venir. Les raids chromatiques de chaque région tiennent sur une seule page.
-• Raids chromatiques : il faut être connecté pour les jouer. Le jour des raids change à minuit, heure de Paris, pour tout le monde.
-• Badges : à partir de la nouvelle région, tes badges se ternissent avec le temps. Ouvre ta boîte à badges depuis ta carte de dresseur et frotte-les pour les faire briller. Les autres joueurs voient leur éclat. Un succès et un cadre récompensent les 8 badges d'une région étincelants ; l'option « Badges ternis » les garde toujours propres.
-• Succès › Cinématiques : revois les cinématiques des légendaires capturés, des Maîtres battus et des rencontres uniques.
-• Certains Maîtres de Ligue ont maintenant leur cinématique d'entrée.
-• Mode veille : après 2 ou 5 minutes sans action, ou avec 🌙 dans la barre du haut, l'écran passe au noir et affiche l'heure, le lieu, les combats et les captures. L'aventure continue au même rythme. Un appui le réveille.
-• Options › Performances : préréglages Économie, Équilibré et Maximum, délai de veille et réglages d'animations, de météo, de fond et d'effets.
-• Boutique : un onglet Vendre pour revendre tes objets en trop au quart de leur prix. Les objets clés, jetons et Éclats ne se vendent pas.
-• Attaques à coups multiples (Double Pied, Furie, Balle Graine…) : elles frappent vraiment plusieurs fois, 2 à 5 coups selon l'attaque, chacun avec ses dégâts. Elles sont donc plus fortes qu'avant.
-• Baies de boost : manger la même baie pendant son effet ajoute 1 h à sa durée, jusqu'à 4 h.
-• Retour d'absence : le récapitulatif indique les chromatiques sauvages qui t'ont échappé.
-• Objets : la carte d'un chapitre montre ses objets trouvables et leurs chances, et l'infobulle d'un objet dit à quoi il sert. Les objets d'évolution trouvés dans un lieu précis indiquent leur pourcentage de chance.
-• Sur ordinateur, la barre du haut affiche tes jetons, Points Combat et Éclats à côté des ₽.
-• Aventure : le panneau du sac devient « Consommables » et ne montre que les baies de boost (un appui en mange une). Le reste du sac s'ouvre depuis son en-tête.
-
-## ⚖️ Équilibrage
-• Zones légendaires : la difficulté de tous les boss a été réajustée, dans toutes les régions. Avec l'équipe ✨ Optimiser, la plupart des zones se gagnent environ 9 fois sur 10.
-• Super Bonbons : plus rares dans les premiers chapitres d'une région, plus fréquents dans les derniers et après la Ligue.
-• Baies : elles apparaissent au fil de la région. Oran, Framby, Nanana et Lansat dès le 1er chapitre ; Pêcha et Framby dorée au 3e badge ; Sitrus, Nanab et Enigma au 6e ; Frista au 8e.
-• Ligue : une fois la Ligue gagnée, ses dresseurs donnent moitié moins de ₽.
-• Objets trouvés pendant ton absence : plus de limite de 10. Chaque objet est gardé à 25 % ; une pierre d'évolution est toujours gardée.
-• Jetons : il n'y a plus de sacs de jetons sur les routes. La machine à sous est la seule source de jetons.
-• Pension : les emplacements ne demandent plus de Ligue. Pensionnaires et incubateur ont les mêmes prix : 50 000, 500 000 puis 2 500 000 ₽. Les emplacements déjà achetés restent.
-• Raids chromatiques : perdre contre le boss compte comme une défaite, plus comme une tentative.
-• Équipes : au plus un exemplaire normal et un chromatique par espèce, dans toutes les équipes. Un second exemplaire retourne au PC.
-• Sélecteurs d'équipe : les marques ▲ / ▼ contre un boss sont retirées. Le bouton ✨ Optimiser reste.
-
-## 🧭 Confort
-• Un champion d'arène déjà battu te laisse passer quand tu rejoues son chapitre, et la route ne s'arrête plus devant lui quand tu es sur un autre écran.
-• Pension : les emplacements restent en haut de l'écran quand tu fais défiler le PC.
-• Échanges : toutes les offres ouvertes se retrouvent, plus seulement les 60 plus récentes, et la recherche porte sur toutes les offres.
-• Échanges « un chromatique qui me manque » : toute la lignée de tes chromatiques compte, pas seulement l'espèce.
-• Menu latéral : Succès passe sous la Boutique, Souterrain sous la Tour de Combat.
-• Textes : 14 px minimum partout.
-• Sauvegarde en ligne toutes les 30 minutes au lieu de 15. Badges, raids et échanges restent sauvegardés tout de suite.
-• « Activité anormale détectée » s'affiche désormais là où un compte retenu est coupé.
-
-## 🐛 Correctifs
-• Sauvegarde : une connexion expirée l'indique, au lieu d'une erreur à chaque appui.
-• Sauvegarde : elle passe aussi sur les réseaux qui bloquaient son envoi.
-• Classements des raids : un temps validé par le serveur ne disparaît plus de ton classement.
-• Zones légendaires : le décor d'une ligne ne saute plus au survol.
-• Inscriptions des temples : elles s'affichent en chinois, coréen et japonais.
-• Nombres : ils suivent le format de ta langue partout.
-• Pension : l'aide de l'incubateur indique la bonne durée d'éclosion.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"🗺️ v0.4.0 · New region",md:`
-This version opens a new region, adds the Underground and the Black Market, reworks the Battle Tower and brings a sleep mode to save battery.
-
-## 🗺️ New region
-• It opens after the third region's League: 107 new Pokémon, 8 Gyms, a League and a chapter after the League.
-• As with the previous region, it has its own money, bag and team until its League, and you play it with the Pokémon caught there. Beating its League links both sides.
-• It is about 20% longer than the previous one. Its League gets harder with each member, up to the Champion.
-• Legendary zones, intro cutscenes, trainer looks, achievements and avatar frames of its own.
-• A new weather, new ways to encounter some Pokémon, and a Game Corner with its own prizes.
-• Battle Tower: its opponents now include the new region's Pokémon.
-
-## ⛏️ Underground
-• New screen Activities › Underground, open from the new region's 2nd badge.
-• Send a team of 3 Pokémon on an expedition: it goes down floor by floor, fights, digs through walls and camps, until it's K.O. The deeper it goes, the better the loot: ₽, items, geodes, Shards and fossils.
-• Each expedition has a theme: Pokémon of its types get +30% stats there.
-• 8 expeditions a day, each Pokémon once a day. 1 slot to start with, 3 more to buy with Shards: 150, 500, then 1,000.
-• Once reached, floors 25, 50, 75 and 100 can be used as a starting point. Skipped floors give no loot and no XP.
-• Record milestones: floors 100, 150 and 200, with legendary geodes, trainer looks and an avatar frame.
-• Geodes: tap them to open them; they can rise in rarity while opening. They give gems, sorted by type and rarity.
-• Counter: 8 gems to buy with Shards, refreshed every 3 hours. A new draw is available for ₽. A spare gem can be recycled into Shards.
-
-## 💎 Ranks
-• A level 100 Pokémon can rank up, from rank I to rank V, with gems of its type and rarity: 1 gem for rank I, 5 for rank V.
-• Each rank multiplies its stats by 1.15 (×2 at rank V). It goes back to level 5 and keeps its evolution and nature. The XP to level back up is multiplied by 1.25 per rank.
-• The rank shows as a gold numeral on the Pokémon everywhere: PC, team, leaderboards, trades. It counts in raids, legendary zones and the Battle Tower.
-
-## 🚀 Black Market
-• They say Team Rocket does business behind the scenes… Those who find its black market buy and sell Pokémon there at a fixed price.
-• The first buyer gets the Pokémon right away, at level 5. The seller receives the full price at the next refresh or the next launch.
-• Listing costs a 20% fee on the price, never refunded. 3 listings at a time, 3 days each; an unsold Pokémon comes back.
-
-## 🏰 Battle Tower
-• Weekly rewards by placement: #1 to #3, a frame, a shiny egg and 1,500 / 1,200 / 1,000 Battle Points; top 5%, a frame, a shiny egg and 800; top 10%, a shiny egg and 600; top 25%, 400; everyone else, 150 from floor 10.
-• Elite: the top 5% of a week moves up to the Elite leaderboard for good. Each week played there gives the top 10% rewards, and its podium a "Tower Elite" frame. The first to join are the top 5% of the week of October 26 to November 1.
-• The week's Frontier Brain look now goes to everyone who clears floor 100, instead of #1.
-• 5 new Frontier Brains between floors 80 and 120. Their looks and those of the 6 other Brains join the rotation: 12 in total.
-• "Floor 50", "Floor 100" and "Floor 150" avatar frames, based on your best floor.
-• The weekly shiny egg holds a species from a region whose League you've won.
-• Each species fights only once per run: its strongest copy. The battle bar shows the active Pokémon and how many are still standing.
-• A Pokémon more than 10 levels below a floor's opponents no longer fights; the run ends when nobody is left at their level.
-• The Tower's shop moves to a tab of the Tower screen.
-
-## ✨ New features
-• Team/PC: 5 saved teams next to the title. A tap loads a team (at the next Pokémon Center), "+" creates an empty one.
-• Raids: the tab becomes "Raids", with a home screen and two banners: Shiny Raids and an upcoming event. Each region's Shiny Raids fit on a single page.
-• Shiny Raids: you need to be signed in to play them. The raid day changes at midnight Paris time, for everyone.
-• Badges: from the new region on, your badges get dull over time. Open your badge case from your trainer card and rub them to make them shine. Other players see their shine. An achievement and a frame reward a region's 8 badges sparkling; the "Dull Badges" option keeps them clean at all times.
-• Achievements › Cutscenes: watch again the cutscenes of legendaries caught, Champions beaten and one-off encounters.
-• Some League Champions now have their own intro cutscene.
-• Sleep mode: after 2 or 5 minutes without input, or with 🌙 in the top bar, the screen turns black and shows the time, the place, battles and catches. The adventure goes on at the same pace. A tap wakes it up.
-• Options › Performance: Saver, Balanced and Maximum presets, sleep delay, and settings for animations, weather, background and effects.
-• Shop: a Sell tab to sell your spare items for a quarter of their price. Key items, Coins and Shards can't be sold.
-• Multi-hit moves (Double Kick, Fury Attack, Bullet Seed…): they really hit several times, 2 to 5 hits depending on the move, each with its own damage. They're stronger than before.
-• Boost berries: eating the same berry while it's active adds 1 hour to its duration, up to 4 hours.
-• Welcome-back recap: it now tells you about wild shinies that got away.
-• Items: a chapter card shows its findable items and their odds, and an item's tooltip says what it's for. Evolution items found in a specific place show their percentage chance.
-• On a computer, the top bar shows your Coins, Battle Points and Shards next to your ₽.
-• Adventure: the bag panel becomes "Consumables" and only shows boost berries (a tap eats one). The rest of the bag opens from its header.
-
-## ⚖️ Balance
-• Legendary zones: every boss's difficulty has been readjusted, in every region. With the ✨ Optimize team, most zones are won about 9 times out of 10.
-• Rare Candies: rarer in a region's first chapters, more common in its last ones and after the League.
-• Berries: they show up as the region goes on. Oran, Razz, Pinap and Lansat from the 1st chapter; Pecha and Golden Razz at the 3rd badge; Sitrus, Nanab and Enigma at the 6th; Starf at the 8th.
-• League: once the League is won, its trainers give half as much ₽.
-• Items found while you're away: no more cap of 10. Each item is kept at 25%; an evolution stone is always kept.
-• Coins: no more coin bags on routes. The slot machine is the only source of Coins.
-• Day Care: slots no longer require a League. Boarders and incubator have the same prices: 50,000, 500,000, then 2,500,000 ₽. Slots already bought are kept.
-• Shiny Raids: losing to the boss counts as a defeat, no longer as an attempt.
-• Teams: at most one regular and one shiny copy per species, in every team. A second copy goes back to the PC.
-• Team pickers: the ▲ / ▼ marks against a boss are removed. The ✨ Optimize button stays.
-
-## 🧭 Quality of life
-• A Gym Leader you've already beaten lets you through when you replay their chapter, and the route no longer stops in front of them while you're on another screen.
-• Day Care: the slots stay at the top of the screen while you scroll the PC.
-• Trades: every open offer can be found, not only the 60 most recent, and search covers every offer.
-• "Any shiny I'm missing" trades: your shinies' whole evolution line counts, not only the species.
-• Side menu: Achievements moves under the Shop, Underground under the Battle Tower.
-• Text: 14 px minimum everywhere.
-• Online save every 30 minutes instead of 15. Badges, raids and trades are still saved right away.
-• "Unusual activity detected" now shows where a held account is cut off.
-
-## 🐛 Bug fixes
-• Save: an expired sign-in now says so, instead of an error on every tap.
-• Save: it now goes through on networks that blocked it.
-• Raid leaderboards: a time accepted by the server no longer disappears from your leaderboard.
-• Legendary zones: a row's background no longer jumps on hover.
-• Temple inscriptions: they now show in Chinese, Korean and Japanese.
-• Numbers: they follow your language's format everywhere.
-• Day Care: the incubator's help shows the right hatching time.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on a phone.
-`},es:{title:"🗺️ v0.4.0 · Nueva región",md:`
-Esta versión abre una nueva región, añade el Subsuelo y el Mercado negro, renueva la Torre Batalla y trae un modo reposo para ahorrar batería.
-
-## 🗺️ Nueva región
-• Se abre tras la Liga de la tercera región: 107 Pokémon nuevos, 8 gimnasios, una Liga y un capítulo después de la Liga.
-• Como la región anterior, tiene su propio dinero, mochila y equipo hasta su Liga, y se juega con los Pokémon capturados allí. Vencer su Liga une los dos lados.
-• Es un 20 % más larga que la anterior, aproximadamente. Su Liga es más difícil con cada miembro, hasta el Campeón.
-• Zonas legendarias, cinemáticas de entrada, aspectos de entrenador, logros y marcos de avatar propios.
-• Un clima nuevo, nuevas formas de encontrar algunos Pokémon y un Casino con sus propios premios.
-• Torre Batalla: sus rivales incluyen ahora los Pokémon de la nueva región.
-
-## ⛏️ Subsuelo
-• Nueva pantalla Actividades › Subsuelo, abierta desde la 2.ª medalla de la nueva región.
-• Envía un equipo de 3 Pokémon de expedición: baja piso a piso, combate, excava muros y acampa, hasta caer K.O. Cuanto más baja, mejor es el botín: ₽, objetos, geodas, Fragmentos y fósiles.
-• Cada expedición tiene un tema: los Pokémon de sus tipos ganan un +30 % de estadísticas allí.
-• 8 expediciones al día, cada Pokémon una sola vez al día. 1 hueco al principio y 3 más que se compran con Fragmentos: 150, 500 y luego 1000.
-• Una vez alcanzados, los pisos 25, 50, 75 y 100 sirven de punto de partida. Los pisos saltados no dan botín ni EXP.
-• Hitos de récord: pisos 100, 150 y 200, con geodas legendarias, aspectos de entrenador y un marco de avatar.
-• Geodas: se abren a toques y pueden subir de rareza mientras se abren. Dan gemas, clasificadas por tipo y rareza.
-• Mostrador: 8 gemas que se compran con Fragmentos, renovadas cada 3 h. Se puede pedir una nueva selección a cambio de ₽. Una gema de sobra se recicla en Fragmentos.
-
-## 💎 Rangos
-• Un Pokémon de nivel 100 puede subir de rango, del rango I al rango V, con gemas de su tipo y rareza: 1 gema para el rango I, 5 para el rango V.
-• Cada rango multiplica sus estadísticas por 1,15 (×2 en el rango V). Vuelve al nivel 5 y conserva su evolución y su naturaleza. La EXP para volver a subir se multiplica por 1,25 por rango.
-• El rango aparece como un número dorado sobre el Pokémon en todas partes: PC, equipo, clasificaciones, intercambios. Cuenta en incursiones, zonas legendarias y la Torre Batalla.
-
-## 🚀 Mercado negro
-• Dicen que el Team Rocket hace negocios entre bastidores… Quienes encuentran su mercado negro compran y venden Pokémon allí a precio fijo.
-• El primer comprador recibe el Pokémon al instante, al nivel 5. El vendedor recibe el precio entero en la siguiente actualización o al volver a abrir el juego.
-• Poner a la venta cuesta una comisión del 20 % del precio, nunca devuelta. 3 ventas a la vez, de 3 días cada una; un Pokémon no vendido vuelve.
-
-## 🏰 Torre Batalla
-• Recompensas semanales según tu puesto: del 1.º al 3.º, un marco, un huevo variocolor y 1500 / 1200 / 1000 Puntos Batalla; top 5 %, un marco, un huevo variocolor y 800; top 10 %, un huevo variocolor y 600; top 25 %, 400; los demás, 150 desde el piso 10.
-• Élite: el top 5 % de una semana pasa a la clasificación Élite, para siempre. Cada semana jugada allí da las recompensas del top 10 %, y su podio un marco «Élite de la Torre». Los primeros en entrar son el top 5 % de la semana del 26 de octubre al 1 de noviembre.
-• El aspecto del As de la semana es ahora para todos los que superan el piso 100, en lugar del n.º 1.
-• 5 Ases nuevos entre los pisos 80 y 120. Sus aspectos y los de los otros 6 Ases entran en la rotación: 12 en total.
-• Marcos de avatar «Piso 50», «Piso 100» y «Piso 150», según tu mejor piso.
-• El huevo variocolor de la semana contiene una especie de una región cuya Liga has ganado.
-• Cada especie combate una sola vez por intento: su ejemplar más fuerte. La barra de combate muestra el Pokémon activo y cuántos siguen en pie.
-• Un Pokémon a más de 10 niveles por debajo de los rivales de un piso ya no combate; el intento termina cuando no queda nadie a su nivel.
-• La tienda de la Torre pasa a una pestaña de la pantalla de la Torre.
-
-## ✨ Novedades
-• Equipo/PC: 5 equipos guardados junto al título. Un toque carga un equipo (en el próximo Centro Pokémon), «+» crea uno vacío.
-• Incursiones: la pestaña pasa a llamarse «Incursiones», con una pantalla de inicio y dos banners: las incursiones variocolor y un evento por venir. Las incursiones variocolor de cada región caben en una sola página.
-• Incursiones variocolor: hay que tener la sesión iniciada para jugarlas. El día de las incursiones cambia a medianoche, hora de París, para todos.
-• Medallas: desde la nueva región, tus medallas se deslucen con el tiempo. Abre tu estuche de medallas desde tu ficha de entrenador y frótalas para que brillen. Los demás jugadores ven su brillo. Un logro y un marco premian las 8 medallas de una región relucientes; la opción «Medallas deslucidas» las mantiene siempre limpias.
-• Logros › Cinemáticas: vuelve a ver las cinemáticas de los legendarios capturados, los Campeones vencidos y los encuentros únicos.
-• Algunos Campeones de Liga tienen ahora su propia cinemática de entrada.
-• Modo reposo: tras 2 o 5 minutos sin actividad, o con 🌙 en la barra superior, la pantalla se pone en negro y muestra la hora, el lugar, los combates y las capturas. La aventura sigue al mismo ritmo. Un toque la despierta.
-• Opciones › Rendimiento: ajustes Ahorro, Equilibrado y Máximo, tiempo antes del reposo y ajustes de animaciones, clima, fondo y efectos.
-• Tienda: una pestaña Vender para vender tus objetos de sobra a un cuarto de su precio. Los objetos clave, las Fichas y los Fragmentos no se venden.
-• Movimientos de golpes múltiples (Doble Patada, Ataque Furia, Recurrente…): ahora golpean de verdad varias veces, de 2 a 5 golpes según el movimiento, cada uno con su daño. Son más fuertes que antes.
-• Bayas de mejora: comer la misma baya mientras está activa añade 1 h a su duración, hasta 4 h.
-• Resumen de regreso: indica los variocolor salvajes que se te escaparon.
-• Objetos: la ficha de un capítulo muestra sus objetos y sus probabilidades, y la descripción de un objeto dice para qué sirve. Los objetos de evolución de un lugar concreto indican su porcentaje de probabilidad.
-• En ordenador, la barra superior muestra tus Fichas, Puntos Batalla y Fragmentos junto a tus ₽.
-• Aventura: el panel de la mochila pasa a llamarse «Consumibles» y solo muestra las bayas de mejora (un toque se come una). El resto de la mochila se abre desde su cabecera.
-
-## ⚖️ Equilibrio
-• Zonas legendarias: la dificultad de todos los jefes se ha reajustado, en todas las regiones. Con el equipo ✨ Optimizar, la mayoría de las zonas se ganan unas 9 veces de cada 10.
-• Caramelos Raros: más raros en los primeros capítulos de una región, más frecuentes en los últimos y después de la Liga.
-• Bayas: aparecen a medida que avanza la región. Aranja, Frambu, Pinia y Zonlan desde el 1.er capítulo; Meloc y Frambu Dorada con la 3.ª medalla; Zidra, Latano y Enigma con la 6.ª; Arabol con la 8.ª.
-• Liga: una vez ganada la Liga, sus entrenadores dan la mitad de ₽.
-• Objetos encontrados durante tu ausencia: ya no hay límite de 10. Cada objeto se conserva al 25 %; una piedra evolutiva siempre se conserva.
-• Fichas: ya no hay sacos de fichas en las rutas. La tragaperras es la única fuente de fichas.
-• Guardería: los huecos ya no requieren una Liga. Huéspedes e incubadora tienen los mismos precios: 50 000, 500 000 y luego 2 500 000 ₽. Los huecos ya comprados se mantienen.
-• Incursiones variocolor: perder contra el jefe cuenta como una derrota, ya no como un intento.
-• Equipos: como mucho un ejemplar normal y uno variocolor por especie, en todos los equipos. Un segundo ejemplar vuelve al PC.
-• Selectores de equipo: se quitan las marcas ▲ / ▼ contra un jefe. El botón ✨ Optimizar se queda.
-
-## 🧭 Comodidad
-• Un Líder de Gimnasio ya vencido te deja pasar cuando repites su capítulo, y la ruta ya no se detiene ante él cuando estás en otra pantalla.
-• Guardería: los huecos se quedan arriba de la pantalla al desplazar el PC.
-• Intercambios: todas las ofertas abiertas se pueden encontrar, no solo las 60 más recientes, y la búsqueda abarca todas las ofertas.
-• Intercambios «un variocolor que me falte»: cuenta toda la línea evolutiva de tus variocolor, no solo la especie.
-• Menú lateral: Logros pasa bajo la Tienda, Subsuelo bajo la Torre Batalla.
-• Textos: 14 px como mínimo en todas partes.
-• Guardado en línea cada 30 minutos en lugar de 15. Las medallas, incursiones e intercambios se siguen guardando al momento.
-• «Actividad anómala detectada» aparece ahora donde una cuenta retenida queda bloqueada.
-
-## 🐛 Correcciones
-• Guardado: una sesión caducada lo indica, en lugar de dar un error a cada toque.
-• Guardado: ahora pasa también en las redes que bloqueaban su envío.
-• Clasificaciones de incursiones: un tiempo validado por el servidor ya no desaparece de tu clasificación.
-• Zonas legendarias: el fondo de una fila ya no salta al pasar el ratón.
-• Inscripciones de los templos: ahora se muestran en chino, coreano y japonés.
-• Números: siguen el formato de tu idioma en todas partes.
-• Guardería: la ayuda de la incubadora indica la duración de eclosión correcta.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un error» en el móvil.
-`}},{date:"2026-10-29",title:"✨ v0.3.17 · Nouveautés",md:`
-Ce patch ajoute cinq langues, un guide du jeu et un week-end Halloween aux raids chromatiques, et corrige plusieurs bugs.
-
-## 🌍 Cinq nouvelles langues
-• Le jeu existe maintenant en allemand, chinois simplifié, chinois traditionnel, coréen et japonais, en plus du français, de l'anglais et de l'espagnol.
-• Les noms des Pokémon, des attaques, des objets et des lieux sont les noms officiels de chaque langue.
-• Options › Langue : les langues s'affichent dans une liste. Au premier lancement, le jeu prend la langue du navigateur quand elle en fait partie.
-• Tu parles l'une de ces langues couramment ? Tes retours sur les traductions sont les bienvenus : écris-nous sur Discord.
-
-## 📖 Guide du jeu
-• Un guide explique chaque fonctionnalité en 13 pages : aventure, capture, chromatiques, équipe, Pokédex, Ligue, baies, Pension, échanges, boutique, Casino, raids et Tour de Combat.
-• Il s'ouvre depuis Options › Nouveautés, et depuis le bouton « Guide » du menu latéral sur ordinateur.
-• Chaque page a un bouton « Y aller » qui ouvre l'onglet concerné.
-
-## 🎃 Halloween
-• Raids chromatiques : du vendredi 30 octobre au dimanche 1er novembre, chaque région a un boss sur le thème d'Halloween.
-• Le donjon passe en lumière de nuit, et des âmes s'élèvent dans le ciel.
-
-## 🧭 Confort
-• Échanges : une offre qui mêle deux régions n'est plus cachée tant que tes régions sont séparées. Elle s'affiche en fin de liste avec la carte, qui indique après quelle Ligue l'échange devient possible.
-• Équipe sur téléphone : le badge du Copain passe en bas à droite du sprite. Il ne cache plus le type du Pokémon.
-
-## 🐛 Correctifs
-• Bonbons Exp. sur téléphone : un seul appui utilise un seul bonbon. Avant, un léger ralentissement pouvait faire consommer le bonbon en boucle.
-• Raids chromatiques : le compteur « Tentative » ne repart plus à 1 après un plantage ou un changement d'équipe.
-• Sélecteurs d'équipe sur iPhone : les 6 emplacements de l'équipe restent visibles en haut de l'écran.
-• Classements : les lignes ne passent plus par-dessus la tienne quand tu fais défiler la liste.
-• Carte : passer de la Ligue d'une région à celle d'une autre commence au premier membre. Avant, le combat en cours dans l'autre Ligue reprenait.
-• Casino : le titre ne passe plus sous ton argent quand tu as beaucoup de ₽.
-
-Pour signaler un bug : salon #bugs du Discord, ou Options › Communauté › « Signaler un bug » sur téléphone.
-`,en:{title:"✨ v0.3.17 · New features",md:`
-This patch adds five languages, a game guide and a Halloween weekend for shiny raids, and fixes several bugs.
-
-## 🌍 Five new languages
-• The game is now available in German, Simplified Chinese, Traditional Chinese, Korean and Japanese, as well as French, English and Spanish.
-• Pokémon, moves, items and places use their official names in each language.
-• Options › Language: the languages are shown in a list. On first launch, the game uses your browser's language when it's one of them.
-• Are you a native speaker of one of these languages? Your feedback on the translations is welcome: send us a message on Discord.
-
-## 📖 Game guide
-• A guide explains every feature in 13 pages: adventure, catching, shinies, team, Pokédex, League, berries, Day Care, trades, shop, Game Corner, raids and Battle Tower.
-• It opens from Options › What's new, and from the "Guide" button in the side menu on a computer.
-• Each page has a "Go there" button that opens the matching tab.
-
-## 🎃 Halloween
-• Shiny raids: from Friday, October 30 to Sunday, November 1, each region has a Halloween-themed boss.
-• The dungeon switches to night lighting, and souls rise into the sky.
-
-## 🧭 Quality of life
-• Trades: an offer across two regions is no longer hidden while your regions are apart. It shows at the end of the list with the map, which tells you after which League the trade becomes possible.
-• Team on a phone: the Buddy badge moves to the bottom right of the sprite. It no longer covers the Pokémon's type.
-
-## 🐛 Bug fixes
-• Exp. Candies on a phone: one tap uses one candy. Before, a short lag could make the candy get used over and over.
-• Shiny raids: the "Attempt" counter no longer goes back to 1 after a crash or a team change.
-• Team pickers on an iPhone: the team's 6 slots stay visible at the top of the screen.
-• Leaderboards: rows no longer slide over yours when you scroll the list.
-• Map: going from one region's League to another's starts at the first member. Before, the fight under way in the other League resumed.
-• Game Corner: the title no longer runs under your money when you have a lot of ₽.
-
-To report a bug: the #bugs channel on Discord, or Options › Community › "Report a bug" on a phone.
-`},es:{title:"✨ v0.3.17 · Novedades",md:`
-Este parche añade cinco idiomas, una guía del juego y un fin de semana de Halloween en las incursiones variocolor, y corrige varios errores.
-
-## 🌍 Cinco idiomas nuevos
-• El juego ya está en alemán, chino simplificado, chino tradicional, coreano y japonés, además de francés, inglés y español.
-• Los Pokémon, movimientos, objetos y lugares llevan su nombre oficial en cada idioma.
-• Opciones › Idioma: los idiomas aparecen en una lista. Al abrir el juego por primera vez, se usa el idioma del navegador si es uno de ellos.
-• ¿Hablas uno de estos idiomas con fluidez? Tus comentarios sobre las traducciones son bienvenidos: escríbenos en Discord.
-
-## 📖 Guía del juego
-• Una guía explica cada función en 13 páginas: aventura, captura, variocolor, equipo, Pokédex, Liga, bayas, Guardería, intercambios, tienda, Casino, incursiones y Torre Batalla.
-• Se abre desde Opciones › Novedades, y desde el botón «Guía» del menú lateral en ordenador.
-• Cada página tiene un botón «Ir allí» que abre la pestaña correspondiente.
-
-## 🎃 Halloween
-• Incursiones variocolor: del viernes 30 de octubre al domingo 1 de noviembre, cada región tiene un jefe con temática de Halloween.
-• La mazmorra pasa a luz nocturna, y unas almas suben hacia el cielo.
-
-## 🧭 Comodidad
-• Intercambios: una oferta que mezcla dos regiones ya no se oculta mientras tus regiones están separadas. Aparece al final de la lista con el mapa, que indica después de qué Liga será posible el intercambio.
-• Equipo en el móvil: la insignia del Compañero pasa abajo a la derecha del sprite. Ya no tapa el tipo del Pokémon.
-
-## 🐛 Correcciones
-• Caramelos Exp. en el móvil: un solo toque usa un solo caramelo. Antes, una pequeña ralentización podía hacer que el caramelo se usara una y otra vez.
-• Incursiones variocolor: el contador «Intento» ya no vuelve a 1 tras un cierre inesperado o un cambio de equipo.
-• Selectores de equipo en iPhone: las 6 casillas del equipo siguen visibles en la parte superior de la pantalla.
-• Clasificaciones: las filas ya no pasan por encima de la tuya al desplazar la lista.
-• Mapa: pasar de la Liga de una región a la de otra empieza por el primer miembro. Antes, se reanudaba el combate en curso de la otra Liga.
-• Casino: el título ya no queda bajo tu dinero cuando tienes muchos ₽.
-
-Para informar de un error: canal #bugs de Discord, u Opciones › Comunidad › «Informar de un error» en el móvil.
-`}},{date:"2026-10-28",title:"🐛 v0.3.16 · Correctifs",md:`
-Ce patch corrige le temps d'absence, les raids après minuit et le scintillement des attaques, et réduit la mémoire utilisée par le jeu.
-
-## ⚖️ Équilibrage
-• Raids chromatiques : la jauge Master Ball repart de zéro chaque jour. Elle ne se garde plus d'un jour à l'autre.
-• La Master Ball arrive toujours au 200e essai, compté sur la journée. Un essai commencé avant minuit compte pour la veille.
-• Casino : à la machine à sous, deux Kokiyas au début d'une ligne rapportent 1 jeton. Plus d'une partie sur trois est gagnante (35 %), au lieu d'une sur quatre.
-• Casino : trois BAR rapportent 66 jetons au lieu de 90. Le 7 reste à 220, et le gain moyen par partie ne change pas.
-
-## 🗺️ Mont Argenté
-• Le Mont Argenté est maintenant le dernier chapitre de sa région, juste après sa Ligue. La mention « Kanto II » disparaît de la carte et du Pokédex.
-• Sur la carte, il s'affiche sous « La suite » une fois la Ligue gagnée. Le titre « Retour à Kanto » est retiré.
-• La région suivante s'ouvre toujours une fois le Mont Argenté terminé. Les sauvegardes sont mises à jour au chargement, rien n'est perdu.
-
-## 🧭 Confort
-• Échanges : une ligne rouge indique que les frais ne sont pas remboursés si tu retires ton offre ou si elle expire. Elle s'affiche sur le récapitulatif de l'offre et au moment de la retirer.
-• Sac : les Bonbons Exp. sont rangés par taille (S, M, XL, Big, puis Super Bonbon), et non plus dans l'ordre où tu les as trouvés.
-• Options : le numéro de version en bas de l'écran est celui du dernier patch (v0.3.16), et non plus v0.9.
-
-## 🐛 Correctifs
-• Temps d'absence : un ordinateur mis en veille avec le jeu ouvert compte ce temps au retour. Avant, 30 min de veille pouvaient ne rien rapporter.
-• Temps d'absence : un téléphone déverrouillé puis reverrouillé avant la reprise du jeu garde tout son temps. Avant, ce coup d'œil effaçait la nuit (cas signalé : 1 h 36 jouée sur 8 h).
-• Raids chromatiques : à minuit, l'essai commencé la veille s'arrête. Le boss de la veille ne peut plus être relancé, et l'écran Raids lance le raid du jour.
-• Effets d'attaque : plus de scintillement quand les attaques s'enchaînent. Le voile sombre change de couleur en 0,3 s au lieu de sauter, et l'écran flashe au plus une fois toutes les 0,45 s. L'option « Flashs lumineux » les coupe toujours.
-• Aventure : l'écran se redessine quand le combat a avancé pendant une étape. Corrige les textes mélangés, le camp de base d'un raid affiché sur le combat après un verrouillage du téléphone, et « undefined sauvage utilise… ».
-• Mémoire : le jeu ne garde plus les Pokémon des combats passés. Sur 10 min d'aventure, la page passait de 1 733 à 3 141 éléments. Elle reste maintenant stable autour de 1 700.
-• PC sur téléphone : une fiche de Pokémon fermée libère sa mémoire (environ 290 éléments par fiche). Les fiches ne s'ouvrent plus de plus en plus lentement, et relâcher un Pokémon ne prend plus plusieurs secondes.
-• Échanges : une offre publiée depuis un autre compte du même dresseur n'est plus effacée. Elle s'affiche avec « Sur ton autre compte » et se règle sur ce compte.
-• Casino : après un gain à la machine à sous, le compteur de jetons affichait 1 jeton de moins que le gain. Il affiche maintenant le bon total.
-• Casino : le pachinko s'ouvre dès que la Ligue de Kanto est gagnée, sans attendre le départ vers la région suivante.
-• Œufs de l'histoire : un œuf reçu dans une région éclot comme Pokémon de cette région, même si tu joues un chapitre de Kanto au moment de l'éclosion. Les Pokémon concernés sont corrigés au chargement.
-• Pokédex : le total des statistiques compte de nouveau la Déf. Spé., comme les six barres qu'il additionne.
-• Retour d'absence : le portrait du dresseur montre toute sa tête, et non plus seulement ses cheveux.
-
-## 🛡️ Fair-play
-• Le serveur repère une page dont l'heure du jeu avance plus vite que la sienne.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"🐛 v0.3.16 · Bug fixes",md:`
-This patch fixes time away, raids after midnight and flickering attacks, and lowers the memory the game uses.
-
-## ⚖️ Balance
-• Shiny raids: the Master Ball gauge starts from zero every day. It no longer carries over from one day to the next.
-• The Master Ball still comes on the 200th try, counted over the day. A try begun before midnight counts for the day before.
-• Game Corner: on the slot machine, two Shellder at the start of a line pay 1 coin. More than one spin in three wins (35 %), instead of one in four.
-• Game Corner: three BARs pay 66 coins instead of 90. The 7 stays at 220, and the average payout per spin doesn't change.
-
-## 🗺️ Mt. Silver
-• Mt. Silver is now the last chapter of its region, right after its League. The "Kanto II" label is gone from the map and the Pokédex.
-• On the map, it shows under "What's next" once the League is won. The "Back to Kanto" title is removed.
-• The next region still opens once Mt. Silver is done. Saves are updated on load, nothing is lost.
-
-## 🧭 Quality of life
-• Trades: a red line says the fee is not refunded if you withdraw your offer or if it expires. It shows on the offer's recap and when you withdraw it.
-• Bag: Exp. Candies are sorted by size (S, M, XL, Big, then Rare Candy), no longer in the order you found them.
-• Options: the version number at the bottom of the screen is the latest patch's (v0.3.16), no longer v0.9.
-
-## 🐛 Bug fixes
-• Time away: a computer put to sleep with the game open counts that time when you come back. Before, 30 min of sleep could give nothing.
-• Time away: a phone unlocked then locked again before the game resumes keeps all its time. Before, that glance wiped the night (reported case: 1 h 36 played out of 8 h).
-• Shiny raids: at midnight, the try begun the day before stops. Yesterday's boss can no longer be started again, and the Raids screen starts today's raid.
-• Attack effects: no more flickering when attacks follow each other. The dark veil changes colour over 0.3 s instead of jumping, and the screen flashes at most once every 0.45 s. The "Bright flashes" option still turns them off.
-• Adventure: the screen is redrawn when the battle moved on during a step. Fixes mixed-up texts, a raid's base camp shown over the battle after a phone lock, and "undefined wild uses…".
-• Memory: the game no longer keeps the Pokémon of past battles. Over 10 min of adventure, the page went from 1,733 to 3,141 elements. It now stays steady around 1,700.
-• PC on phones: a closed Pokémon card frees its memory (about 290 elements per card). Cards no longer open slower and slower, and releasing a Pokémon no longer takes several seconds.
-• Trades: an offer posted from another account of the same trainer is no longer erased. It shows with "On your other account" and settles on that account.
-• Game Corner: after a slot machine win, the coin counter showed 1 coin less than the win. It now shows the right total.
-• Game Corner: the pachinko opens as soon as the Kanto League is won, without waiting for the departure to the next region.
-• Story eggs: an egg received in a region hatches as a Pokémon of that region, even if you play a Kanto chapter when it hatches. The Pokémon involved are fixed on load.
-• Pokédex: the stat total counts Sp. Def again, like the six bars it adds up.
-• Back from an absence: the trainer's portrait shows their whole head, no longer just their hair.
-
-## 🛡️ Fair play
-• The server spots a page whose game time runs faster than its own.
-
-To report a bug: #bugs channel on the Discord, or "Report a bug" in the game.
-`},es:{title:"🐛 v0.3.16 · Correcciones",md:`
-Este parche corrige el tiempo de ausencia, las incursiones después de medianoche y el parpadeo de los ataques, y reduce la memoria que usa el juego.
-
-## ⚖️ Equilibrio
-• Incursiones variocolor: el medidor de Master Ball vuelve a cero cada día. Ya no se conserva de un día para otro.
-• La Master Ball sigue llegando en el intento 200, contado en el día. Un intento empezado antes de medianoche cuenta para el día anterior.
-• Casino: en la tragaperras, dos Shellder al principio de una línea dan 1 ficha. Más de una tirada de cada tres gana (35 %), en lugar de una de cada cuatro.
-• Casino: tres BAR dan 66 fichas en lugar de 90. El 7 sigue en 220, y la ganancia media por tirada no cambia.
-
-## 🗺️ Monte Plateado
-• El Monte Plateado es ahora el último capítulo de su región, justo después de su Liga. La mención «Kanto II» desaparece del mapa y de la Pokédex.
-• En el mapa, aparece bajo «Lo que sigue» una vez ganada la Liga. Se quita el título «Vuelta a Kanto».
-• La región siguiente se sigue abriendo al terminar el Monte Plateado. Las partidas se actualizan al cargar, no se pierde nada.
-
-## 🧭 Comodidad
-• Intercambios: una línea roja indica que la tarifa no se reembolsa si retiras tu oferta o si caduca. Aparece en el resumen de la oferta y al retirarla.
-• Mochila: los Caramelos Exp. se ordenan por tamaño (S, M, XL, Big y luego Caramelo Raro), ya no en el orden en que los encontraste.
-• Opciones: el número de versión al pie de la pantalla es el del último parche (v0.3.16), ya no v0.9.
-
-## 🐛 Correcciones
-• Tiempo de ausencia: un ordenador en reposo con el juego abierto cuenta ese tiempo al volver. Antes, 30 min de reposo podían no dar nada.
-• Tiempo de ausencia: un teléfono desbloqueado y vuelto a bloquear antes de que el juego se reanude conserva todo su tiempo. Antes, ese vistazo borraba la noche (caso informado: 1 h 36 jugada de 8 h).
-• Incursiones variocolor: a medianoche, el intento empezado el día anterior se detiene. El jefe del día anterior ya no se puede volver a lanzar, y la pantalla Incursiones lanza la del día.
-• Efectos de ataque: se acabó el parpadeo cuando los ataques se encadenan. El velo oscuro cambia de color en 0,3 s en lugar de saltar, y la pantalla destella como mucho una vez cada 0,45 s. La opción «Destellos» los sigue quitando.
-• Aventura: la pantalla se vuelve a dibujar cuando el combate avanzó durante una etapa. Corrige los textos mezclados, el campamento base de una incursión mostrado sobre el combate tras bloquear el teléfono, y «undefined salvaje usa…».
-• Memoria: el juego ya no guarda los Pokémon de los combates pasados. En 10 min de aventura, la página pasaba de 1733 a 3141 elementos. Ahora se mantiene estable en torno a 1700.
-• PC en el teléfono: una ficha de Pokémon cerrada libera su memoria (unos 290 elementos por ficha). Las fichas ya no se abren cada vez más despacio, y liberar un Pokémon ya no tarda varios segundos.
-• Intercambios: una oferta publicada desde otra cuenta del mismo entrenador ya no se borra. Aparece con «En tu otra cuenta» y se resuelve en esa cuenta.
-• Casino: tras un premio en la tragaperras, el contador de fichas mostraba 1 ficha menos que el premio. Ahora muestra el total correcto.
-• Casino: el pachinko se abre en cuanto se gana la Liga de Kanto, sin esperar la salida hacia la región siguiente.
-• Huevos de la historia: un huevo recibido en una región eclosiona como Pokémon de esa región, aunque juegues un capítulo de Kanto en el momento de la eclosión. Los Pokémon afectados se corrigen al cargar.
-• Pokédex: el total de estadísticas vuelve a contar la Def. Esp., como las seis barras que suma.
-• Vuelta tras una ausencia: el retrato del entrenador muestra toda su cabeza, ya no solo su pelo.
-
-## 🛡️ Juego limpio
-• El servidor detecta una página cuya hora de juego avanza más rápido que la suya.
-
-Para informar de un fallo: canal #bugs del Discord, o «Informar de un fallo» en el juego.
-`}},{date:"2026-10-27",title:"✨ v0.3.15 · Nouveautés",md:`
-Ce patch fixe la règle des doublons, ajoute une jauge Master Ball aux raids chromatiques et ramène le tri et les filtres sur téléphone.
-
-## 🌱 Doublons : règle finale
-La règle des doublons a changé trois fois depuis le 19 octobre. Après ces itérations, la règle ci-dessous est la règle finale.
-• Avant le 19 octobre : un Pokémon par espèce. Chaque doublon était converti en bonbons.
-• 19 octobre : ajout de l'interrupteur « Garder les doublons ». Les doublons étaient gardés tant qu'une espèce de la famille restait libre.
-• 25 octobre : retrait de l'interrupteur. Chaque famille gardait automatiquement un exemplaire de chaque espèce, plus un de sa forme de base.
-• Ce patch : la limite du 25 octobre est conservée. L'interrupteur revient, désactivé par défaut.
-
-## 📏 Comment ça marche
-• Chaque famille a une limite : un exemplaire de chaque espèce, plus un de sa forme de base. La famille de Roucool tient 4 Pokémon : Roucool, Roucoups, Roucarnage et un 2e Roucool.
-• L'interrupteur « Garder les doublons » se trouve sur la fiche d'un Pokémon, dans la partie Famille. Il vaut pour toute la famille.
-• Désactivé (par défaut) : un doublon n'est gardé que s'il ouvre une branche d'évolution que tu n'as pas encore. À Kanto, tu peux garder 4 Évoli : un pour Pyroli, un pour Aquali, un pour Voltali et un qui reste Évoli. Un 2e Roucool, lui, se change en XP pour sa famille.
-• Activé : la famille garde ses doublons jusqu'à sa limite.
-• Une espèce que tu n'as pas encore est toujours capturée, même quand la famille est pleine. Exemple : un Roucoups sauvage alors que tu n'as que des Roucool.
-• Les chromatiques comptent à part. Ils sont toujours gardés jusqu'à la limite de leur famille, quel que soit l'interrupteur.
-• Rien n'est retiré de ton PC. L'interrupteur ne compte que pour les prochains Pokémon capturés, éclos ou reçus.
-
-## ✨ Nouveautés
-• Raids chromatiques : une jauge Master Ball par région. Chaque Poké Ball ratée sur le boss la remplit d'un cran, et elle se garde d'un jour à l'autre.
-• Au 200e essai, la Ball lancée est une Master Ball : la capture est garantie. Une capture vide la jauge.
-• Chromatiques : un chromatique capturé ouvre toujours sa fiche du Pokédex, même si l'option « Fiche des nouveaux Pokémon » est désactivée.
-• Chromatiques : l'onglet Équipe compte ceux arrivés depuis ta dernière visite. Ils sont signalés dans l'équipe, le PC et le Pokédex.
-• Amis : touche une demande reçue pour voir la carte de dresseur du joueur avant d'accepter.
-• Pokédex : le bouton « Revoir son apparition » passe sur la fiche du Pokédex d'un légendaire capturé, même si tu ne l'as plus.
-
-## ⚖️ Équilibrage
-• Pension : tous les œufs éclosent en 4 h, chromatiques compris. Un œuf chromatique ne se distingue plus avant son éclosion.
-• Événements de ville : la taille des Bonbons Exp. trouvés est tirée parmi celle du chapitre joué (60 %) et les deux tailles en dessous (30 % et 10 %). Elle ne suit plus tes badges.
-• Casino : à la machine à sous, deux Baies Framby au début d'une ligne rapportent 2 jetons. Une partie sur quatre est gagnante, au lieu d'une sur neuf.
-• Casino : trois 7 rapportent 220 jetons au lieu de 300, trois BAR 90 au lieu de 100. Le gain moyen par partie ne change pas.
-
-## 🧭 Confort
-• Téléphone : le tri et les filtres reviennent dans le PC, le PC de la Pension et le Pokédex, derrière un bouton à côté de ✨.
-• Barres de filtres : les boutons prennent le nouveau style, et leurs icônes sont centrées.
-• Casino : les lots s'affichent toujours dans l'ordre des régions.
-• Activités : nouvel ordre du menu. Succès, Pension, Casino, Raids Chroma, Tour de Combat.
-• Échanges : la liste ne ralentit plus avec un grand PC.
-
-## 🐛 Correctifs
-• Barre de PV des boss : elle reste entière dans la scène. Elle ne passe plus sous les boutons de vitesse ni sous les baies actives.
-• Fil des dresseurs : les exploits d'un joueur s'affichent dans l'ordre où ils ont eu lieu.
-• Jour et nuit : le matin commençait à 4 h, en pleine nuit. La nuit dure maintenant de 20 h à 8 h, le matin de 8 h à 10 h et le jour de 10 h à 20 h, à l'heure de ton appareil.
-• Pokédex chromatique : les formes par lesquelles un chromatique est passé en évoluant comptent comme possédées. Les évolutions faites avant le 26 octobre sont rattrapées au chargement.
-• Casino : un lot se débloque dès que tes jetons suffisent, sans rouvrir l'écran.
-• Zone de Sulfura : l'arène garde sa luminosité après la cinématique.
-
-## 🛡️ Fair-play
-• La jauge Master Ball est vérifiée par le serveur. Un chromatique obtenu avec une jauge remplie en trichant est retiré automatiquement.
-• Un appareil dont l'horloge avance n'est plus signalé à tort.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"✨ v0.3.15 · New features",md:`
-This patch settles the duplicates rule, adds a Master Ball gauge to shiny raids and brings sorting and filters back on phones.
-
-## 🌱 Duplicates: final rule
-The duplicates rule changed three times since October 19. After these iterations, the rule below is the final one.
-• Before October 19: one Pokémon per species. Every duplicate was converted into candies.
-• October 19: the "Keep duplicates" switch was added. Duplicates were kept as long as a species of the family was still free.
-• October 25: the switch was removed. Every family automatically kept one of each species, plus one of its base form.
-• This patch: the October 25 limit is kept. The switch is back, off by default.
-
-## 📏 How it works
-• Each family has a limit: one of each species, plus one of its base form. Pidgey's family holds 4 Pokémon: Pidgey, Pidgeotto, Pidgeot and a 2nd Pidgey.
-• The "Keep duplicates" switch is on a Pokémon's card, in the Family section. It applies to the whole family.
-• Off (default): a duplicate is only kept if it opens an evolution branch you don't have yet. In Kanto, you can keep 4 Eevee: one for Flareon, one for Vaporeon, one for Jolteon and one that stays an Eevee. A 2nd Pidgey turns into EXP for its family.
-• On: the family keeps its duplicates up to its limit.
-• A species you don't have yet is always caught, even when the family is full. Example: a wild Pidgeotto when you only have Pidgey.
-• Shinies count separately. They are always kept up to their family's limit, whatever the switch.
-• Nothing is taken from your PC. The switch only applies to the next Pokémon you catch, hatch or receive.
-
-## ✨ New features
-• Shiny raids: a Master Ball gauge per region. Each Poké Ball missed on the boss fills it one notch, and it carries over from one day to the next.
-• On the 200th try, the Ball thrown is a Master Ball: the catch is guaranteed. A catch empties the gauge.
-• Shinies: a shiny you catch always opens its Pokédex card, even with the "New Pokémon card" option off.
-• Shinies: the Team tab counts the ones that arrived since your last visit. They are marked in the team, the PC and the Pokédex.
-• Friends: tap a request you received to see the player's Trainer Card before accepting.
-• Pokédex: the "Watch its appearance again" button moves to the Pokédex card of a legendary you caught, even if you no longer have it.
-
-## ⚖️ Balance
-• Day Care: every egg hatches in 4 h, shiny eggs included. A shiny egg no longer stands out before it hatches.
-• Town events: the size of the Exp. Candies found is drawn among the chapter's size (60 %) and the two sizes below it (30 % and 10 %). It no longer follows your badges.
-• Game Corner: on the slot machine, two Razz Berries at the start of a line pay 2 coins. One spin in four wins, instead of one in nine.
-• Game Corner: three 7s pay 220 coins instead of 300, three BARs 90 instead of 100. The average payout per spin doesn't change.
-
-## 🧭 Quality of life
-• Phone: sorting and filters are back in the PC, the Day Care's PC and the Pokédex, behind a button next to ✨.
-• Filter bars: the buttons get the new style, and their icons are centred.
-• Game Corner: prizes always show in the regions' order.
-• Activities: new menu order. Achievements, Day Care, Game Corner, Shiny Raids, Battle Tower.
-• Trades: the list no longer slows down with a big PC.
-
-## 🐛 Bug fixes
-• Boss HP bar: it stays whole inside the scene. It no longer goes under the speed buttons or the active berries.
-• Trainer feed: a player's highlights show in the order they happened.
-• Day and night: morning started at 4 AM, in the dark. Night now lasts from 8 PM to 8 AM, morning from 8 AM to 10 AM and day from 10 AM to 8 PM, on your device's clock.
-• Shiny Pokédex: the forms a shiny went through while evolving count as owned. Evolutions made before October 26 are caught up on load.
-• Game Corner: a prize unlocks as soon as you have enough coins, without reopening the screen.
-• Moltres's zone: the arena keeps its brightness after the cinematic.
-
-## 🛡️ Fair play
-• The Master Ball gauge is checked by the server. A shiny obtained with a gauge filled by cheating is removed automatically.
-• A device whose clock runs ahead is no longer wrongly flagged.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-`},es:{title:"✨ v0.3.15 · Novedades",md:`
-Este parche fija la regla de los repetidos, añade un medidor de Master Ball a las incursiones variocolor y recupera el orden y los filtros en el móvil.
-
-## 🌱 Repetidos: regla final
-La regla de los repetidos ha cambiado tres veces desde el 19 de octubre. Tras estas iteraciones, la regla de abajo es la regla final.
-• Antes del 19 de octubre: un Pokémon por especie. Cada repetido se convertía en caramelos.
-• 19 de octubre: se añade el interruptor «Conservar repetidos». Los repetidos se guardaban mientras quedara libre una especie de la familia.
-• 25 de octubre: se retira el interruptor. Cada familia guardaba automáticamente un ejemplar de cada especie, más uno de su forma básica.
-• Este parche: se mantiene el límite del 25 de octubre. El interruptor vuelve, desactivado por defecto.
-
-## 📏 Cómo funciona
-• Cada familia tiene un límite: un ejemplar de cada especie, más uno de su forma básica. La familia de Pidgey tiene sitio para 4 Pokémon: Pidgey, Pidgeotto, Pidgeot y un 2.º Pidgey.
-• El interruptor «Conservar repetidos» está en la ficha de un Pokémon, en la parte Familia. Vale para toda la familia.
-• Desactivado (por defecto): un repetido solo se guarda si abre una rama evolutiva que aún no tienes. En Kanto, puedes guardar 4 Eevee: uno para Flareon, uno para Vaporeon, uno para Jolteon y uno que se queda como Eevee. Un 2.º Pidgey se convierte en PE para su familia.
-• Activado: la familia guarda sus repetidos hasta su límite.
-• Una especie que aún no tienes siempre se captura, aunque la familia esté llena. Ejemplo: un Pidgeotto salvaje cuando solo tienes Pidgey.
-• Los variocolor cuentan aparte. Siempre se guardan hasta el límite de su familia, sea cual sea el interruptor.
-• No se quita nada de tu PC. El interruptor solo cuenta para los próximos Pokémon que captures, eclosiones o recibas.
-
-## ✨ Novedades
-• Incursiones variocolor: un medidor de Master Ball por región. Cada Poké Ball fallada contra el jefe lo llena una muesca, y se conserva de un día para otro.
-• En el intento 200, la Ball lanzada es una Master Ball: la captura está garantizada. Una captura vacía el medidor.
-• Variocolor: un variocolor capturado siempre abre su ficha de la Pokédex, aunque la opción «Ficha de nuevos Pokémon» esté desactivada.
-• Variocolor: la pestaña Equipo cuenta los que han llegado desde tu última visita. Aparecen señalados en el equipo, la PC y la Pokédex.
-• Amigos: toca una solicitud recibida para ver la Ficha de Entrenador del jugador antes de aceptar.
-• Pokédex: el botón «Volver a ver su aparición» pasa a la ficha de la Pokédex de un legendario capturado, aunque ya no lo tengas.
-
-## ⚖️ Equilibrio
-• Guardería: todos los huevos eclosionan en 4 h, variocolor incluidos. Un huevo variocolor ya no se distingue antes de eclosionar.
-• Eventos de ciudad: el tamaño de los Caramelos Exp. encontrados se sortea entre el del capítulo jugado (60 %) y los dos tamaños inferiores (30 % y 10 %). Ya no sigue tus medallas.
-• Casino: en la tragaperras, dos Bayas Frambu al principio de una línea dan 2 fichas. Una tirada de cada cuatro gana, en lugar de una de cada nueve.
-• Casino: tres 7 dan 220 fichas en lugar de 300, tres BAR 90 en lugar de 100. La ganancia media por tirada no cambia.
-
-## 🧭 Comodidad
-• Móvil: el orden y los filtros vuelven a la PC, la PC de la Guardería y la Pokédex, tras un botón junto a ✨.
-• Barras de filtros: los botones adoptan el nuevo estilo y sus iconos quedan centrados.
-• Casino: los premios se muestran siempre en el orden de las regiones.
-• Actividades: nuevo orden del menú. Logros, Guardería, Casino, Incursiones, Torre Batalla.
-• Intercambios: la lista ya no se ralentiza con una PC grande.
-
-## 🐛 Correcciones
-• Barra de PS de los jefes: se queda entera dentro de la escena. Ya no pasa bajo los botones de velocidad ni bajo las bayas activas.
-• Feed de entrenadores: los logros de un jugador se muestran en el orden en que ocurrieron.
-• Día y noche: la mañana empezaba a las 4 h, en plena noche. La noche dura ahora de 20 h a 8 h, la mañana de 8 h a 10 h y el día de 10 h a 20 h, según la hora de tu dispositivo.
-• Pokédex variocolor: las formas por las que pasó un variocolor al evolucionar cuentan como obtenidas. Las evoluciones hechas antes del 26 de octubre se recuperan al cargar.
-• Casino: un premio se desbloquea en cuanto tienes fichas suficientes, sin volver a abrir la pantalla.
-• Zona de Moltres: la arena conserva su luminosidad tras la cinemática.
-
-## 🛡️ Juego limpio
-• El servidor comprueba el medidor de Master Ball. Un variocolor obtenido con un medidor llenado con trampas se retira automáticamente.
-• Un dispositivo con el reloj adelantado ya no se marca por error.
-
-Para informar de un fallo: canal #bugs del Discord, o «Informar de un fallo» en el juego.
-`}},{date:"2026-10-26",title:"🧭 v0.3.14 · Confort",md:`
-Ce patch ouvre les Casinos des régions précédentes.
-
-## 🧭 Confort
-• Casino : l'onglet Boutique montre les lots de tous les Casinos. Celui de la région jouée est en premier.
-• Casino : une Ligue vaincue ouvre les lots des Casinos de toutes les régions précédentes. Un Pokémon acheté appartient à la région de son Casino.
-`,en:{title:"🧭 v0.3.14 · Quality of life",md:`
-This patch opens the Game Corners of previous regions.
-
-## 🧭 Quality of life
-• Game Corner: the Shop tab shows the prizes of every Game Corner. The one of the region you are playing comes first.
-• Game Corner: beating a League opens the prizes of the Game Corners of every previous region. A Pokémon you buy belongs to its Game Corner's region.
-`}},{date:"2026-10-26",title:"✨ v0.3.13 · Nouveautés",md:`
-Ce patch ouvre le Casino dans Activités, ajoute des prévisions météo et revoit le bonus chromatique.
-
-## ✨ Nouveautés
-• Casino : nouvel onglet dans Activités. La machine à sous transforme tes Pokédollars en jetons. La mise suit la région atteinte, avec ×1, ×5, ×10 ou ×50 et un mode Auto.
-• Casino : le pachinko échange tes jetons contre des baies, des bonbons et des pierres. Il s'ouvre après la Ligue de Kanto. Sa jauge donne Porygon chromatique à 25 000 jetons, puis Porygon2 chromatique à 50 000.
-• Casino : les lots en jetons quittent la Boutique pour l'onglet Boutique du Casino. Chaque région a son Casino. Les dresseurs ne donnent plus de jetons.
-• Météo : touche la pastille météo de la scène pour voir les perturbations des 24 prochaines heures.
-• Fiche d'un légendaire capturé : le bouton « Revoir son apparition » rejoue sa cinématique.
-• Six nouveaux cadres d'avatar, liés aux régions suivantes.
-• Échanges : option « Amis seulement » sur une offre.
-• Amis : jusqu'à 30 au lieu de 10.
-• Nouvelle météo, le vent léger : elle accompagne certains Pokémon errants et favorise les Pokémon Vol et Dragon.
-• Option « Flashs lumineux » : désactivée, elle retire les flashs blancs des scènes, des attaques et des orages.
-• Progression : « Tout » enchaîne en boucle tous les chapitres ouverts de la région.
-
-## ⚖️ Équilibrage
-• Bonus chromatique : le ×2 ne s'applique plus que dans la région dont le Pokédex est complet. Il ne se cumule plus d'une région à l'autre.
-• Bonus chromatique : un Pokédex régional est complet quand chaque espèce a été capturée au moins une fois, légendaires et fabuleux de la région compris, même si elle a été échangée ou a évolué depuis. Une pastille du Pokédex indique combien il en manque.
-• Doublons : une famille garde un exemplaire de chaque espèce, plus un de sa forme de base. C'est automatique : l'option « Garder les doublons » disparaît.
-• Les bonbons de famille deviennent de l'XP pour la famille : un doublon capturé, éclos ou échangé se transforme directement en XP. Les règles ne changent pas.
-• Zones légendaires : dans la région où tu viens d'arriver, seuls ses propres Pokémon peuvent combattre tant que sa Ligue n'est pas gagnée.
-• Succès des Professeurs : il faut aussi le fabuleux de la région. Ceux qui ont déjà le succès le gardent.
-• Pension : un œuf met maintenant 12 h à éclore, et un œuf chromatique 24 h.
-• Classements des raids : des temps refusés à tort ont été réintégrés. Le jeu n'affiche plus que les temps acceptés et te prévient quand un temps est refusé.
-
-## 🧭 Confort
-• Échanges : la liste se met à jour toutes les 10 min au lieu d'1 h et se charge dès ton arrivée. Une offre déjà prise est signalée avant que tu choisisses ton Pokémon.
-• Recommandés suit maintenant Optimiser pour les boss de raid et de zone. Le bouton Optimiser porte la flèche verte des Recommandés.
-• L'étoile chromatique en pixel art apparaît aussi dans la fenêtre « Bon retour ! », les Échanges et le PC.
-• Fenêtre « Bon retour ! » : le premier chromatique capturé pendant ton absence a son trophée, et la fenêtre s'ouvre dès qu'un chromatique ou un légendaire a été capturé.
-• Sélecteur de raid : l'équipe reste visible en haut quand tu fais défiler le PC.
-• Fenêtres : l'en-tête reste en place pendant le défilement, et la fiche d'un Pokémon tient sur les petits téléphones.
-• Barre de PV du boss : elle ne passe plus sous les boutons de vitesse sur téléphone.
-• Bouton Sauvegarder : il remplace la prochaine sauvegarde automatique, puis attend 15 min, même après un rechargement.
-• Une espèce a le même état partout : Pokédex, vue chromatique, œufs de la Pension et Poké Ball en combat.
-
-## 🐛 Correctifs
-• Une baie déjà active ne peut plus être mangée une seconde fois : son temps restant était perdu.
-• Plus de « +XP » sur un Pokémon niveau 100.
-• Temples : le message et ses boutons tiennent dans l'écran, iPad compris.
-• Carte de dresseur : les noms des badges s'affichent dans ta langue.
-• Intros de boss : les deux types d'un boss s'affichent.
-• Liste d'amis : le nombre au Pokédex ne compte plus les formes.
-• Effets d'attaque : le voile sombre a retrouvé sa couleur, et la teinte d'une attaque ne reste plus sur les suivantes.
-• Sauvegarde en ligne : si elle est coupée, le jeu te prévient et te propose de te reconnecter.
-
-## 🛡️ Fair-play
-• Nouveaux contrôles contre la triche : le jeu ne peut plus être modifié depuis la console, et les Pokémon obtenus en trichant sont retirés automatiquement.
-• Des contrôles qui signalaient à tort des joueurs honnêtes ont été retirés.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-
-PS : la ligne sur les œufs de la Pension était une blague 🥚 Rien ne change : 4 h pour un œuf, 8 h pour un œuf chromatique.
-`,en:{title:"✨ v0.3.13 · New features",md:`
-This patch opens the Game Corner in Activities, adds weather forecasts and reworks the Shiny bonus.
-
-## ✨ New
-• Game Corner: a new tab in Activities. The slot machine turns your Poké Dollars into coins. The bet follows the region you reached, with ×1, ×5, ×10 or ×50 and an Auto mode.
-• Game Corner: the pachinko trades your coins for berries, candies and stones. It opens after the Kanto League. Its gauge gives a Shiny Porygon at 25,000 coins, then a Shiny Porygon2 at 50,000.
-• Game Corner: the coin prizes leave the Shop for the Game Corner's Shop tab. Each region has its own Game Corner. Trainers no longer give coins.
-• Weather: tap the weather pill on the scene to see the weather changes of the next 24 hours.
-• Card of a caught legendary: the "Watch its appearance again" button replays its cinematic.
-• Six new avatar frames, tied to the next regions.
-• Trades: a "Friends only" option on an offer.
-• Friends: up to 30 instead of 10.
-• New weather, the light breeze: it comes with some roaming Pokémon and favors Flying and Dragon Pokémon.
-• "Bright flashes" option: turned off, it removes the white flashes of scenes, moves and storms.
-• Progression: "All" loops every open chapter of the region.
-
-## ⚖️ Balance
-• Shiny bonus: the ×2 now applies only in the region whose Pokédex is complete. It no longer stacks from one region to the next.
-• Shiny bonus: a regional Pokédex is complete when every species was caught at least once, legendaries and the region's Mythical included, even if it was traded or evolved since. A pill in the Pokédex shows how many are missing.
-• Duplicates: a family keeps one of each species, plus one of its base form. It's automatic: the "Keep duplicates" option is gone.
-• Family candies become XP for the family: a duplicate caught, hatched or traded turns straight into XP. The rules don't change.
-• Legendary zones: in the region you just reached, only its own Pokémon can fight until you win its League.
-• Professors' achievements: the region's Mythical is now required too. Players who already have the achievement keep it.
-• Day Care: an egg now takes 12 h to hatch, and a Shiny egg 24 h.
-• Raid leaderboards: times wrongly refused have been put back. The game only shows accepted times and tells you when a time is refused.
-
-## 🧭 Quality of life
-• Trades: the list refreshes every 10 min instead of every hour and loads as soon as you arrive. An offer already taken is flagged before you pick your Pokémon.
-• Recommended now follows Optimize for raid and zone bosses. The Optimize button wears the green arrow of Recommended.
-• The pixel art Shiny star also shows in the "Welcome back!" window, Trades and the PC.
-• "Welcome back!" window: the first Shiny caught while you were away gets its trophy, and the window opens whenever a Shiny or a legendary was caught.
-• Raid team picker: your team stays visible at the top while you scroll the PC.
-• Windows: the header stays in place while scrolling, and a Pokémon's card fits on small phones.
-• Boss HP bar: it no longer sits under the speed buttons on phones.
-• Save button: it replaces the next automatic save, then rests for 15 min, even after a reload.
-• A species has the same status everywhere: Pokédex, Shiny view, Day Care eggs and the Poké Ball in battle.
-
-## 🐛 Bug fixes
-• An active berry can no longer be eaten a second time: its remaining time was lost.
-• No more "+XP" on a level 100 Pokémon.
-• Temples: the message and its buttons fit on screen, iPad included.
-• Trainer card: badge names show in your language.
-• Boss intros: both types of a boss are shown.
-• Friends list: the Pokédex count no longer includes forms.
-• Move effects: the dark veil has its color back, and a move's tint no longer stays on the next ones.
-• Online save: if it's cut off, the game tells you and offers to sign you back in.
-
-## 🛡️ Fair play
-• New anti-cheat checks: the game can no longer be modified from the console, and Pokémon obtained by cheating are removed automatically.
-• Checks that wrongly flagged honest players have been removed.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-
-PS: the Day Care egg line was a prank 🥚 Nothing changes: 4 h for an egg, 8 h for a Shiny egg.
-`}},{date:"2026-10-26",title:"🐛 v0.3.12 · Correctifs",md:`
-Ce patch corrige les problèmes laissés par le changement du raid de Kanto d'aujourd'hui.
-
-## 🐛 Correctifs
-• Raids chromatiques : si tu as capturé Porygon dans le raid de Kanto d'aujourd'hui, le raid est de nouveau ouvert et tu peux tenter Feunard. Tu gardes ton Porygon.
-• Mise à jour : la fenêtre « Mise à jour disponible » s'affiche aussi pendant un raid, une zone légendaire ou la Tour de Combat, entre deux essais. Avant, elle attendait la fin du raid.
-
-## ⚖️ Équilibrage
-• Porygon et Porygon2 ne peuvent plus se reproduire à la Pension, chromatiques ou non, quelle que soit leur origine.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"🐛 v0.3.12 · Bug fixes",md:`
-This patch fixes the issues left by the change to today's Kanto raid.
-
-## 🐛 Bug fixes
-• Shiny raids: if you caught Porygon in today's Kanto raid, the raid is open again and you can now try for Ninetales. You keep your Porygon.
-• Update: the "Update available" window now also appears during a raid, a legendary zone or the Battle Tower, between two attempts. It used to wait until the raid was over.
-
-## ⚖️ Balance
-• Porygon and Porygon2 can no longer breed at the Day Care, shiny or not, whatever their origin.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-`}},{date:"2026-10-26",title:"⚖️ v0.3.11 · Équilibrage",md:`
-Ce patch modifie le raid chromatique de Kanto d'aujourd'hui.
-
-## ⚖️ Équilibrage
-• Porygon et ses évolutions ne sont plus boss des raids chromatiques.
-• Raid de Kanto d'aujourd'hui : Feunard remplace Porygon.
-• Si tu as déjà fait le raid d'aujourd'hui, ton résultat et le Pokémon capturé restent.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"⚖️ v0.3.11 · Balance",md:`
-This patch changes today's Kanto shiny raid.
-
-## ⚖️ Balance
-• Porygon and its evolutions are no longer shiny raid bosses.
-• Today's Kanto raid: Ninetales replaces Porygon.
-• If you already did today's raid, your result and any Pokémon you caught stay.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-`}},{date:"2026-10-24",title:"✨ v0.3.10 · Nouveautés",md:`
-Ce patch rééquilibre les Ligues, ajoute un bouton de sauvegarde et corrige de nombreux bugs.
-
-## ⚖️ Équilibrage
-• Ligue : la difficulté monte membre après membre, et le Maître est maintenant le combat le plus dur. Les premiers membres sont plus faciles.
-• Ligue : moins de répétition. Les dresseurs de la Ligue donnent plus d'expérience, et un membre déjà battu rapporte 50 % de sa récompense tant que tu n'as pas gagné cette Ligue.
-• Zones légendaires : difficulté harmonisée. Certaines zones étaient presque impossibles, d'autres trop faciles : chacune demande maintenant une équipe bien choisie.
-• Optimiser tient compte de la riposte du boss, de son attaque de zone et des statuts.
-• Un œuf chromatique éclot en 8 h au lieu de 4 h.
-• Certains légendaires rencontrés en chemin sont plus difficiles à capturer : 2 % de chances au lieu de 5 %.
-
-## ✨ Nouveautés
-• Bouton Sauvegarder dans la barre du haut : il envoie ta partie en ligne, au plus une fois toutes les 15 min. Sa pastille indique l'état de la sauvegarde.
-• Les zones sous-marines ont leur propre ambiance : lumière bleue, rayons, bulles et fond qui ondule.
-• Une fenêtre te prévient quand une nouvelle version est disponible, même si le jeu est déjà ouvert.
-• Pension : les prochaines météos du parc sont visibles sur téléphone.
-• Victoire contre le Maître : le Panthéon s'affiche seul, avec un bouton pour partir vers la région suivante.
-
-## 🧭 Confort
-• Une seule icône chromatique partout : l'étoile en pixel art.
-• Fiche Pokédex : le bouton chromatique est en bas du portrait, disponible sur toute espèce connue, et ne rouvre plus la fiche.
-• Baies : minuteurs plus grands dans le Sac, et baies actives rangées à droite de la scène.
-• Zones légendaires : le bouton « Affronter » reste visible en bas de l'écran.
-• Fiche de chapitre : chaque forme de Zarbi s'affiche avec son heure ou sa météo.
-• Fenêtres : deux boutons tiennent sur une ligne, de la même taille.
-• Échanges : la recherche trouve aussi les Pokémon jamais vus, et une petite Poké Ball signale ceux déjà dans ton Pokédex.
-
-## 🐛 Corrections
-• Le temps d'absence compte à nouveau quand tu verrouilles ton téléphone avec le jeu ouvert.
-• Le menu s'affiche dans la langue choisie.
-• Les Casinos ne disparaissent plus une fois dans une nouvelle région.
-• Progression : la carte du chapitre avance sur tous les écrans, et « Maître de la Ligue » s'affiche pour chaque Ligue gagnée.
-• Le bon badge s'affiche en fin de route.
-• Classement des raids : plus de défilement sur le côté sur téléphone.
-• Les boutons s'affichent correctement sur les anciens navigateurs mobiles.
-• Cartes de dresseur et liste d'amis : plus de badges comptés en double.
-• Échange : un Pokémon qui évolue par échange n'évolue plus en une espèce que tu possèdes déjà.
-
-## 🛡️ Fair-play
-• Contrôles renforcés contre la triche sur les raids, la vitesse du jeu et le temps d'absence.
-• Les Pokémon obtenus en trichant sont retirés automatiquement.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"✨ v0.3.10 · New features",md:`
-This patch rebalances the Leagues, adds a save button and fixes many bugs.
-
-## ⚖️ Balance
-• League: the difficulty rises member after member, and the Champion is now the hardest battle. The first members are easier.
-• League: less repetition. League trainers give more experience, and a member you already beat pays 50% of their reward until you win that League.
-• Legendary zones: difficulty evened out. Some zones were almost impossible, others too easy: each one now calls for a well-chosen team.
-• Optimize takes into account the boss's counterattack, its area attack and status conditions.
-• A Shiny egg hatches in 8 h instead of 4 h.
-• Some legendaries met along the way are harder to catch: a 2% chance instead of 5%.
-
-## ✨ New
-• Save button in the top bar: it sends your game online, at most once every 15 min. Its dot shows the save's status.
-• Underwater areas have their own atmosphere: blue light, rays, bubbles and a rippling backdrop.
-• A window tells you when a new version is available, even if the game is already open.
-• Day Care: the park's next weather can be seen on a phone.
-• Beating the Champion: the Hall of Fame shows on its own, with a button to set off for the next region.
-
-## 🧭 Quality of life
-• One Shiny icon everywhere: the pixel art star.
-• Pokédex card: the Shiny button sits at the bottom of the portrait, works for every known species, and no longer reopens the card.
-• Berries: bigger timers in the Bag, and active berries lined up on the right of the scene.
-• Legendary zones: the "Fight" button stays visible at the bottom of the screen.
-• Chapter card: each Unown form shows with its time of day or weather.
-• Windows: two buttons fit on one line, the same size.
-• Trades: the search also finds Pokémon never seen, and a small Poké Ball marks those already in your Pokédex.
-
-## 🐛 Bug fixes
-• Time away counts again when you lock your phone with the game open.
-• The menu shows in the language you picked.
-• Game Corners no longer disappear once you are in a new region.
-• Progress: the chapter card moves on every screen, and "League Champion" shows for every League won.
-• The right badge shows at the end of a route.
-• Raid leaderboard: no more sideways scrolling on a phone.
-• Buttons show correctly on older mobile browsers.
-• Trainer cards and friends list: no more badges counted twice.
-• Trade: a Pokémon that evolves by trade no longer evolves into a species you already own.
-
-## 🛡️ Fair play
-• Stronger checks against cheating on raids, game speed and time away.
-• Pokémon obtained by cheating are removed automatically.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-`}},{date:"2026-10-23",title:"⚖️ v0.3.9 · Équilibrage",md:`
-Ce patch rend les combats de boss et d'arène identiques quelle que soit la taille de ton équipe.
-
-## ⚖️ Équilibrage
-• Boss de raid et de zone légendaire : leurs PV ne baissent plus quand ton équipe compte moins de 6 Pokémon. Ils ont toujours la force prévue face à une équipe complète.
-• Champions d'arène : même règle, leurs PV ne dépendent plus du nombre de Pokémon que tu amènes.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"⚖️ v0.3.9 · Balance",md:`
-This patch makes boss and gym battles the same whatever the size of your team.
-
-## ⚖️ Balance
-• Raid and legendary zone bosses: their HP no longer drops when your team has fewer than 6 Pokémon. They always have the strength set for a full team.
-• Gym Leaders: same rule, their HP no longer depends on how many Pokémon you bring.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-`}},{date:"2026-10-23",title:"🐛 v0.3.8 · Correctifs",md:`
-Ce patch affiche les marées, rend deux Pokémon enfin obtenables et corrige plusieurs bugs.
-
-## 🌊 Marées
-• La marée s'affiche sur la carte, dans la fiche du chapitre et en jeu, avec son heure : « Marée basse jusqu'à 2 h » ou « Marée haute · basse à 2 h ».
-• Les Pokémon qu'on ne trouve qu'à marée basse forment un groupe à part dans « Pokémon trouvables ».
-
-## 🐛 Corrections
-• Deux Pokémon ne pouvaient pas être obtenus, faute d'objet d'évolution. Ces objets sont maintenant trouvables dans l'aventure (voir « Où le trouver »).
-• Boutique : trois objets d'évolution rares sont en vente à 500 000 ₽, une fois trouvés.
-• Pokédex : le filtre « Manquants » combiné à un type inclut maintenant les espèces jamais rencontrées.
-• Équipes : un seul shiny par espèce dans une équipe (aventure, raids, zones légendaires). La version normale de la même espèce reste autorisée.
-
-## ✨ Nouveauté
-• Échanges : l'avatar de l'autre dresseur s'affiche pendant l'animation d'échange.
-
-## 🛡️ Fair-play
-• Classements : contrôles renforcés contre la triche.
-
-Pour signaler un bug : salon #bugs du Discord, ou « Signaler un bug » dans le jeu.
-`,en:{title:"🐛 v0.3.8 · Bug fixes",md:`
-This patch shows the tides, makes two Pokémon obtainable at last and fixes several bugs.
-
-## 🌊 Tides
-• The tide is shown on the map, in the chapter card and in the game, with its time: "Low tide until 2:00" or "High tide · low at 2:00".
-• Pokémon found only at low tide have their own group in "Pokémon found here".
-
-## 🐛 Bug fixes
-• Two Pokémon could not be obtained, as their evolution items did not exist. These items can now be found in the adventure (see "Where to find it").
-• Shop: three rare evolution items are on sale for 500,000 ₽ once found.
-• Pokédex: the "Missing" filter combined with a type now includes species never met.
-• Teams: one Shiny per species in a team (adventure, raids, legendary zones). The regular version of the same species is still allowed.
-
-## ✨ New
-• Trades: the other trainer's avatar is shown during the trade animation.
-
-## 🛡️ Fair play
-• Leaderboards: stronger checks against cheating.
-
-To report a bug: the #bugs channel on Discord, or "Report a bug" in the game.
-`}},{date:"2026-10-22",title:"🐛 v0.3.7 · Correctifs",md:`
-Patch de rattrapage : le jeu redevient fluide sur téléphone, les intros légendaires sont de retour et une bonne fournée de vos bugs part à la poubelle.
-
-## 📱 Plus fluide sur téléphone
-• PC, Pension et sélecteur d'équipe s'ouvrent d'un coup, les sprites s'affichent tout de suite et le scroll ne montre plus de cases vides, même en défilant comme un fou 🌀
-• Sélecteur d'équipe : plus de micro-freeze quand tu touches un Pokémon, et le glisser-déposer marche comme dans le PC (les voisins se poussent pour lui faire de la place)
-• Plus de flou derrière les fenêtres et les menus sur téléphone : c'était joli, mais ça ramait
-• Les pages et les images reviennent plus vite après une pause
-• Android : la barre du bas ne reste plus coincée au-dessus du bord de l'écran
-
-## 🎬 Intros légendaires
-• Les intros sont de retour : depuis la dernière mise à jour, tu attendais 8 secondes pour voir la vieille carte du boss à la place 😬
-• Sur iPhone, le légendaire apparaît enfin dans sa propre intro (avant, la tempête était là… mais pas lui)
-
-## ✨ Nouveautés
-• Pokédex « Où le trouver » : chaque espèce dit comment l'obtenir (cadeau, fossile, rencontre unique, œuf de Pension, zone légendaire, Pokémon errant…). Fini les « Introuvable » sur un Pokémon que tu viens d'attraper, et ceux qui ne sortent que la nuit affichent « 🌙 Nuit »
-• Pension : la météo du parc s'affiche, avec l'heure et la prévision. Et l'œuf d'un certain Pokémon météo montre la forme dans laquelle il va éclore ☀️🌧️
-• Shiny : leurs barres de stats montrent leur bonus (une petite partie dorée au bout), pour voir d'un coup d'œil ce qu'ils ont de plus que la version normale
-• Légendaires : leur fiche affiche le nombre d'essais qu'il t'a fallu pour les attraper. À toi de frimer 😎
-• Un certain Pokémon fantôme né d'une mue s'obtient enfin même si tu as déjà sa forme évoluée : l'évolution laisse une Carapace Mue dans ton Sac, à utiliser sur un autre exemplaire de la pré-évolution. Si tu étais bloqué, une Carapace Mue t'attend déjà 🐚
-• L'étoile shiny des cases (PC, Pension, échanges) apparaît en même temps que la case, et se lit aussi en thème clair
-
-## 🐛 Corrections
-• Pokédex : les shiny placés en Pension ne disparaissent plus de la liste ni du total
-• Raids : fini les chronos impossibles (00:01) en tête de ton classement. Le temps d'une tentative est compté correctement, et les temps faussés sont retirés de tes records
-• Échanges : un Pokémon parti en échange compte bien dans sa famille, fini les doublons en trop à l'arrivée. Et si une famille déborde quand même, une fenêtre te dit ce qui a été converti en bonbons
-• Certains dresseurs des derniers chapitres avaient des Pokémon 30 niveaux trop faibles : ils sont maintenant au niveau de leur chapitre 💪
-• Ligue en anglais et en espagnol : la classe des dresseurs est traduite (« Fillette Zoé » ne s'affichait plus en français)
-• Le ✨ du bouton Optimiser et la pastille NEW de l'onglet Apparence se lisent à nouveau
-
-## 🛡️ Fair-play
-• On serre encore la vis sur la triche 👀 Classements, échanges et fil d'activité restent entre joueurs honnêtes.
-
-Un bug ? Signale-le dans le salon #bugs du Discord (ou avec « Signaler un bug » dans le jeu) : cette liste, c'est grâce à vous 🙏
-`,en:{title:"🐛 v0.3.7 · Bug fixes",md:`
-Catch-up patch: the game runs smoothly on phones again, legendary intros are back and a good batch of your bugs goes in the trash.
-
-## 📱 Smoother on phones
-• PC, Day Care and team picker open in a snap, sprites show right away and scrolling no longer shows empty tiles, even when you scroll like crazy 🌀
-• Team picker: no more micro-freeze when you tap a Pokémon, and drag and drop works like in the PC (the neighbours shift to make room)
-• No more blur behind windows and menus on phones: it looked nice, but it lagged
-• Pages and images come back faster after a pause
-• Android: the bottom bar no longer gets stuck above the edge of the screen
-
-## 🎬 Legendary intros
-• Intros are back: since the last update, you waited 8 seconds just to see the old boss card instead 😬
-• On iPhone, the legendary finally shows up in its own intro (before, the storm was there… but not the star)
-
-## ✨ New features
-• Pokédex "Where to find it": every species tells you how to get it (gift, fossil, one-time encounter, Day Care egg, legendary zone, roaming Pokémon…). No more "Not found" on a Pokémon you just caught, and night-only ones show "🌙 Night"
-• Day Care: the park's weather shows up, with the time and the forecast. And a certain Weather Pokémon's egg shows the form it will hatch in ☀️🌧️
-• Shinies: their stat bars show their bonus (a little gold part at the end), so you can see at a glance what they have over the regular version
-• Legendaries: their card shows how many tries it took you to catch them. Time to show off 😎
-• A certain ghost Pokémon born from a shed shell can finally be obtained even if you already own its evolved sibling: the evolution leaves a Shed Shell in your Bag, to use on another copy of the pre-evolution. If you were stuck, a Shed Shell is already waiting for you 🐚
-• The shiny star on tiles (PC, Day Care, trades) appears together with the tile, and is readable in the light theme too
-
-## 🐛 Bug fixes
-• Pokédex: shinies left at the Day Care no longer vanish from the list or the total
-• Raids: no more impossible times (00:01) topping your leaderboard. A run's time is counted properly, and the bogus times are removed from your records
-• Trades: a Pokémon away in a trade counts in its family, no more extra duplicates on arrival. And if a family still overflows, a window tells you what was turned into candies
-• Some trainers in the latest chapters had Pokémon 30 levels too weak: they now match their chapter's level 💪
-• League in English and Spanish: trainer classes are translated ("Fillette Zoé" is now "Lass Zoé")
-• The ✨ on the Optimize button and the NEW pill on the Look tab are readable again
-
-## 🛡️ Fair play
-• We're tightening the screws on cheating again 👀 Leaderboards, trades and the activity feed stay among honest players.
-
-Found a bug? Report it in the #bugs channel on Discord (or with "Report a bug" in the game): this list is thanks to you 🙏
-`}},{date:"2026-10-22",title:"✨ v0.3.6 · Nouveautés",md:`
-Grosse mise à jour : des échanges de shiny surprise, des combats plus malins, un Mont Argenté qui pique et une bonne pile de bugs que vous nous avez signalés.
-
-## ✨ Échanges de shiny
-• Tu peux proposer un shiny contre n'importe quel shiny qui te manque, de même rareté : active ✨ Shiny dans « Espèce cherchée » et choisis « N'importe lequel ». C'est celui qui accepte qui choisit lequel il te donne… surprise à l'arrivée 🎁
-
-## ⚔️ Combats et aventure
-• Coup de grâce : quand une attaque plus faible mais plus précise suffit à mettre l'adversaire K.O., ton Pokémon la choisit, et il ne perd plus son tour sur une attaque de statut. Les dresseurs adverses aussi, méfie-toi 😏
-• Pendant ton absence, tes chapitres en boucle s'enchaînent les uns après les autres (sans affronter leurs champions) au lieu de tourner sur le premier
-
-## ⚖️ Équilibrage
-• Mont Argenté : Pokémon sauvages et dresseurs passent du niveau 35-50 au niveau 90-99, et le dresseur qui t'attend au sommet ne fait plus de cadeaux 😈
-• Électhor, Artikodin et Sulfura passent au niveau 100, comme tous les autres légendaires (fini le plafond d'équipe à 80 dans leur zone)
-• Pension : un parent chromatique ne pond plus un œuf chromatique à tous les coups, mais une fois sur 10. Les shiny en pension, c'était un peu trop la fête 🎉
-• Amis : 10 places maximum (c'était 50). Si tu en avais plus, les amitiés les plus récentes ont été retirées : à toi de choisir ta meilleure bande 🤝
-
-## 🧭 Confort
-• En combat, la colonne de ton équipe affiche aussi la barre de PV de chaque Pokémon : tu vois d'un coup d'œil qui est amoché
-• Les types se lisent mieux, avec un texte foncé dans leur couleur
-• Équipe/PC : nouveau tri « Stats », les plus gros totaux en premier
-• La météo se lit enfin sans plisser les yeux : une pastille sur chaque chapitre, et « Pluie jusqu'à 23 h » directement en jeu
-• Fiche de la Ligue revue : une ligne par dresseur avec son portrait, son type, le niveau conseillé et le plafond juste à côté. Ceux que tu n'as pas encore croisés restent mystère
-• Progression : le plafond de niveau s'affiche à côté du niveau conseillé
-• Pension sur téléphone : tu vois quel Pokémon va éclore de ton œuf
-• Un chromatique, un légendaire ou un boss de raid attrapé part tout de suite dans ta sauvegarde en ligne
-• Raids : les têtes de tes alliés en plus grand dans le classement, avec leur nom au-dessus de leur Pokémon
-• Tour de Combat : le classement ne montre plus que de vrais dresseurs, fini les figurants 👋
-• La fiche d'un Pokémon à forme spéciale affiche le nom et le numéro de son espèce
-• « Signaler un bug » est maintenant dans le menu latéral, juste au-dessus de Discord
-
-## 🛡️ Fair-play
-• On serre la vis sur la triche 👀 Merci à tous ceux qui jouent le jeu !
-
-## 🐛 Corrections
-• Sur téléphone, maintenir un bonbon ou une baie s'arrête dès que tu lèves le doigt (fini le stock entier avalé d'un coup), et c'est bien plus fluide
-• Boutique sur téléphone : un achat ne te renvoie plus en haut de la page
-• Carte de dresseur : le verso n'affiche plus le recto en miroir, et elle ne se casse plus sur téléphone
-• Une partie effacée disparaît des listes d'amis (fini les « ???#???? »)
-• Lance-Soleil ne fait plus ramer le jeu
-• La pluie tombe bien sur la scène quand la météo l'annonce
-• « Plus tard » au choix d'une évolution ne transforme plus ton Pokémon en… bouton (le sélecteur d'équipe se vidait)
-• Certaines intros de légendaires ne restent plus bloquées à la première rencontre
-• Le plafond de niveau passe bien à 100 une fois la toute dernière Ligue battue
-• Certaines formes spéciales de Pokémon peuvent enfin s'échanger
-• Les énigmes de certains temples ne bloquent plus l'aventure automatique
-• Fiche de la Ligue : plus de ✓ trompeur sur un dresseur battu (une défaite renvoie toujours au premier)
-• Sur téléphone, un appui un peu à côté de la barre du bas, ou pour refermer le menu Activités / Social, ne mange plus une baie du Sac par erreur
-• Échanges en ligne plus fiables quand l'onglet est caché ou qu'un autre onglet joue
-• Raids : la Poké Ball « déjà capturé » sur le boss ne s'affiche plus parce que tu as la version normale de l'espèce, seulement si tu as vraiment attrapé le chromatique
-• Apparence Prof. Chen : il faut bien tous les Pokémon de Kanto, légendaires compris, pour la débloquer (elle tombait parfois avant)
-
-Un bug ? Signale-le dans le salon #bugs du Discord (ou avec « Signaler un bug » dans le jeu) : cette liste, c'est grâce à vous 🙏
-`,en:{title:"✨ v0.3.6 · New features",md:`
-Big update: surprise Shiny trades, smarter battles, a Mt. Silver that bites back and a big pile of bugs you reported.
-
-## ✨ Shiny trades
-• You can offer a Shiny for any Shiny you're missing, of the same rarity: turn on ✨ Shiny in "Wanted species" and pick "Any". Whoever accepts picks which one you get… surprise on arrival 🎁
-
-## ⚔️ Battles and adventure
-• Finishing blow: when a weaker but more accurate move is enough to knock the opponent out, your Pokémon picks it, and it no longer wastes its turn on a status move. Enemy trainers do it too, watch out 😏
-• While you're away, your looped chapters now follow one another (without facing their leaders) instead of spinning on the first one
-
-## ⚖️ Balance
-• Mt. Silver: wild Pokémon and trainers go from level 35-50 to level 90-99, and the trainer waiting at the summit no longer holds back 😈
-• Zapdos, Articuno and Moltres go up to level 100, like every other legendary (no more team cap at 80 in their zone)
-• Day Care: a Shiny parent no longer lays a Shiny egg every time, now it's 1 in 10. Shinies at the Day Care were a bit too much of a party 🎉
-• Friends: 10 slots at most (it was 50). If you had more, the most recent friendships were removed: time to pick your best crew 🤝
-
-## 🧭 Quality of life
-• In battle, your team's column also shows each Pokémon's HP bar: see at a glance who's hurt
-• Types are easier to read, with dark text in their own color
-• Team/PC: new "Stats" sort, biggest totals first
-• Weather is finally readable without squinting: a chip on each chapter, and "Rain until 11 PM" right in the game
-• League sheet reworked: one row per trainer with their portrait, type, recommended level and level cap right next to it. The ones you haven't met yet stay a mystery
-• Progress: the level cap shows next to the recommended level
-• Day Care on phones: you can see which Pokémon will hatch from your egg
-• A shiny, a legendary or a raid boss you catch goes straight into your online save
-• Raids: your allies' heads are bigger on the leaderboard, with their name above their Pokémon
-• Battle Tower: the leaderboard now only shows real trainers, no more extras 👋
-• A Pokémon with a special form shows its species' name and number on its card
-• "Report a bug" now lives in the side menu, right above Discord
-
-## 🛡️ Fair play
-• We're cracking down on cheating 👀 Thanks to everyone playing fair!
-
-## 🐛 Fixes
-• On phones, holding a candy or a berry stops as soon as you lift your finger (no more whole stack gone at once), and it's much smoother
-• Shop on phones: buying something no longer sends you back to the top of the page
-• Trainer card: the back no longer shows the front mirrored, and it no longer breaks on phones
-• An erased game disappears from friend lists (no more "???#????")
-• Solar Beam no longer makes the game lag
-• Rain actually falls on the scene when the weather says so
-• "Later" on an evolution choice no longer turns your Pokémon into… a button (the team picker went empty)
-• Some legendary intros no longer get stuck on the first meeting
-• The level cap does go up to 100 once the very last League is beaten
-• Some special Pokémon forms can finally be traded
-• Some temples' riddles no longer stop the automatic adventure
-• League sheet: no more misleading ✓ on a beaten trainer (a loss always sends you back to the first one)
-• On phones, a tap slightly off the bottom bar, or to close the Activities / Social menu, no longer eats a berry from your Bag by mistake
-• Online trades are more reliable when the tab is hidden or another tab is playing
-• Raids: the "already caught" Poké Ball on the boss no longer shows up just because you own the regular version of the species, only once you've really caught the shiny
-• Prof. Oak look: you really need every Kanto Pokémon, legendaries included, to unlock it (it sometimes dropped early)
-
-Found a bug? Report it in the Discord's #bugs channel (or with "Report a bug" in the game): this list is all thanks to you 🙏
-`}},{date:"2026-10-21",title:"🐛 v0.3.5 · Correctifs",md:`
-Petit patch, mais sucré 🍬 : les bonbons s'avalent maintenant à la poignée, et tes Pokémon évolués retrouvent leur Poké Ball.
-
-## 🧭 Confort
-• Maintiens le bouton Bonbon Exp. (ou Super Bonbon) sur la fiche d'un Pokémon pour les enchaîner : un d'abord, puis de plus en plus vite jusqu'à ce que tu relâches, que le stock soit vide ou le niveau max atteint. Une évolution débloquée en route attend que tu relâches, et un simple appui en utilise toujours un seul
-
-## 🐛 Corrections
-• Un Pokémon attrapé puis évolué (ou que tu n'as plus) affiche la Poké Ball grise estompée sur la carte du chapitre et dans « À trouver ici », comme dans le Pokédex, au lieu d'avoir l'air seulement vu
-• « À trouver ici » ne compte comme attrapés que les Pokémon que tu as encore : ton équipe relance une ball sur les autres
-`,en:{title:"🐛 v0.3.5 · Bug fixes",md:`
-Small patch, sweet patch 🍬: candies now go down by the handful, and your evolved Pokémon get their Poké Ball back.
-
-## 🧭 Quality of life
-• Hold the Exp. Candy (or Rare Candy) button on a Pokémon's card to use them in a burst: one at first, then faster and faster until you let go, run out or hit the level cap. An evolution unlocked along the way waits until you let go, and a simple tap still uses just one
-
-## 🐛 Fixes
-• A Pokémon you caught then evolved (or no longer have) shows the faded grey Poké Ball on the chapter card and in "Found here", like in the Pokédex, instead of looking only seen
-• "Found here" only counts as caught the Pokémon you still own: your team throws a ball at the others again
-`}},{date:"2026-10-21",title:"🐛 v0.3.4 · Correctifs",md:`
-Le jeu avait un peu abusé du café ☕ : son horloge prenait de l'avance sur la vraie vie. Tout est remis à l'heure !
-
-## 🐛 Corrections
-• L'heure du jeu ne file plus devant la vraie : depuis la dernière mise à jour, elle pouvait prendre plusieurs heures d'avance, et le jour et la nuit avec
-• Le récap de ton retour ne compte plus davantage que le temps vraiment passé loin du jeu
-• Changer l'heure de ton téléphone ou passer en mode avion ne fait plus sauter le jeu de 8 h d'un coup : hors ligne, l'aventure continue à son rythme, et le temps passé loin est joué dès que le jeu retrouve le réseau
-• Tes captures et tes exploits réapparaissent dans le fil des dresseurs (ils s'y perdaient depuis la dernière mise à jour)
-`,en:{title:"🐛 v0.3.4 · Bug fixes",md:`
-The game had a little too much coffee ☕: its clock kept running ahead of real life. Everything's back on time!
-
-## 🐛 Fixes
-• The game's clock no longer runs ahead of the real one: since the last update it could drift several hours ahead, dragging day and night along with it
-• Your welcome-back recap no longer counts more than the time you actually spent away
-• Changing your phone's time or switching to airplane mode no longer makes the game jump 8 hours at once: offline, your adventure keeps going at its own pace, and the time away is played as soon as the game is back online
-• Your catches and feats show up in the feed again (they went missing since the last update)
-`}},{date:"2026-10-20",title:"🧭 v0.3.3 · Confort",md:`
-Gros patch confort : ton aventure ne fait plus de pause quand tu t'absentes, la Pension devient un vrai buffet à volonté, et le jeu reste fluide même avec 2 000 Pokémon dans le PC 🐢➡️⚡
-
-## ⏳ Le jeu continue sans toi
-• Raids, zones légendaires et Tour de Combat continuent pendant ton absence, comme un chapitre : jusqu'à 8 h, au rythme de l'écran. Un alt-tab ou le jeu fermé, ça ne t'éjecte plus jamais
-• Boss attrapé pendant ton absence ? Il t’attend en trophée dans le récap de ton retour, avec son liseré chroma et ses scintillements. Encore debout ? Son petit sprite est là pour te narguer
-• Changer l'heure de ton appareil ne trompe plus le jeu : il suit l'heure du site, et elle ne recule jamais
-• Un seul onglet joue à la fois : ouvre le jeu ailleurs, l'ancien onglet te le dit au lieu de mélanger les deux parties
-• Entre deux appareils : celui qui n'a pas joué reprend l'autre partie sans rien demander, et une partie effacée ailleurs l'est partout
-
-## 🍓 Pension
-• Envoie plusieurs baies d'affilée sans attendre la fin du goûter : elles tombent toutes d'un coup, et plus il y en a, plus ça croque vite
-• Maintiens un bouton de baie pour en verser une pluie
-• Les baies ont chacune leur taille, tournoient en tombant et rebondissent à l'atterrissage
-• La jauge d'œuf et l'incubateur avancent baie par baie (fini les deux œufs qui popent d'un coup)
-• La ponte compte tout le temps passé loin du jeu : seules les places de l'incubateur la limitent
-
-## ⚔️ Combats et raids
-• Fini la Cage-Éclair sur un Racaillou : une attaque de statut n'est plus lancée sur un Pokémon qu'elle ne peut pas toucher
-• Si aucune attaque ne peut toucher l'adversaire, ton Pokémon utilise Lutte au lieu de rester planté
-• Choix d'équipe : le ▲ vert est réservé aux 15 meilleurs contres du boss, et ses vraies attaques sont prises en compte
-• Raids : tes amis te sont proposés comme alliés dès le matin, avec leur dernier duo dans la région
-
-## 🧭 Confort
-• Nouvelle option « Tremblements de l'écran » : à couper si les secousses des gros coups, captures et évolutions te donnent le mal de mer
-• Sur ordinateur, le fil des dresseurs repasse sous la scène et prend toute la hauteur libre
-• Les scintillements chromatiques s'animent dans les scènes, et restent un ✨ sage dans les menus (le bandeau du raid garde les siens)
-• « Animations réduites » va plus loin : statuts figés sur leur image la plus parlante, moins de batterie consommée
-• L'eau animée fait une pause, le temps qu'on la peaufine
-
-## ⚡ Performances
-• Équipe, PC, Pension et choix d'équipe restent fluides avec 2 000 Pokémon et plus
-• Au lancement après une longue absence, plus d'écran figé pendant le calcul de ce qui s'est passé
-• Le jeu démarre plus vite et consomme bien moins quand tu le laisses tourner
-• Côté équipe, de nouveaux outils de modération : pseudos douteux et tricheurs n'ont qu'à bien se tenir 👀
-
-## 🐛 Corrections
-• Une récompense trouvée n'est plus notée deux fois dans le journal
-• Un Pokémon lâché sur un séparateur de région du PC ne se perd plus
-• Une recherche tapée tout en bas du PC ne te renvoie plus au milieu des résultats
-• Pokédex : une région se replie de nouveau quand un filtre est actif
-• Famille : une évolution en pause s'affiche sur sa flèche (⏸)
-• En anglais, le type Roche ne s'appelle plus « Boulder » 😅
-`,en:{title:"🧭 v0.3.3 · Quality of life",md:`
-A big comfort patch: your adventure no longer pauses when you step away, the Day Care turns into an all-you-can-eat buffet, and the game stays smooth even with 2,000 Pokémon in your PC 🐢➡️⚡
-
-## ⏳ The game keeps going without you
-• Raids, legendary zones and the Battle Tower keep going while you're away, just like a chapter: up to 8 h, at the screen's pace. An alt-tab or a closed game never kicks you out again
-• Caught a boss while you were away? It's waiting for you as a trophy in your welcome-back summary, with its shiny border and sparkles. Still standing? Its little sprite is there to taunt you
-• Changing your device's clock no longer fools the game: it follows the site's time, and that time never goes backwards
-• Only one tab plays at a time: open the game somewhere else and the old tab tells you, instead of mixing up both games
-• Between two devices: the one that didn't play picks up the other game without asking, and a game erased elsewhere is erased everywhere
-
-## 🍓 Day Care
-• Send several berries in a row without waiting for the snack to end: they all drop at once, and the more there are, the faster the munching
-• Hold a berry button to pour a whole shower of them
-• Each berry has its own size, spins on the way down and bounces when it lands
-• The egg gauge and the incubator move up berry by berry (no more two eggs popping out at once)
-• Egg laying counts all the time you're away: only the incubator's slots limit it
-
-## ⚔️ Battles and raids
-• No more Thunder Wave on a Geodude: a status move is no longer used on a Pokémon it can't affect
-• If no move can touch the foe, your Pokémon uses Struggle instead of just standing there
-• Team picking: the green ▲ is kept for the boss's 15 best counters, and its real moves are taken into account
-• Raids: your friends are offered as allies from the morning on, with their latest pair in the region
-
-## 🧭 Comfort
-• New « Screen shake » option: turn it off if the shakes on big hits, catches and evolutions make you seasick
-• On computers, the trainers' feed goes back under the scene and takes all the free height
-• Shiny sparkles are animated in the scenes and stay a calm ✨ in the menus (the raid banner keeps its own)
-• « Reduced animations » goes further: statuses frozen on their most telling frame, less battery used
-• Animated water takes a break while we polish it
-
-## ⚡ Performance
-• Team, PC, Day Care and team picking stay smooth with 2,000 Pokémon and more
-• Launching after a long break no longer freezes the screen while the game works out what happened
-• The game starts faster and uses much less when you leave it running
-• On our side, new moderation tools: shady names and cheaters had better behave 👀
-
-## 🐛 Fixes
-• A reward you found is no longer written twice in the journal
-• A Pokémon dropped on a region separator in the PC no longer gets lost
-• A search typed at the very bottom of the PC no longer drops you in the middle of the results
-• Pokédex: a region folds again while a filter is on
-• Family: a paused evolution now shows on its arrow (⏸)
-• The Rock type is no longer called « Boulder » 😅
-`}},{date:"2026-10-20",title:"🐛 v0.3.2 · Correctifs",md:`
-Petit patch pour lisser quelques agacements, à commencer par le plus rageant : un alt-tab et hop, éjecté du raid 😤
-
-## 🐛 Corrections
-• Raids et zones légendaires : changer de fenêtre ne te fait plus sortir. Reviens en moins de 15 minutes et le combat reprend là où il s'était figé ; après une plus longue pause, ton équipe est revenue à son chapitre comme avant
-• Tour de Combat : elle ne te fait plus jamais sortir. Après une longue absence, ton chapitre joue le temps écoulé, puis ton run de la Tour reprend exactement où tu l'avais laissé, combat compris (sauf si la semaine s'est terminée entre-temps)
-• Les infobulles des objets du Sac ne masquent plus la bulle d'aide de la section
-
-## 🧭 Petits conforts
-• Un petit « i » à côté du titre de chaque fonctionnalité (Aventure, Équipe, Pokédex, Pension, Raids, Tour de Combat, Succès, Amis, Échanges, Boutique, Sac…) : deux ou trois phrases sur son fonctionnement, minuteurs et limites compris
-• Les onglets verrouillés sont grisés avec un cadenas, et leur bulle te dit ce qui les débloque
-• La scène de combat, sa pastille heure / météo et les interrupteurs ont eu un petit coup de polish
-`,en:{title:"🐛 v0.3.2 · Bug fixes",md:`
-A small patch to iron out a few annoyances, starting with the one that hurt the most: one alt-tab and you got kicked out of your raid 😤
-
-## 🐛 Fixes
-• Raids and legendary zones: switching windows no longer kicks you out. Come back within 15 minutes and the fight picks up right where it froze; after a longer break, your team is back in its chapter as before
-• Battle Tower: it never kicks you out anymore. After a long break, your chapter plays the time you were away, then your Tower run is back exactly as you left it, fight included (unless the week ended meanwhile)
-• The Bag's item tooltips no longer cover the section's help bubble
-
-## 🧭 Small comfort touches
-• A little « i » next to every feature's title (Adventure, Team, Pokédex, Pension, Raids, Battle Tower, Achievements, Friends, Trades, Shop, Bag…): two or three sentences on how it works, timers and limits included
-• Locked tabs are now faded with a padlock, and their bubble tells you what unlocks them
-• The battle scene, its time and weather chip and the switches got a little polish
-`}},{date:"2026-10-19",title:"Garder les doublons, légendaires rééquilibrés et choix d'équipe",md:`
-Deuxième fournée du jour : on avait un peu trop musclé les légendaires cet après-midi… même avec l'équipe recommandée, certains se laissaient à peine égratigner 😅 Et au passage, une nouveauté que vous attendiez : garder ses doublons. La présentation est dans #news.
-
-## 🌱 Familles et doublons
-• Nouvelle bande « Famille » sur la fiche d'un Pokémon : toute sa lignée, ce que tu possèdes (« 2 / 3 ») et les places encore libres
-• Interrupteur « Garder les doublons » par famille : les prochains doublons sont gardés tant qu'une espèce de la famille reste libre, puis bonbons comme avant (et l'interrupteur se coupe tout seul)
-• Le jeu te le propose une fois par famille à branches (Évoli, Mystherbe, Ptitard…), sans bloquer l'aventure : petit encart après la capture d'un doublon, ou question à l'éclosion
-• Seules les espèces que tu peux vraiment obtenir comptent : un bébé qui ne naît que d'un œuf porte un petit œuf, et pas de place fantôme
-• Par défaut rien ne change : un doublon devient des bonbons
-• Les évolutions à 3 branches ou plus tiennent dans une grille compacte (l'arbre d'Évoli est 5 fois moins haut)
-
-## 🐉 Légendaires
-• Zones légendaires rééquilibrées : une équipe bien choisie au niveau 100 (le bouton ✨ Optimiser) les bat de nouveau la plupart du temps
-• Ça reste un vrai défi : en dessous du niveau 100, ou avec des types mal adaptés, attends-toi à repartir bredouille
-• Les plus coriaces de l'après-midi ont pris la plus grosse baisse
-
-## 🎯 Choix d'équipe (raids, events, zones légendaires)
-• Nouvel ordre « Recommandés » par défaut et ✨ Optimiser revu : tes Pokémon sont classés selon les dégâts qu'ils infligeront vraiment au boss avant de tomber (niveau, stats, attaques et types ensemble). Fini le Raichu niveau 60 proposé avant tes niveau 100 !
-• ▲ vert : bon type et niveau suffisant pour ce combat ; plus de ▼ rouge sur tes petits niveaux
-• « Les plus choisis » : les espèces que les autres dresseurs ont prises contre ce boss, avec ton meilleur exemplaire juste en dessous (un appui pour l'ajouter). Aussi dans les zones légendaires, d'après les équipes qui les ont capturés
-• Rien de prêt dans ton PC ? Le sélecteur te dit quels types frappent fort et quel niveau viser
-• Téléphone : PC en tuiles compactes, équipe de 6 sur une seule ligne
-
-## 🗺️ Deux régions, des règles claires
-• Un Pokémon appartient à la région où tu l'as obtenu (capture, œuf, échange, cadeau…) ; « un seul par espèce » se compte région par région tant qu'elles ne sont pas reliées
-• Chaque Pokémon a son propre plafond de niveau : ceux de la région quittée, sa Ligue battue, montent jusqu'au niveau 100 même pendant que tu joues ailleurs
-• En reliant les régions, les doublons fusionnent comme partout : le plus fort reste, l'autre devient des bonbons (Pension comprise, sauf ceux que tu as choisi de garder)
-• Une petite carte indique où vit un Pokémon de l'autre côté : échanges, Pension (« ses œufs y écloront »)
-• Toutes les demandes des habitants sont listées, quelle que soit la région jouée
-
-## 🧰 Interface
-• Le fil des dresseurs passe en haut sur ordinateur aussi, comme sur téléphone, et la scène de combat prend toute la hauteur libérée
-• Succès : une seule liste, Presque ! en tête, les débloqués en bas (plus d'onglets ni de tri)
-• Fiche d'un Pokémon : Statistiques / Historique restent ouverts ou fermés d'un Pokémon à l'autre
-• Pokédex : Possédés / Vus / Manquants regroupés dans un menu « Statut »
-• PC : un séparateur par région, et un cadenas (avec son infobulle) sur les Pokémon qui ne peuvent pas combattre ici
-
-## 🐛 Corrections
-• Badges, titre de Maître, légendaires et chromatiques ne s'affichent plus en double dans le fil
-• Les infobulles ne se cachent plus sous la barre du haut
-• Au Dojo de Safrania, Kicklee n'est plus deux fois plus petit que Tygnon
-• L'infobulle du cadenas du PC ne clignote plus et la barre d'XP ne déborde plus du cadre
-`,en:{title:"Keep duplicates, rebalanced legendaries and team picks",md:`
-Second batch of the day: we pumped the legendaries up a bit too much this afternoon… even with the recommended team, some of them barely got a scratch 😅 And along the way, something you've been waiting for: keeping your duplicates. The overview is in #news.
-
-## 🌱 Families and duplicates
-• New « Family » band on a Pokémon's card: its whole line, what you own (« 2 / 3 ») and the places still free
-• « Keep duplicates » switch per family: the next duplicates are kept while a species of the family is still free, then candies as before (and the switch turns itself off)
-• The game offers it once per branching family (Eevee, Oddish, Poliwag…), without stopping the adventure: a small card after catching a duplicate, or a question at hatching
-• Only the species you can really get count: a baby that only hatches from an egg wears a small egg, and no ghost places
-• By default nothing changes: a duplicate turns into candies
-• Evolutions with 3 branches or more fit in a compact grid (Eevee's tree is 5 times shorter)
-
-## 🐉 Legendaries
-• Legendary zones rebalanced: a well-picked level 100 team (the ✨ Optimize button) beats them most of the time again
-• Still a real challenge: below level 100, or with the wrong types, expect to go home empty-handed
-• The toughest ones from this afternoon got the biggest cut
-
-## 🎯 Team picking (raids, events, legendary zones)
-• New default « Recommended » order and a reworked ✨ Optimize: your Pokémon are ranked by the damage they'll actually deal to the boss before going down (level, stats, moves and types together). No more level 60 Raichu suggested ahead of your level 100s!
-• Green ▲: right type and high enough level for this fight; no more red ▼ on your low levels
-• « Most picked »: the species other trainers took against this boss, with your best one right below (tap to add it). Also in legendary zones, from the teams that caught them
-• Nothing ready in your PC? The picker tells you which types hit hard and what level to aim for
-• Phone: compact PC tiles, a team of 6 on a single row
-
-## 🗺️ Two regions, clear rules
-• A Pokémon belongs to the region where you got it (catch, egg, trade, gift…); « one per species » counts region by region until they're linked
-• Each Pokémon has its own level cap: the ones from the region you left, their League beaten, level up to 100 even while you play elsewhere
-• When the regions get linked, duplicates merge like everywhere else: the stronger one stays, the other turns into candies (Day Care included, except the ones you chose to keep)
-• A small map shows where a Pokémon from the other side lives: trades, Day Care (« its eggs will hatch there »)
-• All Locals' requests are listed, whichever region you play
-
-## 🧰 Interface
-• The trainers' feed moves to the top on computers too, like on phones, and the battle scene takes the freed height
-• Achievements: a single list, Almost there! first, unlocked ones at the bottom (no more tabs or sorting)
-• Pokémon card: Stats / History stay open or closed from one Pokémon to the next
-• Pokédex: Owned / Seen / Missing grouped in a « Status » menu
-• PC: a separator per region, and a padlock (with its tooltip) on Pokémon that can't fight here
-
-## 🐛 Fixes
-• Badges, Champion titles, legendaries and shinies no longer show up twice in the feed
-• Tooltips no longer hide under the top bar
-• At the Saffron Dojo, Hitmonlee is no longer half Hitmonchan's size
-• The PC padlock's tooltip no longer flickers and the XP bar no longer spills out of its frame
-`}},{date:"2026-10-19",title:"Succès, progression revue, légendaires et échanges",md:`
-Notes de version détaillées. La présentation des nouveautés est dans #annonces.
-
-## Progression
-• Un bonbon de famille vaut maintenant l'équivalent de 3 niveaux au lieu de 5 (doublons, Pension, œufs, buddy)
-• Bonbons Exp. de la boutique : −40 % d'effet
-• Les régions suivantes demandent 25 % d'XP en plus par niveau
-• Buddy : de nouveau un seul pour toute la partie, il ne change plus avec la région jouée ; un buddy de bas niveau gagne ses bonbons plus vite (1 tous les 5 K.O. au niveau 5, rythme normal au niveau 20)
-• Champions d'arène : récompense complète la première fois, puis 10 % ; les dresseurs d'une Ligue déjà gagnée ne rapportent plus de bonus d'argent
-• Ligue : les 4 dresseurs avant chaque membre du Conseil 4 et le Maître ont une équipe fixe, plus tirée au hasard
-
-## Légendaires
-• Zones légendaires recalibrées : chaque combat reste un vrai défi, même avec la meilleure équipe possible
-• Pokémon errants : raté, équipe K.O. ou PC plein, il ne change plus de chapitre et reste jusqu'à la fin de ses 10 minutes
-• Cinématiques : elles chargent pendant la transition, démarrent plus vite et téléchargent bien moins de fichiers
-• Salles à énigme des temples : l'inscription en braille s'affiche en grand sur la scène dès l'arrivée, avec « Montrer un Pokémon », « Attendre » et « Partir »
-
-## Échanges en ligne
-• Un Pokémon reçu arrive dans la région du Pokémon donné : il attend dans son PC tant que les régions ne sont pas reliées
-• Une fois les régions reliées par la Ligue, échanges possibles d'une région à l'autre, à rareté égale
-• Les évolutions par échange (Kadabra, Machopeur, Gravalanch, Spectrum) se font à l'arrivée, avant la règle « un par espèce »
-
-## Interface
-• Nouvel écran Succès (groupe Activités) : toutes les apparences et tous les cadres à débloquer, triés du plus proche au plus lointain ou par région, « Porter » directement depuis la liste
-• Barre du haut : le nombre de dresseurs en jeu ; Changelogs passe dans Options (pastille NEW tant qu'une note n'est pas lue)
-• Fil des dresseurs sous le combat : les vrais exploits des joueurs (chromatiques, légendaires, badges, Maîtres de la Ligue, échanges, raids, Tour de Combat), jamais ceux d'une région que tu n'as pas atteinte ; Options › Apparaître dans le fil pour t'en retirer
-• Heure et météo regroupées dans une pastille sur la scène, le détail dans l'infobulle
-• Téléphone : le fil des dresseurs devient la deuxième ligne de la barre du haut ; la Pension se joue au toucher (plus de glisser-déposer) ; tuiles compactes dans la Pension et le Pokédex comme au PC
-• PC : filtre par région et bouton « Tout faire évoluer », avec un récapitulatif
-• Pierres d'évolution : le stock s'affiche sur le bouton « Évoluer »
-• Échanges : la section « Demandes des habitants » se replie
-• Niveaux plus grands dans le PC et la Pension
-• Les infobulles s'ouvrent au-dessus de ce qu'elles décrivent
-• Les activités pas encore débloquées sont affichées verrouillées au lieu d'être cachées
-• Le marché noir de la Team Rocket est retiré : les Pokémon que tu y avais mis en vente reviennent au PC
-
-## Combat
-• Les attaques qui drainent (Vol-Vie, Méga-Sangsue, Giga-Sangsue, Vampirisme, Vampi-Poing, Vampibaiser) soignent l'attaquant
-• Tunnel ne cache plus la barre de PV de l'attaquant
-
-## Sauvegarde et chargement
-• Sauvegarde cloud entre appareils : un blocage pouvait empêcher toute sauvegarde depuis un onglet, c'est corrigé ; deux sauvegardes qui ont avancé chacune de leur côté demandent toujours laquelle garder ; une réinitialisation s'applique sur tous les appareils
-• Chargement bien plus léger : environ 160 requêtes au premier lancement au lieu de 580, code compressé, seule ta langue est téléchargée, petites images regroupées et gardées en cache
-
-## Corrections
-• Capture : une espèce déjà possédée dans l'autre région n'empêche plus la Ball (Lokhlass)
-• Natures toujours attribuées (certains Pokémon n'en avaient pas avant un rechargement)
-• « Un par espèce » partout : cadeaux d'histoire et lots du Casino en double deviennent des bonbons ; les doublons déjà présents dans les sauvegardes sont convertis (chromatiques et légendaires gardés)
-• Météo : heure de fin à la minute près
-• Portraits des dresseurs recentrés ; les versions régionales des apparences Kimono, Pokémaniac et Sbire Rocket ne sont plus des copies de celles de Kanto
-• Ondine retrouve sa tenue d'arène
-• Progression : seul le niveau conseillé reste (le doublon « Zone » est retiré) ; carte verrouillée de la région suivante corrigée
-• Pokédex : texte de région plus clair
-• Ningale : flèche d'évolution corrigée
-• Petits soucis d'affichage : tag NEW de l'onglet Cadre, marge en bas des listes à débloquer, image aplatie dans la carte de chapitre, recherche avec peu de résultats, infobulle des baies (une seule à la fois)
-`,en:{title:"Achievements, reworked progress, legendaries and trades",md:`
-Detailed release notes. The highlights are in #announcements.
-
-## Progression
-• A family candy is now worth 3 levels instead of 5 (duplicates, Day Care, eggs, buddy)
-• Shop Exp. Candies: −40 % effect
-• The following regions need 25 % more XP per level
-• Buddy: one for the whole game again, it no longer changes with the region you play; a low-level buddy earns its candies faster (1 every 5 K.O.s at level 5, normal pace at level 20)
-• Gym Leaders: full reward the first time, then 10 %; trainers of a League you've already won no longer pay a money bonus
-• League: the 4 trainers before each Elite Four member and the Champion have a fixed team, no longer drawn at random
-
-## Legendaries
-• Legendary zones recalibrated: every fight stays a real challenge, even with the best possible team
-• Roaming Pokémon: missed, team fainted or PC full, it no longer moves to another chapter and stays until its 10 minutes are over
-• Cinematics: they load during the transition, start sooner and download far fewer files
-• Temple riddle rooms: the braille inscription shows big on the scene as soon as you arrive, with « Show a Pokémon », « Wait » and « Leave »
-
-## Online trades
-• A Pokémon you receive goes to the region of the Pokémon you gave: it waits in that PC until the regions are linked
-• Once the League links the regions, trades work from one region to another, same rarity
-• Trade evolutions (Kadabra, Machoke, Graveler, Haunter) happen on arrival, before the « one per species » rule
-
-## Interface
-• New Achievements screen (Activities group): every look and frame to unlock, sorted closest first or by region, « Wear » right from the list
-• Top bar: the number of trainers playing now; Changelogs moves to Options (NEW badge while a note is unread)
-• Trainer feed under the battle: real players' highlights (shinies, legendaries, badges, League Champions, trades, raids, Battle Tower), never from a region you haven't reached; Options › Show me in the feed to opt out
-• Time and weather together in one pill on the scene, details in its tooltip
-• Phone: the trainer feed becomes the top bar's second row; the Day Care works with taps (no more drag and drop); compact tiles in the Day Care and Pokédex, like the PC
-• PC: region filter and an « Evolve all » button, with a recap
-• Evolution stones: your stock shows on the « Evolve » button
-• Trades: the « Locals' requests » section folds
-• Bigger levels in the PC and Day Care
-• Tooltips open above what they describe
-• Activities not unlocked yet show as locked instead of hidden
-• Team Rocket's black market is removed: Pokémon you had listed there go back to your PC
-
-## Battle
-• Draining moves (Absorb, Mega Drain, Giga Drain, Leech Life, Drain Punch, Draining Kiss) heal the attacker
-• Dig no longer hides the attacker's HP bar
-
-## Saves and loading
-• Cloud save across devices: a lock could stop every save from a tab, now fixed; two saves that both moved on always ask which one to keep; a reset applies on every device
-• Much lighter loading: about 160 requests on first launch instead of 580, compressed code, only your language is downloaded, small images bundled and kept in cache
-
-## Fixes
-• Catching: a species you own in the other region no longer stops the Ball (Lapras)
-• Natures always given (some Pokémon had none until a reload)
-• « One per species » everywhere: duplicate story gifts and Game Corner prizes turn into candies; duplicates already in saves are converted (shinies and legendaries kept)
-• Weather: end time to the minute
-• Trainer portraits centred; the regional versions of the Kimono Girl, Poké Maniac and Rocket Grunt looks are no longer copies of the Kanto ones
-• Misty gets her Gym outfit back
-• Progress: only the recommended level stays (the duplicate « Zone » chip is gone); the next region's locked card fixed
-• Pokédex: clearer region text
-• Shedinja: evolution arrow fixed
-• Small display issues: NEW tag on the Frame tab, bottom margin of the unlock lists, squashed image in the chapter card, search with few results, berry tooltip (one at a time)
-`}},{date:"2026-10-18",title:"Nouvelle région, natures, thème clair et cinématiques",md:`
-Notes de version détaillées. La présentation des nouveautés est dans #annonces.
-
-## Suite de l'aventure
-• Une nouvelle région est disponible plus loin dans l'aventure : arènes, Ligue, météos propres, zones légendaires et apparences de dresseur 👀
-• Partir pour une nouvelle région ne verrouille plus la précédente : elle reste accessible depuis la Progression, avec tous tes Pokémon
-• Jusqu'à la Ligue de la nouvelle région, chaque côté a son argent, son sac et son équipe ; jouer un chapitre de l'autre côté les échange. La barre du haut affiche la région jouée à côté de l'argent
-• En aventure, la nouvelle région n'utilise que les Pokémon capturés sur place ; la région quittée peut utiliser tous tes Pokémon
-• Battre la Ligue relie les deux côtés : argent et objets additionnés, doublons fusionnés (les chromatiques ne fusionnent jamais)
-• Nouvelle fenêtre de départ : starters de la région, argent de départ, règles, et les Pokémon manquants de ton Pokédex qui vivent aussi là-bas
-• Niveau maximum fixé à 100 : les Pokémon au-dessus repassent au niveau 100, le contenu de fin de jeu concerné a été resserré
-• Un défi hebdomadaire avec classement et récompenses le lundi se débloque plus loin dans l'aventure
-• Pokédex : les formes alternatives s'affichent juste après leur espèce, sans compter dans le total
-
-## Natures
-• 25 natures : une stat +10 %, une autre −10 % (PV jamais modifiés), pour tous les Pokémon, adversaires compris ; les Pokémon existants en reçoivent une
-• Fiche Pokémon : tuile Nature avec son effet, 6 barres de stats (Atq. Spé. et Déf. Spé. séparées), extrémité verte sur la stat augmentée, rouge sur la stat baissée
-• La Capsule Nature, à obtenir plus loin dans l'aventure, permet d'en changer
-
-## Légendaires
-• Chaque légendaire a sa propre cinématique d'entrée avant le combat : complète la première fois, courte ensuite, un appui pour la passer
-• Les arènes des légendaires prennent leur météo ou leur ciel (orage, neige, cendres, soleil…), avec les effets habituels de ces météos
-• Zones légendaires uniquement en jeu : hors ligne, l'équipe retourne au chapitre quitté
-• Les Pokémon fabuleux sont rangés dans le groupe « Légendaires » après la Ligue, plus en tête de liste
-• Conditions de déblocage des Pokémon errants revues
-
-## Cadres d'avatar
-• 13 cadres autour du portrait, visibles partout où les autres joueurs te voient : classements, amis, raids, échanges, écran VS
-• Choix dans « Mon dresseur › Cadre » ; chacun se gagne par un exploit (œufs, raids, chromatiques, amis, échanges, Pokédex, Ligue…) et reste acquis
-
-## Thème clair
-• Options › Thème : Sombre (par défaut), Clair ou Auto (réglage de l'appareil)
-• Décors, combats et cinématiques restent sombres ; en-têtes de sections plus vifs dans les deux thèmes
-
-## Interface
-• Menu latéral regroupé : Aventure, Progression, Équipe/PC, Pokédex, puis les groupes repliables Activités (Pension, Raids) et Social (Amis, Échanges), puis Boutique ; 7 onglets sur téléphone
-• Progression : portrait du champion sur chaque arène, en silhouette tant qu'il n'a pas été affronté
-• « Où le trouver » dans l'infobulle des objets (flèche d'évolution, Sac) : lieu de la trouvaille unique de l'aventure et prix en Boutique, avec liens directs
-• Boutique : comptoirs dans un bandeau en haut avec leur solde ; certains objets d'évolution restent verrouillés tant qu'ils n'ont pas été trouvés dans l'aventure
-• Raids Chroma : nouvel écran (régions en bandeau, raid du jour en pleine largeur, Raid / Classement sous le visuel)
-• Classements des raids, zones légendaires et événements sur une même ligne, avec portraits encadrés
-• Bouton « i » d'aide à côté du titre des écrans Raids Chroma et défi hebdomadaire
-• Panneaux Sac et « À trouver ici » repliables
-• Équipe / PC sur téléphone : barre de filtres réduite, PC sur 5 colonnes, glisser-déposer revu
-• Motif Poké Ball du fond en léger défilement
-• Libellés du menu réduits pour tenir au lieu d'être coupés
-
-## Raids
-• Dresseurs de passage : des équipes PNJ complètent le classement d'un boss jusqu'à 20 places tant que les joueurs sont peu nombreux (les mêmes pour tous, sans récompense)
-
-## Échanges
-• Un Pokémon reçu par échange d'une espèce déjà possédée devient des bonbons de sa famille, comme une capture en double (les chromatiques sont toujours gardés) ; l'échange compte toujours
-
-## Sauvegarde en ligne
-• Au lancement, ou au retour sur l'onglet après 2 min, le jeu attend la vérification en ligne (8 s maximum) avant de rejouer le temps d'absence : un appareil en retard ne prend plus le dessus
-• Conflit réglé en faveur de la sauvegarde la plus jouée (à l'écran et hors ligne), puis badges, chapitre et Pokédex ; les cartes « Deux sauvegardes » affichent ce temps de jeu et la dernière utilisation
-
-## Équilibrage
-• Badge Roche : niveau maximum 20 au lieu de 18, Racaillou Nv. 14 et Onix Nv. 15 chez Pierre, ses dresseurs un niveau plus bas
-• Dresseurs d'arène habillés selon leur arène (classes des jeux originaux)
-• Le Scope Sylphe devient une étape de l'histoire au lieu d'un objet du sac
-
-## Décors
-• Plus de 220 décors retravaillés en pixel art (palette de 128 couleurs), environ 3 fois plus légers à charger
-• Nouvelle Route prairie, nouvelles arènes de Pierre et d'Ondine, décors des zones légendaires refaits
-
-## Introduction
-• Le Prof. Chen demande « Quel personnage te représente le mieux ? » au lieu de « Garçon ou fille ? »
-
-## Corrections
-• Les légendaires de zone et les Pokémon errants ne se rencontrent plus et ne se capturent plus hors ligne
-• Œufs pondus pendant l'absence : l'éclosion démarre à la ponte, plus au lancement du jeu
-• Combats contre le rival et le Conseil 4 : plus de Pokémon superposés sur le terrain
-• Une Ligue jouée en chemin automatique va toujours jusqu'au Maître (elle s'arrêtait après le premier membre)
-• La mini-équipe épinglée ne reste plus affichée en passant de l'Équipe à l'aventure
-• Mon dresseur : barre de défilement fine, portraits bien cadrés dans la grille des apparences, apparences en double remplacées
-• Starters de la région suivante tous affichés à la même échelle
-• Les Bonbons Exp. ne changent plus de valeur en changeant de région
-`,en:{title:"New region, natures, light theme and cinematics",md:`
-Detailed release notes. The highlights are in #announcements.
-
-## Further in the adventure
-• A new region is available further in the adventure: Gyms, League, its own weather, legendary zones and trainer looks 👀
-• Leaving for a new region no longer locks the previous one: it stays open from Progress, with all your Pokémon
-• Until the new region's League, each side has its own money, Bag and team; playing a chapter on the other side swaps them. The top bar shows the region played next to your money
-• In the adventure, the new region only uses Pokémon caught there; the region you left can use all your Pokémon
-• Beating the League links both sides: money and items added up, duplicates merged (shinies never merge)
-• New departure window: the region's starters, starting money, the rules, and the missing Pokémon of your Pokédex that live there too
-• Maximum level set to 100: Pokémon above it go back to level 100, the endgame content involved was tightened
-• A weekly challenge with a leaderboard and Monday rewards unlocks further in the adventure
-• Pokédex: alternate forms show right after their species, without counting toward the total
-
-## Natures
-• 25 natures: one stat +10 %, another −10 % (HP never changed), for every Pokémon, opponents included; existing Pokémon get one
-• Pokémon sheet: a Nature tile with its effect, 6 stat bars (Sp. Atk and Sp. Def apart), a green end on the raised stat, a red end on the lowered one
-• The Nature Capsule, found further in the adventure, changes it
-
-## Legendaries
-• Each legendary has its own entrance cinematic before the battle: full the first time, short afterwards, one tap skips it
-• Legendary arenas take their legendary's weather or sky (storm, snow, ash, harsh sun…), with those weathers' usual effects
-• Legendary zones only while playing: offline, the team goes back to the chapter it left
-• Mythical Pokémon sit in the « Legendaries » group after the League, no longer at the top of the list
-• Unlock conditions of roaming Pokémon reviewed
-
-## Avatar frames
-• 13 frames around your portrait, shown wherever other players see you: leaderboards, friends, raids, trades, VS screen
-• Pick one in « My Trainer › Frame »; each is earned through a feat (eggs, raids, shinies, friends, trades, Pokédex, League…) and is yours for good
-
-## Light theme
-• Options › Theme: Dark (default), Light or Auto (device setting)
-• Scenes, battles and cinematics stay dark; brighter section headers in both themes
-
-## Interface
-• Side menu grouped: Adventure, Progress, Team/PC, Pokédex, then the folding groups Activities (Day Care, Raids) and Social (Friends, Trades), then Shop; 7 tabs on phones
-• Progress: each Gym shows its leader's portrait, as a silhouette until you've battled them
-• « Where to find it » in item tooltips (evolution arrow, Bag): where the adventure's one-time find is and the Shop price, with direct links
-• Shop: counters in a band on top with their balance; some evolution items stay locked until found in the adventure
-• Shiny Raids: new screen (regions in a band, the day's raid full width, Raid / Leaderboard under the banner)
-• Raid, legendary zone and event leaderboards on one shared row, with framed portraits
-• « i » help button next to the Shiny Raids and weekly challenge titles
-• Bag and « Found here » panels fold
-• Team / PC on phones: slimmer filter bar, PC in 5 columns, reworked drag and drop
-• The background's Poké Ball pattern drifts slowly
-• Menu labels shrink to fit instead of being cut off
-
-## Raids
-• Passing trainers: NPC teams fill a boss's leaderboard up to 20 spots while players are few (the same for everyone, no rewards)
-
-## Trades
-• A Pokémon received in a trade whose species you already own turns into its family's candies, like a duplicate catch (shinies are always kept); the trade still counts
-
-## Cloud save
-• At launch, or when coming back to the tab after 2 min, the game waits for the online check (8 s at most) before playing the time away: a device that fell behind no longer wins
-• Conflicts go to the save played the longest (on screen and offline), then badges, chapter and Pokédex; the « Two saves » cards show that play time and when each was last used
-
-## Balance
-• Boulder Badge: level cap 20 instead of 18, Geodude Lv. 14 and Onix Lv. 15 at Brock's, his trainers one level lower
-• Gym trainers dressed for their Gym (classes from the original games)
-• The Silph Scope is now a story step instead of a Bag item
-
-## Scenes
-• Over 220 scenes reworked in pixel art (128-colour palette), about 3 times lighter to load
-• New prairie Route, new Brock and Misty Gyms, legendary zone scenes redone
-
-## Intro
-• Professor Oak asks « Which character represents you best? » instead of « Boy or girl? »
-
-## Fixes
-• Zone legendaries and roaming Pokémon are no longer met or caught offline
-• Eggs laid while away: hatching starts when they're laid, no longer at launch
-• Battles against the rival and the Elite Four: no more Pokémon stacked on the field
-• A League played on autopilot always goes through to the Champion (it stopped after the first member)
-• The pinned mini-team no longer stays on screen when going from Team to the adventure
-• My Trainer: thin scrollbar, portraits properly framed in the looks grid, duplicate looks replaced
-• The next region's starters all shown at the same scale
-• Exp. Candies no longer change value when switching regions
-`}},{date:"2026-10-15",title:"Langues, baies bonus et classement des raids",md:`
-Notes de version détaillées. La présentation des nouveautés est dans #annonces.
-
-## Langues
-• Le jeu est disponible en français, anglais et espagnol : choix par drapeau dans les Options (langue du navigateur par défaut)
-• Noms officiels des Pokémon, attaques et objets dans chaque langue
-• Menus, combats, histoire, Pension, échanges, marché, amis, raids, cinématiques et infobulles traduits
-• L'écran de progression s'appelle désormais « Aventure »
-
-## Baies bonus
-• 7 baies consommables donnent un bonus d'une heure dans l'aventure ; elles se trouvent avec les autres baies dans les événements objet (les trouvailles d'argent sur les routes sont moins fréquentes)
-• Baie Framby ×1,25 et Framby dorée ×1,5 : chances de capture (légendaires, raids et Pokémon errants compris)
-• Baie Nanab ×2 : espèces rares · Baie Enigma ×3 : espèces jamais capturées · Baie Nanana ×1,25 : XP de combat · Baie Lansat ×1,25 : Pokédollars · Baie Frista ×2 : taux de chromatiques sauvages
-• Une baie active par famille ; la même baie relance son heure, une baie plus faible demande confirmation avant de remplacer l'active
-• Le temps s'écoule en temps réel, y compris hors ligne
-• Sac : groupe Baies (appui pour utiliser, survol ou appui long pour le détail) ; bonus actifs en pastilles avec minuteur en haut à droite de la scène
-
-## Raids
-• Classement par boss : durée totale du raid (entrée dans le donjon jusqu'au K.O. du boss), une ligne par équipe avec ses 3 dresseurs et leurs Pokémon ; top 50, actualisé au plus une fois par heure
-• Un clic sur un joueur du classement ouvre sa carte de dresseur
-• Les 2 Pokémon du joueur et ceux des amis peuvent venir de n'importe quelle génération ; le donjon, le boss et les alliés automatiques restent limités à la région du raid
-• Sélection des Pokémon : tout le PC est affiché (filtre ▲ Efficaces désactivé par défaut)
-• L'écran Raid occupe toute la hauteur de l'écran
-
-## Zones légendaires
-• Vue Équipes sur la fiche de zone : les équipes qui ont capturé le légendaire, les 6 espèces les plus utilisées et les 20 dernières victoires
-• Raids et zones légendaires : seules les générations disponibles dans la région apparaissent
-• Aucune capture sur le chemin ; « À trouver ici » n'affiche que le légendaire
-
-## Carte de dresseur
-• Red et Leaf sont disponibles d'office ; les 10 autres apparences de base se débloquent par des exploits (combats, captures, badges, évolutions)
-• 10 nouvelles apparences à débloquer, comme Blue : Prof. Chen, Pokémaniac, Pêcheur, Scientifique, Éleveuse, Kimono, Gentleman, Karatéka, Giovanni, Sbire Rocket
-• D'autres apparences arrivent avec la suite de l'aventure : affichées verrouillées, région masquée par « ??? » tant qu'elle n'est pas atteinte
-• Éditeur : apparences possédées en haut, liste « À débloquer » avec condition et progression
-• Une apparence obtenue reste acquise ; l'apparence portée avant la mise à jour est conservée
-• Pastille NEW sur le portrait (barre du haut, carte, éditeur) à chaque apparence débloquée
-
-## Combats et animations
-• Un Pokémon qui fuit (fuite sauvage ou capture ratée) sort de l'écran dans un nuage de fumée
-• Capture : le Pokémon se dissout en pixels aspirés dans la Ball ; rappel en combat en pixels
-• Attaque ratée : le projectile passe à côté de la cible, sans effet d'impact
-• Poké Balls de combat plus grandes
-• Centre Pokémon : animation de soin plus sobre, Poké Balls sur une seule rangée
-• Une capture qui remplit une place libre de l'équipe rejoint immédiatement l'équipe en route
-• Scènes de câble link et choix du starter : Poké Balls animées une par une
-
-## Équilibrage
-• Brûlure et poison sur un boss (raid, zone légendaire, Pokémon errant) : 1/40 de ses PV renforcés par tour ; la brûlure ne réduit plus son attaque physique que de 25 %
-• Retour d'absence : 12 niveaux maximum par Pokémon, XP de combat divisée par deux
-• Habitats des Routes 19 et 20 : espèces de pluie, d'orage et de nuit ; Îles Écume : espèces de base uniquement
-
-## Échanges
-• Pokémon demandé : coche s'il est possédé, sprite grisé sinon, silhouette s'il n'a jamais été vu (offres des joueurs et demandes des habitants)
-• Un Pokémon parti dans un échange en ligne ne compte plus comme possédé : un œuf, une capture ou une évolution peut en donner un second entre-temps (les deux sont gardés si l'offre revient)
-
-## Interface
-• Bouton de chapitre et de Ligue placé juste sous la liste des Pokémon
-• Pokémon errants : sprite animé sur la carte de chapitre et dans la fiche de détail, pastille dorée avec minuteur
-• Fiches latérales de raid, d'événement et de zone : sprite animé
-• Pokédex : plus de Poké Ball derrière les sprites
-• Téléphone : mini-équipe et filtres du PC sous la barre du haut, dernière ligne du PC accessible au-dessus des onglets
-
-## Corrections
-• Pokémon errants affichés uniquement dans leur région
-• Hors combat, le dresseur marche seul : le copain ne remplace plus un Pokémon de l'équipe (un chromatique semblait perdre ses couleurs)
-• Vitesse x4 : les effets de capture et de K.O. gardent une durée minimale, certaines attentes n'étaient plus divisées deux fois
-• Raids : les Pokémon d'autres générations manquaient dans la sélection
-`,en:{title:"Languages, bonus berries and raid leaderboards",md:`
-Detailed release notes. The highlights are in #announcements.
-
-## Languages
-• The game is available in French, English and Spanish: pick a flag in Options (browser language by default)
-• Official names of Pokémon, moves and items in each language
-• Menus, battles, story, Day Care, trades, market, friends, raids, cinematics and tooltips translated
-• The progress screen is now called "Adventure"
-
-## Bonus berries
-• 7 consumable berries give a one-hour bonus in the adventure; they are found with the other berries in item events (money finds on routes are less frequent)
-• Razz Berry ×1.25 and Golden Razz Berry ×1.5: catch chances (legendaries, raids and roaming Pokémon included)
-• Nanab Berry ×2: rare species · Enigma Berry ×3: species never caught · Pinap Berry ×1.25: battle XP · Lansat Berry ×1.25: Pokédollars · Starf Berry ×2: wild Shiny rate
-• One active berry per family; the same berry restarts its hour, a weaker berry asks for confirmation before replacing the active one
-• Time runs in real time, offline included
-• Bag: Berries group (tap to use, hover or long press for details); active bonuses as pills with a timer at the top right of the scene
-
-## Raids
-• Leaderboard per boss: total raid time (from entering the dungeon to the boss's K.O.), one row per team with its 3 trainers and their Pokémon; top 50, refreshed at most once an hour
-• Clicking a player on the leaderboard opens their Trainer Card
-• The player's 2 Pokémon and their friends' can come from any generation; the dungeon, the boss and the automatic allies stay limited to the raid's region
-• Pokémon selection: the whole PC is shown (▲ Strong filter off by default)
-• The Raid screen takes the full height of the screen
-
-## Legendary zones
-• Teams view on the zone sheet: the teams that caught the legendary, the 6 most used species and the last 20 wins
-• Raids and legendary zones: only the generations available in the region appear
-• No catches on the way; "Found here" only shows the legendary
-
-## Trainer Card
-• Red and Leaf are available from the start; the 10 other base looks unlock through feats (battles, catches, badges, evolutions)
-• 10 new looks to unlock, like Blue: Prof. Oak, PokéManiac, Fisherman, Scientist, Breeder, Kimono Girl, Gentleman, Black Belt, Giovanni, Team Rocket Grunt
-• More looks come later in the adventure: shown locked, region hidden behind "???" until you reach it
-• Editor: owned looks at the top, a "To unlock" list with condition and progress
-• A look you get is yours for good; the look worn before the update is kept
-• NEW badge on the portrait (top bar, card, editor) for each look unlocked
-
-## Battles and animations
-• A Pokémon that flees (wild escape or failed catch) leaves the screen in a puff of smoke
-• Catching: the Pokémon dissolves into pixels pulled into the Ball; recall in battle in pixels
-• Missed move: the projectile flies past the target, with no impact effect
-• Bigger battle Poké Balls
-• Pokémon Center: a more understated healing animation, Poké Balls on a single row
-• A catch that fills a free team slot joins the team on the road right away
-• Link Cable and starter choice scenes: Poké Balls animated one by one
-
-## Balance
-• Burn and poison on a boss (raid, legendary zone, roaming Pokémon): 1/40 of its boosted HP per turn; burn now only lowers its physical attack by 25 %
-• Coming back: 12 levels at most per Pokémon, battle XP halved
-• Routes 19 and 20 habitats: rain, storm and night species; Seafoam Islands: base species only
-
-## Trades
-• Wanted Pokémon: a check mark if owned, a grayed sprite otherwise, a silhouette if never seen (player offers and locals' requests)
-• A Pokémon gone in an online trade no longer counts as owned: an egg, a catch or an evolution can give you a second one in the meantime (both are kept if the offer comes back)
-
-## Interface
-• Chapter and League button placed right under the Pokémon list
-• Roaming Pokémon: animated sprite on the chapter card and in the detail sheet, golden pill with a timer
-• Raid, event and zone side sheets: animated sprite
-• Pokédex: no more Poké Ball behind the sprites
-• Phone: mini-team and PC filters under the top bar, last PC row reachable above the tabs
-
-## Fixes
-• Roaming Pokémon only shown in their region
-• Outside battle, the trainer walks alone: the buddy no longer replaces a team Pokémon (a Shiny seemed to lose its colors)
-• x4 speed: catch and K.O. effects keep a minimum duration, some waits are no longer divided twice
-• Raids: Pokémon from other generations were missing from the selection
-`}},{date:"2026-10-14",title:"Infobulles des types et de la météo",md:`
-Notes de version détaillées. La présentation des nouveautés est dans #annonces.
-
-## Infobulles
-• Survol d'un type (badges, fiches d'arène, raids, zones légendaires) : multiplicateurs en attaque (×2, ×½, ×0) et en défense (faiblesses, résistances, immunités)
-• Survol d'une météo ou d'un moment de la journée (barre de la scène, carte, raids) : types d'attaques renforcés ou affaiblis, types de Pokémon sauvages plus fréquents ou plus rares
-
-## Décors
-• Eau animée sur les scènes avec plan d'eau (houle, reflets, scintillements, lumière selon l'heure)
-• Scènes de Kanto harmonisées, laboratoire du Prof. Chen redessiné
-• Nouveaux décors dédiés pour les lieux de la suite de l'aventure et pour une zone légendaire ; les fonds génériques sont retirés
-• Transition systématique vers l'étape suivante après un combat, même sur le même décor ; le message de récompense s'affiche après
-
-## Équilibrage
-• Brûlure et poison sur un boss (raid, zone légendaire, Pokémon errant) : dégâts calculés sur ses PV de base, et non plus sur ses PV renforcés
-
-## Échanges
-• Les Pokémon placés à la Pension peuvent être proposés ou donnés dans un échange (repère « P » dans la liste)
-
-## Corrections
-• Raids : les alliés automatiques n'ont que des Pokémon de la région du raid
-• Zone légendaire lancée depuis la Ligue : la frise affichait les étapes de la Ligue
-• Texte des pastilles des fiches de la carte centré verticalement
-`,en:{title:"Type and weather tooltips",md:`
-Detailed release notes. The highlights are in #announcements.
-
-## Tooltips
-• Hovering a type (badges, Gym sheets, raids, legendary zones): attack multipliers (×2, ×½, ×0) and defense (weaknesses, resistances, immunities)
-• Hovering a weather or a time of day (scene bar, map, raids): move types boosted or weakened, wild Pokémon types more common or rarer
-
-## Scenes
-• Animated water on scenes with a body of water (swell, reflections, sparkles, light by time of day)
-• Kanto scenes harmonized, Prof. Oak's lab redrawn
-• New dedicated scenes for places further in the adventure and for a legendary zone; the generic backgrounds are removed
-• Always a transition to the next step after a battle, even on the same scene; the reward message shows after it
-
-## Balance
-• Burn and poison on a boss (raid, legendary zone, roaming Pokémon): damage based on its base HP, no longer on its boosted HP
-
-## Trades
-• Pokémon placed in the Day Care can be offered or given in a trade ("P" marker in the list)
-
-## Fixes
-• Raids: automatic allies only have Pokémon from the raid's region
-• Legendary zone started from the League: the timeline showed the League's steps
-• Text of the map sheets' pills centered vertically
-`}},{date:"2026-10-14",title:"Raids chromatiques et amis",md:`
-Notes de version détaillées. La présentation des nouveautés est dans #annonces.
-
-## Raids chromatiques
-• Les événements légendaires sont remplacés par des raids quotidiens : un raid par région débloquée, un boss chromatique différent chaque jour
-• Déblocage : après la victoire à la Ligue Pokémon de Kanto
-• Déroulé : 4 combats (sauvages et dresseurs), un camp de soin, puis le boss
-• Boss : niveau 100, combat 6 contre 1, riposte et jauge de rage ; lieu et météo déterminés par ses types, ses attaques x1,2 sous sa météo
-• Capture : 1 % par Poké Ball lancée quand le boss est K.O. ; essais illimités jusqu'à la capture ; le boss capturé rejoint l'équipe au niveau 5
-• Aucun Pokémon n'est capturé pendant le donjon, seul le boss compte
-• Seules les espèces de la région du raid apparaissent (joueur, donjon, boss)
-• Équipe : 2 Pokémon du joueur + 2 alliés de 2 Pokémon chacun ; niveaux plafonnés à 100
-• Alliés automatiques : 6 dresseurs proposés, Pokémon entièrement évolués, niveau 97 à 100, stats x0,9, sans légendaire ni fabuleux ; jamais deux fois la même classe de dresseur dans une sélection
-• Les raids nécessitent une connexion (pas de raid hors ligne)
-• Onglet Raid : raids du jour, boss du lendemain en silhouette, compte à rebours jusqu'aux prochains raids, régions non débloquées affichées verrouillées
-• Indicateurs ▲ / ▼ sur chaque Pokémon de l'équipe selon son efficacité contre le boss
-
-## Amis
-• Nouvel onglet Amis : ajout par code Nom#1234, demandes reçues et envoyées, acceptation, refus, annulation, suppression
-• Consultation de la carte de dresseur d'un ami (lecture seule)
-• Notification en temps réel à la réception ou à l'acceptation d'une demande ; actualisation manuelle limitée à une fois toutes les 5 minutes
-• Raids : les amis apparaissent en tête des alliés proposés, avec les 2 Pokémon qu'ils ont utilisés contre le même boss
-• Échanges : les offres des amis sont listées en premier
-
-## Zones légendaires
-• Une équipe dédiée se prépare pour chaque zone légendaire (fiche de zone, indicateurs ▲ / ▼, niveaux plafonnés à ceux de la zone) ; sans équipe dédiée, l'équipe d'aventure est utilisée
-• Les Pokémon rencontrés sur le chemin évoluent uniquement vers des formes de la région de la zone
-• Suppression de la limite mondiale de légendaires (compteur et refus de capture retirés)
-• Conditions d'accès de deux zones de la suite de l'aventure révisées
-
-## Équipe en route
-• L'équipe qui combat est une copie de l'équipe prévue, prise à chaque soin (Centre Pokémon, nouveau chapitre, défaite, début d'événement ou de zone)
-• Les changements d'équipe restent possibles à tout moment mais ne s'appliquent qu'au prochain soin (corrige le remplacement de Pokémon K.O. en plein combat)
-• Le dernier Pokémon debout de l'équipe en route ne peut pas être vendu, échangé, relâché ni placé à la Pension
-• Message « Changements appliqués au prochain Centre Pokémon » sur l'écran Équipe tant que les deux équipes diffèrent
-
-## Retour d'absence
-• Nouvelle fenêtre « Bon retour » : combats gagnés, argent, défaites, portrait du champion d'arène affronté, nouvelles entrées du Pokédex, niveaux gagnés par l'équipe (jauges animées), objets trouvés
-• Section captures masquée si aucune nouvelle espèce
-
-## Pokédex
-• Nouvel état pour les espèces capturées puis plus possédées (sprite grisé, Poké Ball grisée)
-• Nouveaux filtres Possédés / Plus possédés
-
-## Progression
-• Régions affichées en bandeau au-dessus des arènes
-• Détail de chapitre à côté de la liste sur grand écran, en tiroir latéral sur écran étroit
-• Les arènes atteintes affichent leur décor
-
-## Boutique et interface
-• Boutique : achat x1 / x10 / Max
-• Barre du haut retravaillée
-• Nouvelle police (Jersey 10 / Jersey 15) et échelle de texte agrandie
-• Portraits de dresseurs cadrés sur le visage partout (menu, barre du haut, échanges, classements, raids)
-• Emplacements d'équipe (Équipe/PC, sélecteurs d'équipe) au format portrait
-• Boutons de fermeture uniformisés (croix centrée, contour rouge)
-• Carte de dresseur : les gros compagnons (1,5 m et plus) se placent derrière le dresseur
-• Fenêtres : le contenu défile et les boutons restent visibles sur petits écrans
-
-## Mobile et tablette
-• Glisser-déposer tactile (appui long pour saisir, balayage pour faire défiler le PC, la Pension et les grilles d'événement)
-• Barre du haut et onglets mobiles corrigés, Progression sur une colonne, flèches de fiche dans les coins + balayage, appui long pour afficher les titres
-• Menu latéral compact sur écrans d'ordinateur peu hauts, menu affiné sur tablette
-
-## Performances
-• Le jeu se met en pause dans un onglet masqué et rattrape le temps écoulé au retour
-• Son désactivé temporairement (moteur audio retiré pour les performances) ; options Son / Volume masquées
-• Vérification de la sauvegarde en ligne uniquement après 2 minutes d'absence
-
-## Suite de l'aventure
-• Ajout des événements de ville, des œufs d'histoire, des échanges PNJ et d'une zone dédiée aux insectes dans les régions suivantes
-• Le chapitre initial de la région suivante peut commencer de nuit
-
-## Combat
-• Nuit : attaques Spectre et Ténèbres x1,1
-
-## Corrections
-• Changement d'équipe en plein combat (voir Équipe en route)
-• Pokémon retourné pendant certaines animations d'attaque (ex. Lame de Roc)
-• Sprite de Blue écrasé dans les échanges
-• Niveau maximal des Bonbons bloqué à 95 après la Ligue
-• Échanges : un Pokémon de joueur affiché parmi les offres des habitants ; un échange PNJ réalisé disparaît désormais du tableau
-• Compteur Pokédex du profil : le total suit les régions débloquées au lieu d'afficher 151
-• Pension : emplacements d'œuf vides sans Métamorph affichés en pointillés, avec l'explication dans l'en-tête
-`,en:{title:"Shiny Raids and friends",md:`
-Detailed release notes. The highlights are in #announcements.
-
-## Shiny Raids
-• Legendary events are replaced by daily raids: one raid per unlocked region, a different Shiny boss every day
-• Unlock: after winning the Kanto Pokémon League
-• How it goes: 4 battles (wild and trainers), a healing camp, then the boss
-• Boss: level 100, 6-against-1 battle, counterattack and rage gauge; place and weather set by its types, its moves x1.2 under its weather
-• Catching: 1 % per Poké Ball thrown once the boss is K.O.; unlimited tries until the catch; the caught boss joins the team at level 5
-• No Pokémon is caught during the dungeon, only the boss counts
-• Only species from the raid's region appear (player, dungeon, boss)
-• Team: 2 of the player's Pokémon + 2 allies with 2 Pokémon each; levels capped at 100
-• Automatic allies: 6 trainers offered, fully evolved Pokémon, level 97 to 100, stats x0.9, no legendary or Mythical; never the same trainer class twice in one selection
-• Raids need a connection (no offline raids)
-• Raid tab: the day's raids, the next day's boss as a silhouette, a countdown to the next raids, regions not unlocked shown locked
-• ▲ / ▼ markers on each team Pokémon based on its effectiveness against the boss
-
-## Friends
-• New Friends tab: add by code Name#1234, received and sent requests, accept, decline, cancel, remove
-• View a friend's Trainer Card (read only)
-• Real-time notification when a request is received or accepted; manual refresh limited to once every 5 minutes
-• Raids: friends show first among the offered allies, with the 2 Pokémon they used against the same boss
-• Trades: friends' offers are listed first
-
-## Legendary zones
-• A dedicated team is set up for each legendary zone (zone sheet, ▲ / ▼ markers, levels capped at the zone's); without a dedicated team, the adventure team is used
-• Pokémon met on the way only evolve into forms from the zone's region
-• The global legendary limit is removed (counter and catch refusal gone)
-• Access conditions of two zones further in the adventure revised
-
-## Team on the road
-• The team that fights is a copy of the planned team, taken at each heal (Pokémon Center, new chapter, defeat, start of an event or zone)
-• Team changes are still possible at any time but only apply at the next heal (fixes fainted Pokémon being replaced mid-battle)
-• The last Pokémon standing in the team on the road can't be sold, traded, released or placed in the Day Care
-• "Changes apply at the next Pokémon Center" message on the Team screen while the two teams differ
-
-## Coming back
-• New "Welcome back!" window: battles won, money, defeats, portrait of the Gym Leader faced, new Pokédex entries, levels gained by the team (animated gauges), items found
-• Catches section hidden if there's no new species
-
-## Pokédex
-• New state for species caught but no longer owned (grayed sprite, grayed Poké Ball)
-• New Owned / No longer owned filters
-
-## Progress
-• Regions shown in a band above the Gyms
-• Chapter details next to the list on big screens, in a side drawer on narrow screens
-• Gyms you've reached show their scene
-
-## Shop and interface
-• Shop: buy x1 / x10 / Max
-• Top bar reworked
-• New font (Jersey 10 / Jersey 15) and a bigger text scale
-• Trainer portraits framed on the face everywhere (menu, top bar, trades, leaderboards, raids)
-• Team slots (Team/PC, team pickers) in portrait format
-• Close buttons made consistent (centered cross, red outline)
-• Trainer Card: big companions (1.5 m and up) stand behind the trainer
-• Windows: the content scrolls and the buttons stay visible on small screens
-
-## Mobile and tablet
-• Touch drag and drop (long press to grab, swipe to scroll the PC, the Day Care and event grids)
-• Top bar and mobile tabs fixed, Progress in one column, sheet arrows in the corners + swipe, long press to show titles
-• Compact side menu on short computer screens, refined menu on tablets
-
-## Performance
-• The game pauses in a hidden tab and catches up on the time passed when you come back
-• Sound temporarily off (audio engine removed for performance); Sound / Volume options hidden
-• Online save check only after 2 minutes away
-
-## Further in the adventure
-• Town events, story eggs, NPC trades and a zone dedicated to Bug Pokémon added in the next regions
-• The next region's first chapter can start at night
-
-## Battle
-• Night: Ghost and Dark moves x1.1
-
-## Fixes
-• Team change mid-battle (see Team on the road)
-• Pokémon flipped during some move animations (e.g. Stone Edge)
-• Blue's sprite squashed in trades
-• Max level of Candies stuck at 95 after the League
-• Trades: a player's Pokémon shown among the locals' offers; a completed NPC trade now disappears from the board
-• Profile Pokédex counter: the total follows the unlocked regions instead of showing 151
-• Day Care: empty egg slots without Ditto shown dotted, with the explanation in the header
-`}},{date:"2026-10-13",title:"Le retour des légendaires",md:`
-Les légendaires sont de retour 👑 Et avec eux une bonne pile de corrections grâce à vos signalements, des combats bien plus jolis et des chromatiques qui en valent enfin la peine.
-
-## 👑 Légendaires
-• Les légendaires t'attendent dans leurs repaires, verrouillés tant que tu n'as pas rempli leur condition (le cadenas te dit quoi faire)
-• Avant d'arriver jusqu'à eux, il faudra passer les Pokémon du coin… puis affronter un vrai boss, coriace, qui riposte et se met en rage 😤
-• Et plus loin dans l'aventure, certains ne tiennent pas en place… garde l'œil ouvert 👀
-
-## ✨ Combats
-• Chaque attaque a maintenant son effet en pixel art, plus ou moins spectaculaire selon sa puissance (et les statuts aussi)
-• Tes Pokémon apprennent leurs attaques dans l'ordre, de la plus faible à la plus forte : fini l'Empiflor qui reçoit sa meilleure attaque trop tôt
-• La précision dépend de la puissance, et tes Pokémon prennent toujours la meilleure attaque dispo
-• Les chromatiques ont +10 % sur toutes leurs stats ✨ (affichées en doré sur la fiche)
-
-## 🌿 Rencontres
-• Les Pokémon sauvages peuvent arriver déjà évolués, et les dresseurs costauds sortent plutôt leurs formes finales
-• Les rencontres spéciales en ville suivent l'heure et la météo : plus que ce qui est vraiment dispo, fini les 33 Pokémon à trouver à Lavanville 😅
-• La fiche de chapitre indique s'il fait jour ou nuit et met en avant ce qu'on peut trouver maintenant
-• Lokhlass vit désormais aux Îles Écume, Bulbizarre sort de jour, et Zarbi a des conditions bien à lui
-• Les sprites animés HD arrivent pour toute la suite du Pokédex
-
-## 🥚 Pension & objets
-• Des baies à ramasser et à donner à tes pensionnaires 🍓
-• Animations quand tu trouves un objet ou de l'argent
-• Une seule pierre d'évolution de chaque type par région, et adieu l'arbre à baies
-• Le 4ᵉ emplacement de pension s'achète enfin, le niveau des pensionnaires est affiché, et l'incubateur dit clairement quand il manque un Métamorph
-
-## 🔁 Échanges
-• Les échanges entre joueurs remarchent (désolé pour l'attente 🙏)
-• Les demandes des habitants restent dans leur région, et celles qui sont prêtes ressortent bien mieux
-
-## 🎨 Petits plus
-• PV affichés correctement (plus de 110/100), badges retrouvés au chargement
-• Bouton Relâcher discret, rangé dans le coin du visuel du Pokémon
-• Super Bonbons rangés après les Bonbons Exp., la boutique n'affiche que le Casino de ta région
-• Chenipan devient l'icône du bouton de signalement de bug 🐛
-• La suite de l'aventure a été raccourcie et rééquilibrée 👀
-`,en:{title:"The return of the legendaries",md:`
-The legendaries are back 👑 And with them a big pile of fixes thanks to your reports, much prettier battles and shinies that are finally worth it.
-
-## 👑 Legendaries
-• The legendaries wait for you in their lairs, locked until you meet their condition (the padlock tells you what to do)
-• Before reaching them, you'll have to get past the local Pokémon… then face a real boss, a tough one that hits back and flies into a rage 😤
-• And further in the adventure, some can't stay put… keep your eyes open 👀
-
-## ✨ Battles
-• Every move now has its own pixel art effect, more or less spectacular depending on its power (statuses too)
-• Your Pokémon learn their moves in order, from weakest to strongest: no more Victreebel getting its best move too early
-• Accuracy depends on power, and your Pokémon always pick the best move available
-• Shinies get +10 % on all their stats ✨ (shown in gold on their sheet)
-
-## 🌿 Encounters
-• Wild Pokémon can show up already evolved, and strong trainers tend to send out their final forms
-• Special encounters in towns follow the time and weather: only what's really available, no more 33 Pokémon to find in Lavender Town 😅
-• The chapter sheet tells you if it's day or night and highlights what you can find right now
-• Lapras now lives in the Seafoam Islands, Bulbasaur comes out by day, and Unown has conditions all its own
-• Animated HD sprites are coming for the rest of the Pokédex
-
-## 🥚 Day Care & items
-• Berries to pick up and give to your Day Care Pokémon 🍓
-• Animations when you find an item or money
-• Only one evolution stone of each type per region, and goodbye berry tree
-• The 4th Day Care slot can finally be bought, your Day Care Pokémon's level is shown, and the incubator clearly says when a Ditto is missing
-
-## 🔁 Trades
-• Trades between players work again (sorry for the wait 🙏)
-• Locals' requests stay in their region, and the ones that are ready stand out much better
-
-## 🎨 Little extras
-• HP shown correctly (no more 110/100), badges back on load
-• Discreet Release button, tucked in the corner of the Pokémon's picture
-• Rare Candies sorted after Exp. Candies, the Shop only shows your region's Game Corner
-• Caterpie becomes the icon of the bug report button 🐛
-• The rest of the adventure has been shortened and rebalanced 👀
-`}},{date:"2026-10-11",title:"Jour, nuit & Pension",md:`
-Grosse fournée de corrections grâce à vos signalements 🐛 et en bonus : des Pokémon qui vivent enfin au rythme du jour et de la nuit, une Pension qui pond, et des habitants qui veulent échanger avec toi.
-
-## 🌙 Jour, nuit & météo
-• Chaque zone a maintenant ses Pokémon de jour, de nuit et selon la météo : les spectres sortent la nuit, Ptitard attend la pluie, Salamèche préfère la nuit…
-• La météo colle au climat de chaque zone : plus de tempête de sable au sommet des montagnes 🏜️
-• Le panneau « À trouver ici » et les fiches de chapitre rangent les Pokémon par condition, avec ceux que tu as déjà capturés bien visibles
-• Pas d'Évoli ni de Porygon dans les hautes herbes, et pas de Pokémon fantôme avant d'avoir de quoi les voir 👻
-
-## 🥚 Pension
-• C'est désormais Métamorph qui pond : un œuf de la famille d'un de tes pensionnaires, plus souvent quand il y a du monde
-• Chaque œuf éclot en 4 h pile, et le temps hors ligne compte (jusqu'à 8 h)
-• Un œuf d'une espèce que tu as déjà est annoncé à l'avance et se transforme en bonbon à l'éclosion (fini l'œuf volé 🕵️)
-
-## 🔁 Échanges
-• Les habitants des villes ont leurs demandes dans le menu Échanges : passe dans leur ville pour les débloquer
-• Un échange arrive au niveau du Pokémon envoyé, et dans sa région
-• Debugant te laisse choisir son évolution
-
-## 💎 Objets d'évolution
-• Pierre Soleil, Grelot Zen, Roche Royale, Peau Métal, Écaille Draco et Améliorator se trouvent là où les jeux les donnent, puis arrivent en boutique
-
-## ⚔️ Combats & équilibrage
-• Les boss tapent enfin toute ton équipe, pas juste un Pokémon 😬
-• Tes Pokémon choisissent leur meilleure attaque, le type Fée fait son entrée
-• Ondine et Major Bob un poil plus coriaces, et une Ligue où chaque membre plafonne juste au-dessus de son niveau
-• Fini les Rattata niveau 15 en début d'aventure et les jetons avant le Casino
-• Ton équipe est soignée après chaque arène
-• Les dresseurs ont des équipes cohérentes avec leur métier (le Cracheur de feu range ses Pokémon Eau 🔥)
-• La suite de l'aventure a été rééquilibrée, avec des chapitres moins longs 👀
-
-## 💤 Jeu en fond
-• Le farm hors ligne ne bloque plus sur un champion : le chapitre recommence jusqu'à ton retour
-• La cérémonie de badge et le Hall of Fame se ferment tout seuls après quelques secondes
-• La sauvegarde en ligne ne te demande qu'une fois, puis garde la partie la plus avancée
-
-## 🎨 Petits plus
-• Carte de dresseur : une rangée de badges par région atteinte, et Blue rentre enfin dans le cadre
-• Bouton Relâcher plus discret, bouton d'évolution avec l'icône de la pierre
-• Échap passe les animations, le spam de bonbons ne fait plus la queue
-• Icône Poké Ball sur les Pokémon capturés du Pokédex
-• Les événements légendaires font une petite pause, le temps de les retravailler ⏸️
-
-## 💖 Psst, les testeurs…
-• Une nouvelle rareté secrète vient d'apparaître. Elle ne s'attrape pas, elle se mérite. Gardez un œil sur votre PC 👀
-`,en:{title:"Day, night & Day Care",md:`
-A big batch of fixes thanks to your reports 🐛 and as a bonus: Pokémon that finally live by day and night, a Day Care that lays eggs, and locals who want to trade with you.
-
-## 🌙 Day, night & weather
-• Each zone now has its day, night and weather Pokémon: ghosts come out at night, Poliwag waits for rain, Charmander prefers the night…
-• The weather fits each zone's climate: no more sandstorm on mountaintops 🏜️
-• The "Found here" panel and the chapter sheets sort Pokémon by condition, with the ones you've already caught clearly visible
-• No Eevee or Porygon in the tall grass, and no Ghost Pokémon before you have something to see them with 👻
-
-## 🥚 Day Care
-• Ditto now lays the eggs: an egg from the family of one of your Day Care Pokémon, more often when it's crowded
-• Each egg hatches in exactly 4 h, and offline time counts (up to 8 h)
-• An egg of a species you already have is announced in advance and turns into a candy when it hatches (no more stolen egg 🕵️)
-
-## 🔁 Trades
-• Town locals have their requests in the Trades menu: visit their town to unlock them
-• A trade arrives at the level of the Pokémon sent, and in its region
-• Tyrogue lets you choose its evolution
-
-## 💎 Evolution items
-• Sun Stone, Soothe Bell, King's Rock, Metal Coat, Dragon Scale and Up-Grade are found where the games give them, then arrive in the Shop
-
-## ⚔️ Battles & balance
-• Bosses finally hit your whole team, not just one Pokémon 😬
-• Your Pokémon pick their best move, the Fairy type makes its entrance
-• Misty and Lt. Surge a touch tougher, and a League where each member caps just above their level
-• No more level 15 Rattata at the start of the adventure, and no more coins before the Game Corner
-• Your team is healed after each Gym
-• Trainers have teams that fit their job (the Firebreather puts away his Water Pokémon 🔥)
-• The rest of the adventure has been rebalanced, with shorter chapters 👀
-
-## 💤 Background play
-• Offline farming no longer gets stuck on a Gym Leader: the chapter starts over until you come back
-• The badge ceremony and the Hall of Fame close by themselves after a few seconds
-• The online save only asks you once, then keeps the furthest game
-
-## 🎨 Little extras
-• Trainer Card: one row of badges per region reached, and Blue finally fits in the frame
-• More discreet Release button, evolution button with the stone's icon
-• Esc skips animations, spamming candies no longer queues up
-• Poké Ball icon on caught Pokémon in the Pokédex
-• Legendary events are taking a little break while they get reworked ⏸️
-
-## 💖 Psst, testers…
-• A new secret rarity just appeared. You can't catch it, you have to earn it. Keep an eye on your PC 👀
-`}},{date:"2026-10-11",title:"Chasse aux bugs, round 2",md:`
-Deuxième round de chasse aux bugs grâce à vos signalements sur Discord 🐛 Au menu : sauvegarde synchronisée, échanges blindés, une Ligue qui se mérite et des combats qui durent un peu plus longtemps.
-
-## ☁️ Sauvegarde en ligne
-• Ta save suit enfin d'un appareil à l'autre
-• En cas de conflit, le jeu te montre les deux sauvegardes et tu choisis la bonne
-
-## 🔗 Échanges
-• Tu peux échanger un Pokémon contre un autre de la même espèce
-• Un Pokémon en attente d'échange compte toujours comme à toi : fini les doublons par évolution ou par capture 🙃
-• Une offre ne peut plus être acceptée deux fois
-• Plus de « câble Link » mystère : les évolutions par échange sont indiquées clairement
-• Les dresseurs des villes ne proposent leur échange qu'une seule fois, et jamais pour une espèce que tu as déjà (adieu le pot de colle de Lavanville 👋)
-
-## ⚔️ Combats & équilibrage
-• Les PV max grimpent avec le niveau : les combats de fin de région durent plus longtemps, sans que les attaques perdent leur punch
-• Les attaques des Pokémon ont été remises à jour : plus de Magnéton qui spamme une attaque Normale au niveau 57
-• Captures un peu plus difficiles (plafond à 60 %), les légendaires restent un vrai défi
-• Les dresseurs font évoluer leurs Pokémon par pierre ou échange en fin de parcours, et les sauvages peuvent apparaître déjà évolués
-• Métamorph se transforme enfin en combat
-• Les dresseurs d'événement sont au niveau de l'événement
-• La recommandation d'équipe d'événement propose de vrais counters
-• Quelques rencontres trop costaudes (coucou le Rapasdepic niveau 101) ont été recadrées
-
-## 🏆 Ligue & arènes
-• Perdre à la Ligue te renvoie au tout début du Conseil des 4
-• Battre le Maître déclenche enfin un Hall of Fame 🎉
-• Plus d'arène « passée » toute seule pendant que tu fais tes courses à la boutique
-• Une surprise attend ceux qui reviennent sur des légendaires déjà affrontés : accumule assez de traces pour relancer la chasse en solo 👀
-
-## 🥚 Pension
-• La Pension reste ouverte quand tu changes de région, tes Pokémon t'attendent sagement
-• Pas de bébé Pokémon qui éclot avant l'heure
-
-## 📖 Pokédex & PC
-• « Capturé » veut dire « encore à toi » : un Pokémon échangé repasse en « vu »
-• La fiche garde ses sections ouvertes quand tu changes de Pokémon, avec un toggle ✨ shiny
-• Les échanges en ville et les lots du Casino apparaissent dans « Où le trouver »
-• Retour du bouton Relâcher dans le PC, avec une flèche d'évolution
-
-## 🎨 Visuels
-• Fini l'écran vert pendant le chargement du décor
-• Les boss ont la bonne taille à leur entrée, et c'est ton dresseur qui s'affiche sur l'écran VS
-• Les légendaires d'événement s'animent avec une aura météo ⛈️
-• Menus Pension et Pokédex à la même largeur que les autres, sélecteur d'équipe d'événement remis d'aplomb
-`,en:{title:"Bug hunt, round 2",md:`
-Second round of bug hunting thanks to your reports on Discord 🐛 On the menu: synced saves, bulletproof trades, a League you have to earn and battles that last a bit longer.
-
-## ☁️ Online save
-• Your save finally follows you from one device to another
-• If there's a conflict, the game shows you both saves and you pick the right one
-
-## 🔗 Trades
-• You can trade a Pokémon for another of the same species
-• A Pokémon waiting to be traded still counts as yours: no more duplicates through evolution or catching 🙃
-• An offer can no longer be accepted twice
-• No more mystery "Link Cable": trade evolutions are clearly shown
-• Town trainers only offer their trade once, and never for a species you already have (bye-bye to the Lavender Town pest 👋)
-
-## ⚔️ Battles & balance
-• Max HP climbs with level: end-of-region battles last longer, without moves losing their punch
-• Pokémon moves have been updated: no more Magneton spamming a Normal move at level 57
-• Catching is a bit harder (capped at 60 %), legendaries stay a real challenge
-• Trainers evolve their Pokémon by stone or trade late in the game, and wild ones can show up already evolved
-• Ditto finally transforms in battle
-• Event trainers are at the event's level
-• The event team recommendation suggests real counters
-• A few encounters that were too strong (hi there, level 101 Fearow) have been toned down
-
-## 🏆 League & Gyms
-• Losing at the League sends you back to the very start of the Elite Four
-• Beating the Champion finally triggers a Hall of Fame 🎉
-• No more Gym "cleared" on its own while you shop at the Shop
-• A surprise awaits those who go back to legendaries they've already faced: gather enough traces to restart the hunt solo 👀
-
-## 🥚 Day Care
-• The Day Care stays open when you change region, your Pokémon wait for you patiently
-• No baby Pokémon hatching ahead of time
-
-## 📖 Pokédex & PC
-• "Caught" means "still yours": a traded Pokémon goes back to "seen"
-• The sheet keeps its sections open when you switch Pokémon, with a ✨ shiny toggle
-• Town trades and Game Corner prizes show up in "Where to find it"
-• The Release button is back in the PC, with an evolution arrow
-
-## 🎨 Visuals
-• No more green screen while the scene loads
-• Bosses have the right size when they enter, and your own trainer shows on the VS screen
-• Event legendaries are animated with a weather aura ⛈️
-• Day Care and Pokédex menus as wide as the others, event team picker set straight again
-`}},{date:"2026-10-10",title:"Chasse aux bugs",md:`
-Merci pour vos retours sur Discord : on a fait le ménage dans les bugs signalés 🧹 et les échanges en ville ont eu droit à leur cinématique.
-
-## 🔗 Échanges en ville
-• Les dresseurs des villes proposent leurs échanges dans la même fenêtre que les échanges en ligne
-• Accepter lance la cinématique du câble Link, puis la fiche Pokédex de ton nouveau Pokémon
-
-## ⚔️ Combats
-• Touche un Pokémon de ton équipe : il entre et reste en jeu jusqu'à la fin du combat, même avec le switch auto activé
-• Fini les Pokémon fantômes qui restaient plantés sur la scène après un changement de menu 👻
-• Le décor suit le combat en cours : plus de Ronflex qui fait la sieste en plein Centre Pokémon 😴
-• Un Pokémon échangé (ou que tu n'as plus) se capture de nouveau quand tu le recroises
-
-## 🔁 Boucle de chapitres
-• Perdre dans un chapitre en boucle te fait passer au suivant, au lieu de te renvoyer au premier en boucle infinie
-
-## 📱 Mobile & divers
-• La barre du bas n'affiche plus que les icônes, avec le nom sur l'onglet actif : tout rentre enfin
-• Les jetons du Casino quittent le Sac, ils restent affichés à côté de ton argent
-`,en:{title:"Bug hunt",md:`
-Thanks for your feedback on Discord: we cleaned up the reported bugs 🧹 and town trades got their own cinematic.
-
-## 🔗 Town trades
-• Town trainers offer their trades in the same window as online trades
-• Accepting plays the Link Cable cinematic, then the Pokédex entry of your new Pokémon
-
-## ⚔️ Battles
-• Tap a Pokémon in your team: it comes in and stays in until the end of the battle, even with auto switch on
-• No more ghost Pokémon stuck on the scene after changing menus 👻
-• The scene follows the current battle: no more Snorlax napping in the middle of a Pokémon Center 😴
-• A traded Pokémon (or one you no longer have) can be caught again when you come across it
-
-## 🔁 Chapter loop
-• Losing in a looped chapter moves you on to the next one, instead of sending you back to the first one in an endless loop
-
-## 📱 Mobile & misc
-• The bottom bar only shows icons now, with the name on the active tab: everything finally fits
-• Game Corner coins leave the Bag, they stay shown next to your money
-`}},{date:"2026-10-10",title:"Échanges : ça marche pour de vrai",md:`
-Correctif express sur les échanges : vos offres partaient… nulle part 😅 C'est réparé, et le menu a eu droit à un bon coup de neuf.
-
-## 🔗 Échanges, version 2
-• Ton offre part en ligne tout de suite, plus besoin d'attendre l'actualisation
-• Nouveau poste d'échange façon câble Link : l'espèce que tu cherches d'un côté, ton Pokémon de l'autre, le temps restant sur le câble
-• On choisit d'abord l'espèce qu'on cherche (en version ✨ si tu veux), puis le jeu te montre seulement tes Pokémon qui peuvent l'échanger
-• Un récap clair avant de valider : l'échange, les frais et ton argent après
-• Tableau des offres plus compact : vert = ce que tu reçois, rouge = ce que tu donnes, et ta propre offre y est mise en avant
-• Touche une offre pour voir le détail avant d'échanger
-• Retirer une offre demande maintenant une confirmation
-• Un petit délai entre deux offres, pour garder les serveurs au frais 🧊
-• Tous les timers sont précis à la seconde
-
-## 🎬 Cinématique
-• Tu vois enfin le Pokémon de l'autre dresseur avant qu'il file dans sa Poké Ball
-
-## 🛠️ Divers
-• Les boutons des fenêtres sont harmonisés partout
-• Corrigé : annuler le choix d'un Pokémon pour un échange pouvait planter le menu
-`,en:{title:"Trades: they really work now",md:`
-Express fix for trades: your offers were going… nowhere 😅 It's fixed, and the menu got a nice refresh.
-
-## 🔗 Trades, version 2
-• Your offer goes online right away, no need to wait for a refresh
-• New Link Cable-style trade station: the species you're looking for on one side, your Pokémon on the other, the time left on the cable
-• You first pick the species you're looking for (in its ✨ version if you like), then the game only shows your Pokémon that can trade for it
-• A clear recap before confirming: the trade, the fees and your money afterwards
-• More compact offer board: green = what you get, red = what you give, and your own offer is highlighted
-• Tap an offer to see the details before trading
-• Withdrawing an offer now asks for confirmation
-• A short delay between two offers, to keep the servers cool 🧊
-• All timers are accurate to the second
-
-## 🎬 Cinematic
-• You finally see the other trainer's Pokémon before it zips into its Poké Ball
-
-## 🛠️ Misc
-• Window buttons are consistent everywhere
-• Fixed: cancelling the choice of a Pokémon for a trade could crash the menu
-`}},{date:"2026-10-10",title:"Échanges en ligne, villes vivantes",md:`
-Grosse fournée aujourd'hui : on échange enfin pour de vrai, les villes s'animent et Kanto a encore quelques secrets à te montrer 👀
-
-## 🔗 Échanges entre joueurs
-• Le menu Échanges ouvre ses portes : propose un de tes Pokémon contre l'espèce que tu cherches, et d'autres dresseurs pourront accepter
-• Une offre à la fois, même région et même rareté des deux côtés, pas de légendaires, et un chromatique ne s'échange que contre un chromatique ✨
-• Petits frais pour poster une offre, qui expire au bout de quelques jours (ton Pokémon revient si personne n'en veut)
-• Si quelqu'un accepte pendant que tu joues, tu le vois en direct, avec une petite cinématique d'échange
-• Kadabra, Machopeur & co évoluent bien à l'échange, comme dans le jeu d'origine 😏
-
-## 🏘️ Des villes plus vivantes
-• En arrivant dans une ville, il peut se passer quelque chose dans les rues : un objet trouvé, un peu d'argent, une rencontre spéciale…
-• Des PNJ te proposent parfois d'échanger leur Pokémon contre un des tiens
-• Les pierres évolutives se trouvent maintenant sur les routes et en ville (en boutique, elles coûtent désormais une petite fortune)
-
-## 🎰 Casino de Céladopole
-• Les dresseurs lâchent parfois quelques jetons après un combat, et on en trouve sur les routes
-• Échange-les contre des Pokémon au coin Casino de la boutique
-
-## 🎒 Le Sac
-• Nouveau Sac pour voir tout ce que tu possèdes, rangé par catégorie (objets clés, bonbons, évolution…)
-• Les objets clés t'indiquent où les utiliser
-
-## 👻 Secrets de Kanto
-• Des fossiles à récupérer… et à faire revivre au bon endroit 🦴
-• Certains lieux hantés cachent des spectres impossibles à identifier sans le bon objet
-• Certaines espèces n'apparaissent plus qu'une fois que l'histoire t'a amené là où elles vivent (fini le Ponyta en pleine Forêt de Jade 😅)
-• Quelques apparitions rares selon l'heure, le jour… ou la météo 🌪️
-`,en:{title:"Online trades, living towns",md:`
-Big batch today: you can finally trade for real, towns come alive and Kanto still has a few secrets to show you 👀
-
-## 🔗 Trades between players
-• The Trades menu opens its doors: offer one of your Pokémon for the species you're looking for, and other trainers can accept
-• One offer at a time, same region and same rarity on both sides, no legendaries, and a Shiny only trades for a Shiny ✨
-• A small fee to post an offer, which expires after a few days (your Pokémon comes back if nobody wants it)
-• If someone accepts while you're playing, you see it live, with a little trade cinematic
-• Kadabra, Machoke & co do evolve by trade, like in the original game 😏
-
-## 🏘️ Livelier towns
-• When you arrive in a town, something can happen in the streets: an item found, some money, a special encounter…
-• NPCs sometimes offer to trade their Pokémon for one of yours
-• Evolution stones are now found on routes and in towns (in the Shop, they now cost a small fortune)
-
-## 🎰 Celadon Game Corner
-• Trainers sometimes drop a few coins after a battle, and you can find some on routes
-• Trade them for Pokémon in the Shop's Game Corner section
-
-## 🎒 The Bag
-• New Bag to see everything you own, sorted by category (key items, candies, evolution…)
-• Key items tell you where to use them
-
-## 👻 Kanto's secrets
-• Fossils to collect… and to bring back to life at the right place 🦴
-• Some haunted places hide ghosts you can't identify without the right item
-• Some species only appear once the story has taken you where they live (no more Ponyta in the middle of Viridian Forest 😅)
-• A few rare appearances depending on the time, the day… or the weather 🌪️
-`}}],t.Changelog=function(){const{$:a,h:m,esc:c,modal:ne}=t.UI,U=t.CHANGELOG||[],gt="pokecatch-changelog-seen",z="https://discord.gg/zXGpNAvqc",J=()=>[e("janvier"),e("février"),e("mars"),e("avril"),e("mai"),e("juin"),e("juillet"),e("août"),e("septembre"),e("octobre"),e("novembre"),e("décembre")],Fe=k=>{const[r,Rt,oe]=k.split("-").map(Number);return e("{d} {month} {y}",{d:oe,month:J()[Rt-1],y:r})},He=k=>t.I18n?.lang==="vi"?(window.POKE_VI_CHANGELOG?.[k.date+"|"+(k.en?.title||k.title)]||k.en||k):t.I18n?.lang==="fr"?k:k[t.I18n?.lang]||k.en||k,w=()=>{try{return localStorage.getItem(gt)}catch{return null}},x=()=>!!U[0]&&w()!==U[0].date;function de(k){let r="",Rt=!1;const oe=()=>{Rt&&(r+="</ul>",Rt=!1)};for(const ee of k.trim().split(`
+            <span class="gd-ic">${F.ic}</span><span class="gd-lbl">${F.name}</span>${F.isNew?.()?'<span class="gd-new">'+e("NEW")+'</span>':""}</button>`).join("")).join(""),c(".gd-item",Ce).forEach($=>{$.onclick=()=>X($.dataset.p)}),m(".on",Ce)?.scrollIntoView({block:"nearest",inline:"nearest"})}function we(){const $=m(".op-account",vt);$&&($.innerHTML=Te(),N($,"login",()=>t.Cloud.signIn("discord")),N($,"login-google",()=>t.Cloud.signIn("google")),N($,"logout",()=>t.Cloud.signOut()))}function X($){le=$;const R=ze.find(F=>F.id===$);vt.innerHTML=`<div class="op-page"><h3>${R.name}</h3>${R.html()}</div>`,vt.scrollTop=0,V(),he()}function he(){we(),c("[data-sw]",vt).forEach($=>{const R=()=>{const F=Je.find(l=>l[0]===$.dataset.sw);if(F[4](),x.includes(F))return X("perf");const Ee=F[3]();$.classList.toggle("on",Ee),$.setAttribute("aria-checked",Ee),z.save()};$.onclick=F=>{F.target.closest(".info-tip")||R()},$.onkeydown=F=>{(F.key===" "||F.key==="Enter")&&!F.target.closest(".info-tip")&&(F.preventDefault(),R())}}),c("[data-preset]",vt).forEach($=>{$.onclick=()=>{Fe().set("preset",$.dataset.preset),X("perf")}}),c("[data-sleep]",vt).forEach($=>{$.onclick=()=>{Fe().set("sleep",+$.dataset.sleep),X("perf")}}),c("[data-theme-pref]",vt).forEach($=>{$.onclick=()=>{t.Theme.set($.dataset.themePref),c("[data-theme-pref]",vt).forEach(R=>{const F=R===$;R.classList.toggle("on",F),R.setAttribute("aria-checked",F)}),m(".op-theme small",vt).textContent=pe()}}),c("[data-lang]",vt).forEach($=>{const R=()=>{$.dataset.lang!==t.I18n.lang&&(z.save(),t.I18n.set($.dataset.lang))};$.onclick=R,$.onkeydown=F=>{(F.key==="Enter"||F.key===" ")&&(F.preventDefault(),R())}}),N(vt,"changelog",()=>{xt(null),t.Changelog.open()}),N(vt,"guide",()=>{xt(null),t.Guide.open()}),N(vt,"migrate",()=>{xt(null),window.__pokeOpenMigrationModal&&window.__pokeOpenMigrationModal()}),N(vt,"reset",async()=>{xt(null);const $=t.Cloud?.profile(),R=e("Ton équipe, ton Pokédex, tes badges et ta carte de dresseur seront perdus. C'est définitif.")+($?" "+e("La sauvegarde en ligne de ce compte sera aussi effacée et tes amis retirés."):t.Cloud?.linked()?" "+e("Ta sauvegarde en ligne ne sera pas touchée : connecte-toi d'abord pour l'effacer aussi."):"");if(!await gt(R,e("Tout effacer"))||t.TabLock?.mine()===!1)return;const F=JSON.stringify(z.S);if(z.reset(),t.Cloud&&!await t.Cloud.wipe())return localStorage.setItem(t.CONFIG.SAVE_KEY,F),t.onbeforeunload=null,z.stopSaving(),await gt(e("Impossible de joindre la sauvegarde en ligne. Rien n'a été effacé, réessaie une fois connecté."),"OK"),location.reload();t.onbeforeunload=null,z.stopSaving(),location.reload()})}m(".dc-x",je).onclick=()=>xt(null),$t=t.Cloud?.on(we),at=ys(()=>{if(na(),t.Cloud?.pushedAt){const $=m(".op-discord.on small",vt);$&&($.textContent=e("Sauvegarde en ligne · {ago}",{ago:ut(t.Cloud.pushedAt)}))}},1e3);const S=()=>et.classList.toggle("narrow",et.offsetWidth<600);S();const P=new ResizeObserver(S);P.observe(et),Y.addEventListener("abort",()=>P.disconnect()),X(le)}}).then(()=>{clearInterval(at),$t?.()})}t.Options={open:me}}(),t.CHANGELOG=[
+  {
+    "date": "2026-11-03",
+    "title": "⚖️ v0.4.71 · Équilibrage",
+    "md": "\nCette version teste une vitesse maximale plus basse. C'est un test temporaire.\n\n## ⏱️ Vitesse\n• La vitesse la plus rapide passe de ×4 à ×3, le temps de faire des mesures.\n• Ces mesures portent sur les performances, la batterie des téléphones et le rythme des régions, qui se terminent plus vite que prévu.\n• Elles portent aussi sur l'écart entre les joueurs très actifs et les autres : le temps hors du jeu compte comme du ×1 et rapporte moins, et cet écart se creusait beaucoup en ×4.\n• Le temps passé hors du jeu n'est pas concerné.\n• Les temps de raid déjà enregistrés sont ajustés à la nouvelle vitesse, pour que les classements restent à portée.\n\n",
+    "en": {
+      "title": "⚖️ v0.4.71 · Balance",
+      "md": "\nThis version tests a lower top speed. It is a temporary test.\n\n## ⏱️ Speed\n• The fastest speed goes from ×4 to ×3 while we take measurements.\n• They cover performance, phone battery and the pace of regions, which are finished faster than planned.\n• They also cover the gap between very active players and the others: time away counts as ×1 and earns less, and that gap was growing fast at ×4.\n• Time spent away from the game is not affected.\n• Raid times already recorded are adjusted to the new speed, so the leaderboards stay within reach.\n\n"
+    },
+    "es": {
+      "title": "⚖️ v0.4.71 · Equilibrio",
+      "md": "\nEsta versión prueba una velocidad máxima más baja. Es una prueba temporal.\n\n## ⏱️ Velocidad\n• La velocidad más rápida pasa de ×4 a ×3 mientras hacemos mediciones.\n• Estas mediciones tratan del rendimiento, la batería de los teléfonos y el ritmo de las regiones, que se terminan más rápido de lo previsto.\n• También tratan de la diferencia entre los jugadores muy activos y los demás: el tiempo fuera del juego cuenta como ×1 y da menos, y esa diferencia crecía mucho en ×4.\n• El tiempo que pasas fuera del juego no cambia.\n• Los tiempos de incursión ya registrados se ajustan a la nueva velocidad, para que las clasificaciones sigan a tu alcance.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-03",
+    "title": "✨ v0.4.7 · Nouveautés",
+    "md": "\nCette version te laisse choisir quel doublon garder, sépare les échanges d'une nouvelle région des autres et ajoute des récompenses.\n\n## 🔁 Doublons\n• Quand un doublon n'a pas la même nature que le tien, la fenêtre « Lequel gardes-tu ? » te laisse garder le nouveau. Il prend la place du tien dans tes équipes. Dans les deux cas, la famille reçoit l'XP du doublon.\n• La question s'affiche après une éclosion, un échange, un achat au Marché noir, un cadeau ou un lot du comptoir du Casino.\n• Pour les captures, active « Garder les doublons » sur la famille. Quand elle est pleine, la question s'affiche dans un coin de l'écran et l'aventure continue.\n• Si le Pokémon remplacé a plus de niveaux ou un rang, le jeu demande confirmation et indique ce qui sera perdu.\n\n## 🌍 Régions liées\n• Tant qu'une nouvelle région est à part, jusqu'à sa Ligue, les Échanges et le Marché noir ont deux onglets : « Régions liées » et celui de la nouvelle région. Chaque onglet montre les Pokémon de son côté et utilise son propre argent.\n• Une seule offre d'échange à la fois : l'autre onglet indique de quel côté elle se trouve.\n• Équipes enregistrées : chaque côté a ses 5 équipes, comme son Sac. Une équipe qui ne contenait que des Pokémon de l'autre côté se modifie de nouveau.\n• Tour de Combat : seuls les Pokémon des régions liées montent. Les achats de la boutique arrivent dans le Sac des régions liées.\n• Souterrain : les ₽, Éclats et trouvailles reviennent toujours au côté de sa région, où que tu joues.\n\n## 🎁 Récompenses\n• Tour de Combat : la Baie Framby dorée, la Baie Nanab et la Baie Enigma sont en vente contre 75 Points Combat, et la Baie Frista contre 400 à partir de l'étage 75.\n• Pension : un œuf a une chance sur deux d'avoir la nature de son parent.\n• Le pachinko, les routes et les villes donnent les pierres d'évolution de chaque région atteinte, comme la Boutique.\n• Souterrain : une gemme légendaire de type Ténèbres rejoint les géodes légendaires et le comptoir.\n\n## 🧭 Confort\n• Zones légendaires : « Voir les capacités » montre les attaques du légendaire, comme pour les raids.\n• Chaque région a sa cérémonie de remise de badge, comme Kanto.\n• La recherche ignore les accents partout : « evoli » trouve Évoli.\n• Le Pokédex complet d'une région compte maintenant tous ses Pokémon fabuleux, pour le bonus ×2 de chromatiques comme sur la carte.\n\n## ⚖️ Équilibrage\n• Ligue de la région la plus récente : l'équipe du Maître va du niveau 91 au 95, avec une puissance cachée plus basse. Il faut une équipe proche du niveau 95 pour gagner.\n\n## 🐛 Correctifs\n• Raids chromatiques : à l'ouverture du jeu, une victoire contre un autre boss pouvait terminer le raid du jour sans capture. C'est corrigé.\n• Carte de dresseur : les badges de la région la plus récente sont rangés dans l'ordre des arènes.\n• Sur certains iPhone, les prix des boutiques du Casino et du Souterrain étaient invisibles, et la carte d'un raid n'affichait pas le bouton Raid. C'est corrigé.\n• Revoir la cinématique d'un légendaire n'affiche plus un autre écran pendant un instant.\n• Marché noir : l'aide en chinois est réécrite, merci au joueur qui l'a proposée.\n\n## 🛡️ Fair-play\n• Les records de la Tour de Combat sont mieux contrôlés.\n\n",
+    "en": {
+      "title": "✨ v0.4.7 · New features",
+      "md": "\nThis version lets you choose which duplicate to keep, separates a new region's trades from the others and adds rewards.\n\n## 🔁 Duplicates\n• When a duplicate doesn't have the same nature as yours, the \"Which one do you keep?\" window lets you keep the new one. It takes your Pokémon's place in your teams. Either way, the family gets the duplicate's XP.\n• The question shows after a hatch, a trade, a Black Market purchase, a gift or a Casino counter prize.\n• For catches, turn on \"Keep duplicates\" for the family. When it's full, the question shows in a corner of the screen and the adventure goes on.\n• If the Pokémon being replaced has more levels or a rank, the game asks you to confirm and shows what will be lost.\n\n## 🌍 Linked regions\n• While a new region is apart, until its League, Trades and the Black Market have two tabs: \"Linked regions\" and the new region's. Each tab shows the Pokémon of its side and uses its own money.\n• One trade offer at a time: the other tab shows which side it's on.\n• Saved teams: each side has its own 5 teams, like its Bag. A team holding only Pokémon from the other side can be edited again.\n• Battle Tower: only the linked regions' Pokémon climb. The shop's purchases go to the linked regions' Bag.\n• Underground: ₽, Shards and finds always go to its region's side, wherever you play.\n\n## 🎁 Rewards\n• Battle Tower: the Golden Razz Berry, the Nanab Berry and the Enigma Berry are on sale for 75 Battle Points, and the Starf Berry for 400 from floor 75.\n• Day Care: an Egg has a one-in-two chance of getting its parent's nature.\n• The pachinko, routes and towns give the evolution stones of every region you've reached, like the Shop.\n• Underground: a Dark-type legendary gem joins the legendary Geodes and the counter.\n\n## 🧭 Quality of life\n• Legendary zones: \"See moves\" shows the legendary's moves, as in raids.\n• Every region has its own badge ceremony, like Kanto.\n• Search ignores accents everywhere, in every language.\n• A region's complete Pokédex now counts all its Mythical Pokémon, for the ×2 Shiny bonus as on the map.\n\n## ⚖️ Balance\n• The newest region's League: the Champion's team goes from level 91 to 95, with lower hidden power. You need a team close to level 95 to win.\n\n## 🐛 Bug fixes\n• Shiny raids: as the game opened, a win against another boss could end the day's raid without a catch. It is fixed.\n• Trainer Card: the newest region's badges are in the Gyms' order.\n• On some iPhones, prices in the Casino and Underground shops were invisible, and a raid's card didn't show the Raid button. It is fixed.\n• Replaying a legendary's cutscene no longer flashes another screen for a moment.\n• Black Market: the Chinese help text is rewritten, thanks to the player who suggested it.\n\n## 🛡️ Fair play\n• Battle Tower records are checked more closely.\n\n"
+    },
+    "es": {
+      "title": "✨ v0.4.7 · Novedades",
+      "md": "\nEsta versión te deja elegir qué repetido conservar, separa los intercambios de una región nueva de los demás y añade recompensas.\n\n## 🔁 Repetidos\n• Cuando un repetido no tiene la misma naturaleza que el tuyo, la ventana «¿Con cuál te quedas?» te deja quedarte el nuevo. Ocupa el lugar del tuyo en tus equipos. En ambos casos, la familia recibe la Exp. del repetido.\n• La pregunta aparece tras una eclosión, un intercambio, una compra en el Mercado negro, un regalo o un premio del mostrador del Casino.\n• Para las capturas, activa «Conservar repetidos» en la familia. Cuando está completa, la pregunta aparece en una esquina de la pantalla y la aventura sigue.\n• Si el Pokémon sustituido tiene más niveles o un rango, el juego pide confirmación e indica lo que se perderá.\n\n## 🌍 Regiones vinculadas\n• Mientras una región nueva está aparte, hasta su Liga, Intercambios y el Mercado negro tienen dos pestañas: «Regiones vinculadas» y la de la región nueva. Cada pestaña muestra los Pokémon de su lado y usa su propio dinero.\n• Una sola oferta de intercambio a la vez: la otra pestaña indica en qué lado está.\n• Equipos guardados: cada lado tiene sus 5 equipos, como su Mochila. Un equipo que solo tenía Pokémon del otro lado vuelve a poder editarse.\n• Torre Batalla: solo suben los Pokémon de las regiones vinculadas. Las compras de la tienda llegan a la Mochila de las regiones vinculadas.\n• Subsuelo: los ₽, Fragmentos y hallazgos van siempre al lado de su región, juegues donde juegues.\n\n## 🎁 Recompensas\n• Torre Batalla: la Baya Frambu Dorada, la Baya Latano y la Baya Enigma se venden por 75 Puntos Batalla, y la Baya Arabol por 400 a partir del piso 75.\n• Guardería: un Huevo tiene una posibilidad entre dos de tener la naturaleza de su progenitor.\n• El pachinko, las rutas y las ciudades dan las piedras evolutivas de cada región alcanzada, como la Tienda.\n• Subsuelo: una gema legendaria de tipo Siniestro se une a las geodas legendarias y al mostrador.\n\n## 🧭 Comodidad\n• Zonas legendarias: «Ver movimientos» muestra los movimientos del legendario, como en las incursiones.\n• Cada región tiene su ceremonia de entrega de medalla, como Kanto.\n• La búsqueda ignora los acentos en todas partes, en todos los idiomas.\n• La Pokédex completa de una región cuenta ahora todos sus Pokémon singulares, para el bonus ×2 de variocolor como en el mapa.\n\n## ⚖️ Equilibrio\n• Liga de la región más reciente: el equipo del Campeón va del nivel 91 al 95, con un poder oculto más bajo. Hace falta un equipo cercano al nivel 95 para ganar.\n\n## 🐛 Correcciones\n• Incursiones variocolor: al abrir el juego, una victoria contra otro jefe podía terminar la incursión del día sin captura. Está corregido.\n• Ficha de Entrenador: las medallas de la región más reciente están en el orden de los Gimnasios.\n• En algunos iPhone, los precios de las tiendas del Casino y del Subsuelo no se veían, y la ficha de una incursión no mostraba el botón Incursión. Está corregido.\n• Volver a ver la cinemática de un legendario ya no muestra otra pantalla durante un instante.\n• Mercado negro: la ayuda en chino se ha reescrito, gracias al jugador que la propuso.\n\n## 🛡️ Juego limpio\n• Los récords de la Torre Batalla se controlan mejor.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-03",
+    "title": "⚖️ v0.4.61 · Équilibrage",
+    "md": "\nCette version modifie les rangs du Souterrain.\n\n## ⛏️ Souterrain\n• Un Pokémon qui a pris un rang ne peut plus évoluer, ni par niveau, ni avec un objet.\n• La fenêtre de passage au rang le précise avant de dépenser les gemmes, et la fiche du Pokémon l'indique à la place de ses évolutions.\n\n",
+    "en": {
+      "title": "⚖️ v0.4.61 · Balance",
+      "md": "\nThis version changes Underground ranks.\n\n## ⛏️ Underground\n• A Pokémon that has gained a rank can no longer evolve, by level or with an item.\n• The rank-up window says so before you spend your gems, and the Pokémon's card shows it in place of its evolutions.\n\n"
+    },
+    "es": {
+      "title": "⚖️ v0.4.61 · Equilibrio",
+      "md": "\nEsta versión cambia los rangos del Subsuelo.\n\n## ⛏️ Subsuelo\n• Un Pokémon que ha subido de rango ya no puede evolucionar, ni por nivel ni con un objeto.\n• La ventana de subida de rango lo indica antes de gastar las gemas, y la ficha del Pokémon lo muestra en lugar de sus evoluciones.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-03",
+    "title": "🐛 v0.4.6 · Correctifs",
+    "md": "\nCette version montre mieux les gains de rang du Souterrain, rend les expéditions plus lisibles et corrige plusieurs bugs.\n\n## 📊 Statistiques\n• Les barres de stats d'un Pokémon suivent une échelle de couleurs, de l'orange au vert, puis des couleurs que seuls les rangs atteignent.\n• Pour un Pokémon qui a pris des rangs au Souterrain, la part gagnée par ses rangs s'affiche au bout de chaque barre, avec « +n » après chaque valeur. Le total de la fiche indique le bonus du rang.\n\n## ⛏️ Souterrain\n• Le thème d'une expédition affiche son bonus : « ▲ +30 % » de stats pour les Pokémon de ses types.\n• Dans le choix de l'équipe, les Pokémon de ton équipe d'aventure sont signalés. Ceux déjà envoyés dans une autre expédition apparaissent grisés en fin de liste, avec le numéro de leur équipe.\n• Équipe / PC : les Pokémon partis en expédition apparaissent en fin de liste. Touche-en un pour savoir quand il revient.\n• Un Pokémon à deux types prend un rang avec une gemme de l'un ou l'autre de ses types.\n• Le bouton qui lance une expédition s'appelle « En route ».\n\n## 🐛 Correctifs\n• Le bouton qui suit l'ouverture d'une géode ne bouge plus quand tu appuies dessus. Celui du choix d'un fossile non plus.\n• Carte de dresseur : sous les cadres, le bouton s'appelle « Voir les cadres » et ouvre les Succès sur les cadres. Même chose pour les apparences.\n• Pension : si l'heure de l'appareil avait été en avance, les Pokémon restaient figés jusqu'à ce que l'heure réelle les rattrape. Ils reprennent tout de suite.\n• Souterrain : avec « Animations réduites » activé ou « Météo animée » désactivé, le décor reste fixe au lieu de s'animer par à-coups.\n• Panthéon : une Ligue battue pendant qu'un chapitre d'une autre région tourne en boucle montre bien l'équipe qui a gagné.\n• Combats : les Pokémon adverses ne se superposent plus après un passage sur un autre écran.\n• Tour de Combat : les Pokémon partis en expédition au Souterrain font partie de ta prochaine ascension.\n• Un chromatique reçu par échange ou acheté au Marché noir, et transformé en XP pour sa famille, s'affiche bien en chromatique dans le message.\n• Un légendaire de zone de la région la plus récente avait beaucoup trop de PV. Son combat dure maintenant autant que celui des autres.\n\n## 🛡️ Fair-play\n• Des joueurs voyaient « Activité anormale détectée » à tort, notamment quand l'heure de leur appareil était décalée à l'ouverture du jeu. C'est corrigé.\n• Plusieurs protections contre la triche sont renforcées.\n\n",
+    "en": {
+      "title": "🐛 v0.4.6 · Bug fixes",
+      "md": "\nThis version shows Underground rank gains more clearly, makes expeditions easier to read and fixes several bugs.\n\n## 📊 Stats\n• A Pokémon's stat bars follow a colour scale, from orange to green, then colours only ranks can reach.\n• For a Pokémon that gained ranks in the Underground, the part its ranks add shows at the end of each bar, with \"+n\" after each value. The card's total shows the rank bonus.\n\n## ⛏️ Underground\n• An expedition's theme shows its bonus: \"▲ +30%\" stats for Pokémon of its types.\n• In the team picker, the Pokémon in your adventure team are marked. Those already sent on another expedition show greyed out at the end of the list, with their team's number.\n• Team / PC: Pokémon away on an expedition show at the end of the list. Tap one to see when it comes back.\n• A dual-type Pokémon ranks up with a gem of either of its types.\n• The button that starts an expedition now says \"Start\".\n\n## 🐛 Bug fixes\n• The button after opening a Geode no longer moves when you press it. Neither does the one after choosing a fossil.\n• Trainer Card: under the frames, the button says \"See frames\" and opens Achievements on the frames. Same for looks.\n• Day Care: if the device's clock had been ahead, the Pokémon stayed frozen until real time caught up. They resume right away.\n• Underground: with \"Reduced animations\" on or \"Animated weather\" off, the scenery stays still instead of moving in jerks.\n• Hall of Fame: a League beaten while a chapter of another region is on repeat shows the team that won.\n• Battles: opposing Pokémon no longer stack up after you visit another screen.\n• Battle Tower: Pokémon away on an Underground expedition are part of your next climb.\n• A shiny received in a trade or bought at the Black Market, and turned into XP for its family, now shows as shiny in the message.\n• A zone legendary of the newest region had far too much HP. Its battle now lasts as long as the others.\n\n## 🛡️ Fair play\n• Some players saw \"Unusual activity detected\" by mistake, especially when their device's clock was off as the game opened. It is fixed.\n• Several protections against cheating are stronger.\n\n"
+    },
+    "es": {
+      "title": "🐛 v0.4.6 · Correcciones",
+      "md": "\nEsta versión muestra mejor lo que aportan los rangos del Subsuelo, hace las expediciones más claras y corrige varios errores.\n\n## 📊 Estadísticas\n• Las barras de estadísticas de un Pokémon siguen una escala de colores, del naranja al verde, y luego colores que solo alcanzan los rangos.\n• En un Pokémon que ha subido de rango en el Subsuelo, lo que aportan sus rangos aparece al final de cada barra, con «+n» tras cada valor. El total de la ficha indica el bonus del rango.\n\n## ⛏️ Subsuelo\n• El tema de una expedición muestra su bonus: «▲ +30 %» de estadísticas para los Pokémon de sus tipos.\n• Al elegir el equipo, los Pokémon de tu equipo de aventura están señalados. Los que ya están en otra expedición aparecen en gris al final de la lista, con el número de su equipo.\n• Equipo / PC: los Pokémon que están de expedición aparecen al final de la lista. Toca uno para saber cuándo vuelve.\n• Un Pokémon de dos tipos sube de rango con una gema de cualquiera de sus tipos.\n• El botón que inicia una expedición se llama «Explorar».\n\n## 🐛 Correcciones\n• El botón que aparece al abrir una geoda ya no se mueve al pulsarlo. Tampoco el que aparece al elegir un fósil.\n• Ficha de Entrenador: bajo los marcos, el botón se llama «Ver marcos» y abre los Logros en los marcos. Lo mismo para los aspectos.\n• Guardería: si el reloj del dispositivo había ido adelantado, los Pokémon se quedaban parados hasta que la hora real los alcanzaba. Ahora siguen enseguida.\n• Subsuelo: con «Animaciones reducidas» activado o «Clima animado» desactivado, el decorado se queda fijo en vez de moverse a tirones.\n• Hall de la Fama: una Liga ganada mientras un capítulo de otra región se repite muestra el equipo que ganó.\n• Combates: los Pokémon rivales ya no se superponen tras pasar por otra pantalla.\n• Torre Batalla: los Pokémon que están de expedición en el Subsuelo forman parte de tu próximo ascenso.\n• Un variocolor recibido en un intercambio o comprado en el Mercado negro, y convertido en EXP para su familia, ya aparece como variocolor en el mensaje.\n• Un legendario de zona de la región más reciente tenía demasiados PS. Su combate dura ahora lo mismo que los demás.\n\n## 🛡️ Juego limpio\n• Algunos jugadores veían «Actividad anómala detectada» por error, sobre todo cuando el reloj de su dispositivo iba desfasado al abrir el juego. Ya está corregido.\n• Varias protecciones contra las trampas son más sólidas.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "title": "⚖️ v0.4.5 · Équilibrage",
+    "md": "\nCette version revoit la commission du Marché noir, met les combats contre les Champions en 1 contre 1 et corrige plusieurs bugs.\n\n## 🛒 Marché noir\n• La commission Rocket est de 30 % du prix, plus une part fixe selon la rareté du Pokémon : de 50 000 à 500 000 ₽, et de 500 000 à 2 500 000 ₽ pour un chromatique. Un échange reste la façon la moins chère de céder un Pokémon.\n• Tu peux acheter 3 Pokémon par jour, dont un seul chromatique. Le compteur repart à minuit, heure de Paris. Les ventes ne sont pas limitées.\n• Quand un autre joueur achète un Pokémon juste avant toi, la liste se met à jour.\n\n## ⚖️ Équilibrage\n• Les combats contre les Champions d'Arène, le Conseil 4 et les boss se jouent toujours en 1 contre 1. Les combats à 2 contre 2 restent possibles contre les autres dresseurs, et les Champions qui combattent en duo gardent leur combat à deux.\n• Les capes rares de Cheniti sont plus faciles à trouver.\n\n## 🐛 Correctifs\n• Après un échange ou un changement d'appareil, garder une sauvegarde plus ancienne pouvait faire perdre un Pokémon reçu, capturé ou éclos. Ce n'est plus le cas.\n• « Deux sauvegardes trouvées » indique ce que chaque sauvegarde a de plus que l'autre : « Seulement ici : » et ses Pokémon les plus précieux.\n• Un jeu resté ouvert sans être touché vérifie la sauvegarde en ligne dès que tu reviens dessus.\n• Le jour du jeu est le même pour tous les joueurs : il change à minuit, heure de Paris, comme celui des raids. Les expéditions du Souterrain en dépendent.\n• Certains joueurs ne pouvaient plus vendre ni acheter au Marché noir. C'est corrigé.\n• Sur téléphone, le montant de la commission ne se coupe plus avant « ₽ ».\n• Des joueurs voyaient à nouveau « Activité anormale détectée » à tort, après une vérification ou après une capture dans certains lieux. C'est corrigé.\n• Un joueur écarté pour triche n'est plus visible des autres joueurs : listes d'amis, code ami, alliés de raid.\n\n",
+    "en": {
+      "title": "⚖️ v0.4.5 · Balance",
+      "md": "\nThis version reworks the Black Market commission, makes battles against Gym Leaders 1 vs 1 and fixes several bugs.\n\n## 🛒 Black Market\n• The Rocket commission is 30% of the price, plus a fixed part based on the Pokémon's rarity: ₽50,000 to ₽500,000, and ₽500,000 to ₽2,500,000 for a shiny. A trade stays the cheapest way to hand over a Pokémon.\n• You can buy 3 Pokémon a day, only one of them shiny. The count restarts at midnight, Paris time. Sales are not limited.\n• When another player buys a Pokémon just before you, the list updates.\n\n## ⚖️ Balance\n• Battles against Gym Leaders, the Elite Four and bosses are always 1 vs 1. 2 vs 2 battles can still happen against other trainers, and Gym Leaders who fight as a pair keep their double battle.\n• Burmy's rarer cloaks are easier to find.\n\n## 🐛 Bug fixes\n• After a trade or a device switch, keeping an older save could lose a Pokémon you received, caught or hatched. That no longer happens.\n• \"Two saves found\" shows what each save has that the other lacks: \"Only here:\" and its most valuable Pokémon.\n• A game left open without being touched checks the online save as soon as you come back to it.\n• The game day is the same for every player: it changes at midnight, Paris time, like the raids' day. The Underground expeditions follow it.\n• Some players could no longer sell or buy at the Black Market. It is fixed.\n• On phones, the commission amount no longer breaks before \"₽\".\n• Some players saw \"Unusual activity detected\" again by mistake, after a review or after a catch in some places. It is fixed.\n• A player set aside for cheating is no longer visible to other players: friends lists, friend code, raid allies.\n\n"
+    },
+    "es": {
+      "title": "⚖️ v0.4.5 · Equilibrio",
+      "md": "\nEsta versión revisa la comisión del Mercado negro, pone los combates contra los Líderes de Gimnasio en 1 contra 1 y corrige varios errores.\n\n## 🛒 Mercado negro\n• La comisión Rocket es del 30 % del precio, más una parte fija según la rareza del Pokémon: de 50 000 ₽ a 500 000 ₽, y de 500 000 ₽ a 2 500 000 ₽ para un variocolor. Un intercambio sigue siendo la forma más barata de ceder un Pokémon.\n• Puedes comprar 3 Pokémon al día, solo uno de ellos variocolor. El contador vuelve a empezar a medianoche, hora de París. Las ventas no tienen límite.\n• Cuando otro jugador compra un Pokémon justo antes que tú, la lista se actualiza.\n\n## ⚖️ Equilibrio\n• Los combates contra los Líderes de Gimnasio, el Alto Mando y los jefes son siempre de 1 contra 1. Los combates de 2 contra 2 siguen siendo posibles contra los demás entrenadores, y los Líderes que combaten en pareja conservan su combate doble.\n• Los tipos de capa poco comunes de Burmy son más fáciles de encontrar.\n\n## 🐛 Correcciones\n• Tras un intercambio o un cambio de dispositivo, conservar una partida más antigua podía hacer perder un Pokémon recibido, capturado o eclosionado. Ya no ocurre.\n• «Se han encontrado dos partidas» indica lo que cada partida tiene y la otra no: «Solo aquí:» y sus Pokémon más valiosos.\n• Un juego que se queda abierto sin tocarlo comprueba la partida en línea en cuanto vuelves a él.\n• El día del juego es el mismo para todos los jugadores: cambia a medianoche, hora de París, como el de las incursiones. Las expediciones del Subsuelo dependen de él.\n• Algunos jugadores ya no podían vender ni comprar en el Mercado negro. Ya está corregido.\n• En el móvil, el importe de la comisión ya no se corta antes de «₽».\n• Algunos jugadores volvían a ver «Actividad anómala detectada» por error, tras una revisión o tras una captura en ciertos lugares. Ya está corregido.\n• Un jugador apartado por hacer trampas ya no es visible para los demás jugadores: listas de amigos, código de amigo, aliados de incursión.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "title": "🐛 v0.4.4 · Correctifs",
+    "md": "\nCette version corrige de nombreux bugs, montre les attaques des boss de raid et ajuste quelques réglages.\n\n## ⚔️ Raids\n• Un bouton « Voir les capacités » sur la carte du raid et dans le choix de l'équipe montre toutes les attaques du boss. Sa riposte est en tête de liste.\n\n## ⚖️ Équilibrage\n• Les attaques puissantes ratent un peu moins souvent, pour tous les combattants.\n• Dans le Souterrain, les objets d'évolution de la région la plus récente sont environ cinq fois plus fréquents, dès l'étage 25. Leur description et la Boutique indiquent qu'ils se trouvent dans le Souterrain.\n• La mise du Casino le plus récent passe de 3 000 à 2 500 ₽ par partie.\n• Un Pokémon échangé ou acheté appartient à la région de son espèce, si tu as déjà voyagé jusqu'à elle.\n• Tant que la Ligue de la nouvelle région n'est pas battue, les anciennes régions restent séparées d'elle. Un Pokémon de la nouvelle région placé dans l'équipe d'une ancienne région retourne au PC quand tu changes de région.\n\n## 🐛 Correctifs\n• Après une cinématique passée avec « Passer », comme une éclosion, l'Aventure pouvait s'accélérer fortement pendant que tu étais sur un autre écran. Elle garde maintenant son rythme normal.\n• L'éclosion d'un œuf suit l'option « Animations réduites ».\n• Avec « Flashs lumineux » désactivé, l'écran ne s'assombrit plus pendant les attaques puissantes.\n• Les fiches Pokédex de quelques Pokémon ne s'ouvraient plus. Elles s'ouvrent à nouveau.\n• Tour de Combat : un combat à 2 contre 2 restait à 1 contre 2 si tu touchais un Pokémon pendant l'arrivée du dresseur.\n• Tour de Combat : les attaques qui rendent des PV, comme Giga-Sangsue, ne font plus refuser un record.\n• Certaines évolutions étaient bloquées à tort par la place disponible dans une famille.\n• Un objet clé rangé dans le Sac de l'autre région est bien reconnu. Un lieu ne reste plus fermé et un ticket ne se rachète plus chaque semaine.\n• Pension : changer l'heure de l'appareil ne fait plus compter deux fois le même temps.\n• Pension : sur ordinateur, la liste des emplacements épinglée en haut ne déborde plus.\n• Marché noir : la grille de vente ne s'empile plus sur iPhone et iPad.\n• Le bandeau d'un chapitre sans arène montrait un autre lieu. Il montre maintenant le lieu de son légendaire.\n• Le look Pokémaniac de Kanto reprenait le dessin d'une autre région. Il a maintenant le sien.\n• Boîte à badges : un seul geste frotte tous les badges qu'il traverse.\n• Des joueurs voyaient « Activité anormale détectée » à tort : jeu laissé dans une fenêtre en arrière-plan, ou partie commencée en invité avant de se connecter. C'est corrigé.\n• Plusieurs protections contre la triche sont renforcées.\n\n## 📝 Textes\n• Le compteur d'une famille compte une place par espèce, plus une avec « Garder les doublons » ou pour un chromatique. Les bulles d'aide l'expliquent.\n• Une famille dont des membres sont hors du PC l'indique : « Pas tous au PC ».\n• La carte d'un raid verrouillé indique la Ligue à battre.\n• Le porte-monnaie de l'ancienne région porte le nom de la région jouée.\n• Un objet d'évolution absent de ton Sac mais présent dans celui de l'autre région le signale sous le bouton.\n• « Bon retour ! » indique ce que la Pension a donné pendant ton absence.\n• La Bel'Écaille indique qu'on ne la trouve qu'à marée basse.\n\n",
+    "en": {
+      "title": "🐛 v0.4.4 · Bug fixes",
+      "md": "\nThis version fixes many bugs, shows raid bosses' moves and adjusts a few settings.\n\n## ⚔️ Raids\n• A \"See moves\" button on the raid card and in the team picker shows all the boss's moves. Its counter is at the top of the list.\n\n## ⚖️ Balance\n• Powerful moves miss a little less often, for every fighter.\n• In the Underground, the evolution items of the newest region are about five times more common, from floor 25. Their description and the Shop say they are found in the Underground.\n• The bet at the newest Casino goes from ₽3,000 to ₽2,500 per game.\n• A traded or bought Pokémon belongs to its species' region, if you have already travelled there.\n• Until the new region's League is beaten, the older regions stay cut off from it. A Pokémon of the new region placed in an older region's team goes back to the PC when you switch regions.\n\n## 🐛 Bug fixes\n• After a cutscene skipped with \"Skip\", such as a hatching, the Adventure could speed up a lot while you were on another screen. It now keeps its normal pace.\n• Egg hatching follows the \"Reduced animations\" option.\n• With \"Bright flashes\" off, the screen no longer darkens during powerful moves.\n• The Pokédex entries of a few Pokémon would no longer open. They open again.\n• Battle Tower: a 2 vs 2 battle stayed at 1 vs 2 if you tapped a Pokémon while the trainer was coming in.\n• Battle Tower: moves that restore HP, such as Giga Drain, no longer get a record refused.\n• Some evolutions were wrongly blocked by the room left in a family.\n• A key item kept in the other region's Bag is now recognized. A place no longer stays locked and a ticket is no longer bought again every week.\n• Day Care: changing the device's time no longer counts the same time twice.\n• Day Care: on a computer, the slot list pinned at the top no longer overflows.\n• Black Market: the sell grid no longer piles up on iPhone and iPad.\n• The banner of a chapter without a gym showed another place. It now shows its legendary's place.\n• Kanto's Poké Maniac look used another region's drawing. It now has its own.\n• Badge Case: a single stroke rubs every badge it crosses.\n• Some players wrongly saw \"Unusual activity detected\": the game left in a background window, or a game started as a guest before signing in. This is fixed.\n• Several protections against cheating are stronger.\n\n## 📝 Texts\n• A family's counter counts one spot per species, plus one with \"Keep duplicates\" or for a shiny. The help bubbles explain it.\n• A family with members outside the PC says so: \"Not all in the PC\".\n• A locked raid's card shows the League to beat.\n• The older region's wallet is named after the region being played.\n• An evolution item missing from your Bag but held in the other region's Bag is noted under the button.\n• \"Welcome back!\" shows what the Day Care gave while you were away.\n• The Prism Scale says it can only be found at low tide.\n\n"
+    },
+    "es": {
+      "title": "🐛 v0.4.4 · Correcciones",
+      "md": "\nEsta versión corrige muchos errores, muestra los movimientos de los jefes de incursión y ajusta algunos parámetros.\n\n## ⚔️ Incursiones\n• Un botón «Ver movimientos» en la tarjeta de la incursión y en la elección del equipo muestra todos los movimientos del jefe. Su contraataque aparece el primero de la lista.\n\n## ⚖️ Equilibrio\n• Los movimientos potentes fallan un poco menos, para todos los combatientes.\n• En el Subsuelo, los objetos de evolución de la región más reciente son unas cinco veces más frecuentes, desde el piso 25. Su descripción y la Tienda indican que se encuentran en el Subsuelo.\n• La apuesta del Casino más reciente pasa de 3000 ₽ a 2500 ₽ por partida.\n• Un Pokémon intercambiado o comprado pertenece a la región de su especie, si ya has viajado hasta ella.\n• Mientras no venzas a la Liga de la nueva región, las regiones antiguas siguen separadas de ella. Un Pokémon de la nueva región colocado en el equipo de una región antigua vuelve al PC cuando cambias de región.\n\n## 🐛 Correcciones\n• Tras una escena saltada con «Saltar», como una eclosión, la Aventura podía acelerarse mucho mientras estabas en otra pantalla. Ahora mantiene su ritmo normal.\n• La eclosión de un huevo sigue la opción «Animaciones reducidas».\n• Con «Destellos» desactivado, la pantalla ya no se oscurece durante los movimientos potentes.\n• Las fichas de la Pokédex de algunos Pokémon ya no se abrían. Vuelven a abrirse.\n• Torre Batalla: un combate de 2 contra 2 se quedaba en 1 contra 2 si tocabas un Pokémon mientras llegaba el entrenador.\n• Torre Batalla: los movimientos que recuperan PS, como Gigadrenado, ya no hacen rechazar un récord.\n• Algunas evoluciones se bloqueaban por error por el espacio disponible en una familia.\n• Un objeto clave guardado en la Mochila de la otra región ya se reconoce. Un lugar ya no se queda cerrado y un ticket ya no se vuelve a comprar cada semana.\n• Guardería: cambiar la hora del dispositivo ya no cuenta dos veces el mismo tiempo.\n• Guardería: en ordenador, la lista de espacios fijada arriba ya no se desborda.\n• Mercado negro: la cuadrícula de venta ya no se amontona en iPhone y iPad.\n• El banner de un capítulo sin gimnasio mostraba otro lugar. Ahora muestra el lugar de su legendario.\n• El aspecto Pokémaníaco de Kanto usaba el dibujo de otra región. Ahora tiene el suyo.\n• Estuche de medallas: un solo gesto frota todas las medallas que cruza.\n• Algunos jugadores veían «Actividad anómala detectada» por error: el juego dejado en una ventana en segundo plano, o una partida empezada como invitado antes de iniciar sesión. Ya está corregido.\n• Varias protecciones contra las trampas son más fuertes.\n\n## 📝 Textos\n• El contador de una familia cuenta un espacio por especie, más uno con «Conservar repetidos» o por un variocolor. Las burbujas de ayuda lo explican.\n• Una familia con miembros fuera del PC lo indica: «No todos en el PC».\n• La tarjeta de una incursión bloqueada indica la Liga que hay que vencer.\n• El monedero de la región antigua lleva el nombre de la región que juegas.\n• Un objeto de evolución que no está en tu Mochila pero sí en la de la otra región lo indica bajo el botón.\n• «¡Bienvenido de nuevo!» muestra lo que la Guardería dio durante tu ausencia.\n• La Escama Bella indica que solo se encuentra con la marea baja.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "title": "✨ v0.4.3 · Nouveautés",
+    "md": "\nCette version change la façon d'obtenir les formes de Motisma, rééquilibre les raids et les zones légendaires les plus difficiles, et corrige plusieurs bugs.\n\n## ⚡ Motisma\n• Le Motisma de base s'obtient toujours de la même façon.\n• Une fois qu'il est capturé, chacune de ses cinq formes peut apparaître dans un lieu qui lui correspond, sous une météo ou à un moment précis de la journée. L'apparition est rare et n'a lieu qu'une fois par forme.\n• Chaque forme est un Pokémon à part, mais une équipe ne peut avoir qu'un seul Motisma à la fois, de base ou d'une forme.\n• Chaque forme apprend son attaque propre au niveau 50 : Surchauffe, Hydrocanon, Blizzard, Lame d'Air ou Tempête Verte.\n• La fiche Pokédex de chaque forme indique où et quand la trouver.\n• Les appareils sont retirés du jeu. Chaque appareil que tu avais a été remplacé par la forme correspondante, et un Motisma transformé a repris sa forme normale.\n\n## ⚖️ Raids et zones légendaires\n• Les boss de raid qu'aucune bonne équipe ne pouvait battre sont moins résistants. Les autres boss ne changent pas.\n• Plusieurs zones légendaires sont plus abordables avec une équipe peu adaptée, sans devenir faciles avec la meilleure équipe.\n\n## 🐛 Correctifs\n• Tacle Lourd, Presse, Balayage, Nœud Herbe, Gyroballe, Boule Élek et Dégommage manquaient aux Pokémon qui les apprennent. Ils les apprennent à nouveau, à leur niveau habituel.\n• Une défaite dans une Ligue ramène toujours ton équipe au premier membre. Avant, un membre déjà battu laissait passer l'équipe, et une Ligue pouvait être validée un membre à la fois.\n• La liste des rencontres de certaines zones affichait des Pokémon qui n'y vivent pas. C'est corrigé.\n• Sur le parcours de l'Aventure, l'étape de l'Arbre à Miel affiche l'icône du Miel.\n• L'accueil des Raids affiche la même bannière, que tu sois connecté ou non. Les boss du jour sont sur la page Raids chroma.\n• Certains joueurs qui jouaient sur plusieurs appareils voyaient « Activité anormale détectée » à tort. C'est corrigé.\n• La coupure du serveur dans la nuit du 1er au 2 novembre ne devrait plus se reproduire.\n\n",
+    "en": {
+      "title": "✨ v0.4.3 · New features",
+      "md": "\nThis version changes how Rotom's forms are obtained, rebalances the hardest raids and legendary zones, and fixes several bugs.\n\n## ⚡ Rotom\n• The base Rotom is still obtained the same way.\n• Once it is caught, each of its five forms can appear in a place that suits it, under a given weather or at a given time of day. The encounter is rare and happens only once per form.\n• Each form is a Pokémon of its own, but a team can only have one Rotom at a time, base or form.\n• Each form learns its own move at level 50: Overheat, Hydro Pump, Blizzard, Air Slash or Leaf Storm.\n• Each form's Pokédex entry shows where and when to find it.\n• Appliances are removed from the game. Each appliance you had was replaced by the matching form, and a transformed Rotom went back to its normal form.\n\n## ⚖️ Raids and legendary zones\n• Raid bosses that no good team could beat are less tough. The other bosses don't change.\n• Several legendary zones are more within reach with a poorly suited team, without becoming easy with the best team.\n\n## 🐛 Bug fixes\n• Heavy Slam, Crush Grip, Low Kick, Grass Knot, Gyro Ball, Electro Ball and Fling were missing from the Pokémon that learn them. They learn them again, at their usual level.\n• A defeat in a League always sends your team back to the first member. Before, a member already beaten let the team through, and a League could be cleared one member at a time.\n• The encounter list of some zones showed Pokémon that don't live there. This is fixed.\n• On the Adventure path, the Honey Tree step shows the Honey icon.\n• The Raids home shows the same banner whether you are signed in or not. The day's bosses are on the Shiny Raids page.\n• Some players who played on several devices wrongly saw \"Unusual activity detected\". This is fixed.\n• The server outage during the night of November 1 to 2 should not happen again.\n\n"
+    },
+    "es": {
+      "title": "✨ v0.4.3 · Novedades",
+      "md": "\nEsta versión cambia la forma de obtener las formas de Rotom, reequilibra las incursiones y las zonas legendarias más difíciles, y corrige varios errores.\n\n## ⚡ Rotom\n• El Rotom base se sigue obteniendo de la misma forma.\n• Una vez capturado, cada una de sus cinco formas puede aparecer en un lugar que le corresponde, con un clima o en un momento concreto del día. La aparición es rara y solo ocurre una vez por forma.\n• Cada forma es un Pokémon aparte, pero un equipo solo puede tener un Rotom a la vez, base o de una forma.\n• Cada forma aprende su propio movimiento al nivel 50: Sofoco, Hidrobomba, Ventisca, Tajo Aéreo o Lluevehojas.\n• La ficha de la Pokédex de cada forma indica dónde y cuándo encontrarla.\n• Los electrodomésticos se retiran del juego. Cada electrodoméstico que tenías se ha sustituido por la forma correspondiente, y un Rotom transformado ha vuelto a su forma normal.\n\n## ⚖️ Incursiones y zonas legendarias\n• Los jefes de incursión que ningún buen equipo podía vencer son menos resistentes. Los demás jefes no cambian.\n• Varias zonas legendarias son más asequibles con un equipo poco adaptado, sin volverse fáciles con el mejor equipo.\n\n## 🐛 Correcciones\n• Cuerpo Pesado, Agarrón, Patada Baja, Hierba Lazo, Giro Bola, Bola Voltio y Lanzamiento faltaban a los Pokémon que los aprenden. Vuelven a aprenderlos, a su nivel habitual.\n• Una derrota en una Liga siempre devuelve a tu equipo al primer miembro. Antes, un miembro ya vencido dejaba pasar al equipo, y una Liga podía superarse un miembro cada vez.\n• La lista de encuentros de algunas zonas mostraba Pokémon que no viven allí. Ya está corregido.\n• En el recorrido de la Aventura, la etapa del Árbol de Miel muestra el icono de la Miel.\n• El inicio de Incursiones muestra el mismo banner, tanto si has iniciado sesión como si no. Los jefes del día están en la página de Incursiones variocolor.\n• Algunos jugadores que jugaban en varios dispositivos veían «Actividad anómala detectada» por error. Ya está corregido.\n• El corte del servidor durante la noche del 1 al 2 de noviembre no debería repetirse.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "title": "🐛 v0.4.2 · Correctifs",
+    "md": "\nCette version empêche d'utiliser le Sac d'une ancienne région pour faire progresser les Pokémon de la nouvelle.\n\n## 🎒 Sac\n• Jusqu'à la Ligue de la nouvelle région, les Bonbons Exp., Super Bonbons, pierres d'évolution et Capsules Nature du Sac d'une ancienne région ne servent plus à ses Pokémon. Sur leur fiche, ces objets sont grisés.\n• Une baie de bonus mangée dans une ancienne région, ou juste avant d'en partir, n'a plus d'effet quand tu joues la nouvelle. Son heure continue de passer, et elle refait effet si tu retournes dans l'ancienne région.\n• Le Sac de la nouvelle région sert toujours à tous tes Pokémon. Après sa Ligue, tous les Sacs servent à nouveau à tous.\n\n",
+    "en": {
+      "title": "🐛 v0.4.2 · Bug fixes",
+      "md": "\nThis version stops the Bag of a previous region from being used to power up the new region's Pokémon.\n\n## 🎒 Bag\n• Until the new region's League, Exp. Candies, Rare Candies, evolution stones and Nature Capsules from a previous region's Bag can no longer be used on its Pokémon. On their card, these items are greyed out.\n• A bonus berry eaten in a previous region, or just before leaving it, has no effect while you play the new one. Its hour keeps running, and it works again if you go back to the previous region.\n• The new region's Bag still works on all your Pokémon. After its League, every Bag works on everyone again.\n\n"
+    },
+    "es": {
+      "title": "🐛 v0.4.2 · Correcciones",
+      "md": "\nEsta versión impide usar la Mochila de una región anterior para hacer progresar a los Pokémon de la nueva.\n\n## 🎒 Mochila\n• Hasta la Liga de la nueva región, los Caramelos Exp., Caramelos Raros, piedras evolutivas y Cápsulas Naturaleza de la Mochila de una región anterior ya no sirven para sus Pokémon. En su ficha, estos objetos aparecen en gris.\n• Una baya de bonificación comida en una región anterior, o justo antes de salir de ella, no tiene efecto mientras juegas la nueva. Su hora sigue corriendo, y vuelve a funcionar si regresas a la región anterior.\n• La Mochila de la nueva región sigue sirviendo para todos tus Pokémon. Tras su Liga, todas las Mochilas vuelven a servir para todos.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-02",
+    "title": "🐛 v0.4.1 · Correctifs",
+    "md": "\nCette version corrige le Souterrain, les doublons de famille, les raids chromatiques et le compteur de la Tour de Combat, et rééquilibre les zones légendaires.\n\n## ⛏️ Souterrain\n• Les expéditions lancées dans la nouvelle région ne restent plus bloquées à l'étage 1 pendant plusieurs jours.\n• Les expéditions déjà bloquées sont rappelées au chargement : « Récupérer » ramène les Pokémon et rend l'expédition du jour.\n• Jusqu'à la Ligue de la nouvelle région, seuls ses Pokémon peuvent partir en expédition, comme dans son aventure. Après la Ligue, tous les Pokémon peuvent y aller.\n\n## 🧬 Doublons de famille\n• Option « Garder les doublons » désactivée : une évolution vers une espèce déjà possédée attend, comme le ferait une nouvelle capture, au lieu de créer un doublon.\n• Option activée, ou Pokémon chromatique : rien ne change.\n• Aucun Pokémon n'est retiré du PC.\n\n## ✨ Raids chromatiques\n• Un raid gagné ne recommence plus à l'ouverture du jeu, avant que les raids du jour ne soient chargés.\n\n## 🌟 Zones légendaires\n• Rééquilibrage : une équipe peu adaptée au légendaire gagne moins souvent. La meilleure équipe gagne toujours environ 9 fois sur 10.\n• « Les plus choisis » s'affiche aussi dans la vue Zone, au-dessus de l'équipe.\n\n## 🏰 Tour de Combat\n• Le compteur de Pokémon ne baisse plus à chaque nouvel étage. Les Pokémon trop faibles pour l'étage restent debout et ne combattent pas ; le journal de l'étage indique combien.\n\n",
+    "en": {
+      "title": "🐛 v0.4.1 · Bug fixes",
+      "md": "\nThis version fixes the Underground, family duplicates, Shiny Raids and the Battle Tower counter, and rebalances legendary zones.\n\n## ⛏️ Underground\n• Expeditions sent in the new region no longer stay stuck on floor 1 for days.\n• Expeditions already stuck are called back on load: \"Take back\" brings the Pokémon home and gives the day's expedition back.\n• Until the new region's League, only its Pokémon can go on expeditions, as in its adventure. After the League, every Pokémon can go.\n\n## 🧬 Family duplicates\n• \"Keep duplicates\" off: an evolution into a species you already own waits, as a new catch would, instead of creating a duplicate.\n• Option on, or a shiny Pokémon: nothing changes.\n• No Pokémon is taken from your PC.\n\n## ✨ Shiny Raids\n• A raid you won no longer starts again when the game opens, before the day's raids are loaded.\n\n## 🌟 Legendary zones\n• Rebalance: a team poorly suited to the legendary wins less often. The best team still wins about 9 times out of 10.\n• \"Most picked\" also shows in the Zone view, above the team.\n\n## 🏰 Battle Tower\n• The Pokémon counter no longer drops on each new floor. Pokémon too weak for the floor stay standing and sit it out; the floor's log says how many.\n\n"
+    },
+    "es": {
+      "title": "🐛 v0.4.1 · Correcciones",
+      "md": "\nEsta versión corrige el Subsuelo, los repetidos de familia, las incursiones variocolor y el contador de la Torre Batalla, y reequilibra las zonas legendarias.\n\n## ⛏️ Subsuelo\n• Las expediciones enviadas en la nueva región ya no se quedan bloqueadas en el piso 1 durante días.\n• Las expediciones ya bloqueadas se recuperan al cargar: «Recoger» devuelve los Pokémon y la expedición del día.\n• Hasta la Liga de la nueva región, solo sus Pokémon pueden ir de expedición, como en su aventura. Tras la Liga, todos los Pokémon pueden ir.\n\n## 🧬 Repetidos de familia\n• «Conservar repetidos» desactivado: una evolución hacia una especie que ya tienes espera, como lo haría una nueva captura, en lugar de crear un repetido.\n• Opción activada, o Pokémon variocolor: nada cambia.\n• No se retira ningún Pokémon de tu PC.\n\n## ✨ Incursiones variocolor\n• Una incursión ganada ya no vuelve a empezar al abrir el juego, antes de que se carguen las incursiones del día.\n\n## 🌟 Zonas legendarias\n• Reequilibrio: un equipo poco adaptado al legendario gana menos a menudo. El mejor equipo sigue ganando unas 9 veces de cada 10.\n• «Los más elegidos» también aparece en la vista Zona, encima del equipo.\n\n## 🏰 Torre Batalla\n• El contador de Pokémon ya no baja en cada piso nuevo. Los Pokémon demasiado débiles para el piso siguen en pie y no combaten; el registro del piso indica cuántos.\n\n"
+    }
+  },
+  {
+    "date": "2026-11-01",
+    "title": "🗺️ v0.4.0 · Nouvelle région",
+    "md": "\nCette version ouvre une nouvelle région, ajoute le Souterrain et le Marché noir, revoit la Tour de Combat et apporte un mode veille pour économiser la batterie.\n\n## 🗺️ Nouvelle région\n• Elle s'ouvre après la Ligue de la troisième région : 107 nouveaux Pokémon, 8 arènes, une Ligue et un chapitre après la Ligue.\n• Comme pour la région précédente, elle a son argent, son sac et son équipe jusqu'à sa Ligue, et s'y joue avec les Pokémon capturés sur place. Battre sa Ligue relie les deux côtés.\n• Elle est environ 20 % plus longue que la précédente. Sa Ligue est plus difficile à chaque membre, jusqu'au Maître.\n• Zones légendaires, cinématiques d'entrée, apparences de dresseur, succès et cadres d'avatar propres à la région.\n• Une nouvelle météo, de nouvelles façons de rencontrer certains Pokémon, et un Casino avec ses propres lots.\n• Tour de Combat : ses adversaires incluent maintenant les Pokémon de la nouvelle région.\n\n## ⛏️ Souterrain\n• Nouvel écran Activités › Souterrain, ouvert au 2e badge de la nouvelle région.\n• Envoie une équipe de 3 Pokémon en expédition : elle descend étage par étage, combat, creuse des murs et campe, jusqu'au K.O. Plus elle descend, meilleur est le butin : ₽, objets, géodes, Éclats et fossiles.\n• Chaque expédition a un thème : les Pokémon de ses types y gagnent +30 % de stats.\n• 8 expéditions par jour, chaque Pokémon une seule fois par jour. 1 emplacement au départ, 3 autres à acheter avec des Éclats : 150, 500 puis 1 000.\n• Une fois atteints, les étages 25, 50, 75 et 100 servent de point de départ. Les étages sautés ne donnent ni butin ni XP.\n• Paliers de record : étage 100, 150 et 200, avec géodes légendaires, apparences de dresseur et un cadre d'avatar.\n• Géodes : elles s'ouvrent en les tapant et peuvent monter de rareté en cours d'ouverture. Elles donnent des gemmes, classées par type et par rareté.\n• Comptoir : 8 gemmes à acheter avec des Éclats, renouvelées toutes les 3 h. Un nouveau tirage est possible contre des ₽. Une gemme en trop se recycle en Éclats.\n\n## 💎 Rangs\n• Un Pokémon au niveau 100 peut monter de rang, du rang I au rang V, avec des gemmes de son type et de sa rareté : 1 gemme pour le rang I, 5 pour le rang V.\n• Chaque rang multiplie ses stats par 1,15 (×2 au rang V). Il repart au niveau 5 et garde son évolution et sa nature. L'XP pour remonter est multipliée par 1,25 par rang.\n• Le rang s'affiche en chiffre doré sur le Pokémon, partout : PC, équipe, classements, échanges. Il compte en raids, en zones légendaires et à la Tour de Combat.\n\n## 🚀 Marché noir\n• On dit que la Team Rocket fait des affaires en coulisses… Ceux qui trouvent son marché noir y achètent et vendent des Pokémon à prix fixe.\n• Le premier acheteur reçoit le Pokémon tout de suite, au niveau 5. Le vendeur reçoit le prix entier au rafraîchissement suivant ou au prochain lancement.\n• Mettre en vente coûte une commission de 20 % du prix, jamais rendue. 3 ventes à la fois, 3 jours chacune ; un Pokémon non vendu revient.\n\n## 🏰 Tour de Combat\n• Récompenses de la semaine selon ta place : n° 1 à 3, un cadre, un œuf chromatique et 1 500 / 1 200 / 1 000 Points Combat ; top 5 %, un cadre, un œuf chromatique et 800 ; top 10 %, un œuf chromatique et 600 ; top 25 %, 400 ; les autres, 150 dès l'étage 10.\n• Élite : le top 5 % d'une semaine passe dans le classement Élite, pour de bon. Chaque semaine jouée y rapporte les récompenses du top 10 %, et son podium un cadre « Élite de la Tour ». Les premiers à y entrer sont le top 5 % de la semaine du 26 octobre au 1er novembre.\n• L'apparence du Meneur de la semaine revient à tous ceux qui franchissent l'étage 100, au lieu du n° 1.\n• 5 nouveaux Meneurs entre les étages 80 et 120. Leurs apparences et celles des 6 autres Meneurs entrent dans la rotation : 12 au total.\n• Cadres d'avatar « Étage 50 », « Étage 100 » et « Étage 150 », d'après ton meilleur étage.\n• L'œuf chromatique de la semaine contient une espèce d'une région dont tu as gagné la Ligue.\n• Chaque espèce ne combat qu'une fois par course : son exemplaire le plus fort. La barre de combat montre le Pokémon actif et le nombre de Pokémon encore debout.\n• Un Pokémon à plus de 10 niveaux sous les adversaires d'un étage ne combat plus ; la course s'arrête quand plus personne n'est au niveau.\n• La boutique de la Tour passe dans un onglet de l'écran Tour.\n\n## ✨ Nouveautés\n• Équipe/PC : 5 équipes enregistrées à côté du titre. Un appui charge une équipe (au prochain Centre Pokémon), « + » en crée une vide.\n• Raids : l'onglet devient « Raids », avec un accueil à deux bannières : les raids chromatiques et un événement à venir. Les raids chromatiques de chaque région tiennent sur une seule page.\n• Raids chromatiques : il faut être connecté pour les jouer. Le jour des raids change à minuit, heure de Paris, pour tout le monde.\n• Badges : à partir de la nouvelle région, tes badges se ternissent avec le temps. Ouvre ta boîte à badges depuis ta carte de dresseur et frotte-les pour les faire briller. Les autres joueurs voient leur éclat. Un succès et un cadre récompensent les 8 badges d'une région étincelants ; l'option « Badges ternis » les garde toujours propres.\n• Succès › Cinématiques : revois les cinématiques des légendaires capturés, des Maîtres battus et des rencontres uniques.\n• Certains Maîtres de Ligue ont maintenant leur cinématique d'entrée.\n• Mode veille : après 2 ou 5 minutes sans action, ou avec 🌙 dans la barre du haut, l'écran passe au noir et affiche l'heure, le lieu, les combats et les captures. L'aventure continue au même rythme. Un appui le réveille.\n• Options › Performances : préréglages Économie, Équilibré et Maximum, délai de veille et réglages d'animations, de météo, de fond et d'effets.\n• Boutique : un onglet Vendre pour revendre tes objets en trop au quart de leur prix. Les objets clés, jetons et Éclats ne se vendent pas.\n• Attaques à coups multiples (Double Pied, Furie, Balle Graine…) : elles frappent vraiment plusieurs fois, 2 à 5 coups selon l'attaque, chacun avec ses dégâts. Elles sont donc plus fortes qu'avant.\n• Baies de boost : manger la même baie pendant son effet ajoute 1 h à sa durée, jusqu'à 4 h.\n• Retour d'absence : le récapitulatif indique les chromatiques sauvages qui t'ont échappé.\n• Objets : la carte d'un chapitre montre ses objets trouvables et leurs chances, et l'infobulle d'un objet dit à quoi il sert. Les objets d'évolution trouvés dans un lieu précis indiquent leur pourcentage de chance.\n• Sur ordinateur, la barre du haut affiche tes jetons, Points Combat et Éclats à côté des ₽.\n• Aventure : le panneau du sac devient « Consommables » et ne montre que les baies de boost (un appui en mange une). Le reste du sac s'ouvre depuis son en-tête.\n\n## ⚖️ Équilibrage\n• Zones légendaires : la difficulté de tous les boss a été réajustée, dans toutes les régions. Avec l'équipe ✨ Optimiser, la plupart des zones se gagnent environ 9 fois sur 10.\n• Super Bonbons : plus rares dans les premiers chapitres d'une région, plus fréquents dans les derniers et après la Ligue.\n• Baies : elles apparaissent au fil de la région. Oran, Framby, Nanana et Lansat dès le 1er chapitre ; Pêcha et Framby dorée au 3e badge ; Sitrus, Nanab et Enigma au 6e ; Frista au 8e.\n• Ligue : une fois la Ligue gagnée, ses dresseurs donnent moitié moins de ₽.\n• Objets trouvés pendant ton absence : plus de limite de 10. Chaque objet est gardé à 25 % ; une pierre d'évolution est toujours gardée.\n• Jetons : il n'y a plus de sacs de jetons sur les routes. La machine à sous est la seule source de jetons.\n• Pension : les emplacements ne demandent plus de Ligue. Pensionnaires et incubateur ont les mêmes prix : 50 000, 500 000 puis 2 500 000 ₽. Les emplacements déjà achetés restent.\n• Raids chromatiques : perdre contre le boss compte comme une défaite, plus comme une tentative.\n• Équipes : au plus un exemplaire normal et un chromatique par espèce, dans toutes les équipes. Un second exemplaire retourne au PC.\n• Sélecteurs d'équipe : les marques ▲ / ▼ contre un boss sont retirées. Le bouton ✨ Optimiser reste.\n\n## 🧭 Confort\n• Un champion d'arène déjà battu te laisse passer quand tu rejoues son chapitre, et la route ne s'arrête plus devant lui quand tu es sur un autre écran.\n• Pension : les emplacements restent en haut de l'écran quand tu fais défiler le PC.\n• Échanges : toutes les offres ouvertes se retrouvent, plus seulement les 60 plus récentes, et la recherche porte sur toutes les offres.\n• Échanges « un chromatique qui me manque » : toute la lignée de tes chromatiques compte, pas seulement l'espèce.\n• Menu latéral : Succès passe sous la Boutique, Souterrain sous la Tour de Combat.\n• Textes : 14 px minimum partout.\n• Sauvegarde en ligne toutes les 30 minutes au lieu de 15. Badges, raids et échanges restent sauvegardés tout de suite.\n• « Activité anormale détectée » s'affiche désormais là où un compte retenu est coupé.\n\n## 🐛 Correctifs\n• Sauvegarde : une connexion expirée l'indique, au lieu d'une erreur à chaque appui.\n• Sauvegarde : elle passe aussi sur les réseaux qui bloquaient son envoi.\n• Classements des raids : un temps validé par le serveur ne disparaît plus de ton classement.\n• Zones légendaires : le décor d'une ligne ne saute plus au survol.\n• Inscriptions des temples : elles s'affichent en chinois, coréen et japonais.\n• Nombres : ils suivent le format de ta langue partout.\n• Pension : l'aide de l'incubateur indique la bonne durée d'éclosion.\n\n",
+    "en": {
+      "title": "🗺️ v0.4.0 · New region",
+      "md": "\nThis version opens a new region, adds the Underground and the Black Market, reworks the Battle Tower and brings a sleep mode to save battery.\n\n## 🗺️ New region\n• It opens after the third region's League: 107 new Pokémon, 8 Gyms, a League and a chapter after the League.\n• As with the previous region, it has its own money, bag and team until its League, and you play it with the Pokémon caught there. Beating its League links both sides.\n• It is about 20% longer than the previous one. Its League gets harder with each member, up to the Champion.\n• Legendary zones, intro cutscenes, trainer looks, achievements and avatar frames of its own.\n• A new weather, new ways to encounter some Pokémon, and a Game Corner with its own prizes.\n• Battle Tower: its opponents now include the new region's Pokémon.\n\n## ⛏️ Underground\n• New screen Activities › Underground, open from the new region's 2nd badge.\n• Send a team of 3 Pokémon on an expedition: it goes down floor by floor, fights, digs through walls and camps, until it's K.O. The deeper it goes, the better the loot: ₽, items, geodes, Shards and fossils.\n• Each expedition has a theme: Pokémon of its types get +30% stats there.\n• 8 expeditions a day, each Pokémon once a day. 1 slot to start with, 3 more to buy with Shards: 150, 500, then 1,000.\n• Once reached, floors 25, 50, 75 and 100 can be used as a starting point. Skipped floors give no loot and no XP.\n• Record milestones: floors 100, 150 and 200, with legendary geodes, trainer looks and an avatar frame.\n• Geodes: tap them to open them; they can rise in rarity while opening. They give gems, sorted by type and rarity.\n• Counter: 8 gems to buy with Shards, refreshed every 3 hours. A new draw is available for ₽. A spare gem can be recycled into Shards.\n\n## 💎 Ranks\n• A level 100 Pokémon can rank up, from rank I to rank V, with gems of its type and rarity: 1 gem for rank I, 5 for rank V.\n• Each rank multiplies its stats by 1.15 (×2 at rank V). It goes back to level 5 and keeps its evolution and nature. The XP to level back up is multiplied by 1.25 per rank.\n• The rank shows as a gold numeral on the Pokémon everywhere: PC, team, leaderboards, trades. It counts in raids, legendary zones and the Battle Tower.\n\n## 🚀 Black Market\n• They say Team Rocket does business behind the scenes… Those who find its black market buy and sell Pokémon there at a fixed price.\n• The first buyer gets the Pokémon right away, at level 5. The seller receives the full price at the next refresh or the next launch.\n• Listing costs a 20% fee on the price, never refunded. 3 listings at a time, 3 days each; an unsold Pokémon comes back.\n\n## 🏰 Battle Tower\n• Weekly rewards by placement: #1 to #3, a frame, a shiny egg and 1,500 / 1,200 / 1,000 Battle Points; top 5%, a frame, a shiny egg and 800; top 10%, a shiny egg and 600; top 25%, 400; everyone else, 150 from floor 10.\n• Elite: the top 5% of a week moves up to the Elite leaderboard for good. Each week played there gives the top 10% rewards, and its podium a \"Tower Elite\" frame. The first to join are the top 5% of the week of October 26 to November 1.\n• The week's Frontier Brain look now goes to everyone who clears floor 100, instead of #1.\n• 5 new Frontier Brains between floors 80 and 120. Their looks and those of the 6 other Brains join the rotation: 12 in total.\n• \"Floor 50\", \"Floor 100\" and \"Floor 150\" avatar frames, based on your best floor.\n• The weekly shiny egg holds a species from a region whose League you've won.\n• Each species fights only once per run: its strongest copy. The battle bar shows the active Pokémon and how many are still standing.\n• A Pokémon more than 10 levels below a floor's opponents no longer fights; the run ends when nobody is left at their level.\n• The Tower's shop moves to a tab of the Tower screen.\n\n## ✨ New features\n• Team/PC: 5 saved teams next to the title. A tap loads a team (at the next Pokémon Center), \"+\" creates an empty one.\n• Raids: the tab becomes \"Raids\", with a home screen and two banners: Shiny Raids and an upcoming event. Each region's Shiny Raids fit on a single page.\n• Shiny Raids: you need to be signed in to play them. The raid day changes at midnight Paris time, for everyone.\n• Badges: from the new region on, your badges get dull over time. Open your badge case from your trainer card and rub them to make them shine. Other players see their shine. An achievement and a frame reward a region's 8 badges sparkling; the \"Dull Badges\" option keeps them clean at all times.\n• Achievements › Cutscenes: watch again the cutscenes of legendaries caught, Champions beaten and one-off encounters.\n• Some League Champions now have their own intro cutscene.\n• Sleep mode: after 2 or 5 minutes without input, or with 🌙 in the top bar, the screen turns black and shows the time, the place, battles and catches. The adventure goes on at the same pace. A tap wakes it up.\n• Options › Performance: Saver, Balanced and Maximum presets, sleep delay, and settings for animations, weather, background and effects.\n• Shop: a Sell tab to sell your spare items for a quarter of their price. Key items, Coins and Shards can't be sold.\n• Multi-hit moves (Double Kick, Fury Attack, Bullet Seed…): they really hit several times, 2 to 5 hits depending on the move, each with its own damage. They're stronger than before.\n• Boost berries: eating the same berry while it's active adds 1 hour to its duration, up to 4 hours.\n• Welcome-back recap: it now tells you about wild shinies that got away.\n• Items: a chapter card shows its findable items and their odds, and an item's tooltip says what it's for. Evolution items found in a specific place show their percentage chance.\n• On a computer, the top bar shows your Coins, Battle Points and Shards next to your ₽.\n• Adventure: the bag panel becomes \"Consumables\" and only shows boost berries (a tap eats one). The rest of the bag opens from its header.\n\n## ⚖️ Balance\n• Legendary zones: every boss's difficulty has been readjusted, in every region. With the ✨ Optimize team, most zones are won about 9 times out of 10.\n• Rare Candies: rarer in a region's first chapters, more common in its last ones and after the League.\n• Berries: they show up as the region goes on. Oran, Razz, Pinap and Lansat from the 1st chapter; Pecha and Golden Razz at the 3rd badge; Sitrus, Nanab and Enigma at the 6th; Starf at the 8th.\n• League: once the League is won, its trainers give half as much ₽.\n• Items found while you're away: no more cap of 10. Each item is kept at 25%; an evolution stone is always kept.\n• Coins: no more coin bags on routes. The slot machine is the only source of Coins.\n• Day Care: slots no longer require a League. Boarders and incubator have the same prices: 50,000, 500,000, then 2,500,000 ₽. Slots already bought are kept.\n• Shiny Raids: losing to the boss counts as a defeat, no longer as an attempt.\n• Teams: at most one regular and one shiny copy per species, in every team. A second copy goes back to the PC.\n• Team pickers: the ▲ / ▼ marks against a boss are removed. The ✨ Optimize button stays.\n\n## 🧭 Quality of life\n• A Gym Leader you've already beaten lets you through when you replay their chapter, and the route no longer stops in front of them while you're on another screen.\n• Day Care: the slots stay at the top of the screen while you scroll the PC.\n• Trades: every open offer can be found, not only the 60 most recent, and search covers every offer.\n• \"Any shiny I'm missing\" trades: your shinies' whole evolution line counts, not only the species.\n• Side menu: Achievements moves under the Shop, Underground under the Battle Tower.\n• Text: 14 px minimum everywhere.\n• Online save every 30 minutes instead of 15. Badges, raids and trades are still saved right away.\n• \"Unusual activity detected\" now shows where a held account is cut off.\n\n## 🐛 Bug fixes\n• Save: an expired sign-in now says so, instead of an error on every tap.\n• Save: it now goes through on networks that blocked it.\n• Raid leaderboards: a time accepted by the server no longer disappears from your leaderboard.\n• Legendary zones: a row's background no longer jumps on hover.\n• Temple inscriptions: they now show in Chinese, Korean and Japanese.\n• Numbers: they follow your language's format everywhere.\n• Day Care: the incubator's help shows the right hatching time.\n\n"
+    },
+    "es": {
+      "title": "🗺️ v0.4.0 · Nueva región",
+      "md": "\nEsta versión abre una nueva región, añade el Subsuelo y el Mercado negro, renueva la Torre Batalla y trae un modo reposo para ahorrar batería.\n\n## 🗺️ Nueva región\n• Se abre tras la Liga de la tercera región: 107 Pokémon nuevos, 8 gimnasios, una Liga y un capítulo después de la Liga.\n• Como la región anterior, tiene su propio dinero, mochila y equipo hasta su Liga, y se juega con los Pokémon capturados allí. Vencer su Liga une los dos lados.\n• Es un 20 % más larga que la anterior, aproximadamente. Su Liga es más difícil con cada miembro, hasta el Campeón.\n• Zonas legendarias, cinemáticas de entrada, aspectos de entrenador, logros y marcos de avatar propios.\n• Un clima nuevo, nuevas formas de encontrar algunos Pokémon y un Casino con sus propios premios.\n• Torre Batalla: sus rivales incluyen ahora los Pokémon de la nueva región.\n\n## ⛏️ Subsuelo\n• Nueva pantalla Actividades › Subsuelo, abierta desde la 2.ª medalla de la nueva región.\n• Envía un equipo de 3 Pokémon de expedición: baja piso a piso, combate, excava muros y acampa, hasta caer K.O. Cuanto más baja, mejor es el botín: ₽, objetos, geodas, Fragmentos y fósiles.\n• Cada expedición tiene un tema: los Pokémon de sus tipos ganan un +30 % de estadísticas allí.\n• 8 expediciones al día, cada Pokémon una sola vez al día. 1 hueco al principio y 3 más que se compran con Fragmentos: 150, 500 y luego 1000.\n• Una vez alcanzados, los pisos 25, 50, 75 y 100 sirven de punto de partida. Los pisos saltados no dan botín ni EXP.\n• Hitos de récord: pisos 100, 150 y 200, con geodas legendarias, aspectos de entrenador y un marco de avatar.\n• Geodas: se abren a toques y pueden subir de rareza mientras se abren. Dan gemas, clasificadas por tipo y rareza.\n• Mostrador: 8 gemas que se compran con Fragmentos, renovadas cada 3 h. Se puede pedir una nueva selección a cambio de ₽. Una gema de sobra se recicla en Fragmentos.\n\n## 💎 Rangos\n• Un Pokémon de nivel 100 puede subir de rango, del rango I al rango V, con gemas de su tipo y rareza: 1 gema para el rango I, 5 para el rango V.\n• Cada rango multiplica sus estadísticas por 1,15 (×2 en el rango V). Vuelve al nivel 5 y conserva su evolución y su naturaleza. La EXP para volver a subir se multiplica por 1,25 por rango.\n• El rango aparece como un número dorado sobre el Pokémon en todas partes: PC, equipo, clasificaciones, intercambios. Cuenta en incursiones, zonas legendarias y la Torre Batalla.\n\n## 🚀 Mercado negro\n• Dicen que el Team Rocket hace negocios entre bastidores… Quienes encuentran su mercado negro compran y venden Pokémon allí a precio fijo.\n• El primer comprador recibe el Pokémon al instante, al nivel 5. El vendedor recibe el precio entero en la siguiente actualización o al volver a abrir el juego.\n• Poner a la venta cuesta una comisión del 20 % del precio, nunca devuelta. 3 ventas a la vez, de 3 días cada una; un Pokémon no vendido vuelve.\n\n## 🏰 Torre Batalla\n• Recompensas semanales según tu puesto: del 1.º al 3.º, un marco, un huevo variocolor y 1500 / 1200 / 1000 Puntos Batalla; top 5 %, un marco, un huevo variocolor y 800; top 10 %, un huevo variocolor y 600; top 25 %, 400; los demás, 150 desde el piso 10.\n• Élite: el top 5 % de una semana pasa a la clasificación Élite, para siempre. Cada semana jugada allí da las recompensas del top 10 %, y su podio un marco «Élite de la Torre». Los primeros en entrar son el top 5 % de la semana del 26 de octubre al 1 de noviembre.\n• El aspecto del As de la semana es ahora para todos los que superan el piso 100, en lugar del n.º 1.\n• 5 Ases nuevos entre los pisos 80 y 120. Sus aspectos y los de los otros 6 Ases entran en la rotación: 12 en total.\n• Marcos de avatar «Piso 50», «Piso 100» y «Piso 150», según tu mejor piso.\n• El huevo variocolor de la semana contiene una especie de una región cuya Liga has ganado.\n• Cada especie combate una sola vez por intento: su ejemplar más fuerte. La barra de combate muestra el Pokémon activo y cuántos siguen en pie.\n• Un Pokémon a más de 10 niveles por debajo de los rivales de un piso ya no combate; el intento termina cuando no queda nadie a su nivel.\n• La tienda de la Torre pasa a una pestaña de la pantalla de la Torre.\n\n## ✨ Novedades\n• Equipo/PC: 5 equipos guardados junto al título. Un toque carga un equipo (en el próximo Centro Pokémon), «+» crea uno vacío.\n• Incursiones: la pestaña pasa a llamarse «Incursiones», con una pantalla de inicio y dos banners: las incursiones variocolor y un evento por venir. Las incursiones variocolor de cada región caben en una sola página.\n• Incursiones variocolor: hay que tener la sesión iniciada para jugarlas. El día de las incursiones cambia a medianoche, hora de París, para todos.\n• Medallas: desde la nueva región, tus medallas se deslucen con el tiempo. Abre tu estuche de medallas desde tu ficha de entrenador y frótalas para que brillen. Los demás jugadores ven su brillo. Un logro y un marco premian las 8 medallas de una región relucientes; la opción «Medallas deslucidas» las mantiene siempre limpias.\n• Logros › Cinemáticas: vuelve a ver las cinemáticas de los legendarios capturados, los Campeones vencidos y los encuentros únicos.\n• Algunos Campeones de Liga tienen ahora su propia cinemática de entrada.\n• Modo reposo: tras 2 o 5 minutos sin actividad, o con 🌙 en la barra superior, la pantalla se pone en negro y muestra la hora, el lugar, los combates y las capturas. La aventura sigue al mismo ritmo. Un toque la despierta.\n• Opciones › Rendimiento: ajustes Ahorro, Equilibrado y Máximo, tiempo antes del reposo y ajustes de animaciones, clima, fondo y efectos.\n• Tienda: una pestaña Vender para vender tus objetos de sobra a un cuarto de su precio. Los objetos clave, las Fichas y los Fragmentos no se venden.\n• Movimientos de golpes múltiples (Doble Patada, Ataque Furia, Recurrente…): ahora golpean de verdad varias veces, de 2 a 5 golpes según el movimiento, cada uno con su daño. Son más fuertes que antes.\n• Bayas de mejora: comer la misma baya mientras está activa añade 1 h a su duración, hasta 4 h.\n• Resumen de regreso: indica los variocolor salvajes que se te escaparon.\n• Objetos: la ficha de un capítulo muestra sus objetos y sus probabilidades, y la descripción de un objeto dice para qué sirve. Los objetos de evolución de un lugar concreto indican su porcentaje de probabilidad.\n• En ordenador, la barra superior muestra tus Fichas, Puntos Batalla y Fragmentos junto a tus ₽.\n• Aventura: el panel de la mochila pasa a llamarse «Consumibles» y solo muestra las bayas de mejora (un toque se come una). El resto de la mochila se abre desde su cabecera.\n\n## ⚖️ Equilibrio\n• Zonas legendarias: la dificultad de todos los jefes se ha reajustado, en todas las regiones. Con el equipo ✨ Optimizar, la mayoría de las zonas se ganan unas 9 veces de cada 10.\n• Caramelos Raros: más raros en los primeros capítulos de una región, más frecuentes en los últimos y después de la Liga.\n• Bayas: aparecen a medida que avanza la región. Aranja, Frambu, Pinia y Zonlan desde el 1.er capítulo; Meloc y Frambu Dorada con la 3.ª medalla; Zidra, Latano y Enigma con la 6.ª; Arabol con la 8.ª.\n• Liga: una vez ganada la Liga, sus entrenadores dan la mitad de ₽.\n• Objetos encontrados durante tu ausencia: ya no hay límite de 10. Cada objeto se conserva al 25 %; una piedra evolutiva siempre se conserva.\n• Fichas: ya no hay sacos de fichas en las rutas. La tragaperras es la única fuente de fichas.\n• Guardería: los huecos ya no requieren una Liga. Huéspedes e incubadora tienen los mismos precios: 50 000, 500 000 y luego 2 500 000 ₽. Los huecos ya comprados se mantienen.\n• Incursiones variocolor: perder contra el jefe cuenta como una derrota, ya no como un intento.\n• Equipos: como mucho un ejemplar normal y uno variocolor por especie, en todos los equipos. Un segundo ejemplar vuelve al PC.\n• Selectores de equipo: se quitan las marcas ▲ / ▼ contra un jefe. El botón ✨ Optimizar se queda.\n\n## 🧭 Comodidad\n• Un Líder de Gimnasio ya vencido te deja pasar cuando repites su capítulo, y la ruta ya no se detiene ante él cuando estás en otra pantalla.\n• Guardería: los huecos se quedan arriba de la pantalla al desplazar el PC.\n• Intercambios: todas las ofertas abiertas se pueden encontrar, no solo las 60 más recientes, y la búsqueda abarca todas las ofertas.\n• Intercambios «un variocolor que me falte»: cuenta toda la línea evolutiva de tus variocolor, no solo la especie.\n• Menú lateral: Logros pasa bajo la Tienda, Subsuelo bajo la Torre Batalla.\n• Textos: 14 px como mínimo en todas partes.\n• Guardado en línea cada 30 minutos en lugar de 15. Las medallas, incursiones e intercambios se siguen guardando al momento.\n• «Actividad anómala detectada» aparece ahora donde una cuenta retenida queda bloqueada.\n\n## 🐛 Correcciones\n• Guardado: una sesión caducada lo indica, en lugar de dar un error a cada toque.\n• Guardado: ahora pasa también en las redes que bloqueaban su envío.\n• Clasificaciones de incursiones: un tiempo validado por el servidor ya no desaparece de tu clasificación.\n• Zonas legendarias: el fondo de una fila ya no salta al pasar el ratón.\n• Inscripciones de los templos: ahora se muestran en chino, coreano y japonés.\n• Números: siguen el formato de tu idioma en todas partes.\n• Guardería: la ayuda de la incubadora indica la duración de eclosión correcta.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-29",
+    "title": "✨ v0.3.17 · Nouveautés",
+    "md": "\nCe patch ajoute cinq langues, un guide du jeu et un week-end Halloween aux raids chromatiques, et corrige plusieurs bugs.\n\n## 🌍 Cinq nouvelles langues\n• Le jeu existe maintenant en allemand, chinois simplifié, chinois traditionnel, coréen et japonais, en plus du français, de l'anglais et de l'espagnol.\n• Les noms des Pokémon, des attaques, des objets et des lieux sont les noms officiels de chaque langue.\n• Options › Langue : les langues s'affichent dans une liste. Au premier lancement, le jeu prend la langue du navigateur quand elle en fait partie.\n\n## 📖 Guide du jeu\n• Un guide explique chaque fonctionnalité en 13 pages : aventure, capture, chromatiques, équipe, Pokédex, Ligue, baies, Pension, échanges, boutique, Casino, raids et Tour de Combat.\n• Il s'ouvre depuis Options › Nouveautés, et depuis le bouton « Guide » du menu latéral sur ordinateur.\n• Chaque page a un bouton « Y aller » qui ouvre l'onglet concerné.\n\n## 🎃 Halloween\n• Raids chromatiques : du vendredi 30 octobre au dimanche 1er novembre, chaque région a un boss sur le thème d'Halloween.\n• Le donjon passe en lumière de nuit, et des âmes s'élèvent dans le ciel.\n\n## 🧭 Confort\n• Échanges : une offre qui mêle deux régions n'est plus cachée tant que tes régions sont séparées. Elle s'affiche en fin de liste avec la carte, qui indique après quelle Ligue l'échange devient possible.\n• Équipe sur téléphone : le badge du Copain passe en bas à droite du sprite. Il ne cache plus le type du Pokémon.\n\n## 🐛 Correctifs\n• Bonbons Exp. sur téléphone : un seul appui utilise un seul bonbon. Avant, un léger ralentissement pouvait faire consommer le bonbon en boucle.\n• Raids chromatiques : le compteur « Tentative » ne repart plus à 1 après un plantage ou un changement d'équipe.\n• Sélecteurs d'équipe sur iPhone : les 6 emplacements de l'équipe restent visibles en haut de l'écran.\n• Classements : les lignes ne passent plus par-dessus la tienne quand tu fais défiler la liste.\n• Carte : passer de la Ligue d'une région à celle d'une autre commence au premier membre. Avant, le combat en cours dans l'autre Ligue reprenait.\n• Casino : le titre ne passe plus sous ton argent quand tu as beaucoup de ₽.\n\n",
+    "en": {
+      "title": "✨ v0.3.17 · New features",
+      "md": "\nThis patch adds five languages, a game guide and a Halloween weekend for shiny raids, and fixes several bugs.\n\n## 🌍 Five new languages\n• The game is now available in German, Simplified Chinese, Traditional Chinese, Korean and Japanese, as well as French, English and Spanish.\n• Pokémon, moves, items and places use their official names in each language.\n• Options › Language: the languages are shown in a list. On first launch, the game uses your browser's language when it's one of them.\n\n## 📖 Game guide\n• A guide explains every feature in 13 pages: adventure, catching, shinies, team, Pokédex, League, berries, Day Care, trades, shop, Game Corner, raids and Battle Tower.\n• It opens from Options › What's new, and from the \"Guide\" button in the side menu on a computer.\n• Each page has a \"Go there\" button that opens the matching tab.\n\n## 🎃 Halloween\n• Shiny raids: from Friday, October 30 to Sunday, November 1, each region has a Halloween-themed boss.\n• The dungeon switches to night lighting, and souls rise into the sky.\n\n## 🧭 Quality of life\n• Trades: an offer across two regions is no longer hidden while your regions are apart. It shows at the end of the list with the map, which tells you after which League the trade becomes possible.\n• Team on a phone: the Buddy badge moves to the bottom right of the sprite. It no longer covers the Pokémon's type.\n\n## 🐛 Bug fixes\n• Exp. Candies on a phone: one tap uses one candy. Before, a short lag could make the candy get used over and over.\n• Shiny raids: the \"Attempt\" counter no longer goes back to 1 after a crash or a team change.\n• Team pickers on an iPhone: the team's 6 slots stay visible at the top of the screen.\n• Leaderboards: rows no longer slide over yours when you scroll the list.\n• Map: going from one region's League to another's starts at the first member. Before, the fight under way in the other League resumed.\n• Game Corner: the title no longer runs under your money when you have a lot of ₽.\n\n"
+    },
+    "es": {
+      "title": "✨ v0.3.17 · Novedades",
+      "md": "\nEste parche añade cinco idiomas, una guía del juego y un fin de semana de Halloween en las incursiones variocolor, y corrige varios errores.\n\n## 🌍 Cinco idiomas nuevos\n• El juego ya está en alemán, chino simplificado, chino tradicional, coreano y japonés, además de francés, inglés y español.\n• Los Pokémon, movimientos, objetos y lugares llevan su nombre oficial en cada idioma.\n• Opciones › Idioma: los idiomas aparecen en una lista. Al abrir el juego por primera vez, se usa el idioma del navegador si es uno de ellos.\n\n## 📖 Guía del juego\n• Una guía explica cada función en 13 páginas: aventura, captura, variocolor, equipo, Pokédex, Liga, bayas, Guardería, intercambios, tienda, Casino, incursiones y Torre Batalla.\n• Se abre desde Opciones › Novedades, y desde el botón «Guía» del menú lateral en ordenador.\n• Cada página tiene un botón «Ir allí» que abre la pestaña correspondiente.\n\n## 🎃 Halloween\n• Incursiones variocolor: del viernes 30 de octubre al domingo 1 de noviembre, cada región tiene un jefe con temática de Halloween.\n• La mazmorra pasa a luz nocturna, y unas almas suben hacia el cielo.\n\n## 🧭 Comodidad\n• Intercambios: una oferta que mezcla dos regiones ya no se oculta mientras tus regiones están separadas. Aparece al final de la lista con el mapa, que indica después de qué Liga será posible el intercambio.\n• Equipo en el móvil: la insignia del Compañero pasa abajo a la derecha del sprite. Ya no tapa el tipo del Pokémon.\n\n## 🐛 Correcciones\n• Caramelos Exp. en el móvil: un solo toque usa un solo caramelo. Antes, una pequeña ralentización podía hacer que el caramelo se usara una y otra vez.\n• Incursiones variocolor: el contador «Intento» ya no vuelve a 1 tras un cierre inesperado o un cambio de equipo.\n• Selectores de equipo en iPhone: las 6 casillas del equipo siguen visibles en la parte superior de la pantalla.\n• Clasificaciones: las filas ya no pasan por encima de la tuya al desplazar la lista.\n• Mapa: pasar de la Liga de una región a la de otra empieza por el primer miembro. Antes, se reanudaba el combate en curso de la otra Liga.\n• Casino: el título ya no queda bajo tu dinero cuando tienes muchos ₽.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-28",
+    "title": "🐛 v0.3.16 · Correctifs",
+    "md": "\nCe patch corrige le temps d'absence, les raids après minuit et le scintillement des attaques, et réduit la mémoire utilisée par le jeu.\n\n## ⚖️ Équilibrage\n• Raids chromatiques : la jauge Master Ball repart de zéro chaque jour. Elle ne se garde plus d'un jour à l'autre.\n• La Master Ball arrive toujours au 200e essai, compté sur la journée. Un essai commencé avant minuit compte pour la veille.\n• Casino : à la machine à sous, deux Kokiyas au début d'une ligne rapportent 1 jeton. Plus d'une partie sur trois est gagnante (35 %), au lieu d'une sur quatre.\n• Casino : trois BAR rapportent 66 jetons au lieu de 90. Le 7 reste à 220, et le gain moyen par partie ne change pas.\n\n## 🗺️ Mont Argenté\n• Le Mont Argenté est maintenant le dernier chapitre de sa région, juste après sa Ligue. La mention « Kanto II » disparaît de la carte et du Pokédex.\n• Sur la carte, il s'affiche sous « La suite » une fois la Ligue gagnée. Le titre « Retour à Kanto » est retiré.\n• La région suivante s'ouvre toujours une fois le Mont Argenté terminé. Les sauvegardes sont mises à jour au chargement, rien n'est perdu.\n\n## 🧭 Confort\n• Échanges : une ligne rouge indique que les frais ne sont pas remboursés si tu retires ton offre ou si elle expire. Elle s'affiche sur le récapitulatif de l'offre et au moment de la retirer.\n• Sac : les Bonbons Exp. sont rangés par taille (S, M, XL, Big, puis Super Bonbon), et non plus dans l'ordre où tu les as trouvés.\n• Options : le numéro de version en bas de l'écran est celui du dernier patch (v0.3.16), et non plus v0.9.\n\n## 🐛 Correctifs\n• Temps d'absence : un ordinateur mis en veille avec le jeu ouvert compte ce temps au retour. Avant, 30 min de veille pouvaient ne rien rapporter.\n• Temps d'absence : un téléphone déverrouillé puis reverrouillé avant la reprise du jeu garde tout son temps. Avant, ce coup d'œil effaçait la nuit (cas signalé : 1 h 36 jouée sur 8 h).\n• Raids chromatiques : à minuit, l'essai commencé la veille s'arrête. Le boss de la veille ne peut plus être relancé, et l'écran Raids lance le raid du jour.\n• Effets d'attaque : plus de scintillement quand les attaques s'enchaînent. Le voile sombre change de couleur en 0,3 s au lieu de sauter, et l'écran flashe au plus une fois toutes les 0,45 s. L'option « Flashs lumineux » les coupe toujours.\n• Aventure : l'écran se redessine quand le combat a avancé pendant une étape. Corrige les textes mélangés, le camp de base d'un raid affiché sur le combat après un verrouillage du téléphone, et « undefined sauvage utilise… ».\n• Mémoire : le jeu ne garde plus les Pokémon des combats passés. Sur 10 min d'aventure, la page passait de 1 733 à 3 141 éléments. Elle reste maintenant stable autour de 1 700.\n• PC sur téléphone : une fiche de Pokémon fermée libère sa mémoire (environ 290 éléments par fiche). Les fiches ne s'ouvrent plus de plus en plus lentement, et relâcher un Pokémon ne prend plus plusieurs secondes.\n• Échanges : une offre publiée depuis un autre compte du même dresseur n'est plus effacée. Elle s'affiche avec « Sur ton autre compte » et se règle sur ce compte.\n• Casino : après un gain à la machine à sous, le compteur de jetons affichait 1 jeton de moins que le gain. Il affiche maintenant le bon total.\n• Casino : le pachinko s'ouvre dès que la Ligue de Kanto est gagnée, sans attendre le départ vers la région suivante.\n• Œufs de l'histoire : un œuf reçu dans une région éclot comme Pokémon de cette région, même si tu joues un chapitre de Kanto au moment de l'éclosion. Les Pokémon concernés sont corrigés au chargement.\n• Pokédex : le total des statistiques compte de nouveau la Déf. Spé., comme les six barres qu'il additionne.\n• Retour d'absence : le portrait du dresseur montre toute sa tête, et non plus seulement ses cheveux.\n\n## 🛡️ Fair-play\n• Le serveur repère une page dont l'heure du jeu avance plus vite que la sienne.\n\n",
+    "en": {
+      "title": "🐛 v0.3.16 · Bug fixes",
+      "md": "\nThis patch fixes time away, raids after midnight and flickering attacks, and lowers the memory the game uses.\n\n## ⚖️ Balance\n• Shiny raids: the Master Ball gauge starts from zero every day. It no longer carries over from one day to the next.\n• The Master Ball still comes on the 200th try, counted over the day. A try begun before midnight counts for the day before.\n• Game Corner: on the slot machine, two Shellder at the start of a line pay 1 coin. More than one spin in three wins (35 %), instead of one in four.\n• Game Corner: three BARs pay 66 coins instead of 90. The 7 stays at 220, and the average payout per spin doesn't change.\n\n## 🗺️ Mt. Silver\n• Mt. Silver is now the last chapter of its region, right after its League. The \"Kanto II\" label is gone from the map and the Pokédex.\n• On the map, it shows under \"What's next\" once the League is won. The \"Back to Kanto\" title is removed.\n• The next region still opens once Mt. Silver is done. Saves are updated on load, nothing is lost.\n\n## 🧭 Quality of life\n• Trades: a red line says the fee is not refunded if you withdraw your offer or if it expires. It shows on the offer's recap and when you withdraw it.\n• Bag: Exp. Candies are sorted by size (S, M, XL, Big, then Rare Candy), no longer in the order you found them.\n• Options: the version number at the bottom of the screen is the latest patch's (v0.3.16), no longer v0.9.\n\n## 🐛 Bug fixes\n• Time away: a computer put to sleep with the game open counts that time when you come back. Before, 30 min of sleep could give nothing.\n• Time away: a phone unlocked then locked again before the game resumes keeps all its time. Before, that glance wiped the night (reported case: 1 h 36 played out of 8 h).\n• Shiny raids: at midnight, the try begun the day before stops. Yesterday's boss can no longer be started again, and the Raids screen starts today's raid.\n• Attack effects: no more flickering when attacks follow each other. The dark veil changes colour over 0.3 s instead of jumping, and the screen flashes at most once every 0.45 s. The \"Bright flashes\" option still turns them off.\n• Adventure: the screen is redrawn when the battle moved on during a step. Fixes mixed-up texts, a raid's base camp shown over the battle after a phone lock, and \"undefined wild uses…\".\n• Memory: the game no longer keeps the Pokémon of past battles. Over 10 min of adventure, the page went from 1,733 to 3,141 elements. It now stays steady around 1,700.\n• PC on phones: a closed Pokémon card frees its memory (about 290 elements per card). Cards no longer open slower and slower, and releasing a Pokémon no longer takes several seconds.\n• Trades: an offer posted from another account of the same trainer is no longer erased. It shows with \"On your other account\" and settles on that account.\n• Game Corner: after a slot machine win, the coin counter showed 1 coin less than the win. It now shows the right total.\n• Game Corner: the pachinko opens as soon as the Kanto League is won, without waiting for the departure to the next region.\n• Story eggs: an egg received in a region hatches as a Pokémon of that region, even if you play a Kanto chapter when it hatches. The Pokémon involved are fixed on load.\n• Pokédex: the stat total counts Sp. Def again, like the six bars it adds up.\n• Back from an absence: the trainer's portrait shows their whole head, no longer just their hair.\n\n## 🛡️ Fair play\n• The server spots a page whose game time runs faster than its own.\n\n"
+    },
+    "es": {
+      "title": "🐛 v0.3.16 · Correcciones",
+      "md": "\nEste parche corrige el tiempo de ausencia, las incursiones después de medianoche y el parpadeo de los ataques, y reduce la memoria que usa el juego.\n\n## ⚖️ Equilibrio\n• Incursiones variocolor: el medidor de Master Ball vuelve a cero cada día. Ya no se conserva de un día para otro.\n• La Master Ball sigue llegando en el intento 200, contado en el día. Un intento empezado antes de medianoche cuenta para el día anterior.\n• Casino: en la tragaperras, dos Shellder al principio de una línea dan 1 ficha. Más de una tirada de cada tres gana (35 %), en lugar de una de cada cuatro.\n• Casino: tres BAR dan 66 fichas en lugar de 90. El 7 sigue en 220, y la ganancia media por tirada no cambia.\n\n## 🗺️ Monte Plateado\n• El Monte Plateado es ahora el último capítulo de su región, justo después de su Liga. La mención «Kanto II» desaparece del mapa y de la Pokédex.\n• En el mapa, aparece bajo «Lo que sigue» una vez ganada la Liga. Se quita el título «Vuelta a Kanto».\n• La región siguiente se sigue abriendo al terminar el Monte Plateado. Las partidas se actualizan al cargar, no se pierde nada.\n\n## 🧭 Comodidad\n• Intercambios: una línea roja indica que la tarifa no se reembolsa si retiras tu oferta o si caduca. Aparece en el resumen de la oferta y al retirarla.\n• Mochila: los Caramelos Exp. se ordenan por tamaño (S, M, XL, Big y luego Caramelo Raro), ya no en el orden en que los encontraste.\n• Opciones: el número de versión al pie de la pantalla es el del último parche (v0.3.16), ya no v0.9.\n\n## 🐛 Correcciones\n• Tiempo de ausencia: un ordenador en reposo con el juego abierto cuenta ese tiempo al volver. Antes, 30 min de reposo podían no dar nada.\n• Tiempo de ausencia: un teléfono desbloqueado y vuelto a bloquear antes de que el juego se reanude conserva todo su tiempo. Antes, ese vistazo borraba la noche (caso informado: 1 h 36 jugada de 8 h).\n• Incursiones variocolor: a medianoche, el intento empezado el día anterior se detiene. El jefe del día anterior ya no se puede volver a lanzar, y la pantalla Incursiones lanza la del día.\n• Efectos de ataque: se acabó el parpadeo cuando los ataques se encadenan. El velo oscuro cambia de color en 0,3 s en lugar de saltar, y la pantalla destella como mucho una vez cada 0,45 s. La opción «Destellos» los sigue quitando.\n• Aventura: la pantalla se vuelve a dibujar cuando el combate avanzó durante una etapa. Corrige los textos mezclados, el campamento base de una incursión mostrado sobre el combate tras bloquear el teléfono, y «undefined salvaje usa…».\n• Memoria: el juego ya no guarda los Pokémon de los combates pasados. En 10 min de aventura, la página pasaba de 1733 a 3141 elementos. Ahora se mantiene estable en torno a 1700.\n• PC en el teléfono: una ficha de Pokémon cerrada libera su memoria (unos 290 elementos por ficha). Las fichas ya no se abren cada vez más despacio, y liberar un Pokémon ya no tarda varios segundos.\n• Intercambios: una oferta publicada desde otra cuenta del mismo entrenador ya no se borra. Aparece con «En tu otra cuenta» y se resuelve en esa cuenta.\n• Casino: tras un premio en la tragaperras, el contador de fichas mostraba 1 ficha menos que el premio. Ahora muestra el total correcto.\n• Casino: el pachinko se abre en cuanto se gana la Liga de Kanto, sin esperar la salida hacia la región siguiente.\n• Huevos de la historia: un huevo recibido en una región eclosiona como Pokémon de esa región, aunque juegues un capítulo de Kanto en el momento de la eclosión. Los Pokémon afectados se corrigen al cargar.\n• Pokédex: el total de estadísticas vuelve a contar la Def. Esp., como las seis barras que suma.\n• Vuelta tras una ausencia: el retrato del entrenador muestra toda su cabeza, ya no solo su pelo.\n\n## 🛡️ Juego limpio\n• El servidor detecta una página cuya hora de juego avanza más rápido que la suya.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-27",
+    "title": "✨ v0.3.15 · Nouveautés",
+    "md": "\nCe patch fixe la règle des doublons, ajoute une jauge Master Ball aux raids chromatiques et ramène le tri et les filtres sur téléphone.\n\n## 🌱 Doublons : règle finale\nLa règle des doublons a changé trois fois depuis le 19 octobre. Après ces itérations, la règle ci-dessous est la règle finale.\n• Avant le 19 octobre : un Pokémon par espèce. Chaque doublon était converti en bonbons.\n• 19 octobre : ajout de l'interrupteur « Garder les doublons ». Les doublons étaient gardés tant qu'une espèce de la famille restait libre.\n• 25 octobre : retrait de l'interrupteur. Chaque famille gardait automatiquement un exemplaire de chaque espèce, plus un de sa forme de base.\n• Ce patch : la limite du 25 octobre est conservée. L'interrupteur revient, désactivé par défaut.\n\n## 📏 Comment ça marche\n• Chaque famille a une limite : un exemplaire de chaque espèce, plus un de sa forme de base. La famille de Roucool tient 4 Pokémon : Roucool, Roucoups, Roucarnage et un 2e Roucool.\n• L'interrupteur « Garder les doublons » se trouve sur la fiche d'un Pokémon, dans la partie Famille. Il vaut pour toute la famille.\n• Désactivé (par défaut) : un doublon n'est gardé que s'il ouvre une branche d'évolution que tu n'as pas encore. À Kanto, tu peux garder 4 Évoli : un pour Pyroli, un pour Aquali, un pour Voltali et un qui reste Évoli. Un 2e Roucool, lui, se change en XP pour sa famille.\n• Activé : la famille garde ses doublons jusqu'à sa limite.\n• Une espèce que tu n'as pas encore est toujours capturée, même quand la famille est pleine. Exemple : un Roucoups sauvage alors que tu n'as que des Roucool.\n• Les chromatiques comptent à part. Ils sont toujours gardés jusqu'à la limite de leur famille, quel que soit l'interrupteur.\n• Rien n'est retiré de ton PC. L'interrupteur ne compte que pour les prochains Pokémon capturés, éclos ou reçus.\n\n## ✨ Nouveautés\n• Raids chromatiques : une jauge Master Ball par région. Chaque Poké Ball ratée sur le boss la remplit d'un cran, et elle se garde d'un jour à l'autre.\n• Au 200e essai, la Ball lancée est une Master Ball : la capture est garantie. Une capture vide la jauge.\n• Chromatiques : un chromatique capturé ouvre toujours sa fiche du Pokédex, même si l'option « Fiche des nouveaux Pokémon » est désactivée.\n• Chromatiques : l'onglet Équipe compte ceux arrivés depuis ta dernière visite. Ils sont signalés dans l'équipe, le PC et le Pokédex.\n• Amis : touche une demande reçue pour voir la carte de dresseur du joueur avant d'accepter.\n• Pokédex : le bouton « Revoir son apparition » passe sur la fiche du Pokédex d'un légendaire capturé, même si tu ne l'as plus.\n\n## ⚖️ Équilibrage\n• Pension : tous les œufs éclosent en 4 h, chromatiques compris. Un œuf chromatique ne se distingue plus avant son éclosion.\n• Événements de ville : la taille des Bonbons Exp. trouvés est tirée parmi celle du chapitre joué (60 %) et les deux tailles en dessous (30 % et 10 %). Elle ne suit plus tes badges.\n• Casino : à la machine à sous, deux Baies Framby au début d'une ligne rapportent 2 jetons. Une partie sur quatre est gagnante, au lieu d'une sur neuf.\n• Casino : trois 7 rapportent 220 jetons au lieu de 300, trois BAR 90 au lieu de 100. Le gain moyen par partie ne change pas.\n\n## 🧭 Confort\n• Téléphone : le tri et les filtres reviennent dans le PC, le PC de la Pension et le Pokédex, derrière un bouton à côté de ✨.\n• Barres de filtres : les boutons prennent le nouveau style, et leurs icônes sont centrées.\n• Casino : les lots s'affichent toujours dans l'ordre des régions.\n• Activités : nouvel ordre du menu. Succès, Pension, Casino, Raids Chroma, Tour de Combat.\n• Échanges : la liste ne ralentit plus avec un grand PC.\n\n## 🐛 Correctifs\n• Barre de PV des boss : elle reste entière dans la scène. Elle ne passe plus sous les boutons de vitesse ni sous les baies actives.\n• Fil des dresseurs : les exploits d'un joueur s'affichent dans l'ordre où ils ont eu lieu.\n• Jour et nuit : le matin commençait à 4 h, en pleine nuit. La nuit dure maintenant de 20 h à 8 h, le matin de 8 h à 10 h et le jour de 10 h à 20 h, à l'heure de ton appareil.\n• Pokédex chromatique : les formes par lesquelles un chromatique est passé en évoluant comptent comme possédées. Les évolutions faites avant le 26 octobre sont rattrapées au chargement.\n• Casino : un lot se débloque dès que tes jetons suffisent, sans rouvrir l'écran.\n• Zone de Sulfura : l'arène garde sa luminosité après la cinématique.\n\n## 🛡️ Fair-play\n• La jauge Master Ball est vérifiée par le serveur. Un chromatique obtenu avec une jauge remplie en trichant est retiré automatiquement.\n• Un appareil dont l'horloge avance n'est plus signalé à tort.\n\n",
+    "en": {
+      "title": "✨ v0.3.15 · New features",
+      "md": "\nThis patch settles the duplicates rule, adds a Master Ball gauge to shiny raids and brings sorting and filters back on phones.\n\n## 🌱 Duplicates: final rule\nThe duplicates rule changed three times since October 19. After these iterations, the rule below is the final one.\n• Before October 19: one Pokémon per species. Every duplicate was converted into candies.\n• October 19: the \"Keep duplicates\" switch was added. Duplicates were kept as long as a species of the family was still free.\n• October 25: the switch was removed. Every family automatically kept one of each species, plus one of its base form.\n• This patch: the October 25 limit is kept. The switch is back, off by default.\n\n## 📏 How it works\n• Each family has a limit: one of each species, plus one of its base form. Pidgey's family holds 4 Pokémon: Pidgey, Pidgeotto, Pidgeot and a 2nd Pidgey.\n• The \"Keep duplicates\" switch is on a Pokémon's card, in the Family section. It applies to the whole family.\n• Off (default): a duplicate is only kept if it opens an evolution branch you don't have yet. In Kanto, you can keep 4 Eevee: one for Flareon, one for Vaporeon, one for Jolteon and one that stays an Eevee. A 2nd Pidgey turns into EXP for its family.\n• On: the family keeps its duplicates up to its limit.\n• A species you don't have yet is always caught, even when the family is full. Example: a wild Pidgeotto when you only have Pidgey.\n• Shinies count separately. They are always kept up to their family's limit, whatever the switch.\n• Nothing is taken from your PC. The switch only applies to the next Pokémon you catch, hatch or receive.\n\n## ✨ New features\n• Shiny raids: a Master Ball gauge per region. Each Poké Ball missed on the boss fills it one notch, and it carries over from one day to the next.\n• On the 200th try, the Ball thrown is a Master Ball: the catch is guaranteed. A catch empties the gauge.\n• Shinies: a shiny you catch always opens its Pokédex card, even with the \"New Pokémon card\" option off.\n• Shinies: the Team tab counts the ones that arrived since your last visit. They are marked in the team, the PC and the Pokédex.\n• Friends: tap a request you received to see the player's Trainer Card before accepting.\n• Pokédex: the \"Watch its appearance again\" button moves to the Pokédex card of a legendary you caught, even if you no longer have it.\n\n## ⚖️ Balance\n• Day Care: every egg hatches in 4 h, shiny eggs included. A shiny egg no longer stands out before it hatches.\n• Town events: the size of the Exp. Candies found is drawn among the chapter's size (60 %) and the two sizes below it (30 % and 10 %). It no longer follows your badges.\n• Game Corner: on the slot machine, two Razz Berries at the start of a line pay 2 coins. One spin in four wins, instead of one in nine.\n• Game Corner: three 7s pay 220 coins instead of 300, three BARs 90 instead of 100. The average payout per spin doesn't change.\n\n## 🧭 Quality of life\n• Phone: sorting and filters are back in the PC, the Day Care's PC and the Pokédex, behind a button next to ✨.\n• Filter bars: the buttons get the new style, and their icons are centred.\n• Game Corner: prizes always show in the regions' order.\n• Activities: new menu order. Achievements, Day Care, Game Corner, Shiny Raids, Battle Tower.\n• Trades: the list no longer slows down with a big PC.\n\n## 🐛 Bug fixes\n• Boss HP bar: it stays whole inside the scene. It no longer goes under the speed buttons or the active berries.\n• Trainer feed: a player's highlights show in the order they happened.\n• Day and night: morning started at 4 AM, in the dark. Night now lasts from 8 PM to 8 AM, morning from 8 AM to 10 AM and day from 10 AM to 8 PM, on your device's clock.\n• Shiny Pokédex: the forms a shiny went through while evolving count as owned. Evolutions made before October 26 are caught up on load.\n• Game Corner: a prize unlocks as soon as you have enough coins, without reopening the screen.\n• Moltres's zone: the arena keeps its brightness after the cinematic.\n\n## 🛡️ Fair play\n• The Master Ball gauge is checked by the server. A shiny obtained with a gauge filled by cheating is removed automatically.\n• A device whose clock runs ahead is no longer wrongly flagged.\n\n"
+    },
+    "es": {
+      "title": "✨ v0.3.15 · Novedades",
+      "md": "\nEste parche fija la regla de los repetidos, añade un medidor de Master Ball a las incursiones variocolor y recupera el orden y los filtros en el móvil.\n\n## 🌱 Repetidos: regla final\nLa regla de los repetidos ha cambiado tres veces desde el 19 de octubre. Tras estas iteraciones, la regla de abajo es la regla final.\n• Antes del 19 de octubre: un Pokémon por especie. Cada repetido se convertía en caramelos.\n• 19 de octubre: se añade el interruptor «Conservar repetidos». Los repetidos se guardaban mientras quedara libre una especie de la familia.\n• 25 de octubre: se retira el interruptor. Cada familia guardaba automáticamente un ejemplar de cada especie, más uno de su forma básica.\n• Este parche: se mantiene el límite del 25 de octubre. El interruptor vuelve, desactivado por defecto.\n\n## 📏 Cómo funciona\n• Cada familia tiene un límite: un ejemplar de cada especie, más uno de su forma básica. La familia de Pidgey tiene sitio para 4 Pokémon: Pidgey, Pidgeotto, Pidgeot y un 2.º Pidgey.\n• El interruptor «Conservar repetidos» está en la ficha de un Pokémon, en la parte Familia. Vale para toda la familia.\n• Desactivado (por defecto): un repetido solo se guarda si abre una rama evolutiva que aún no tienes. En Kanto, puedes guardar 4 Eevee: uno para Flareon, uno para Vaporeon, uno para Jolteon y uno que se queda como Eevee. Un 2.º Pidgey se convierte en PE para su familia.\n• Activado: la familia guarda sus repetidos hasta su límite.\n• Una especie que aún no tienes siempre se captura, aunque la familia esté llena. Ejemplo: un Pidgeotto salvaje cuando solo tienes Pidgey.\n• Los variocolor cuentan aparte. Siempre se guardan hasta el límite de su familia, sea cual sea el interruptor.\n• No se quita nada de tu PC. El interruptor solo cuenta para los próximos Pokémon que captures, eclosiones o recibas.\n\n## ✨ Novedades\n• Incursiones variocolor: un medidor de Master Ball por región. Cada Poké Ball fallada contra el jefe lo llena una muesca, y se conserva de un día para otro.\n• En el intento 200, la Ball lanzada es una Master Ball: la captura está garantizada. Una captura vacía el medidor.\n• Variocolor: un variocolor capturado siempre abre su ficha de la Pokédex, aunque la opción «Ficha de nuevos Pokémon» esté desactivada.\n• Variocolor: la pestaña Equipo cuenta los que han llegado desde tu última visita. Aparecen señalados en el equipo, la PC y la Pokédex.\n• Amigos: toca una solicitud recibida para ver la Ficha de Entrenador del jugador antes de aceptar.\n• Pokédex: el botón «Volver a ver su aparición» pasa a la ficha de la Pokédex de un legendario capturado, aunque ya no lo tengas.\n\n## ⚖️ Equilibrio\n• Guardería: todos los huevos eclosionan en 4 h, variocolor incluidos. Un huevo variocolor ya no se distingue antes de eclosionar.\n• Eventos de ciudad: el tamaño de los Caramelos Exp. encontrados se sortea entre el del capítulo jugado (60 %) y los dos tamaños inferiores (30 % y 10 %). Ya no sigue tus medallas.\n• Casino: en la tragaperras, dos Bayas Frambu al principio de una línea dan 2 fichas. Una tirada de cada cuatro gana, en lugar de una de cada nueve.\n• Casino: tres 7 dan 220 fichas en lugar de 300, tres BAR 90 en lugar de 100. La ganancia media por tirada no cambia.\n\n## 🧭 Comodidad\n• Móvil: el orden y los filtros vuelven a la PC, la PC de la Guardería y la Pokédex, tras un botón junto a ✨.\n• Barras de filtros: los botones adoptan el nuevo estilo y sus iconos quedan centrados.\n• Casino: los premios se muestran siempre en el orden de las regiones.\n• Actividades: nuevo orden del menú. Logros, Guardería, Casino, Incursiones, Torre Batalla.\n• Intercambios: la lista ya no se ralentiza con una PC grande.\n\n## 🐛 Correcciones\n• Barra de PS de los jefes: se queda entera dentro de la escena. Ya no pasa bajo los botones de velocidad ni bajo las bayas activas.\n• Feed de entrenadores: los logros de un jugador se muestran en el orden en que ocurrieron.\n• Día y noche: la mañana empezaba a las 4 h, en plena noche. La noche dura ahora de 20 h a 8 h, la mañana de 8 h a 10 h y el día de 10 h a 20 h, según la hora de tu dispositivo.\n• Pokédex variocolor: las formas por las que pasó un variocolor al evolucionar cuentan como obtenidas. Las evoluciones hechas antes del 26 de octubre se recuperan al cargar.\n• Casino: un premio se desbloquea en cuanto tienes fichas suficientes, sin volver a abrir la pantalla.\n• Zona de Moltres: la arena conserva su luminosidad tras la cinemática.\n\n## 🛡️ Juego limpio\n• El servidor comprueba el medidor de Master Ball. Un variocolor obtenido con un medidor llenado con trampas se retira automáticamente.\n• Un dispositivo con el reloj adelantado ya no se marca por error.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-26",
+    "title": "🧭 v0.3.14 · Confort",
+    "md": "\nCe patch ouvre les Casinos des régions précédentes.\n\n## 🧭 Confort\n• Casino : l'onglet Boutique montre les lots de tous les Casinos. Celui de la région jouée est en premier.\n• Casino : une Ligue vaincue ouvre les lots des Casinos de toutes les régions précédentes. Un Pokémon acheté appartient à la région de son Casino.\n",
+    "en": {
+      "title": "🧭 v0.3.14 · Quality of life",
+      "md": "\nThis patch opens the Game Corners of previous regions.\n\n## 🧭 Quality of life\n• Game Corner: the Shop tab shows the prizes of every Game Corner. The one of the region you are playing comes first.\n• Game Corner: beating a League opens the prizes of the Game Corners of every previous region. A Pokémon you buy belongs to its Game Corner's region.\n"
+    }
+  },
+  {
+    "date": "2026-10-26",
+    "title": "✨ v0.3.13 · Nouveautés",
+    "md": "\nCe patch ouvre le Casino dans Activités, ajoute des prévisions météo et revoit le bonus chromatique.\n\n## ✨ Nouveautés\n• Casino : nouvel onglet dans Activités. La machine à sous transforme tes Pokédollars en jetons. La mise suit la région atteinte, avec ×1, ×5, ×10 ou ×50 et un mode Auto.\n• Casino : le pachinko échange tes jetons contre des baies, des bonbons et des pierres. Il s'ouvre après la Ligue de Kanto. Sa jauge donne Porygon chromatique à 25 000 jetons, puis Porygon2 chromatique à 50 000.\n• Casino : les lots en jetons quittent la Boutique pour l'onglet Boutique du Casino. Chaque région a son Casino. Les dresseurs ne donnent plus de jetons.\n• Météo : touche la pastille météo de la scène pour voir les perturbations des 24 prochaines heures.\n• Fiche d'un légendaire capturé : le bouton « Revoir son apparition » rejoue sa cinématique.\n• Six nouveaux cadres d'avatar, liés aux régions suivantes.\n• Échanges : option « Amis seulement » sur une offre.\n• Amis : jusqu'à 30 au lieu de 10.\n• Nouvelle météo, le vent léger : elle accompagne certains Pokémon errants et favorise les Pokémon Vol et Dragon.\n• Option « Flashs lumineux » : désactivée, elle retire les flashs blancs des scènes, des attaques et des orages.\n• Progression : « Tout » enchaîne en boucle tous les chapitres ouverts de la région.\n\n## ⚖️ Équilibrage\n• Bonus chromatique : le ×2 ne s'applique plus que dans la région dont le Pokédex est complet. Il ne se cumule plus d'une région à l'autre.\n• Bonus chromatique : un Pokédex régional est complet quand chaque espèce a été capturée au moins une fois, légendaires et fabuleux de la région compris, même si elle a été échangée ou a évolué depuis. Une pastille du Pokédex indique combien il en manque.\n• Doublons : une famille garde un exemplaire de chaque espèce, plus un de sa forme de base. C'est automatique : l'option « Garder les doublons » disparaît.\n• Les bonbons de famille deviennent de l'XP pour la famille : un doublon capturé, éclos ou échangé se transforme directement en XP. Les règles ne changent pas.\n• Zones légendaires : dans la région où tu viens d'arriver, seuls ses propres Pokémon peuvent combattre tant que sa Ligue n'est pas gagnée.\n• Succès des Professeurs : il faut aussi le fabuleux de la région. Ceux qui ont déjà le succès le gardent.\n• Pension : un œuf met maintenant 12 h à éclore, et un œuf chromatique 24 h.\n• Classements des raids : des temps refusés à tort ont été réintégrés. Le jeu n'affiche plus que les temps acceptés et te prévient quand un temps est refusé.\n\n## 🧭 Confort\n• Échanges : la liste se met à jour toutes les 10 min au lieu d'1 h et se charge dès ton arrivée. Une offre déjà prise est signalée avant que tu choisisses ton Pokémon.\n• Recommandés suit maintenant Optimiser pour les boss de raid et de zone. Le bouton Optimiser porte la flèche verte des Recommandés.\n• L'étoile chromatique en pixel art apparaît aussi dans la fenêtre « Bon retour ! », les Échanges et le PC.\n• Fenêtre « Bon retour ! » : le premier chromatique capturé pendant ton absence a son trophée, et la fenêtre s'ouvre dès qu'un chromatique ou un légendaire a été capturé.\n• Sélecteur de raid : l'équipe reste visible en haut quand tu fais défiler le PC.\n• Fenêtres : l'en-tête reste en place pendant le défilement, et la fiche d'un Pokémon tient sur les petits téléphones.\n• Barre de PV du boss : elle ne passe plus sous les boutons de vitesse sur téléphone.\n• Bouton Sauvegarder : il remplace la prochaine sauvegarde automatique, puis attend 15 min, même après un rechargement.\n• Une espèce a le même état partout : Pokédex, vue chromatique, œufs de la Pension et Poké Ball en combat.\n\n## 🐛 Correctifs\n• Une baie déjà active ne peut plus être mangée une seconde fois : son temps restant était perdu.\n• Plus de « +XP » sur un Pokémon niveau 100.\n• Temples : le message et ses boutons tiennent dans l'écran, iPad compris.\n• Carte de dresseur : les noms des badges s'affichent dans ta langue.\n• Intros de boss : les deux types d'un boss s'affichent.\n• Liste d'amis : le nombre au Pokédex ne compte plus les formes.\n• Effets d'attaque : le voile sombre a retrouvé sa couleur, et la teinte d'une attaque ne reste plus sur les suivantes.\n• Sauvegarde en ligne : si elle est coupée, le jeu te prévient et te propose de te reconnecter.\n\n## 🛡️ Fair-play\n• Nouveaux contrôles contre la triche : le jeu ne peut plus être modifié depuis la console, et les Pokémon obtenus en trichant sont retirés automatiquement.\n• Des contrôles qui signalaient à tort des joueurs honnêtes ont été retirés.\n\nPS : la ligne sur les œufs de la Pension était une blague 🥚 Rien ne change : 4 h pour un œuf, 8 h pour un œuf chromatique.\n",
+    "en": {
+      "title": "✨ v0.3.13 · New features",
+      "md": "\nThis patch opens the Game Corner in Activities, adds weather forecasts and reworks the Shiny bonus.\n\n## ✨ New\n• Game Corner: a new tab in Activities. The slot machine turns your Poké Dollars into coins. The bet follows the region you reached, with ×1, ×5, ×10 or ×50 and an Auto mode.\n• Game Corner: the pachinko trades your coins for berries, candies and stones. It opens after the Kanto League. Its gauge gives a Shiny Porygon at 25,000 coins, then a Shiny Porygon2 at 50,000.\n• Game Corner: the coin prizes leave the Shop for the Game Corner's Shop tab. Each region has its own Game Corner. Trainers no longer give coins.\n• Weather: tap the weather pill on the scene to see the weather changes of the next 24 hours.\n• Card of a caught legendary: the \"Watch its appearance again\" button replays its cinematic.\n• Six new avatar frames, tied to the next regions.\n• Trades: a \"Friends only\" option on an offer.\n• Friends: up to 30 instead of 10.\n• New weather, the light breeze: it comes with some roaming Pokémon and favors Flying and Dragon Pokémon.\n• \"Bright flashes\" option: turned off, it removes the white flashes of scenes, moves and storms.\n• Progression: \"All\" loops every open chapter of the region.\n\n## ⚖️ Balance\n• Shiny bonus: the ×2 now applies only in the region whose Pokédex is complete. It no longer stacks from one region to the next.\n• Shiny bonus: a regional Pokédex is complete when every species was caught at least once, legendaries and the region's Mythical included, even if it was traded or evolved since. A pill in the Pokédex shows how many are missing.\n• Duplicates: a family keeps one of each species, plus one of its base form. It's automatic: the \"Keep duplicates\" option is gone.\n• Family candies become XP for the family: a duplicate caught, hatched or traded turns straight into XP. The rules don't change.\n• Legendary zones: in the region you just reached, only its own Pokémon can fight until you win its League.\n• Professors' achievements: the region's Mythical is now required too. Players who already have the achievement keep it.\n• Day Care: an egg now takes 12 h to hatch, and a Shiny egg 24 h.\n• Raid leaderboards: times wrongly refused have been put back. The game only shows accepted times and tells you when a time is refused.\n\n## 🧭 Quality of life\n• Trades: the list refreshes every 10 min instead of every hour and loads as soon as you arrive. An offer already taken is flagged before you pick your Pokémon.\n• Recommended now follows Optimize for raid and zone bosses. The Optimize button wears the green arrow of Recommended.\n• The pixel art Shiny star also shows in the \"Welcome back!\" window, Trades and the PC.\n• \"Welcome back!\" window: the first Shiny caught while you were away gets its trophy, and the window opens whenever a Shiny or a legendary was caught.\n• Raid team picker: your team stays visible at the top while you scroll the PC.\n• Windows: the header stays in place while scrolling, and a Pokémon's card fits on small phones.\n• Boss HP bar: it no longer sits under the speed buttons on phones.\n• Save button: it replaces the next automatic save, then rests for 15 min, even after a reload.\n• A species has the same status everywhere: Pokédex, Shiny view, Day Care eggs and the Poké Ball in battle.\n\n## 🐛 Bug fixes\n• An active berry can no longer be eaten a second time: its remaining time was lost.\n• No more \"+XP\" on a level 100 Pokémon.\n• Temples: the message and its buttons fit on screen, iPad included.\n• Trainer card: badge names show in your language.\n• Boss intros: both types of a boss are shown.\n• Friends list: the Pokédex count no longer includes forms.\n• Move effects: the dark veil has its color back, and a move's tint no longer stays on the next ones.\n• Online save: if it's cut off, the game tells you and offers to sign you back in.\n\n## 🛡️ Fair play\n• New anti-cheat checks: the game can no longer be modified from the console, and Pokémon obtained by cheating are removed automatically.\n• Checks that wrongly flagged honest players have been removed.\n\nPS: the Day Care egg line was a prank 🥚 Nothing changes: 4 h for an egg, 8 h for a Shiny egg.\n"
+    }
+  },
+  {
+    "date": "2026-10-26",
+    "title": "🐛 v0.3.12 · Correctifs",
+    "md": "\nCe patch corrige les problèmes laissés par le changement du raid de Kanto d'aujourd'hui.\n\n## 🐛 Correctifs\n• Raids chromatiques : si tu as capturé Porygon dans le raid de Kanto d'aujourd'hui, le raid est de nouveau ouvert et tu peux tenter Feunard. Tu gardes ton Porygon.\n• Mise à jour : la fenêtre « Mise à jour disponible » s'affiche aussi pendant un raid, une zone légendaire ou la Tour de Combat, entre deux essais. Avant, elle attendait la fin du raid.\n\n## ⚖️ Équilibrage\n• Porygon et Porygon2 ne peuvent plus se reproduire à la Pension, chromatiques ou non, quelle que soit leur origine.\n\n",
+    "en": {
+      "title": "🐛 v0.3.12 · Bug fixes",
+      "md": "\nThis patch fixes the issues left by the change to today's Kanto raid.\n\n## 🐛 Bug fixes\n• Shiny raids: if you caught Porygon in today's Kanto raid, the raid is open again and you can now try for Ninetales. You keep your Porygon.\n• Update: the \"Update available\" window now also appears during a raid, a legendary zone or the Battle Tower, between two attempts. It used to wait until the raid was over.\n\n## ⚖️ Balance\n• Porygon and Porygon2 can no longer breed at the Day Care, shiny or not, whatever their origin.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-26",
+    "title": "⚖️ v0.3.11 · Équilibrage",
+    "md": "\nCe patch modifie le raid chromatique de Kanto d'aujourd'hui.\n\n## ⚖️ Équilibrage\n• Porygon et ses évolutions ne sont plus boss des raids chromatiques.\n• Raid de Kanto d'aujourd'hui : Feunard remplace Porygon.\n• Si tu as déjà fait le raid d'aujourd'hui, ton résultat et le Pokémon capturé restent.\n\n",
+    "en": {
+      "title": "⚖️ v0.3.11 · Balance",
+      "md": "\nThis patch changes today's Kanto shiny raid.\n\n## ⚖️ Balance\n• Porygon and its evolutions are no longer shiny raid bosses.\n• Today's Kanto raid: Ninetales replaces Porygon.\n• If you already did today's raid, your result and any Pokémon you caught stay.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-24",
+    "title": "✨ v0.3.10 · Nouveautés",
+    "md": "\nCe patch rééquilibre les Ligues, ajoute un bouton de sauvegarde et corrige de nombreux bugs.\n\n## ⚖️ Équilibrage\n• Ligue : la difficulté monte membre après membre, et le Maître est maintenant le combat le plus dur. Les premiers membres sont plus faciles.\n• Ligue : moins de répétition. Les dresseurs de la Ligue donnent plus d'expérience, et un membre déjà battu rapporte 50 % de sa récompense tant que tu n'as pas gagné cette Ligue.\n• Zones légendaires : difficulté harmonisée. Certaines zones étaient presque impossibles, d'autres trop faciles : chacune demande maintenant une équipe bien choisie.\n• Optimiser tient compte de la riposte du boss, de son attaque de zone et des statuts.\n• Un œuf chromatique éclot en 8 h au lieu de 4 h.\n• Certains légendaires rencontrés en chemin sont plus difficiles à capturer : 2 % de chances au lieu de 5 %.\n\n## ✨ Nouveautés\n• Bouton Sauvegarder dans la barre du haut : il envoie ta partie en ligne, au plus une fois toutes les 15 min. Sa pastille indique l'état de la sauvegarde.\n• Les zones sous-marines ont leur propre ambiance : lumière bleue, rayons, bulles et fond qui ondule.\n• Une fenêtre te prévient quand une nouvelle version est disponible, même si le jeu est déjà ouvert.\n• Pension : les prochaines météos du parc sont visibles sur téléphone.\n• Victoire contre le Maître : le Panthéon s'affiche seul, avec un bouton pour partir vers la région suivante.\n\n## 🧭 Confort\n• Une seule icône chromatique partout : l'étoile en pixel art.\n• Fiche Pokédex : le bouton chromatique est en bas du portrait, disponible sur toute espèce connue, et ne rouvre plus la fiche.\n• Baies : minuteurs plus grands dans le Sac, et baies actives rangées à droite de la scène.\n• Zones légendaires : le bouton « Affronter » reste visible en bas de l'écran.\n• Fiche de chapitre : chaque forme de Zarbi s'affiche avec son heure ou sa météo.\n• Fenêtres : deux boutons tiennent sur une ligne, de la même taille.\n• Échanges : la recherche trouve aussi les Pokémon jamais vus, et une petite Poké Ball signale ceux déjà dans ton Pokédex.\n\n## 🐛 Corrections\n• Le temps d'absence compte à nouveau quand tu verrouilles ton téléphone avec le jeu ouvert.\n• Le menu s'affiche dans la langue choisie.\n• Les Casinos ne disparaissent plus une fois dans une nouvelle région.\n• Progression : la carte du chapitre avance sur tous les écrans, et « Maître de la Ligue » s'affiche pour chaque Ligue gagnée.\n• Le bon badge s'affiche en fin de route.\n• Classement des raids : plus de défilement sur le côté sur téléphone.\n• Les boutons s'affichent correctement sur les anciens navigateurs mobiles.\n• Cartes de dresseur et liste d'amis : plus de badges comptés en double.\n• Échange : un Pokémon qui évolue par échange n'évolue plus en une espèce que tu possèdes déjà.\n\n## 🛡️ Fair-play\n• Contrôles renforcés contre la triche sur les raids, la vitesse du jeu et le temps d'absence.\n• Les Pokémon obtenus en trichant sont retirés automatiquement.\n\n",
+    "en": {
+      "title": "✨ v0.3.10 · New features",
+      "md": "\nThis patch rebalances the Leagues, adds a save button and fixes many bugs.\n\n## ⚖️ Balance\n• League: the difficulty rises member after member, and the Champion is now the hardest battle. The first members are easier.\n• League: less repetition. League trainers give more experience, and a member you already beat pays 50% of their reward until you win that League.\n• Legendary zones: difficulty evened out. Some zones were almost impossible, others too easy: each one now calls for a well-chosen team.\n• Optimize takes into account the boss's counterattack, its area attack and status conditions.\n• A Shiny egg hatches in 8 h instead of 4 h.\n• Some legendaries met along the way are harder to catch: a 2% chance instead of 5%.\n\n## ✨ New\n• Save button in the top bar: it sends your game online, at most once every 15 min. Its dot shows the save's status.\n• Underwater areas have their own atmosphere: blue light, rays, bubbles and a rippling backdrop.\n• A window tells you when a new version is available, even if the game is already open.\n• Day Care: the park's next weather can be seen on a phone.\n• Beating the Champion: the Hall of Fame shows on its own, with a button to set off for the next region.\n\n## 🧭 Quality of life\n• One Shiny icon everywhere: the pixel art star.\n• Pokédex card: the Shiny button sits at the bottom of the portrait, works for every known species, and no longer reopens the card.\n• Berries: bigger timers in the Bag, and active berries lined up on the right of the scene.\n• Legendary zones: the \"Fight\" button stays visible at the bottom of the screen.\n• Chapter card: each Unown form shows with its time of day or weather.\n• Windows: two buttons fit on one line, the same size.\n• Trades: the search also finds Pokémon never seen, and a small Poké Ball marks those already in your Pokédex.\n\n## 🐛 Bug fixes\n• Time away counts again when you lock your phone with the game open.\n• The menu shows in the language you picked.\n• Game Corners no longer disappear once you are in a new region.\n• Progress: the chapter card moves on every screen, and \"League Champion\" shows for every League won.\n• The right badge shows at the end of a route.\n• Raid leaderboard: no more sideways scrolling on a phone.\n• Buttons show correctly on older mobile browsers.\n• Trainer cards and friends list: no more badges counted twice.\n• Trade: a Pokémon that evolves by trade no longer evolves into a species you already own.\n\n## 🛡️ Fair play\n• Stronger checks against cheating on raids, game speed and time away.\n• Pokémon obtained by cheating are removed automatically.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-23",
+    "title": "⚖️ v0.3.9 · Équilibrage",
+    "md": "\nCe patch rend les combats de boss et d'arène identiques quelle que soit la taille de ton équipe.\n\n## ⚖️ Équilibrage\n• Boss de raid et de zone légendaire : leurs PV ne baissent plus quand ton équipe compte moins de 6 Pokémon. Ils ont toujours la force prévue face à une équipe complète.\n• Champions d'arène : même règle, leurs PV ne dépendent plus du nombre de Pokémon que tu amènes.\n\n",
+    "en": {
+      "title": "⚖️ v0.3.9 · Balance",
+      "md": "\nThis patch makes boss and gym battles the same whatever the size of your team.\n\n## ⚖️ Balance\n• Raid and legendary zone bosses: their HP no longer drops when your team has fewer than 6 Pokémon. They always have the strength set for a full team.\n• Gym Leaders: same rule, their HP no longer depends on how many Pokémon you bring.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-23",
+    "title": "🐛 v0.3.8 · Correctifs",
+    "md": "\nCe patch affiche les marées, rend deux Pokémon enfin obtenables et corrige plusieurs bugs.\n\n## 🌊 Marées\n• La marée s'affiche sur la carte, dans la fiche du chapitre et en jeu, avec son heure : « Marée basse jusqu'à 2 h » ou « Marée haute · basse à 2 h ».\n• Les Pokémon qu'on ne trouve qu'à marée basse forment un groupe à part dans « Pokémon trouvables ».\n\n## 🐛 Corrections\n• Deux Pokémon ne pouvaient pas être obtenus, faute d'objet d'évolution. Ces objets sont maintenant trouvables dans l'aventure (voir « Où le trouver »).\n• Boutique : trois objets d'évolution rares sont en vente à 500 000 ₽, une fois trouvés.\n• Pokédex : le filtre « Manquants » combiné à un type inclut maintenant les espèces jamais rencontrées.\n• Équipes : un seul shiny par espèce dans une équipe (aventure, raids, zones légendaires). La version normale de la même espèce reste autorisée.\n\n## ✨ Nouveauté\n• Échanges : l'avatar de l'autre dresseur s'affiche pendant l'animation d'échange.\n\n## 🛡️ Fair-play\n• Classements : contrôles renforcés contre la triche.\n\n",
+    "en": {
+      "title": "🐛 v0.3.8 · Bug fixes",
+      "md": "\nThis patch shows the tides, makes two Pokémon obtainable at last and fixes several bugs.\n\n## 🌊 Tides\n• The tide is shown on the map, in the chapter card and in the game, with its time: \"Low tide until 2:00\" or \"High tide · low at 2:00\".\n• Pokémon found only at low tide have their own group in \"Pokémon found here\".\n\n## 🐛 Bug fixes\n• Two Pokémon could not be obtained, as their evolution items did not exist. These items can now be found in the adventure (see \"Where to find it\").\n• Shop: three rare evolution items are on sale for 500,000 ₽ once found.\n• Pokédex: the \"Missing\" filter combined with a type now includes species never met.\n• Teams: one Shiny per species in a team (adventure, raids, legendary zones). The regular version of the same species is still allowed.\n\n## ✨ New\n• Trades: the other trainer's avatar is shown during the trade animation.\n\n## 🛡️ Fair play\n• Leaderboards: stronger checks against cheating.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-22",
+    "title": "🐛 v0.3.7 · Correctifs",
+    "md": "\nPatch de rattrapage : le jeu redevient fluide sur téléphone, les intros légendaires sont de retour et une bonne fournée de vos bugs part à la poubelle.\n\n## 📱 Plus fluide sur téléphone\n• PC, Pension et sélecteur d'équipe s'ouvrent d'un coup, les sprites s'affichent tout de suite et le scroll ne montre plus de cases vides, même en défilant comme un fou 🌀\n• Sélecteur d'équipe : plus de micro-freeze quand tu touches un Pokémon, et le glisser-déposer marche comme dans le PC (les voisins se poussent pour lui faire de la place)\n• Plus de flou derrière les fenêtres et les menus sur téléphone : c'était joli, mais ça ramait\n• Les pages et les images reviennent plus vite après une pause\n• Android : la barre du bas ne reste plus coincée au-dessus du bord de l'écran\n\n## 🎬 Intros légendaires\n• Les intros sont de retour : depuis la dernière mise à jour, tu attendais 8 secondes pour voir la vieille carte du boss à la place 😬\n• Sur iPhone, le légendaire apparaît enfin dans sa propre intro (avant, la tempête était là… mais pas lui)\n\n## ✨ Nouveautés\n• Pokédex « Où le trouver » : chaque espèce dit comment l'obtenir (cadeau, fossile, rencontre unique, œuf de Pension, zone légendaire, Pokémon errant…). Fini les « Introuvable » sur un Pokémon que tu viens d'attraper, et ceux qui ne sortent que la nuit affichent « 🌙 Nuit »\n• Pension : la météo du parc s'affiche, avec l'heure et la prévision. Et l'œuf d'un certain Pokémon météo montre la forme dans laquelle il va éclore ☀️🌧️\n• Shiny : leurs barres de stats montrent leur bonus (une petite partie dorée au bout), pour voir d'un coup d'œil ce qu'ils ont de plus que la version normale\n• Légendaires : leur fiche affiche le nombre d'essais qu'il t'a fallu pour les attraper. À toi de frimer 😎\n• Un certain Pokémon fantôme né d'une mue s'obtient enfin même si tu as déjà sa forme évoluée : l'évolution laisse une Carapace Mue dans ton Sac, à utiliser sur un autre exemplaire de la pré-évolution. Si tu étais bloqué, une Carapace Mue t'attend déjà 🐚\n• L'étoile shiny des cases (PC, Pension, échanges) apparaît en même temps que la case, et se lit aussi en thème clair\n\n## 🐛 Corrections\n• Pokédex : les shiny placés en Pension ne disparaissent plus de la liste ni du total\n• Raids : fini les chronos impossibles (00:01) en tête de ton classement. Le temps d'une tentative est compté correctement, et les temps faussés sont retirés de tes records\n• Échanges : un Pokémon parti en échange compte bien dans sa famille, fini les doublons en trop à l'arrivée. Et si une famille déborde quand même, une fenêtre te dit ce qui a été converti en bonbons\n• Certains dresseurs des derniers chapitres avaient des Pokémon 30 niveaux trop faibles : ils sont maintenant au niveau de leur chapitre 💪\n• Ligue en anglais et en espagnol : la classe des dresseurs est traduite (« Fillette Zoé » ne s'affichait plus en français)\n• Le ✨ du bouton Optimiser et la pastille NEW de l'onglet Apparence se lisent à nouveau\n\n## 🛡️ Fair-play\n• On serre encore la vis sur la triche 👀 Classements, échanges et fil d'activité restent entre joueurs honnêtes.\n\n",
+    "en": {
+      "title": "🐛 v0.3.7 · Bug fixes",
+      "md": "\nCatch-up patch: the game runs smoothly on phones again, legendary intros are back and a good batch of your bugs goes in the trash.\n\n## 📱 Smoother on phones\n• PC, Day Care and team picker open in a snap, sprites show right away and scrolling no longer shows empty tiles, even when you scroll like crazy 🌀\n• Team picker: no more micro-freeze when you tap a Pokémon, and drag and drop works like in the PC (the neighbours shift to make room)\n• No more blur behind windows and menus on phones: it looked nice, but it lagged\n• Pages and images come back faster after a pause\n• Android: the bottom bar no longer gets stuck above the edge of the screen\n\n## 🎬 Legendary intros\n• Intros are back: since the last update, you waited 8 seconds just to see the old boss card instead 😬\n• On iPhone, the legendary finally shows up in its own intro (before, the storm was there… but not the star)\n\n## ✨ New features\n• Pokédex \"Where to find it\": every species tells you how to get it (gift, fossil, one-time encounter, Day Care egg, legendary zone, roaming Pokémon…). No more \"Not found\" on a Pokémon you just caught, and night-only ones show \"🌙 Night\"\n• Day Care: the park's weather shows up, with the time and the forecast. And a certain Weather Pokémon's egg shows the form it will hatch in ☀️🌧️\n• Shinies: their stat bars show their bonus (a little gold part at the end), so you can see at a glance what they have over the regular version\n• Legendaries: their card shows how many tries it took you to catch them. Time to show off 😎\n• A certain ghost Pokémon born from a shed shell can finally be obtained even if you already own its evolved sibling: the evolution leaves a Shed Shell in your Bag, to use on another copy of the pre-evolution. If you were stuck, a Shed Shell is already waiting for you 🐚\n• The shiny star on tiles (PC, Day Care, trades) appears together with the tile, and is readable in the light theme too\n\n## 🐛 Bug fixes\n• Pokédex: shinies left at the Day Care no longer vanish from the list or the total\n• Raids: no more impossible times (00:01) topping your leaderboard. A run's time is counted properly, and the bogus times are removed from your records\n• Trades: a Pokémon away in a trade counts in its family, no more extra duplicates on arrival. And if a family still overflows, a window tells you what was turned into candies\n• Some trainers in the latest chapters had Pokémon 30 levels too weak: they now match their chapter's level 💪\n• League in English and Spanish: trainer classes are translated (\"Fillette Zoé\" is now \"Lass Zoé\")\n• The ✨ on the Optimize button and the NEW pill on the Look tab are readable again\n\n## 🛡️ Fair play\n• We're tightening the screws on cheating again 👀 Leaderboards, trades and the activity feed stay among honest players.\n\n"
+    }
+  },
+  {
+    "date": "2026-10-22",
+    "title": "✨ v0.3.6 · Nouveautés",
+    "md": "\nGrosse mise à jour : des échanges de shiny surprise, des combats plus malins, un Mont Argenté qui pique et une bonne pile de bugs que vous nous avez signalés.\n\n## ✨ Échanges de shiny\n• Tu peux proposer un shiny contre n'importe quel shiny qui te manque, de même rareté : active ✨ Shiny dans « Espèce cherchée » et choisis « N'importe lequel ». C'est celui qui accepte qui choisit lequel il te donne… surprise à l'arrivée 🎁\n\n## ⚔️ Combats et aventure\n• Coup de grâce : quand une attaque plus faible mais plus précise suffit à mettre l'adversaire K.O., ton Pokémon la choisit, et il ne perd plus son tour sur une attaque de statut. Les dresseurs adverses aussi, méfie-toi 😏\n• Pendant ton absence, tes chapitres en boucle s'enchaînent les uns après les autres (sans affronter leurs champions) au lieu de tourner sur le premier\n\n## ⚖️ Équilibrage\n• Mont Argenté : Pokémon sauvages et dresseurs passent du niveau 35-50 au niveau 90-99, et le dresseur qui t'attend au sommet ne fait plus de cadeaux 😈\n• Électhor, Artikodin et Sulfura passent au niveau 100, comme tous les autres légendaires (fini le plafond d'équipe à 80 dans leur zone)\n• Pension : un parent chromatique ne pond plus un œuf chromatique à tous les coups, mais une fois sur 10. Les shiny en pension, c'était un peu trop la fête 🎉\n• Amis : 10 places maximum (c'était 50). Si tu en avais plus, les amitiés les plus récentes ont été retirées : à toi de choisir ta meilleure bande 🤝\n\n## 🧭 Confort\n• En combat, la colonne de ton équipe affiche aussi la barre de PV de chaque Pokémon : tu vois d'un coup d'œil qui est amoché\n• Les types se lisent mieux, avec un texte foncé dans leur couleur\n• Équipe/PC : nouveau tri « Stats », les plus gros totaux en premier\n• La météo se lit enfin sans plisser les yeux : une pastille sur chaque chapitre, et « Pluie jusqu'à 23 h » directement en jeu\n• Fiche de la Ligue revue : une ligne par dresseur avec son portrait, son type, le niveau conseillé et le plafond juste à côté. Ceux que tu n'as pas encore croisés restent mystère\n• Progression : le plafond de niveau s'affiche à côté du niveau conseillé\n• Pension sur téléphone : tu vois quel Pokémon va éclore de ton œuf\n• Un chromatique, un légendaire ou un boss de raid attrapé part tout de suite dans ta sauvegarde en ligne\n• Raids : les têtes de tes alliés en plus grand dans le classement, avec leur nom au-dessus de leur Pokémon\n• Tour de Combat : le classement ne montre plus que de vrais dresseurs, fini les figurants 👋\n• La fiche d'un Pokémon à forme spéciale affiche le nom et le numéro de son espèce\n\n## 🛡️ Fair-play\n• On serre la vis sur la triche 👀 Merci à tous ceux qui jouent le jeu !\n\n## 🐛 Corrections\n• Sur téléphone, maintenir un bonbon ou une baie s'arrête dès que tu lèves le doigt (fini le stock entier avalé d'un coup), et c'est bien plus fluide\n• Boutique sur téléphone : un achat ne te renvoie plus en haut de la page\n• Carte de dresseur : le verso n'affiche plus le recto en miroir, et elle ne se casse plus sur téléphone\n• Une partie effacée disparaît des listes d'amis (fini les « ???#???? »)\n• Lance-Soleil ne fait plus ramer le jeu\n• La pluie tombe bien sur la scène quand la météo l'annonce\n• « Plus tard » au choix d'une évolution ne transforme plus ton Pokémon en… bouton (le sélecteur d'équipe se vidait)\n• Certaines intros de légendaires ne restent plus bloquées à la première rencontre\n• Le plafond de niveau passe bien à 100 une fois la toute dernière Ligue battue\n• Certaines formes spéciales de Pokémon peuvent enfin s'échanger\n• Les énigmes de certains temples ne bloquent plus l'aventure automatique\n• Fiche de la Ligue : plus de ✓ trompeur sur un dresseur battu (une défaite renvoie toujours au premier)\n• Sur téléphone, un appui un peu à côté de la barre du bas, ou pour refermer le menu Activités / Social, ne mange plus une baie du Sac par erreur\n• Échanges en ligne plus fiables quand l'onglet est caché ou qu'un autre onglet joue\n• Raids : la Poké Ball « déjà capturé » sur le boss ne s'affiche plus parce que tu as la version normale de l'espèce, seulement si tu as vraiment attrapé le chromatique\n• Apparence Prof. Chen : il faut bien tous les Pokémon de Kanto, légendaires compris, pour la débloquer (elle tombait parfois avant)\n\n",
+    "en": {
+      "title": "✨ v0.3.6 · New features",
+      "md": "\nBig update: surprise Shiny trades, smarter battles, a Mt. Silver that bites back and a big pile of bugs you reported.\n\n## ✨ Shiny trades\n• You can offer a Shiny for any Shiny you're missing, of the same rarity: turn on ✨ Shiny in \"Wanted species\" and pick \"Any\". Whoever accepts picks which one you get… surprise on arrival 🎁\n\n## ⚔️ Battles and adventure\n• Finishing blow: when a weaker but more accurate move is enough to knock the opponent out, your Pokémon picks it, and it no longer wastes its turn on a status move. Enemy trainers do it too, watch out 😏\n• While you're away, your looped chapters now follow one another (without facing their leaders) instead of spinning on the first one\n\n## ⚖️ Balance\n• Mt. Silver: wild Pokémon and trainers go from level 35-50 to level 90-99, and the trainer waiting at the summit no longer holds back 😈\n• Zapdos, Articuno and Moltres go up to level 100, like every other legendary (no more team cap at 80 in their zone)\n• Day Care: a Shiny parent no longer lays a Shiny egg every time, now it's 1 in 10. Shinies at the Day Care were a bit too much of a party 🎉\n• Friends: 10 slots at most (it was 50). If you had more, the most recent friendships were removed: time to pick your best crew 🤝\n\n## 🧭 Quality of life\n• In battle, your team's column also shows each Pokémon's HP bar: see at a glance who's hurt\n• Types are easier to read, with dark text in their own color\n• Team/PC: new \"Stats\" sort, biggest totals first\n• Weather is finally readable without squinting: a chip on each chapter, and \"Rain until 11 PM\" right in the game\n• League sheet reworked: one row per trainer with their portrait, type, recommended level and level cap right next to it. The ones you haven't met yet stay a mystery\n• Progress: the level cap shows next to the recommended level\n• Day Care on phones: you can see which Pokémon will hatch from your egg\n• A shiny, a legendary or a raid boss you catch goes straight into your online save\n• Raids: your allies' heads are bigger on the leaderboard, with their name above their Pokémon\n• Battle Tower: the leaderboard now only shows real trainers, no more extras 👋\n• A Pokémon with a special form shows its species' name and number on its card\n\n## 🛡️ Fair play\n• We're cracking down on cheating 👀 Thanks to everyone playing fair!\n\n## 🐛 Fixes\n• On phones, holding a candy or a berry stops as soon as you lift your finger (no more whole stack gone at once), and it's much smoother\n• Shop on phones: buying something no longer sends you back to the top of the page\n• Trainer card: the back no longer shows the front mirrored, and it no longer breaks on phones\n• An erased game disappears from friend lists (no more \"???#????\")\n• Solar Beam no longer makes the game lag\n• Rain actually falls on the scene when the weather says so\n• \"Later\" on an evolution choice no longer turns your Pokémon into… a button (the team picker went empty)\n• Some legendary intros no longer get stuck on the first meeting\n• The level cap does go up to 100 once the very last League is beaten\n• Some special Pokémon forms can finally be traded\n• Some temples' riddles no longer stop the automatic adventure\n• League sheet: no more misleading ✓ on a beaten trainer (a loss always sends you back to the first one)\n• On phones, a tap slightly off the bottom bar, or to close the Activities / Social menu, no longer eats a berry from your Bag by mistake\n• Online trades are more reliable when the tab is hidden or another tab is playing\n• Raids: the \"already caught\" Poké Ball on the boss no longer shows up just because you own the regular version of the species, only once you've really caught the shiny\n• Prof. Oak look: you really need every Kanto Pokémon, legendaries included, to unlock it (it sometimes dropped early)\n\n"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "🐛 v0.3.5 · Correctifs",
+    "md": "\nPetit patch, mais sucré 🍬 : les bonbons s'avalent maintenant à la poignée, et tes Pokémon évolués retrouvent leur Poké Ball.\n\n## 🧭 Confort\n• Maintiens le bouton Bonbon Exp. (ou Super Bonbon) sur la fiche d'un Pokémon pour les enchaîner : un d'abord, puis de plus en plus vite jusqu'à ce que tu relâches, que le stock soit vide ou le niveau max atteint. Une évolution débloquée en route attend que tu relâches, et un simple appui en utilise toujours un seul\n\n## 🐛 Corrections\n• Un Pokémon attrapé puis évolué (ou que tu n'as plus) affiche la Poké Ball grise estompée sur la carte du chapitre et dans « À trouver ici », comme dans le Pokédex, au lieu d'avoir l'air seulement vu\n• « À trouver ici » ne compte comme attrapés que les Pokémon que tu as encore : ton équipe relance une ball sur les autres\n",
+    "en": {
+      "title": "🐛 v0.3.5 · Bug fixes",
+      "md": "\nSmall patch, sweet patch 🍬: candies now go down by the handful, and your evolved Pokémon get their Poké Ball back.\n\n## 🧭 Quality of life\n• Hold the Exp. Candy (or Rare Candy) button on a Pokémon's card to use them in a burst: one at first, then faster and faster until you let go, run out or hit the level cap. An evolution unlocked along the way waits until you let go, and a simple tap still uses just one\n\n## 🐛 Fixes\n• A Pokémon you caught then evolved (or no longer have) shows the faded grey Poké Ball on the chapter card and in \"Found here\", like in the Pokédex, instead of looking only seen\n• \"Found here\" only counts as caught the Pokémon you still own: your team throws a ball at the others again\n"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "🐛 v0.3.4 · Correctifs",
+    "md": "\nLe jeu avait un peu abusé du café ☕ : son horloge prenait de l'avance sur la vraie vie. Tout est remis à l'heure !\n\n## 🐛 Corrections\n• L'heure du jeu ne file plus devant la vraie : depuis la dernière mise à jour, elle pouvait prendre plusieurs heures d'avance, et le jour et la nuit avec\n• Le récap de ton retour ne compte plus davantage que le temps vraiment passé loin du jeu\n• Changer l'heure de ton téléphone ou passer en mode avion ne fait plus sauter le jeu de 8 h d'un coup : hors ligne, l'aventure continue à son rythme, et le temps passé loin est joué dès que le jeu retrouve le réseau\n• Tes captures et tes exploits réapparaissent dans le fil des dresseurs (ils s'y perdaient depuis la dernière mise à jour)\n",
+    "en": {
+      "title": "🐛 v0.3.4 · Bug fixes",
+      "md": "\nThe game had a little too much coffee ☕: its clock kept running ahead of real life. Everything's back on time!\n\n## 🐛 Fixes\n• The game's clock no longer runs ahead of the real one: since the last update it could drift several hours ahead, dragging day and night along with it\n• Your welcome-back recap no longer counts more than the time you actually spent away\n• Changing your phone's time or switching to airplane mode no longer makes the game jump 8 hours at once: offline, your adventure keeps going at its own pace, and the time away is played as soon as the game is back online\n• Your catches and feats show up in the feed again (they went missing since the last update)\n"
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "title": "🧭 v0.3.3 · Confort",
+    "md": "\nGros patch confort : ton aventure ne fait plus de pause quand tu t'absentes, la Pension devient un vrai buffet à volonté, et le jeu reste fluide même avec 2 000 Pokémon dans le PC 🐢➡️⚡\n\n## ⏳ Le jeu continue sans toi\n• Raids, zones légendaires et Tour de Combat continuent pendant ton absence, comme un chapitre : jusqu'à 8 h, au rythme de l'écran. Un alt-tab ou le jeu fermé, ça ne t'éjecte plus jamais\n• Boss attrapé pendant ton absence ? Il t’attend en trophée dans le récap de ton retour, avec son liseré chroma et ses scintillements. Encore debout ? Son petit sprite est là pour te narguer\n• Changer l'heure de ton appareil ne trompe plus le jeu : il suit l'heure du site, et elle ne recule jamais\n• Un seul onglet joue à la fois : ouvre le jeu ailleurs, l'ancien onglet te le dit au lieu de mélanger les deux parties\n• Entre deux appareils : celui qui n'a pas joué reprend l'autre partie sans rien demander, et une partie effacée ailleurs l'est partout\n\n## 🍓 Pension\n• Envoie plusieurs baies d'affilée sans attendre la fin du goûter : elles tombent toutes d'un coup, et plus il y en a, plus ça croque vite\n• Maintiens un bouton de baie pour en verser une pluie\n• Les baies ont chacune leur taille, tournoient en tombant et rebondissent à l'atterrissage\n• La jauge d'œuf et l'incubateur avancent baie par baie (fini les deux œufs qui popent d'un coup)\n• La ponte compte tout le temps passé loin du jeu : seules les places de l'incubateur la limitent\n\n## ⚔️ Combats et raids\n• Fini la Cage-Éclair sur un Racaillou : une attaque de statut n'est plus lancée sur un Pokémon qu'elle ne peut pas toucher\n• Si aucune attaque ne peut toucher l'adversaire, ton Pokémon utilise Lutte au lieu de rester planté\n• Choix d'équipe : le ▲ vert est réservé aux 15 meilleurs contres du boss, et ses vraies attaques sont prises en compte\n• Raids : tes amis te sont proposés comme alliés dès le matin, avec leur dernier duo dans la région\n\n## 🧭 Confort\n• Nouvelle option « Tremblements de l'écran » : à couper si les secousses des gros coups, captures et évolutions te donnent le mal de mer\n• Sur ordinateur, le fil des dresseurs repasse sous la scène et prend toute la hauteur libre\n• Les scintillements chromatiques s'animent dans les scènes, et restent un ✨ sage dans les menus (le bandeau du raid garde les siens)\n• « Animations réduites » va plus loin : statuts figés sur leur image la plus parlante, moins de batterie consommée\n• L'eau animée fait une pause, le temps qu'on la peaufine\n\n## ⚡ Performances\n• Équipe, PC, Pension et choix d'équipe restent fluides avec 2 000 Pokémon et plus\n• Au lancement après une longue absence, plus d'écran figé pendant le calcul de ce qui s'est passé\n• Le jeu démarre plus vite et consomme bien moins quand tu le laisses tourner\n• Côté équipe, de nouveaux outils de modération : pseudos douteux et tricheurs n'ont qu'à bien se tenir 👀\n\n## 🐛 Corrections\n• Une récompense trouvée n'est plus notée deux fois dans le journal\n• Un Pokémon lâché sur un séparateur de région du PC ne se perd plus\n• Une recherche tapée tout en bas du PC ne te renvoie plus au milieu des résultats\n• Pokédex : une région se replie de nouveau quand un filtre est actif\n• Famille : une évolution en pause s'affiche sur sa flèche (⏸)\n• En anglais, le type Roche ne s'appelle plus « Boulder » 😅\n",
+    "en": {
+      "title": "🧭 v0.3.3 · Quality of life",
+      "md": "\nA big comfort patch: your adventure no longer pauses when you step away, the Day Care turns into an all-you-can-eat buffet, and the game stays smooth even with 2,000 Pokémon in your PC 🐢➡️⚡\n\n## ⏳ The game keeps going without you\n• Raids, legendary zones and the Battle Tower keep going while you're away, just like a chapter: up to 8 h, at the screen's pace. An alt-tab or a closed game never kicks you out again\n• Caught a boss while you were away? It's waiting for you as a trophy in your welcome-back summary, with its shiny border and sparkles. Still standing? Its little sprite is there to taunt you\n• Changing your device's clock no longer fools the game: it follows the site's time, and that time never goes backwards\n• Only one tab plays at a time: open the game somewhere else and the old tab tells you, instead of mixing up both games\n• Between two devices: the one that didn't play picks up the other game without asking, and a game erased elsewhere is erased everywhere\n\n## 🍓 Day Care\n• Send several berries in a row without waiting for the snack to end: they all drop at once, and the more there are, the faster the munching\n• Hold a berry button to pour a whole shower of them\n• Each berry has its own size, spins on the way down and bounces when it lands\n• The egg gauge and the incubator move up berry by berry (no more two eggs popping out at once)\n• Egg laying counts all the time you're away: only the incubator's slots limit it\n\n## ⚔️ Battles and raids\n• No more Thunder Wave on a Geodude: a status move is no longer used on a Pokémon it can't affect\n• If no move can touch the foe, your Pokémon uses Struggle instead of just standing there\n• Team picking: the green ▲ is kept for the boss's 15 best counters, and its real moves are taken into account\n• Raids: your friends are offered as allies from the morning on, with their latest pair in the region\n\n## 🧭 Comfort\n• New « Screen shake » option: turn it off if the shakes on big hits, catches and evolutions make you seasick\n• On computers, the trainers' feed goes back under the scene and takes all the free height\n• Shiny sparkles are animated in the scenes and stay a calm ✨ in the menus (the raid banner keeps its own)\n• « Reduced animations » goes further: statuses frozen on their most telling frame, less battery used\n• Animated water takes a break while we polish it\n\n## ⚡ Performance\n• Team, PC, Day Care and team picking stay smooth with 2,000 Pokémon and more\n• Launching after a long break no longer freezes the screen while the game works out what happened\n• The game starts faster and uses much less when you leave it running\n• On our side, new moderation tools: shady names and cheaters had better behave 👀\n\n## 🐛 Fixes\n• A reward you found is no longer written twice in the journal\n• A Pokémon dropped on a region separator in the PC no longer gets lost\n• A search typed at the very bottom of the PC no longer drops you in the middle of the results\n• Pokédex: a region folds again while a filter is on\n• Family: a paused evolution now shows on its arrow (⏸)\n• The Rock type is no longer called « Boulder » 😅\n"
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "title": "🐛 v0.3.2 · Correctifs",
+    "md": "\nPetit patch pour lisser quelques agacements, à commencer par le plus rageant : un alt-tab et hop, éjecté du raid 😤\n\n## 🐛 Corrections\n• Raids et zones légendaires : changer de fenêtre ne te fait plus sortir. Reviens en moins de 15 minutes et le combat reprend là où il s'était figé ; après une plus longue pause, ton équipe est revenue à son chapitre comme avant\n• Tour de Combat : elle ne te fait plus jamais sortir. Après une longue absence, ton chapitre joue le temps écoulé, puis ton run de la Tour reprend exactement où tu l'avais laissé, combat compris (sauf si la semaine s'est terminée entre-temps)\n• Les infobulles des objets du Sac ne masquent plus la bulle d'aide de la section\n\n## 🧭 Petits conforts\n• Un petit « i » à côté du titre de chaque fonctionnalité (Aventure, Équipe, Pokédex, Pension, Raids, Tour de Combat, Succès, Amis, Échanges, Boutique, Sac…) : deux ou trois phrases sur son fonctionnement, minuteurs et limites compris\n• Les onglets verrouillés sont grisés avec un cadenas, et leur bulle te dit ce qui les débloque\n• La scène de combat, sa pastille heure / météo et les interrupteurs ont eu un petit coup de polish\n",
+    "en": {
+      "title": "🐛 v0.3.2 · Bug fixes",
+      "md": "\nA small patch to iron out a few annoyances, starting with the one that hurt the most: one alt-tab and you got kicked out of your raid 😤\n\n## 🐛 Fixes\n• Raids and legendary zones: switching windows no longer kicks you out. Come back within 15 minutes and the fight picks up right where it froze; after a longer break, your team is back in its chapter as before\n• Battle Tower: it never kicks you out anymore. After a long break, your chapter plays the time you were away, then your Tower run is back exactly as you left it, fight included (unless the week ended meanwhile)\n• The Bag's item tooltips no longer cover the section's help bubble\n\n## 🧭 Small comfort touches\n• A little « i » next to every feature's title (Adventure, Team, Pokédex, Pension, Raids, Battle Tower, Achievements, Friends, Trades, Shop, Bag…): two or three sentences on how it works, timers and limits included\n• Locked tabs are now faded with a padlock, and their bubble tells you what unlocks them\n• The battle scene, its time and weather chip and the switches got a little polish\n"
+    }
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Garder les doublons, légendaires rééquilibrés et choix d'équipe",
+    "md": "\n\n## 🌱 Familles et doublons\n• Nouvelle bande « Famille » sur la fiche d'un Pokémon : toute sa lignée, ce que tu possèdes (« 2 / 3 ») et les places encore libres\n• Interrupteur « Garder les doublons » par famille : les prochains doublons sont gardés tant qu'une espèce de la famille reste libre, puis bonbons comme avant (et l'interrupteur se coupe tout seul)\n• Le jeu te le propose une fois par famille à branches (Évoli, Mystherbe, Ptitard…), sans bloquer l'aventure : petit encart après la capture d'un doublon, ou question à l'éclosion\n• Seules les espèces que tu peux vraiment obtenir comptent : un bébé qui ne naît que d'un œuf porte un petit œuf, et pas de place fantôme\n• Par défaut rien ne change : un doublon devient des bonbons\n• Les évolutions à 3 branches ou plus tiennent dans une grille compacte (l'arbre d'Évoli est 5 fois moins haut)\n\n## 🐉 Légendaires\n• Zones légendaires rééquilibrées : une équipe bien choisie au niveau 100 (le bouton ✨ Optimiser) les bat de nouveau la plupart du temps\n• Ça reste un vrai défi : en dessous du niveau 100, ou avec des types mal adaptés, attends-toi à repartir bredouille\n• Les plus coriaces de l'après-midi ont pris la plus grosse baisse\n\n## 🎯 Choix d'équipe (raids, events, zones légendaires)\n• Nouvel ordre « Recommandés » par défaut et ✨ Optimiser revu : tes Pokémon sont classés selon les dégâts qu'ils infligeront vraiment au boss avant de tomber (niveau, stats, attaques et types ensemble). Fini le Raichu niveau 60 proposé avant tes niveau 100 !\n• ▲ vert : bon type et niveau suffisant pour ce combat ; plus de ▼ rouge sur tes petits niveaux\n• « Les plus choisis » : les espèces que les autres dresseurs ont prises contre ce boss, avec ton meilleur exemplaire juste en dessous (un appui pour l'ajouter). Aussi dans les zones légendaires, d'après les équipes qui les ont capturés\n• Rien de prêt dans ton PC ? Le sélecteur te dit quels types frappent fort et quel niveau viser\n• Téléphone : PC en tuiles compactes, équipe de 6 sur une seule ligne\n\n## 🗺️ Deux régions, des règles claires\n• Un Pokémon appartient à la région où tu l'as obtenu (capture, œuf, échange, cadeau…) ; « un seul par espèce » se compte région par région tant qu'elles ne sont pas reliées\n• Chaque Pokémon a son propre plafond de niveau : ceux de la région quittée, sa Ligue battue, montent jusqu'au niveau 100 même pendant que tu joues ailleurs\n• En reliant les régions, les doublons fusionnent comme partout : le plus fort reste, l'autre devient des bonbons (Pension comprise, sauf ceux que tu as choisi de garder)\n• Une petite carte indique où vit un Pokémon de l'autre côté : échanges, Pension (« ses œufs y écloront »)\n• Toutes les demandes des habitants sont listées, quelle que soit la région jouée\n\n## 🧰 Interface\n• Le fil des dresseurs passe en haut sur ordinateur aussi, comme sur téléphone, et la scène de combat prend toute la hauteur libérée\n• Succès : une seule liste, Presque ! en tête, les débloqués en bas (plus d'onglets ni de tri)\n• Fiche d'un Pokémon : Statistiques / Historique restent ouverts ou fermés d'un Pokémon à l'autre\n• Pokédex : Possédés / Vus / Manquants regroupés dans un menu « Statut »\n• PC : un séparateur par région, et un cadenas (avec son infobulle) sur les Pokémon qui ne peuvent pas combattre ici\n\n## 🐛 Corrections\n• Badges, titre de Maître, légendaires et chromatiques ne s'affichent plus en double dans le fil\n• Les infobulles ne se cachent plus sous la barre du haut\n• Au Dojo de Safrania, Kicklee n'est plus deux fois plus petit que Tygnon\n• L'infobulle du cadenas du PC ne clignote plus et la barre d'XP ne déborde plus du cadre\n",
+    "en": {
+      "title": "Keep duplicates, rebalanced legendaries and team picks",
+      "md": "\n\n## 🌱 Families and duplicates\n• New « Family » band on a Pokémon's card: its whole line, what you own (« 2 / 3 ») and the places still free\n• « Keep duplicates » switch per family: the next duplicates are kept while a species of the family is still free, then candies as before (and the switch turns itself off)\n• The game offers it once per branching family (Eevee, Oddish, Poliwag…), without stopping the adventure: a small card after catching a duplicate, or a question at hatching\n• Only the species you can really get count: a baby that only hatches from an egg wears a small egg, and no ghost places\n• By default nothing changes: a duplicate turns into candies\n• Evolutions with 3 branches or more fit in a compact grid (Eevee's tree is 5 times shorter)\n\n## 🐉 Legendaries\n• Legendary zones rebalanced: a well-picked level 100 team (the ✨ Optimize button) beats them most of the time again\n• Still a real challenge: below level 100, or with the wrong types, expect to go home empty-handed\n• The toughest ones from this afternoon got the biggest cut\n\n## 🎯 Team picking (raids, events, legendary zones)\n• New default « Recommended » order and a reworked ✨ Optimize: your Pokémon are ranked by the damage they'll actually deal to the boss before going down (level, stats, moves and types together). No more level 60 Raichu suggested ahead of your level 100s!\n• Green ▲: right type and high enough level for this fight; no more red ▼ on your low levels\n• « Most picked »: the species other trainers took against this boss, with your best one right below (tap to add it). Also in legendary zones, from the teams that caught them\n• Nothing ready in your PC? The picker tells you which types hit hard and what level to aim for\n• Phone: compact PC tiles, a team of 6 on a single row\n\n## 🗺️ Two regions, clear rules\n• A Pokémon belongs to the region where you got it (catch, egg, trade, gift…); « one per species » counts region by region until they're linked\n• Each Pokémon has its own level cap: the ones from the region you left, their League beaten, level up to 100 even while you play elsewhere\n• When the regions get linked, duplicates merge like everywhere else: the stronger one stays, the other turns into candies (Day Care included, except the ones you chose to keep)\n• A small map shows where a Pokémon from the other side lives: trades, Day Care (« its eggs will hatch there »)\n• All Locals' requests are listed, whichever region you play\n\n## 🧰 Interface\n• The trainers' feed moves to the top on computers too, like on phones, and the battle scene takes the freed height\n• Achievements: a single list, Almost there! first, unlocked ones at the bottom (no more tabs or sorting)\n• Pokémon card: Stats / History stay open or closed from one Pokémon to the next\n• Pokédex: Owned / Seen / Missing grouped in a « Status » menu\n• PC: a separator per region, and a padlock (with its tooltip) on Pokémon that can't fight here\n\n## 🐛 Fixes\n• Badges, Champion titles, legendaries and shinies no longer show up twice in the feed\n• Tooltips no longer hide under the top bar\n• At the Saffron Dojo, Hitmonlee is no longer half Hitmonchan's size\n• The PC padlock's tooltip no longer flickers and the XP bar no longer spills out of its frame\n"
+    }
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Succès, progression revue, légendaires et échanges",
+    "md": "\nNotes de version détaillées. La présentation des nouveautés est dans #annonces.\n\n## Progression\n• Un bonbon de famille vaut maintenant l'équivalent de 3 niveaux au lieu de 5 (doublons, Pension, œufs, buddy)\n• Bonbons Exp. de la boutique : −40 % d'effet\n• Les régions suivantes demandent 25 % d'XP en plus par niveau\n• Buddy : de nouveau un seul pour toute la partie, il ne change plus avec la région jouée ; un buddy de bas niveau gagne ses bonbons plus vite (1 tous les 5 K.O. au niveau 5, rythme normal au niveau 20)\n• Champions d'arène : récompense complète la première fois, puis 10 % ; les dresseurs d'une Ligue déjà gagnée ne rapportent plus de bonus d'argent\n• Ligue : les 4 dresseurs avant chaque membre du Conseil 4 et le Maître ont une équipe fixe, plus tirée au hasard\n\n## Légendaires\n• Zones légendaires recalibrées : chaque combat reste un vrai défi, même avec la meilleure équipe possible\n• Pokémon errants : raté, équipe K.O. ou PC plein, il ne change plus de chapitre et reste jusqu'à la fin de ses 10 minutes\n• Cinématiques : elles chargent pendant la transition, démarrent plus vite et téléchargent bien moins de fichiers\n• Salles à énigme des temples : l'inscription en braille s'affiche en grand sur la scène dès l'arrivée, avec « Montrer un Pokémon », « Attendre » et « Partir »\n\n## Échanges en ligne\n• Un Pokémon reçu arrive dans la région du Pokémon donné : il attend dans son PC tant que les régions ne sont pas reliées\n• Une fois les régions reliées par la Ligue, échanges possibles d'une région à l'autre, à rareté égale\n• Les évolutions par échange (Kadabra, Machopeur, Gravalanch, Spectrum) se font à l'arrivée, avant la règle « un par espèce »\n\n## Interface\n• Nouvel écran Succès (groupe Activités) : toutes les apparences et tous les cadres à débloquer, triés du plus proche au plus lointain ou par région, « Porter » directement depuis la liste\n• Barre du haut : le nombre de dresseurs en jeu ; Changelogs passe dans Options (pastille NEW tant qu'une note n'est pas lue)\n• Fil des dresseurs sous le combat : les vrais exploits des joueurs (chromatiques, légendaires, badges, Maîtres de la Ligue, échanges, raids, Tour de Combat), jamais ceux d'une région que tu n'as pas atteinte ; Options › Apparaître dans le fil pour t'en retirer\n• Heure et météo regroupées dans une pastille sur la scène, le détail dans l'infobulle\n• Téléphone : le fil des dresseurs devient la deuxième ligne de la barre du haut ; la Pension se joue au toucher (plus de glisser-déposer) ; tuiles compactes dans la Pension et le Pokédex comme au PC\n• PC : filtre par région et bouton « Tout faire évoluer », avec un récapitulatif\n• Pierres d'évolution : le stock s'affiche sur le bouton « Évoluer »\n• Échanges : la section « Demandes des habitants » se replie\n• Niveaux plus grands dans le PC et la Pension\n• Les infobulles s'ouvrent au-dessus de ce qu'elles décrivent\n• Les activités pas encore débloquées sont affichées verrouillées au lieu d'être cachées\n• Le marché noir de la Team Rocket est retiré : les Pokémon que tu y avais mis en vente reviennent au PC\n\n## Combat\n• Les attaques qui drainent (Vol-Vie, Méga-Sangsue, Giga-Sangsue, Vampirisme, Vampi-Poing, Vampibaiser) soignent l'attaquant\n• Tunnel ne cache plus la barre de PV de l'attaquant\n\n## Sauvegarde et chargement\n• Sauvegarde cloud entre appareils : un blocage pouvait empêcher toute sauvegarde depuis un onglet, c'est corrigé ; deux sauvegardes qui ont avancé chacune de leur côté demandent toujours laquelle garder ; une réinitialisation s'applique sur tous les appareils\n• Chargement bien plus léger : environ 160 requêtes au premier lancement au lieu de 580, code compressé, seule ta langue est téléchargée, petites images regroupées et gardées en cache\n\n## Corrections\n• Capture : une espèce déjà possédée dans l'autre région n'empêche plus la Ball (Lokhlass)\n• Natures toujours attribuées (certains Pokémon n'en avaient pas avant un rechargement)\n• « Un par espèce » partout : cadeaux d'histoire et lots du Casino en double deviennent des bonbons ; les doublons déjà présents dans les sauvegardes sont convertis (chromatiques et légendaires gardés)\n• Météo : heure de fin à la minute près\n• Portraits des dresseurs recentrés ; les versions régionales des apparences Kimono, Pokémaniac et Sbire Rocket ne sont plus des copies de celles de Kanto\n• Ondine retrouve sa tenue d'arène\n• Progression : seul le niveau conseillé reste (le doublon « Zone » est retiré) ; carte verrouillée de la région suivante corrigée\n• Pokédex : texte de région plus clair\n• Ningale : flèche d'évolution corrigée\n• Petits soucis d'affichage : tag NEW de l'onglet Cadre, marge en bas des listes à débloquer, image aplatie dans la carte de chapitre, recherche avec peu de résultats, infobulle des baies (une seule à la fois)\n",
+    "en": {
+      "title": "Achievements, reworked progress, legendaries and trades",
+      "md": "\n\n## Progression\n• A family candy is now worth 3 levels instead of 5 (duplicates, Day Care, eggs, buddy)\n• Shop Exp. Candies: −40 % effect\n• The following regions need 25 % more XP per level\n• Buddy: one for the whole game again, it no longer changes with the region you play; a low-level buddy earns its candies faster (1 every 5 K.O.s at level 5, normal pace at level 20)\n• Gym Leaders: full reward the first time, then 10 %; trainers of a League you've already won no longer pay a money bonus\n• League: the 4 trainers before each Elite Four member and the Champion have a fixed team, no longer drawn at random\n\n## Legendaries\n• Legendary zones recalibrated: every fight stays a real challenge, even with the best possible team\n• Roaming Pokémon: missed, team fainted or PC full, it no longer moves to another chapter and stays until its 10 minutes are over\n• Cinematics: they load during the transition, start sooner and download far fewer files\n• Temple riddle rooms: the braille inscription shows big on the scene as soon as you arrive, with « Show a Pokémon », « Wait » and « Leave »\n\n## Online trades\n• A Pokémon you receive goes to the region of the Pokémon you gave: it waits in that PC until the regions are linked\n• Once the League links the regions, trades work from one region to another, same rarity\n• Trade evolutions (Kadabra, Machoke, Graveler, Haunter) happen on arrival, before the « one per species » rule\n\n## Interface\n• New Achievements screen (Activities group): every look and frame to unlock, sorted closest first or by region, « Wear » right from the list\n• Top bar: the number of trainers playing now; Changelogs moves to Options (NEW badge while a note is unread)\n• Trainer feed under the battle: real players' highlights (shinies, legendaries, badges, League Champions, trades, raids, Battle Tower), never from a region you haven't reached; Options › Show me in the feed to opt out\n• Time and weather together in one pill on the scene, details in its tooltip\n• Phone: the trainer feed becomes the top bar's second row; the Day Care works with taps (no more drag and drop); compact tiles in the Day Care and Pokédex, like the PC\n• PC: region filter and an « Evolve all » button, with a recap\n• Evolution stones: your stock shows on the « Evolve » button\n• Trades: the « Locals' requests » section folds\n• Bigger levels in the PC and Day Care\n• Tooltips open above what they describe\n• Activities not unlocked yet show as locked instead of hidden\n• Team Rocket's black market is removed: Pokémon you had listed there go back to your PC\n\n## Battle\n• Draining moves (Absorb, Mega Drain, Giga Drain, Leech Life, Drain Punch, Draining Kiss) heal the attacker\n• Dig no longer hides the attacker's HP bar\n\n## Saves and loading\n• Cloud save across devices: a lock could stop every save from a tab, now fixed; two saves that both moved on always ask which one to keep; a reset applies on every device\n• Much lighter loading: about 160 requests on first launch instead of 580, compressed code, only your language is downloaded, small images bundled and kept in cache\n\n## Fixes\n• Catching: a species you own in the other region no longer stops the Ball (Lapras)\n• Natures always given (some Pokémon had none until a reload)\n• « One per species » everywhere: duplicate story gifts and Game Corner prizes turn into candies; duplicates already in saves are converted (shinies and legendaries kept)\n• Weather: end time to the minute\n• Trainer portraits centred; the regional versions of the Kimono Girl, Poké Maniac and Rocket Grunt looks are no longer copies of the Kanto ones\n• Misty gets her Gym outfit back\n• Progress: only the recommended level stays (the duplicate « Zone » chip is gone); the next region's locked card fixed\n• Pokédex: clearer region text\n• Shedinja: evolution arrow fixed\n• Small display issues: NEW tag on the Frame tab, bottom margin of the unlock lists, squashed image in the chapter card, search with few results, berry tooltip (one at a time)\n"
+    }
+  },
+  {
+    "date": "2026-10-18",
+    "title": "Nouvelle région, natures, thème clair et cinématiques",
+    "md": "\nNotes de version détaillées. La présentation des nouveautés est dans #annonces.\n\n## Suite de l'aventure\n• Une nouvelle région est disponible plus loin dans l'aventure : arènes, Ligue, météos propres, zones légendaires et apparences de dresseur 👀\n• Partir pour une nouvelle région ne verrouille plus la précédente : elle reste accessible depuis la Progression, avec tous tes Pokémon\n• Jusqu'à la Ligue de la nouvelle région, chaque côté a son argent, son sac et son équipe ; jouer un chapitre de l'autre côté les échange. La barre du haut affiche la région jouée à côté de l'argent\n• En aventure, la nouvelle région n'utilise que les Pokémon capturés sur place ; la région quittée peut utiliser tous tes Pokémon\n• Battre la Ligue relie les deux côtés : argent et objets additionnés, doublons fusionnés (les chromatiques ne fusionnent jamais)\n• Nouvelle fenêtre de départ : starters de la région, argent de départ, règles, et les Pokémon manquants de ton Pokédex qui vivent aussi là-bas\n• Niveau maximum fixé à 100 : les Pokémon au-dessus repassent au niveau 100, le contenu de fin de jeu concerné a été resserré\n• Un défi hebdomadaire avec classement et récompenses le lundi se débloque plus loin dans l'aventure\n• Pokédex : les formes alternatives s'affichent juste après leur espèce, sans compter dans le total\n\n## Natures\n• 25 natures : une stat +10 %, une autre −10 % (PV jamais modifiés), pour tous les Pokémon, adversaires compris ; les Pokémon existants en reçoivent une\n• Fiche Pokémon : tuile Nature avec son effet, 6 barres de stats (Atq. Spé. et Déf. Spé. séparées), extrémité verte sur la stat augmentée, rouge sur la stat baissée\n• La Capsule Nature, à obtenir plus loin dans l'aventure, permet d'en changer\n\n## Légendaires\n• Chaque légendaire a sa propre cinématique d'entrée avant le combat : complète la première fois, courte ensuite, un appui pour la passer\n• Les arènes des légendaires prennent leur météo ou leur ciel (orage, neige, cendres, soleil…), avec les effets habituels de ces météos\n• Zones légendaires uniquement en jeu : hors ligne, l'équipe retourne au chapitre quitté\n• Les Pokémon fabuleux sont rangés dans le groupe « Légendaires » après la Ligue, plus en tête de liste\n• Conditions de déblocage des Pokémon errants revues\n\n## Cadres d'avatar\n• 13 cadres autour du portrait, visibles partout où les autres joueurs te voient : classements, amis, raids, échanges, écran VS\n• Choix dans « Mon dresseur › Cadre » ; chacun se gagne par un exploit (œufs, raids, chromatiques, amis, échanges, Pokédex, Ligue…) et reste acquis\n\n## Thème clair\n• Options › Thème : Sombre (par défaut), Clair ou Auto (réglage de l'appareil)\n• Décors, combats et cinématiques restent sombres ; en-têtes de sections plus vifs dans les deux thèmes\n\n## Interface\n• Menu latéral regroupé : Aventure, Progression, Équipe/PC, Pokédex, puis les groupes repliables Activités (Pension, Raids) et Social (Amis, Échanges), puis Boutique ; 7 onglets sur téléphone\n• Progression : portrait du champion sur chaque arène, en silhouette tant qu'il n'a pas été affronté\n• « Où le trouver » dans l'infobulle des objets (flèche d'évolution, Sac) : lieu de la trouvaille unique de l'aventure et prix en Boutique, avec liens directs\n• Boutique : comptoirs dans un bandeau en haut avec leur solde ; certains objets d'évolution restent verrouillés tant qu'ils n'ont pas été trouvés dans l'aventure\n• Raids Chroma : nouvel écran (régions en bandeau, raid du jour en pleine largeur, Raid / Classement sous le visuel)\n• Classements des raids, zones légendaires et événements sur une même ligne, avec portraits encadrés\n• Bouton « i » d'aide à côté du titre des écrans Raids Chroma et défi hebdomadaire\n• Panneaux Sac et « À trouver ici » repliables\n• Équipe / PC sur téléphone : barre de filtres réduite, PC sur 5 colonnes, glisser-déposer revu\n• Motif Poké Ball du fond en léger défilement\n• Libellés du menu réduits pour tenir au lieu d'être coupés\n\n## Raids\n• Dresseurs de passage : des équipes PNJ complètent le classement d'un boss jusqu'à 20 places tant que les joueurs sont peu nombreux (les mêmes pour tous, sans récompense)\n\n## Échanges\n• Un Pokémon reçu par échange d'une espèce déjà possédée devient des bonbons de sa famille, comme une capture en double (les chromatiques sont toujours gardés) ; l'échange compte toujours\n\n## Sauvegarde en ligne\n• Au lancement, ou au retour sur l'onglet après 2 min, le jeu attend la vérification en ligne (8 s maximum) avant de rejouer le temps d'absence : un appareil en retard ne prend plus le dessus\n• Conflit réglé en faveur de la sauvegarde la plus jouée (à l'écran et hors ligne), puis badges, chapitre et Pokédex ; les cartes « Deux sauvegardes » affichent ce temps de jeu et la dernière utilisation\n\n## Équilibrage\n• Badge Roche : niveau maximum 20 au lieu de 18, Racaillou Nv. 14 et Onix Nv. 15 chez Pierre, ses dresseurs un niveau plus bas\n• Dresseurs d'arène habillés selon leur arène (classes des jeux originaux)\n• Le Scope Sylphe devient une étape de l'histoire au lieu d'un objet du sac\n\n## Décors\n• Plus de 220 décors retravaillés en pixel art (palette de 128 couleurs), environ 3 fois plus légers à charger\n• Nouvelle Route prairie, nouvelles arènes de Pierre et d'Ondine, décors des zones légendaires refaits\n\n## Introduction\n• Le Prof. Chen demande « Quel personnage te représente le mieux ? » au lieu de « Garçon ou fille ? »\n\n## Corrections\n• Les légendaires de zone et les Pokémon errants ne se rencontrent plus et ne se capturent plus hors ligne\n• Œufs pondus pendant l'absence : l'éclosion démarre à la ponte, plus au lancement du jeu\n• Combats contre le rival et le Conseil 4 : plus de Pokémon superposés sur le terrain\n• Une Ligue jouée en chemin automatique va toujours jusqu'au Maître (elle s'arrêtait après le premier membre)\n• La mini-équipe épinglée ne reste plus affichée en passant de l'Équipe à l'aventure\n• Mon dresseur : barre de défilement fine, portraits bien cadrés dans la grille des apparences, apparences en double remplacées\n• Starters de la région suivante tous affichés à la même échelle\n• Les Bonbons Exp. ne changent plus de valeur en changeant de région\n",
+    "en": {
+      "title": "New region, natures, light theme and cinematics",
+      "md": "\n\n## Further in the adventure\n• A new region is available further in the adventure: Gyms, League, its own weather, legendary zones and trainer looks 👀\n• Leaving for a new region no longer locks the previous one: it stays open from Progress, with all your Pokémon\n• Until the new region's League, each side has its own money, Bag and team; playing a chapter on the other side swaps them. The top bar shows the region played next to your money\n• In the adventure, the new region only uses Pokémon caught there; the region you left can use all your Pokémon\n• Beating the League links both sides: money and items added up, duplicates merged (shinies never merge)\n• New departure window: the region's starters, starting money, the rules, and the missing Pokémon of your Pokédex that live there too\n• Maximum level set to 100: Pokémon above it go back to level 100, the endgame content involved was tightened\n• A weekly challenge with a leaderboard and Monday rewards unlocks further in the adventure\n• Pokédex: alternate forms show right after their species, without counting toward the total\n\n## Natures\n• 25 natures: one stat +10 %, another −10 % (HP never changed), for every Pokémon, opponents included; existing Pokémon get one\n• Pokémon sheet: a Nature tile with its effect, 6 stat bars (Sp. Atk and Sp. Def apart), a green end on the raised stat, a red end on the lowered one\n• The Nature Capsule, found further in the adventure, changes it\n\n## Legendaries\n• Each legendary has its own entrance cinematic before the battle: full the first time, short afterwards, one tap skips it\n• Legendary arenas take their legendary's weather or sky (storm, snow, ash, harsh sun…), with those weathers' usual effects\n• Legendary zones only while playing: offline, the team goes back to the chapter it left\n• Mythical Pokémon sit in the « Legendaries » group after the League, no longer at the top of the list\n• Unlock conditions of roaming Pokémon reviewed\n\n## Avatar frames\n• 13 frames around your portrait, shown wherever other players see you: leaderboards, friends, raids, trades, VS screen\n• Pick one in « My Trainer › Frame »; each is earned through a feat (eggs, raids, shinies, friends, trades, Pokédex, League…) and is yours for good\n\n## Light theme\n• Options › Theme: Dark (default), Light or Auto (device setting)\n• Scenes, battles and cinematics stay dark; brighter section headers in both themes\n\n## Interface\n• Side menu grouped: Adventure, Progress, Team/PC, Pokédex, then the folding groups Activities (Day Care, Raids) and Social (Friends, Trades), then Shop; 7 tabs on phones\n• Progress: each Gym shows its leader's portrait, as a silhouette until you've battled them\n• « Where to find it » in item tooltips (evolution arrow, Bag): where the adventure's one-time find is and the Shop price, with direct links\n• Shop: counters in a band on top with their balance; some evolution items stay locked until found in the adventure\n• Shiny Raids: new screen (regions in a band, the day's raid full width, Raid / Leaderboard under the banner)\n• Raid, legendary zone and event leaderboards on one shared row, with framed portraits\n• « i » help button next to the Shiny Raids and weekly challenge titles\n• Bag and « Found here » panels fold\n• Team / PC on phones: slimmer filter bar, PC in 5 columns, reworked drag and drop\n• The background's Poké Ball pattern drifts slowly\n• Menu labels shrink to fit instead of being cut off\n\n## Raids\n• Passing trainers: NPC teams fill a boss's leaderboard up to 20 spots while players are few (the same for everyone, no rewards)\n\n## Trades\n• A Pokémon received in a trade whose species you already own turns into its family's candies, like a duplicate catch (shinies are always kept); the trade still counts\n\n## Cloud save\n• At launch, or when coming back to the tab after 2 min, the game waits for the online check (8 s at most) before playing the time away: a device that fell behind no longer wins\n• Conflicts go to the save played the longest (on screen and offline), then badges, chapter and Pokédex; the « Two saves » cards show that play time and when each was last used\n\n## Balance\n• Boulder Badge: level cap 20 instead of 18, Geodude Lv. 14 and Onix Lv. 15 at Brock's, his trainers one level lower\n• Gym trainers dressed for their Gym (classes from the original games)\n• The Silph Scope is now a story step instead of a Bag item\n\n## Scenes\n• Over 220 scenes reworked in pixel art (128-colour palette), about 3 times lighter to load\n• New prairie Route, new Brock and Misty Gyms, legendary zone scenes redone\n\n## Intro\n• Professor Oak asks « Which character represents you best? » instead of « Boy or girl? »\n\n## Fixes\n• Zone legendaries and roaming Pokémon are no longer met or caught offline\n• Eggs laid while away: hatching starts when they're laid, no longer at launch\n• Battles against the rival and the Elite Four: no more Pokémon stacked on the field\n• A League played on autopilot always goes through to the Champion (it stopped after the first member)\n• The pinned mini-team no longer stays on screen when going from Team to the adventure\n• My Trainer: thin scrollbar, portraits properly framed in the looks grid, duplicate looks replaced\n• The next region's starters all shown at the same scale\n• Exp. Candies no longer change value when switching regions\n"
+    }
+  },
+  {
+    "date": "2026-10-15",
+    "title": "Langues, baies bonus et classement des raids",
+    "md": "\nNotes de version détaillées. La présentation des nouveautés est dans #annonces.\n\n## Langues\n• Le jeu est disponible en français, anglais et espagnol : choix par drapeau dans les Options (langue du navigateur par défaut)\n• Noms officiels des Pokémon, attaques et objets dans chaque langue\n• Menus, combats, histoire, Pension, échanges, marché, amis, raids, cinématiques et infobulles traduits\n• L'écran de progression s'appelle désormais « Aventure »\n\n## Baies bonus\n• 7 baies consommables donnent un bonus d'une heure dans l'aventure ; elles se trouvent avec les autres baies dans les événements objet (les trouvailles d'argent sur les routes sont moins fréquentes)\n• Baie Framby ×1,25 et Framby dorée ×1,5 : chances de capture (légendaires, raids et Pokémon errants compris)\n• Baie Nanab ×2 : espèces rares · Baie Enigma ×3 : espèces jamais capturées · Baie Nanana ×1,25 : XP de combat · Baie Lansat ×1,25 : Pokédollars · Baie Frista ×2 : taux de chromatiques sauvages\n• Une baie active par famille ; la même baie relance son heure, une baie plus faible demande confirmation avant de remplacer l'active\n• Le temps s'écoule en temps réel, y compris hors ligne\n• Sac : groupe Baies (appui pour utiliser, survol ou appui long pour le détail) ; bonus actifs en pastilles avec minuteur en haut à droite de la scène\n\n## Raids\n• Classement par boss : durée totale du raid (entrée dans le donjon jusqu'au K.O. du boss), une ligne par équipe avec ses 3 dresseurs et leurs Pokémon ; top 50, actualisé au plus une fois par heure\n• Un clic sur un joueur du classement ouvre sa carte de dresseur\n• Les 2 Pokémon du joueur et ceux des amis peuvent venir de n'importe quelle génération ; le donjon, le boss et les alliés automatiques restent limités à la région du raid\n• Sélection des Pokémon : tout le PC est affiché (filtre ▲ Efficaces désactivé par défaut)\n• L'écran Raid occupe toute la hauteur de l'écran\n\n## Zones légendaires\n• Vue Équipes sur la fiche de zone : les équipes qui ont capturé le légendaire, les 6 espèces les plus utilisées et les 20 dernières victoires\n• Raids et zones légendaires : seules les générations disponibles dans la région apparaissent\n• Aucune capture sur le chemin ; « À trouver ici » n'affiche que le légendaire\n\n## Carte de dresseur\n• Red et Leaf sont disponibles d'office ; les 10 autres apparences de base se débloquent par des exploits (combats, captures, badges, évolutions)\n• 10 nouvelles apparences à débloquer, comme Blue : Prof. Chen, Pokémaniac, Pêcheur, Scientifique, Éleveuse, Kimono, Gentleman, Karatéka, Giovanni, Sbire Rocket\n• D'autres apparences arrivent avec la suite de l'aventure : affichées verrouillées, région masquée par « ??? » tant qu'elle n'est pas atteinte\n• Éditeur : apparences possédées en haut, liste « À débloquer » avec condition et progression\n• Une apparence obtenue reste acquise ; l'apparence portée avant la mise à jour est conservée\n• Pastille NEW sur le portrait (barre du haut, carte, éditeur) à chaque apparence débloquée\n\n## Combats et animations\n• Un Pokémon qui fuit (fuite sauvage ou capture ratée) sort de l'écran dans un nuage de fumée\n• Capture : le Pokémon se dissout en pixels aspirés dans la Ball ; rappel en combat en pixels\n• Attaque ratée : le projectile passe à côté de la cible, sans effet d'impact\n• Poké Balls de combat plus grandes\n• Centre Pokémon : animation de soin plus sobre, Poké Balls sur une seule rangée\n• Une capture qui remplit une place libre de l'équipe rejoint immédiatement l'équipe en route\n• Scènes de câble link et choix du starter : Poké Balls animées une par une\n\n## Équilibrage\n• Brûlure et poison sur un boss (raid, zone légendaire, Pokémon errant) : 1/40 de ses PV renforcés par tour ; la brûlure ne réduit plus son attaque physique que de 25 %\n• Retour d'absence : 12 niveaux maximum par Pokémon, XP de combat divisée par deux\n• Habitats des Routes 19 et 20 : espèces de pluie, d'orage et de nuit ; Îles Écume : espèces de base uniquement\n\n## Échanges\n• Pokémon demandé : coche s'il est possédé, sprite grisé sinon, silhouette s'il n'a jamais été vu (offres des joueurs et demandes des habitants)\n• Un Pokémon parti dans un échange en ligne ne compte plus comme possédé : un œuf, une capture ou une évolution peut en donner un second entre-temps (les deux sont gardés si l'offre revient)\n\n## Interface\n• Bouton de chapitre et de Ligue placé juste sous la liste des Pokémon\n• Pokémon errants : sprite animé sur la carte de chapitre et dans la fiche de détail, pastille dorée avec minuteur\n• Fiches latérales de raid, d'événement et de zone : sprite animé\n• Pokédex : plus de Poké Ball derrière les sprites\n• Téléphone : mini-équipe et filtres du PC sous la barre du haut, dernière ligne du PC accessible au-dessus des onglets\n\n## Corrections\n• Pokémon errants affichés uniquement dans leur région\n• Hors combat, le dresseur marche seul : le copain ne remplace plus un Pokémon de l'équipe (un chromatique semblait perdre ses couleurs)\n• Vitesse x4 : les effets de capture et de K.O. gardent une durée minimale, certaines attentes n'étaient plus divisées deux fois\n• Raids : les Pokémon d'autres générations manquaient dans la sélection\n",
+    "en": {
+      "title": "Languages, bonus berries and raid leaderboards",
+      "md": "\n\n## Languages\n• The game is available in French, English and Spanish: pick a flag in Options (browser language by default)\n• Official names of Pokémon, moves and items in each language\n• Menus, battles, story, Day Care, trades, market, friends, raids, cinematics and tooltips translated\n• The progress screen is now called \"Adventure\"\n\n## Bonus berries\n• 7 consumable berries give a one-hour bonus in the adventure; they are found with the other berries in item events (money finds on routes are less frequent)\n• Razz Berry ×1.25 and Golden Razz Berry ×1.5: catch chances (legendaries, raids and roaming Pokémon included)\n• Nanab Berry ×2: rare species · Enigma Berry ×3: species never caught · Pinap Berry ×1.25: battle XP · Lansat Berry ×1.25: Pokédollars · Starf Berry ×2: wild Shiny rate\n• One active berry per family; the same berry restarts its hour, a weaker berry asks for confirmation before replacing the active one\n• Time runs in real time, offline included\n• Bag: Berries group (tap to use, hover or long press for details); active bonuses as pills with a timer at the top right of the scene\n\n## Raids\n• Leaderboard per boss: total raid time (from entering the dungeon to the boss's K.O.), one row per team with its 3 trainers and their Pokémon; top 50, refreshed at most once an hour\n• Clicking a player on the leaderboard opens their Trainer Card\n• The player's 2 Pokémon and their friends' can come from any generation; the dungeon, the boss and the automatic allies stay limited to the raid's region\n• Pokémon selection: the whole PC is shown (▲ Strong filter off by default)\n• The Raid screen takes the full height of the screen\n\n## Legendary zones\n• Teams view on the zone sheet: the teams that caught the legendary, the 6 most used species and the last 20 wins\n• Raids and legendary zones: only the generations available in the region appear\n• No catches on the way; \"Found here\" only shows the legendary\n\n## Trainer Card\n• Red and Leaf are available from the start; the 10 other base looks unlock through feats (battles, catches, badges, evolutions)\n• 10 new looks to unlock, like Blue: Prof. Oak, PokéManiac, Fisherman, Scientist, Breeder, Kimono Girl, Gentleman, Black Belt, Giovanni, Team Rocket Grunt\n• More looks come later in the adventure: shown locked, region hidden behind \"???\" until you reach it\n• Editor: owned looks at the top, a \"To unlock\" list with condition and progress\n• A look you get is yours for good; the look worn before the update is kept\n• NEW badge on the portrait (top bar, card, editor) for each look unlocked\n\n## Battles and animations\n• A Pokémon that flees (wild escape or failed catch) leaves the screen in a puff of smoke\n• Catching: the Pokémon dissolves into pixels pulled into the Ball; recall in battle in pixels\n• Missed move: the projectile flies past the target, with no impact effect\n• Bigger battle Poké Balls\n• Pokémon Center: a more understated healing animation, Poké Balls on a single row\n• A catch that fills a free team slot joins the team on the road right away\n• Link Cable and starter choice scenes: Poké Balls animated one by one\n\n## Balance\n• Burn and poison on a boss (raid, legendary zone, roaming Pokémon): 1/40 of its boosted HP per turn; burn now only lowers its physical attack by 25 %\n• Coming back: 12 levels at most per Pokémon, battle XP halved\n• Routes 19 and 20 habitats: rain, storm and night species; Seafoam Islands: base species only\n\n## Trades\n• Wanted Pokémon: a check mark if owned, a grayed sprite otherwise, a silhouette if never seen (player offers and locals' requests)\n• A Pokémon gone in an online trade no longer counts as owned: an egg, a catch or an evolution can give you a second one in the meantime (both are kept if the offer comes back)\n\n## Interface\n• Chapter and League button placed right under the Pokémon list\n• Roaming Pokémon: animated sprite on the chapter card and in the detail sheet, golden pill with a timer\n• Raid, event and zone side sheets: animated sprite\n• Pokédex: no more Poké Ball behind the sprites\n• Phone: mini-team and PC filters under the top bar, last PC row reachable above the tabs\n\n## Fixes\n• Roaming Pokémon only shown in their region\n• Outside battle, the trainer walks alone: the buddy no longer replaces a team Pokémon (a Shiny seemed to lose its colors)\n• x4 speed: catch and K.O. effects keep a minimum duration, some waits are no longer divided twice\n• Raids: Pokémon from other generations were missing from the selection\n"
+    }
+  },
+  {
+    "date": "2026-10-14",
+    "title": "Infobulles des types et de la météo",
+    "md": "\nNotes de version détaillées. La présentation des nouveautés est dans #annonces.\n\n## Infobulles\n• Survol d'un type (badges, fiches d'arène, raids, zones légendaires) : multiplicateurs en attaque (×2, ×½, ×0) et en défense (faiblesses, résistances, immunités)\n• Survol d'une météo ou d'un moment de la journée (barre de la scène, carte, raids) : types d'attaques renforcés ou affaiblis, types de Pokémon sauvages plus fréquents ou plus rares\n\n## Décors\n• Eau animée sur les scènes avec plan d'eau (houle, reflets, scintillements, lumière selon l'heure)\n• Scènes de Kanto harmonisées, laboratoire du Prof. Chen redessiné\n• Nouveaux décors dédiés pour les lieux de la suite de l'aventure et pour une zone légendaire ; les fonds génériques sont retirés\n• Transition systématique vers l'étape suivante après un combat, même sur le même décor ; le message de récompense s'affiche après\n\n## Équilibrage\n• Brûlure et poison sur un boss (raid, zone légendaire, Pokémon errant) : dégâts calculés sur ses PV de base, et non plus sur ses PV renforcés\n\n## Échanges\n• Les Pokémon placés à la Pension peuvent être proposés ou donnés dans un échange (repère « P » dans la liste)\n\n## Corrections\n• Raids : les alliés automatiques n'ont que des Pokémon de la région du raid\n• Zone légendaire lancée depuis la Ligue : la frise affichait les étapes de la Ligue\n• Texte des pastilles des fiches de la carte centré verticalement\n",
+    "en": {
+      "title": "Type and weather tooltips",
+      "md": "\n\n## Tooltips\n• Hovering a type (badges, Gym sheets, raids, legendary zones): attack multipliers (×2, ×½, ×0) and defense (weaknesses, resistances, immunities)\n• Hovering a weather or a time of day (scene bar, map, raids): move types boosted or weakened, wild Pokémon types more common or rarer\n\n## Scenes\n• Animated water on scenes with a body of water (swell, reflections, sparkles, light by time of day)\n• Kanto scenes harmonized, Prof. Oak's lab redrawn\n• New dedicated scenes for places further in the adventure and for a legendary zone; the generic backgrounds are removed\n• Always a transition to the next step after a battle, even on the same scene; the reward message shows after it\n\n## Balance\n• Burn and poison on a boss (raid, legendary zone, roaming Pokémon): damage based on its base HP, no longer on its boosted HP\n\n## Trades\n• Pokémon placed in the Day Care can be offered or given in a trade (\"P\" marker in the list)\n\n## Fixes\n• Raids: automatic allies only have Pokémon from the raid's region\n• Legendary zone started from the League: the timeline showed the League's steps\n• Text of the map sheets' pills centered vertically\n"
+    }
+  },
+  {
+    "date": "2026-10-14",
+    "title": "Raids chromatiques et amis",
+    "md": "\nNotes de version détaillées. La présentation des nouveautés est dans #annonces.\n\n## Raids chromatiques\n• Les événements légendaires sont remplacés par des raids quotidiens : un raid par région débloquée, un boss chromatique différent chaque jour\n• Déblocage : après la victoire à la Ligue Pokémon de Kanto\n• Déroulé : 4 combats (sauvages et dresseurs), un camp de soin, puis le boss\n• Boss : niveau 100, combat 6 contre 1, riposte et jauge de rage ; lieu et météo déterminés par ses types, ses attaques x1,2 sous sa météo\n• Capture : 1 % par Poké Ball lancée quand le boss est K.O. ; essais illimités jusqu'à la capture ; le boss capturé rejoint l'équipe au niveau 5\n• Aucun Pokémon n'est capturé pendant le donjon, seul le boss compte\n• Seules les espèces de la région du raid apparaissent (joueur, donjon, boss)\n• Équipe : 2 Pokémon du joueur + 2 alliés de 2 Pokémon chacun ; niveaux plafonnés à 100\n• Alliés automatiques : 6 dresseurs proposés, Pokémon entièrement évolués, niveau 97 à 100, stats x0,9, sans légendaire ni fabuleux ; jamais deux fois la même classe de dresseur dans une sélection\n• Les raids nécessitent une connexion (pas de raid hors ligne)\n• Onglet Raid : raids du jour, boss du lendemain en silhouette, compte à rebours jusqu'aux prochains raids, régions non débloquées affichées verrouillées\n• Indicateurs ▲ / ▼ sur chaque Pokémon de l'équipe selon son efficacité contre le boss\n\n## Amis\n• Nouvel onglet Amis : ajout par code Nom#1234, demandes reçues et envoyées, acceptation, refus, annulation, suppression\n• Consultation de la carte de dresseur d'un ami (lecture seule)\n• Notification en temps réel à la réception ou à l'acceptation d'une demande ; actualisation manuelle limitée à une fois toutes les 5 minutes\n• Raids : les amis apparaissent en tête des alliés proposés, avec les 2 Pokémon qu'ils ont utilisés contre le même boss\n• Échanges : les offres des amis sont listées en premier\n\n## Zones légendaires\n• Une équipe dédiée se prépare pour chaque zone légendaire (fiche de zone, indicateurs ▲ / ▼, niveaux plafonnés à ceux de la zone) ; sans équipe dédiée, l'équipe d'aventure est utilisée\n• Les Pokémon rencontrés sur le chemin évoluent uniquement vers des formes de la région de la zone\n• Suppression de la limite mondiale de légendaires (compteur et refus de capture retirés)\n• Conditions d'accès de deux zones de la suite de l'aventure révisées\n\n## Équipe en route\n• L'équipe qui combat est une copie de l'équipe prévue, prise à chaque soin (Centre Pokémon, nouveau chapitre, défaite, début d'événement ou de zone)\n• Les changements d'équipe restent possibles à tout moment mais ne s'appliquent qu'au prochain soin (corrige le remplacement de Pokémon K.O. en plein combat)\n• Le dernier Pokémon debout de l'équipe en route ne peut pas être vendu, échangé, relâché ni placé à la Pension\n• Message « Changements appliqués au prochain Centre Pokémon » sur l'écran Équipe tant que les deux équipes diffèrent\n\n## Retour d'absence\n• Nouvelle fenêtre « Bon retour » : combats gagnés, argent, défaites, portrait du champion d'arène affronté, nouvelles entrées du Pokédex, niveaux gagnés par l'équipe (jauges animées), objets trouvés\n• Section captures masquée si aucune nouvelle espèce\n\n## Pokédex\n• Nouvel état pour les espèces capturées puis plus possédées (sprite grisé, Poké Ball grisée)\n• Nouveaux filtres Possédés / Plus possédés\n\n## Progression\n• Régions affichées en bandeau au-dessus des arènes\n• Détail de chapitre à côté de la liste sur grand écran, en tiroir latéral sur écran étroit\n• Les arènes atteintes affichent leur décor\n\n## Boutique et interface\n• Boutique : achat x1 / x10 / Max\n• Barre du haut retravaillée\n• Nouvelle police (Jersey 10 / Jersey 15) et échelle de texte agrandie\n• Portraits de dresseurs cadrés sur le visage partout (menu, barre du haut, échanges, classements, raids)\n• Emplacements d'équipe (Équipe/PC, sélecteurs d'équipe) au format portrait\n• Boutons de fermeture uniformisés (croix centrée, contour rouge)\n• Carte de dresseur : les gros compagnons (1,5 m et plus) se placent derrière le dresseur\n• Fenêtres : le contenu défile et les boutons restent visibles sur petits écrans\n\n## Mobile et tablette\n• Glisser-déposer tactile (appui long pour saisir, balayage pour faire défiler le PC, la Pension et les grilles d'événement)\n• Barre du haut et onglets mobiles corrigés, Progression sur une colonne, flèches de fiche dans les coins + balayage, appui long pour afficher les titres\n• Menu latéral compact sur écrans d'ordinateur peu hauts, menu affiné sur tablette\n\n## Performances\n• Le jeu se met en pause dans un onglet masqué et rattrape le temps écoulé au retour\n• Son désactivé temporairement (moteur audio retiré pour les performances) ; options Son / Volume masquées\n• Vérification de la sauvegarde en ligne uniquement après 2 minutes d'absence\n\n## Suite de l'aventure\n• Ajout des événements de ville, des œufs d'histoire, des échanges PNJ et d'une zone dédiée aux insectes dans les régions suivantes\n• Le chapitre initial de la région suivante peut commencer de nuit\n\n## Combat\n• Nuit : attaques Spectre et Ténèbres x1,1\n\n## Corrections\n• Changement d'équipe en plein combat (voir Équipe en route)\n• Pokémon retourné pendant certaines animations d'attaque (ex. Lame de Roc)\n• Sprite de Blue écrasé dans les échanges\n• Niveau maximal des Bonbons bloqué à 95 après la Ligue\n• Échanges : un Pokémon de joueur affiché parmi les offres des habitants ; un échange PNJ réalisé disparaît désormais du tableau\n• Compteur Pokédex du profil : le total suit les régions débloquées au lieu d'afficher 151\n• Pension : emplacements d'œuf vides sans Métamorph affichés en pointillés, avec l'explication dans l'en-tête\n",
+    "en": {
+      "title": "Shiny Raids and friends",
+      "md": "\n\n## Shiny Raids\n• Legendary events are replaced by daily raids: one raid per unlocked region, a different Shiny boss every day\n• Unlock: after winning the Kanto Pokémon League\n• How it goes: 4 battles (wild and trainers), a healing camp, then the boss\n• Boss: level 100, 6-against-1 battle, counterattack and rage gauge; place and weather set by its types, its moves x1.2 under its weather\n• Catching: 1 % per Poké Ball thrown once the boss is K.O.; unlimited tries until the catch; the caught boss joins the team at level 5\n• No Pokémon is caught during the dungeon, only the boss counts\n• Only species from the raid's region appear (player, dungeon, boss)\n• Team: 2 of the player's Pokémon + 2 allies with 2 Pokémon each; levels capped at 100\n• Automatic allies: 6 trainers offered, fully evolved Pokémon, level 97 to 100, stats x0.9, no legendary or Mythical; never the same trainer class twice in one selection\n• Raids need a connection (no offline raids)\n• Raid tab: the day's raids, the next day's boss as a silhouette, a countdown to the next raids, regions not unlocked shown locked\n• ▲ / ▼ markers on each team Pokémon based on its effectiveness against the boss\n\n## Friends\n• New Friends tab: add by code Name#1234, received and sent requests, accept, decline, cancel, remove\n• View a friend's Trainer Card (read only)\n• Real-time notification when a request is received or accepted; manual refresh limited to once every 5 minutes\n• Raids: friends show first among the offered allies, with the 2 Pokémon they used against the same boss\n• Trades: friends' offers are listed first\n\n## Legendary zones\n• A dedicated team is set up for each legendary zone (zone sheet, ▲ / ▼ markers, levels capped at the zone's); without a dedicated team, the adventure team is used\n• Pokémon met on the way only evolve into forms from the zone's region\n• The global legendary limit is removed (counter and catch refusal gone)\n• Access conditions of two zones further in the adventure revised\n\n## Team on the road\n• The team that fights is a copy of the planned team, taken at each heal (Pokémon Center, new chapter, defeat, start of an event or zone)\n• Team changes are still possible at any time but only apply at the next heal (fixes fainted Pokémon being replaced mid-battle)\n• The last Pokémon standing in the team on the road can't be sold, traded, released or placed in the Day Care\n• \"Changes apply at the next Pokémon Center\" message on the Team screen while the two teams differ\n\n## Coming back\n• New \"Welcome back!\" window: battles won, money, defeats, portrait of the Gym Leader faced, new Pokédex entries, levels gained by the team (animated gauges), items found\n• Catches section hidden if there's no new species\n\n## Pokédex\n• New state for species caught but no longer owned (grayed sprite, grayed Poké Ball)\n• New Owned / No longer owned filters\n\n## Progress\n• Regions shown in a band above the Gyms\n• Chapter details next to the list on big screens, in a side drawer on narrow screens\n• Gyms you've reached show their scene\n\n## Shop and interface\n• Shop: buy x1 / x10 / Max\n• Top bar reworked\n• New font (Jersey 10 / Jersey 15) and a bigger text scale\n• Trainer portraits framed on the face everywhere (menu, top bar, trades, leaderboards, raids)\n• Team slots (Team/PC, team pickers) in portrait format\n• Close buttons made consistent (centered cross, red outline)\n• Trainer Card: big companions (1.5 m and up) stand behind the trainer\n• Windows: the content scrolls and the buttons stay visible on small screens\n\n## Mobile and tablet\n• Touch drag and drop (long press to grab, swipe to scroll the PC, the Day Care and event grids)\n• Top bar and mobile tabs fixed, Progress in one column, sheet arrows in the corners + swipe, long press to show titles\n• Compact side menu on short computer screens, refined menu on tablets\n\n## Performance\n• The game pauses in a hidden tab and catches up on the time passed when you come back\n• Sound temporarily off (audio engine removed for performance); Sound / Volume options hidden\n• Online save check only after 2 minutes away\n\n## Further in the adventure\n• Town events, story eggs, NPC trades and a zone dedicated to Bug Pokémon added in the next regions\n• The next region's first chapter can start at night\n\n## Battle\n• Night: Ghost and Dark moves x1.1\n\n## Fixes\n• Team change mid-battle (see Team on the road)\n• Pokémon flipped during some move animations (e.g. Stone Edge)\n• Blue's sprite squashed in trades\n• Max level of Candies stuck at 95 after the League\n• Trades: a player's Pokémon shown among the locals' offers; a completed NPC trade now disappears from the board\n• Profile Pokédex counter: the total follows the unlocked regions instead of showing 151\n• Day Care: empty egg slots without Ditto shown dotted, with the explanation in the header\n"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "Le retour des légendaires",
+    "md": "\nLes légendaires sont de retour 👑 Et avec eux une bonne pile de corrections grâce à vos signalements, des combats bien plus jolis et des chromatiques qui en valent enfin la peine.\n\n## 👑 Légendaires\n• Les légendaires t'attendent dans leurs repaires, verrouillés tant que tu n'as pas rempli leur condition (le cadenas te dit quoi faire)\n• Avant d'arriver jusqu'à eux, il faudra passer les Pokémon du coin… puis affronter un vrai boss, coriace, qui riposte et se met en rage 😤\n• Et plus loin dans l'aventure, certains ne tiennent pas en place… garde l'œil ouvert 👀\n\n## ✨ Combats\n• Chaque attaque a maintenant son effet en pixel art, plus ou moins spectaculaire selon sa puissance (et les statuts aussi)\n• Tes Pokémon apprennent leurs attaques dans l'ordre, de la plus faible à la plus forte : fini l'Empiflor qui reçoit sa meilleure attaque trop tôt\n• La précision dépend de la puissance, et tes Pokémon prennent toujours la meilleure attaque dispo\n• Les chromatiques ont +10 % sur toutes leurs stats ✨ (affichées en doré sur la fiche)\n\n## 🌿 Rencontres\n• Les Pokémon sauvages peuvent arriver déjà évolués, et les dresseurs costauds sortent plutôt leurs formes finales\n• Les rencontres spéciales en ville suivent l'heure et la météo : plus que ce qui est vraiment dispo, fini les 33 Pokémon à trouver à Lavanville 😅\n• La fiche de chapitre indique s'il fait jour ou nuit et met en avant ce qu'on peut trouver maintenant\n• Lokhlass vit désormais aux Îles Écume, Bulbizarre sort de jour, et Zarbi a des conditions bien à lui\n• Les sprites animés HD arrivent pour toute la suite du Pokédex\n\n## 🥚 Pension & objets\n• Des baies à ramasser et à donner à tes pensionnaires 🍓\n• Animations quand tu trouves un objet ou de l'argent\n• Une seule pierre d'évolution de chaque type par région, et adieu l'arbre à baies\n• Le 4ᵉ emplacement de pension s'achète enfin, le niveau des pensionnaires est affiché, et l'incubateur dit clairement quand il manque un Métamorph\n\n## 🔁 Échanges\n• Les échanges entre joueurs remarchent (désolé pour l'attente 🙏)\n• Les demandes des habitants restent dans leur région, et celles qui sont prêtes ressortent bien mieux\n\n## 🎨 Petits plus\n• PV affichés correctement (plus de 110/100), badges retrouvés au chargement\n• Bouton Relâcher discret, rangé dans le coin du visuel du Pokémon\n• Super Bonbons rangés après les Bonbons Exp., la boutique n'affiche que le Casino de ta région\n• Chenipan devient l'icône du bouton de signalement de bug 🐛\n• La suite de l'aventure a été raccourcie et rééquilibrée 👀\n",
+    "en": {
+      "title": "The return of the legendaries",
+      "md": "\nThe legendaries are back 👑 And with them a big pile of fixes thanks to your reports, much prettier battles and shinies that are finally worth it.\n\n## 👑 Legendaries\n• The legendaries wait for you in their lairs, locked until you meet their condition (the padlock tells you what to do)\n• Before reaching them, you'll have to get past the local Pokémon… then face a real boss, a tough one that hits back and flies into a rage 😤\n• And further in the adventure, some can't stay put… keep your eyes open 👀\n\n## ✨ Battles\n• Every move now has its own pixel art effect, more or less spectacular depending on its power (statuses too)\n• Your Pokémon learn their moves in order, from weakest to strongest: no more Victreebel getting its best move too early\n• Accuracy depends on power, and your Pokémon always pick the best move available\n• Shinies get +10 % on all their stats ✨ (shown in gold on their sheet)\n\n## 🌿 Encounters\n• Wild Pokémon can show up already evolved, and strong trainers tend to send out their final forms\n• Special encounters in towns follow the time and weather: only what's really available, no more 33 Pokémon to find in Lavender Town 😅\n• The chapter sheet tells you if it's day or night and highlights what you can find right now\n• Lapras now lives in the Seafoam Islands, Bulbasaur comes out by day, and Unown has conditions all its own\n• Animated HD sprites are coming for the rest of the Pokédex\n\n## 🥚 Day Care & items\n• Berries to pick up and give to your Day Care Pokémon 🍓\n• Animations when you find an item or money\n• Only one evolution stone of each type per region, and goodbye berry tree\n• The 4th Day Care slot can finally be bought, your Day Care Pokémon's level is shown, and the incubator clearly says when a Ditto is missing\n\n## 🔁 Trades\n• Trades between players work again (sorry for the wait 🙏)\n• Locals' requests stay in their region, and the ones that are ready stand out much better\n\n## 🎨 Little extras\n• HP shown correctly (no more 110/100), badges back on load\n• Discreet Release button, tucked in the corner of the Pokémon's picture\n• Rare Candies sorted after Exp. Candies, the Shop only shows your region's Game Corner\n• Caterpie becomes the icon of the bug report button 🐛\n• The rest of the adventure has been shortened and rebalanced 👀\n"
+    }
+  },
+  {
+    "date": "2026-10-11",
+    "title": "Jour, nuit & Pension",
+    "md": "\nGrosse fournée de corrections grâce à vos signalements 🐛 et en bonus : des Pokémon qui vivent enfin au rythme du jour et de la nuit, une Pension qui pond, et des habitants qui veulent échanger avec toi.\n\n## 🌙 Jour, nuit & météo\n• Chaque zone a maintenant ses Pokémon de jour, de nuit et selon la météo : les spectres sortent la nuit, Ptitard attend la pluie, Salamèche préfère la nuit…\n• La météo colle au climat de chaque zone : plus de tempête de sable au sommet des montagnes 🏜️\n• Le panneau « À trouver ici » et les fiches de chapitre rangent les Pokémon par condition, avec ceux que tu as déjà capturés bien visibles\n• Pas d'Évoli ni de Porygon dans les hautes herbes, et pas de Pokémon fantôme avant d'avoir de quoi les voir 👻\n\n## 🥚 Pension\n• C'est désormais Métamorph qui pond : un œuf de la famille d'un de tes pensionnaires, plus souvent quand il y a du monde\n• Chaque œuf éclot en 4 h pile, et le temps hors ligne compte (jusqu'à 8 h)\n• Un œuf d'une espèce que tu as déjà est annoncé à l'avance et se transforme en bonbon à l'éclosion (fini l'œuf volé 🕵️)\n\n## 🔁 Échanges\n• Les habitants des villes ont leurs demandes dans le menu Échanges : passe dans leur ville pour les débloquer\n• Un échange arrive au niveau du Pokémon envoyé, et dans sa région\n• Debugant te laisse choisir son évolution\n\n## 💎 Objets d'évolution\n• Pierre Soleil, Grelot Zen, Roche Royale, Peau Métal, Écaille Draco et Améliorator se trouvent là où les jeux les donnent, puis arrivent en boutique\n\n## ⚔️ Combats & équilibrage\n• Les boss tapent enfin toute ton équipe, pas juste un Pokémon 😬\n• Tes Pokémon choisissent leur meilleure attaque, le type Fée fait son entrée\n• Ondine et Major Bob un poil plus coriaces, et une Ligue où chaque membre plafonne juste au-dessus de son niveau\n• Fini les Rattata niveau 15 en début d'aventure et les jetons avant le Casino\n• Ton équipe est soignée après chaque arène\n• Les dresseurs ont des équipes cohérentes avec leur métier (le Cracheur de feu range ses Pokémon Eau 🔥)\n• La suite de l'aventure a été rééquilibrée, avec des chapitres moins longs 👀\n\n## 💤 Jeu en fond\n• Le farm hors ligne ne bloque plus sur un champion : le chapitre recommence jusqu'à ton retour\n• La cérémonie de badge et le Hall of Fame se ferment tout seuls après quelques secondes\n• La sauvegarde en ligne ne te demande qu'une fois, puis garde la partie la plus avancée\n\n## 🎨 Petits plus\n• Carte de dresseur : une rangée de badges par région atteinte, et Blue rentre enfin dans le cadre\n• Bouton Relâcher plus discret, bouton d'évolution avec l'icône de la pierre\n• Échap passe les animations, le spam de bonbons ne fait plus la queue\n• Icône Poké Ball sur les Pokémon capturés du Pokédex\n• Les événements légendaires font une petite pause, le temps de les retravailler ⏸️\n\n## 💖 Psst, les testeurs…\n• Une nouvelle rareté secrète vient d'apparaître. Elle ne s'attrape pas, elle se mérite. Gardez un œil sur votre PC 👀\n",
+    "en": {
+      "title": "Day, night & Day Care",
+      "md": "\nA big batch of fixes thanks to your reports 🐛 and as a bonus: Pokémon that finally live by day and night, a Day Care that lays eggs, and locals who want to trade with you.\n\n## 🌙 Day, night & weather\n• Each zone now has its day, night and weather Pokémon: ghosts come out at night, Poliwag waits for rain, Charmander prefers the night…\n• The weather fits each zone's climate: no more sandstorm on mountaintops 🏜️\n• The \"Found here\" panel and the chapter sheets sort Pokémon by condition, with the ones you've already caught clearly visible\n• No Eevee or Porygon in the tall grass, and no Ghost Pokémon before you have something to see them with 👻\n\n## 🥚 Day Care\n• Ditto now lays the eggs: an egg from the family of one of your Day Care Pokémon, more often when it's crowded\n• Each egg hatches in exactly 4 h, and offline time counts (up to 8 h)\n• An egg of a species you already have is announced in advance and turns into a candy when it hatches (no more stolen egg 🕵️)\n\n## 🔁 Trades\n• Town locals have their requests in the Trades menu: visit their town to unlock them\n• A trade arrives at the level of the Pokémon sent, and in its region\n• Tyrogue lets you choose its evolution\n\n## 💎 Evolution items\n• Sun Stone, Soothe Bell, King's Rock, Metal Coat, Dragon Scale and Up-Grade are found where the games give them, then arrive in the Shop\n\n## ⚔️ Battles & balance\n• Bosses finally hit your whole team, not just one Pokémon 😬\n• Your Pokémon pick their best move, the Fairy type makes its entrance\n• Misty and Lt. Surge a touch tougher, and a League where each member caps just above their level\n• No more level 15 Rattata at the start of the adventure, and no more coins before the Game Corner\n• Your team is healed after each Gym\n• Trainers have teams that fit their job (the Firebreather puts away his Water Pokémon 🔥)\n• The rest of the adventure has been rebalanced, with shorter chapters 👀\n\n## 💤 Background play\n• Offline farming no longer gets stuck on a Gym Leader: the chapter starts over until you come back\n• The badge ceremony and the Hall of Fame close by themselves after a few seconds\n• The online save only asks you once, then keeps the furthest game\n\n## 🎨 Little extras\n• Trainer Card: one row of badges per region reached, and Blue finally fits in the frame\n• More discreet Release button, evolution button with the stone's icon\n• Esc skips animations, spamming candies no longer queues up\n• Poké Ball icon on caught Pokémon in the Pokédex\n• Legendary events are taking a little break while they get reworked ⏸️\n\n## 💖 Psst, testers…\n• A new secret rarity just appeared. You can't catch it, you have to earn it. Keep an eye on your PC 👀\n"
+    }
+  },
+  {
+    "date": "2026-10-11",
+    "title": "Chasse aux bugs, round 2",
+    "md": "\n\n## ☁️ Sauvegarde en ligne\n• Ta save suit enfin d'un appareil à l'autre\n• En cas de conflit, le jeu te montre les deux sauvegardes et tu choisis la bonne\n\n## 🔗 Échanges\n• Tu peux échanger un Pokémon contre un autre de la même espèce\n• Un Pokémon en attente d'échange compte toujours comme à toi : fini les doublons par évolution ou par capture 🙃\n• Une offre ne peut plus être acceptée deux fois\n• Plus de « câble Link » mystère : les évolutions par échange sont indiquées clairement\n• Les dresseurs des villes ne proposent leur échange qu'une seule fois, et jamais pour une espèce que tu as déjà (adieu le pot de colle de Lavanville 👋)\n\n## ⚔️ Combats & équilibrage\n• Les PV max grimpent avec le niveau : les combats de fin de région durent plus longtemps, sans que les attaques perdent leur punch\n• Les attaques des Pokémon ont été remises à jour : plus de Magnéton qui spamme une attaque Normale au niveau 57\n• Captures un peu plus difficiles (plafond à 60 %), les légendaires restent un vrai défi\n• Les dresseurs font évoluer leurs Pokémon par pierre ou échange en fin de parcours, et les sauvages peuvent apparaître déjà évolués\n• Métamorph se transforme enfin en combat\n• Les dresseurs d'événement sont au niveau de l'événement\n• La recommandation d'équipe d'événement propose de vrais counters\n• Quelques rencontres trop costaudes (coucou le Rapasdepic niveau 101) ont été recadrées\n\n## 🏆 Ligue & arènes\n• Perdre à la Ligue te renvoie au tout début du Conseil des 4\n• Battre le Maître déclenche enfin un Hall of Fame 🎉\n• Plus d'arène « passée » toute seule pendant que tu fais tes courses à la boutique\n• Une surprise attend ceux qui reviennent sur des légendaires déjà affrontés : accumule assez de traces pour relancer la chasse en solo 👀\n\n## 🥚 Pension\n• La Pension reste ouverte quand tu changes de région, tes Pokémon t'attendent sagement\n• Pas de bébé Pokémon qui éclot avant l'heure\n\n## 📖 Pokédex & PC\n• « Capturé » veut dire « encore à toi » : un Pokémon échangé repasse en « vu »\n• La fiche garde ses sections ouvertes quand tu changes de Pokémon, avec un toggle ✨ shiny\n• Les échanges en ville et les lots du Casino apparaissent dans « Où le trouver »\n• Retour du bouton Relâcher dans le PC, avec une flèche d'évolution\n\n## 🎨 Visuels\n• Fini l'écran vert pendant le chargement du décor\n• Les boss ont la bonne taille à leur entrée, et c'est ton dresseur qui s'affiche sur l'écran VS\n• Les légendaires d'événement s'animent avec une aura météo ⛈️\n• Menus Pension et Pokédex à la même largeur que les autres, sélecteur d'équipe d'événement remis d'aplomb\n",
+    "en": {
+      "title": "Bug hunt, round 2",
+      "md": "\n\n## ☁️ Online save\n• Your save finally follows you from one device to another\n• If there's a conflict, the game shows you both saves and you pick the right one\n\n## 🔗 Trades\n• You can trade a Pokémon for another of the same species\n• A Pokémon waiting to be traded still counts as yours: no more duplicates through evolution or catching 🙃\n• An offer can no longer be accepted twice\n• No more mystery \"Link Cable\": trade evolutions are clearly shown\n• Town trainers only offer their trade once, and never for a species you already have (bye-bye to the Lavender Town pest 👋)\n\n## ⚔️ Battles & balance\n• Max HP climbs with level: end-of-region battles last longer, without moves losing their punch\n• Pokémon moves have been updated: no more Magneton spamming a Normal move at level 57\n• Catching is a bit harder (capped at 60 %), legendaries stay a real challenge\n• Trainers evolve their Pokémon by stone or trade late in the game, and wild ones can show up already evolved\n• Ditto finally transforms in battle\n• Event trainers are at the event's level\n• The event team recommendation suggests real counters\n• A few encounters that were too strong (hi there, level 101 Fearow) have been toned down\n\n## 🏆 League & Gyms\n• Losing at the League sends you back to the very start of the Elite Four\n• Beating the Champion finally triggers a Hall of Fame 🎉\n• No more Gym \"cleared\" on its own while you shop at the Shop\n• A surprise awaits those who go back to legendaries they've already faced: gather enough traces to restart the hunt solo 👀\n\n## 🥚 Day Care\n• The Day Care stays open when you change region, your Pokémon wait for you patiently\n• No baby Pokémon hatching ahead of time\n\n## 📖 Pokédex & PC\n• \"Caught\" means \"still yours\": a traded Pokémon goes back to \"seen\"\n• The sheet keeps its sections open when you switch Pokémon, with a ✨ shiny toggle\n• Town trades and Game Corner prizes show up in \"Where to find it\"\n• The Release button is back in the PC, with an evolution arrow\n\n## 🎨 Visuals\n• No more green screen while the scene loads\n• Bosses have the right size when they enter, and your own trainer shows on the VS screen\n• Event legendaries are animated with a weather aura ⛈️\n• Day Care and Pokédex menus as wide as the others, event team picker set straight again\n"
+    }
+  },
+  {
+    "date": "2026-10-10",
+    "title": "Chasse aux bugs",
+    "md": "\n\n## 🔗 Échanges en ville\n• Les dresseurs des villes proposent leurs échanges dans la même fenêtre que les échanges en ligne\n• Accepter lance la cinématique du câble Link, puis la fiche Pokédex de ton nouveau Pokémon\n\n## ⚔️ Combats\n• Touche un Pokémon de ton équipe : il entre et reste en jeu jusqu'à la fin du combat, même avec le switch auto activé\n• Fini les Pokémon fantômes qui restaient plantés sur la scène après un changement de menu 👻\n• Le décor suit le combat en cours : plus de Ronflex qui fait la sieste en plein Centre Pokémon 😴\n• Un Pokémon échangé (ou que tu n'as plus) se capture de nouveau quand tu le recroises\n\n## 🔁 Boucle de chapitres\n• Perdre dans un chapitre en boucle te fait passer au suivant, au lieu de te renvoyer au premier en boucle infinie\n\n## 📱 Mobile & divers\n• La barre du bas n'affiche plus que les icônes, avec le nom sur l'onglet actif : tout rentre enfin\n• Les jetons du Casino quittent le Sac, ils restent affichés à côté de ton argent\n",
+    "en": {
+      "title": "Bug hunt",
+      "md": "\n\n## 🔗 Town trades\n• Town trainers offer their trades in the same window as online trades\n• Accepting plays the Link Cable cinematic, then the Pokédex entry of your new Pokémon\n\n## ⚔️ Battles\n• Tap a Pokémon in your team: it comes in and stays in until the end of the battle, even with auto switch on\n• No more ghost Pokémon stuck on the scene after changing menus 👻\n• The scene follows the current battle: no more Snorlax napping in the middle of a Pokémon Center 😴\n• A traded Pokémon (or one you no longer have) can be caught again when you come across it\n\n## 🔁 Chapter loop\n• Losing in a looped chapter moves you on to the next one, instead of sending you back to the first one in an endless loop\n\n## 📱 Mobile & misc\n• The bottom bar only shows icons now, with the name on the active tab: everything finally fits\n• Game Corner coins leave the Bag, they stay shown next to your money\n"
+    }
+  },
+  {
+    "date": "2026-10-10",
+    "title": "Échanges : ça marche pour de vrai",
+    "md": "\nCorrectif express sur les échanges : vos offres partaient… nulle part 😅 C'est réparé, et le menu a eu droit à un bon coup de neuf.\n\n## 🔗 Échanges, version 2\n• Ton offre part en ligne tout de suite, plus besoin d'attendre l'actualisation\n• Nouveau poste d'échange façon câble Link : l'espèce que tu cherches d'un côté, ton Pokémon de l'autre, le temps restant sur le câble\n• On choisit d'abord l'espèce qu'on cherche (en version ✨ si tu veux), puis le jeu te montre seulement tes Pokémon qui peuvent l'échanger\n• Un récap clair avant de valider : l'échange, les frais et ton argent après\n• Tableau des offres plus compact : vert = ce que tu reçois, rouge = ce que tu donnes, et ta propre offre y est mise en avant\n• Touche une offre pour voir le détail avant d'échanger\n• Retirer une offre demande maintenant une confirmation\n• Un petit délai entre deux offres, pour garder les serveurs au frais 🧊\n• Tous les timers sont précis à la seconde\n\n## 🎬 Cinématique\n• Tu vois enfin le Pokémon de l'autre dresseur avant qu'il file dans sa Poké Ball\n\n## 🛠️ Divers\n• Les boutons des fenêtres sont harmonisés partout\n• Corrigé : annuler le choix d'un Pokémon pour un échange pouvait planter le menu\n",
+    "en": {
+      "title": "Trades: they really work now",
+      "md": "\nExpress fix for trades: your offers were going… nowhere 😅 It's fixed, and the menu got a nice refresh.\n\n## 🔗 Trades, version 2\n• Your offer goes online right away, no need to wait for a refresh\n• New Link Cable-style trade station: the species you're looking for on one side, your Pokémon on the other, the time left on the cable\n• You first pick the species you're looking for (in its ✨ version if you like), then the game only shows your Pokémon that can trade for it\n• A clear recap before confirming: the trade, the fees and your money afterwards\n• More compact offer board: green = what you get, red = what you give, and your own offer is highlighted\n• Tap an offer to see the details before trading\n• Withdrawing an offer now asks for confirmation\n• A short delay between two offers, to keep the servers cool 🧊\n• All timers are accurate to the second\n\n## 🎬 Cinematic\n• You finally see the other trainer's Pokémon before it zips into its Poké Ball\n\n## 🛠️ Misc\n• Window buttons are consistent everywhere\n• Fixed: cancelling the choice of a Pokémon for a trade could crash the menu\n"
+    }
+  },
+  {
+    "date": "2026-10-10",
+    "title": "Échanges en ligne, villes vivantes",
+    "md": "\nGrosse fournée aujourd'hui : on échange enfin pour de vrai, les villes s'animent et Kanto a encore quelques secrets à te montrer 👀\n\n## 🔗 Échanges entre joueurs\n• Le menu Échanges ouvre ses portes : propose un de tes Pokémon contre l'espèce que tu cherches, et d'autres dresseurs pourront accepter\n• Une offre à la fois, même région et même rareté des deux côtés, pas de légendaires, et un chromatique ne s'échange que contre un chromatique ✨\n• Petits frais pour poster une offre, qui expire au bout de quelques jours (ton Pokémon revient si personne n'en veut)\n• Si quelqu'un accepte pendant que tu joues, tu le vois en direct, avec une petite cinématique d'échange\n• Kadabra, Machopeur & co évoluent bien à l'échange, comme dans le jeu d'origine 😏\n\n## 🏘️ Des villes plus vivantes\n• En arrivant dans une ville, il peut se passer quelque chose dans les rues : un objet trouvé, un peu d'argent, une rencontre spéciale…\n• Des PNJ te proposent parfois d'échanger leur Pokémon contre un des tiens\n• Les pierres évolutives se trouvent maintenant sur les routes et en ville (en boutique, elles coûtent désormais une petite fortune)\n\n## 🎰 Casino de Céladopole\n• Les dresseurs lâchent parfois quelques jetons après un combat, et on en trouve sur les routes\n• Échange-les contre des Pokémon au coin Casino de la boutique\n\n## 🎒 Le Sac\n• Nouveau Sac pour voir tout ce que tu possèdes, rangé par catégorie (objets clés, bonbons, évolution…)\n• Les objets clés t'indiquent où les utiliser\n\n## 👻 Secrets de Kanto\n• Des fossiles à récupérer… et à faire revivre au bon endroit 🦴\n• Certains lieux hantés cachent des spectres impossibles à identifier sans le bon objet\n• Certaines espèces n'apparaissent plus qu'une fois que l'histoire t'a amené là où elles vivent (fini le Ponyta en pleine Forêt de Jade 😅)\n• Quelques apparitions rares selon l'heure, le jour… ou la météo 🌪️\n",
+    "en": {
+      "title": "Online trades, living towns",
+      "md": "\nBig batch today: you can finally trade for real, towns come alive and Kanto still has a few secrets to show you 👀\n\n## 🔗 Trades between players\n• The Trades menu opens its doors: offer one of your Pokémon for the species you're looking for, and other trainers can accept\n• One offer at a time, same region and same rarity on both sides, no legendaries, and a Shiny only trades for a Shiny ✨\n• A small fee to post an offer, which expires after a few days (your Pokémon comes back if nobody wants it)\n• If someone accepts while you're playing, you see it live, with a little trade cinematic\n• Kadabra, Machoke & co do evolve by trade, like in the original game 😏\n\n## 🏘️ Livelier towns\n• When you arrive in a town, something can happen in the streets: an item found, some money, a special encounter…\n• NPCs sometimes offer to trade their Pokémon for one of yours\n• Evolution stones are now found on routes and in towns (in the Shop, they now cost a small fortune)\n\n## 🎰 Celadon Game Corner\n• Trainers sometimes drop a few coins after a battle, and you can find some on routes\n• Trade them for Pokémon in the Shop's Game Corner section\n\n## 🎒 The Bag\n• New Bag to see everything you own, sorted by category (key items, candies, evolution…)\n• Key items tell you where to use them\n\n## 👻 Kanto's secrets\n• Fossils to collect… and to bring back to life at the right place 🦴\n• Some haunted places hide ghosts you can't identify without the right item\n• Some species only appear once the story has taken you where they live (no more Ponyta in the middle of Viridian Forest 😅)\n• A few rare appearances depending on the time, the day… or the weather 🌪️\n"
+    }
+  }
+],t.Changelog=function(){const{$:a,h:m,esc:c,modal:ne}=t.UI,U=t.CHANGELOG||[],gt="pokecatch-changelog-seen",J=()=>[e("janvier"),e("février"),e("mars"),e("avril"),e("mai"),e("juin"),e("juillet"),e("août"),e("septembre"),e("octobre"),e("novembre"),e("décembre")],Fe=k=>{const[r,Rt,oe]=k.split("-").map(Number);return e("{d} {month} {y}",{d:oe,month:J()[Rt-1],y:r})},He=k=>t.I18n?.lang==="vi"?(window.POKE_VI_CHANGELOG?.[k.date+"|"+(k.en?.title||k.title)]||k.en||k):t.I18n?.lang==="fr"?k:k[t.I18n?.lang]||k.en||k,w=()=>{try{return localStorage.getItem(gt)}catch{return null}},x=()=>!!U[0]&&w()!==U[0].date;function de(k){let r="",Rt=!1;const oe=()=>{Rt&&(r+="</ul>",Rt=!1)};for(const ee of k.trim().split(`
 `)){const ot=ee.trim();if(!ot){oe();continue}ot.startsWith("## ")?(oe(),r+=`<h5>${c(ot.slice(3))}</h5>`):/^[•-] /.test(ot)?(Rt||(r+="<ul>",Rt=!0),r+=`<li>${c(ot.slice(2))}</li>`):(oe(),r+=`<p>${c(ot)}</p>`)}return oe(),r}function H(){a("#options-btn")?.classList.toggle("has-new",x())}function Je(){if(U[0])try{localStorage.setItem(gt,U[0].date)}catch{}H();const k=m(`<div class="op">
       <header class="op-head"><h3><img class="pn-ic" src="assets/ui/orange-mail.png" alt=""> ${e("Changelogs")}</h3><button class="op-x dc-x" aria-label="${e("Fermer")}">✕</button></header>
       <div class="pn-list">${U.map((r,Rt)=>{const oe=He(r);return`<details class="pn-item"${Rt?"":" open"}>
         <summary><span class="t"><b>${c(oe.title)}</b><small>${Fe(r.date)}</small></span><span class="chev">›</span></summary>
         <div class="pn-body">${de(oe.md)}</div></details>`}).join("")}</div>
-      <a class="pn-more" href="${z}" target="_blank" rel="noopener">${e("Toutes les notes sur Discord ›")}</a>
+
     </div>`);return ne({className:"op-modal pn-modal",body:k,onOpen:(r,Rt)=>{a(".op-x",k).onclick=()=>Rt(null)}})}return{open:Je,badge:H,isNew:x}}(),t.Guide=function(){const{$:a,$$:m,h:c,modal:ne}=t.UI,U="pokecatch-guide-seen",gt=()=>{try{return new Set(JSON.parse(localStorage.getItem(U)||"[]"))}catch{return new Set}},z=Je=>{try{localStorage.setItem(U,JSON.stringify([...Je]))}catch{}},J=()=>!gt().size,Fe=()=>[[e("Les bases"),[{id:"adv",ic:"ui/town-map.png",tab:"adventure",name:e("Aventure"),c:"var(--red)",scene:"01-prairie-ouverte",mons:[25,16],eyebrow:e("Le cœur du jeu"),tag:e("Ton équipe avance toute seule, même quand tu es absent."),intro:e("Ton équipe combat les Pokémon sauvages et les dresseurs de chaque route, chapitre après chapitre. Les arènes bloquent la suite tant que ton équipe n'est pas assez forte. Jeu fermé, elle continue jusqu'à 8 h, raids et zones légendaires compris, avec deux fois moins d'XP de combat et 12 niveaux au plus par Pokémon ; la fenêtre « Bon retour ! » résume ton absence. Tous les Pokémon croisés sont capturables, même ceux qui semblent s'enfuir au début, et les fossiles revivent tout seuls à un moment de l'aventure."),facts:[[e("Rythme"),e("1 combat / 2,8 s")],[e("Hors ligne"),e("Jusqu'à 8 h")],[e("Débloqué"),e("Dès le départ")]],steps:[e("Choisis un chapitre dans la liste à gauche."),e("Ton équipe y combat et capture en continu. Les attaques sont choisies seules."),e("Bats le champion d'arène pour ouvrir le chapitre suivant."),e("Touche le bouton de boucle d'un ou de plusieurs chapitres : ils se rejouent en boucle, l'un après l'autre.")],tip:e("Certains Pokémon ne sortent que de nuit (20 h - 8 h, à ton heure), par une météo ou à marée basse : touche la pastille météo de la scène pour voir les <b>24 prochaines heures</b>.")},{id:"catch",ic:"items/poke-ball.png",tab:"adventure",name:e("Capture"),c:"var(--green)",scene:"17-safari-prairie",mons:[115,123],eyebrow:e("Attrape-les tous"),tag:e("Chaque Pokémon sauvage mis K.O. reçoit une Poké Ball."),intro:e("Pas de Balls à acheter : chaque Pokémon sauvage mis K.O. reçoit un lancer. Les chances suivent celles des jeux officiels, 60 % au plus, et la Ball affichée ne change rien. Un chromatique n'est pas plus dur à attraper qu'un autre ; un légendaire, beaucoup plus. Les baies de capture augmentent les chances pendant 1 h."),facts:[[e("Lancer de Ball"),e("1 par K.O.")],[e("Chances"),e("60 % au plus")],[e("Balls"),e("Cosmétiques")]],steps:[e("Ton équipe met le Pokémon sauvage K.O."),e("Une Ball part toute seule : capturé, ou il s'enfuit."),e("Espèce nouvelle : elle rejoint ton PC. Déjà possédée : elle devient de l'XP de famille.")],tip:e("Un doublon vaut l'équivalent de <b>3 niveaux d'XP</b>, partagés entre les membres de sa famille que tu possèdes (équipe, PC, Pension), perdus s'ils sont tous au niveau max. Avec « Garder les doublons », il est gardé tant que la famille a de la place, puis devient de l'XP lui aussi. Un chromatique est toujours gardé tant que sa famille a de la place.")},{id:"shiny",ic:"shiny",tab:"pokedex",name:e("Chromatiques"),c:"var(--gold-soft)",scene:"20-iles-ecume-v2",mons:["shiny/129","shiny/6"],eyebrow:e("Les plus rares"),tag:e("Des couleurs à part et +10 % sur toutes leurs stats."),intro:e("Un chromatique a des couleurs à part et +10 % sur toutes ses stats, en doré sur sa fiche. Il n'est pas plus dur à capturer qu'un autre. Chromatique et normal comptent comme deux Pokémon différents : tu peux avoir un exemplaire de chaque, et un chromatique est gardé tant que sa famille a de la place chez les chromatiques, sans interrupteur à activer. En revanche, une équipe n'en prend qu'un chromatique par espèce."),facts:[[e("Aventure"),e("≈ 1 / 4 000")],[e("Pension"),e("1 / 1 024")],[e("Raids"),e("1 / jour / région")]],steps:[e("Complète le Pokédex d'une région, légendaires et fabuleux compris : les chances y sont doublées. Le bonus ne se cumule pas d'une région à l'autre."),e("À la Pension, un parent chromatique pond un œuf chromatique une fois sur 10."),e("La Baie Frista double les chances des Pokémon sauvages pendant 1 h."),e("Les raids chromatiques donnent un boss chromatique par région et par jour.")],tip:e("Pas de légendaire chromatique pour le moment. Un chromatique capturé pendant ton absence a son trophée dans la fenêtre « Bon retour ! ».")},{id:"team",ic:"ui/box-link.png",tab:"team",name:e("Équipe & PC"),c:"var(--blue)",scene:"50-centre-pokemon-v2",mons:[1,4,7],eyebrow:e("Tes Pokémon"),tag:e("6 Pokémon en équipe, tous les autres au PC."),intro:e("Glisse un Pokémon du PC vers une case d'équipe pour l'envoyer combattre. Les Pokémon au PC ne combattent pas, mais l'XP de famille les fait monter aussi : un doublon devient de l'XP pour toute sa famille, sauf si tu actives « Garder les doublons » sur sa fiche."),facts:[[e("Équipe"),e("6 places")],[e("PC"),e("Illimité")],[e("Débloqué"),e("Dès le départ")]],steps:[e("Glisse un Pokémon du PC sur une case d'équipe (appui long sur téléphone)."),e("Touche un Pokémon pour ouvrir sa fiche."),e("Sur sa fiche, donne-lui des Bonbons Exp. : reste appuyé sur le bouton pour en donner plusieurs."),e("Sa nature est sur sa fiche : la plupart montent une stat de 10 % et en baissent une autre de 10 %, certaines sont neutres. Une Capsule Nature, au comptoir de la Tour de Combat, en tire une autre au hasard.")],tip:e("Ton <b>copain</b> (la Poké Ball grisée de sa fiche) gagne +30 % d'XP et de l'XP pour sa famille au fil des K.O. de ton équipe.")},{id:"dex",ic:"ui/pokedex-red.png",tab:"pokedex",name:e("Pokédex"),c:"var(--red)",scene:"51-labo-cramois",mons:[137],eyebrow:e("Collection"),tag:e("Chaque espèce vue ou capturée, et où la trouver."),intro:e("Le Pokédex recense les espèces de chaque région. Une fiche dit comment obtenir l'espèce : zone, heure, météo, cadeau, fossile, œuf, zone légendaire ou Pokémon errant. Dans une nouvelle région, tant que sa Ligue n'est pas gagnée, les Pokédex des régions précédentes sont temporairement indisponibles."),facts:[[e("Espèces"),e("151 + …")],[e("Fiche"),e("Lieux, heure, météo")],[e("Débloqué"),e("Dès le départ")]],steps:[e("Touche une espèce pour ouvrir sa fiche."),e("« Où le trouver » dit comment l'obtenir."),e("Légendaire capturé : « Revoir son apparition » rejoue sa cinématique.")],tip:e("Capture chaque espèce d'une région, légendaires et fabuleux compris : les chances de <b>chromatique</b> y sont doublées. Une pastille indique combien il en manque.")},{id:"league",ic:"ui/versus.png",tab:"map",name:e("Ligue & régions"),c:"var(--blue)",scene:"38-maitre-blue",mons:[149,130],eyebrow:e("Fin de région"),tag:e("Bats la Ligue pour relier les régions."),intro:e("Chaque région se termine par sa Ligue : quatre membres puis le Maître, à la suite. Le plafond de niveau de ton équipe monte à chaque membre battu, la difficulté aussi, et le Maître est le combat le plus dur. Une défaite te renvoie au premier membre ; un membre déjà battu rapporte la moitié de sa récompense tant que la Ligue n'est pas gagnée."),facts:[[e("Membres"),e("4 + le Maître")],[e("Défaite"),e("Retour au 1er")],[e("Plafond"),e("Monte par membre")]],steps:[e("Dans une nouvelle région, seuls les Pokémon capturés sur place combattent, zones légendaires comprises. L'ancienne région reste jouable avec tous ses Pokémon."),e("Tant que la Ligue de la nouvelle région n'est pas gagnée, les Pokédex des régions précédentes sont temporairement indisponibles."),e("Gagne sa Ligue : les régions se relient. Argent et objets s'additionnent, et les doublons fusionnent.")],tip:e("Pas besoin de finir le Pokédex avant de changer de région : les <b>nouvelles régions</b> débloquent des choses qui t'aideront.")},{id:"berry",ic:"items/razz-berry.png",tab:"adventure",name:e("Baies bonus"),c:"var(--yellow)",scene:"04-berge-riviere",mons:[102,103],eyebrow:e("Coups de pouce"),tag:e("Une heure de bonus : capture, XP, argent, chromatiques…"),intro:e("Mange une baie depuis le Sac pour un bonus d'une heure dans l'aventure, qui continue pendant ton absence. Une seule baie active par effet : une autre baie du même effet remplace l'active, la même relance son heure. Les bonus ne s'additionnent jamais."),facts:[[e("Durée"),e("1 h")],[e("Active"),e("1 par effet")],[e("Hors ligne"),e("Le temps court")]],steps:[e("Framby (×1,25) et Framby dorée (×1,5) : chances de capture, légendaires et raids compris."),e("Nanab : espèces rares de la zone ×2. Enigma : espèces jamais capturées ×3. Frista : chromatiques sauvages ×2."),e("Nanana : +25 % d'XP de combat. Lansat : +25 % de ₽.")],tip:e("Les baies actives s'affichent à droite de la scène, avec leur minuteur. On en trouve en arrivant dans les villes et au <b>pachinko</b> du Casino.")}]],[e("Activités"),[{id:"pen",ic:"items/mystery-egg.png",tab:"pension",name:e("Pension"),c:"var(--pink)",scene:"39-bourg-palette",mons:[113,132],eyebrow:e("Soins & œufs"),tag:e("Tes Pokémon y gagnent de l’XP et y pondent des œufs."),intro:e("Chaque Pokémon placé à la Pension rapporte de l'XP à sa famille, même pendant ton absence. Avec un Métamorph, elle pond aussi des œufs de la famille d'un de tes pensionnaires. La 1re place est offerte, les autres s'achètent : 15 000 ₽, puis 150 000 ₽ après la Ligue de Kanto, puis 600 000 ₽ après celle de Johto."),facts:[[e("Places"),e("1 à 4")],[e("Éclosion"),e("4 h")],[e("Débloqué"),e("Dès le départ")]],steps:[e("Place des Pokémon du PC, et un Métamorph pour avoir des œufs."),e("Donne-leur des baies pour remplir la jauge d'œuf plus vite."),e("L'œuf éclot en 4 h dans l'incubateur, temps d'absence compris.")],tip:e("Un parent <b>chromatique</b> pond un œuf chromatique une fois sur 10, sauf Métamorph : un Métamorph chromatique n'augmente pas les chances. Le bébé a une chance sur deux d'avoir la <b>nature</b> de son parent. Surprise à l'éclosion : rien ne le montre avant.")},{id:"trade",ic:"ui/link-cable.svg",tab:"trade",name:e("Échanges"),c:"var(--trade)",scene:"43-carmin-port",mons:[63,64],eyebrow:e("Entre dresseurs"),tag:e("Échange tes doublons avec les autres joueurs."),intro:e("Propose un Pokémon contre l'espèce que tu cherches, de même rareté. Tant que tes régions sont séparées, les deux espèces viennent de la même région. Un chromatique ne s'échange que contre un chromatique, et les légendaires jamais. Certaines espèces évoluent à l'échange. Publier une offre coûte 30 000 ₽ pour un commun, 120 000 ₽ pour un peu commun et 450 000 ₽ pour un rare, cinq fois plus pour un chromatique."),facts:[[e("Frais"),e("Dès 30 000 ₽")],[e("Durée"),e("3 jours")],[e("Débloqué"),e("Dès le départ")]],steps:[e("Choisis le Pokémon à donner et l'espèce cherchée."),e("Publie l'offre (option « Amis seulement ») ou accepte celle d'un autre joueur."),e("Le Pokémon reçu garde le niveau de celui que tu donnes.")],tip:e("Demande « <b>n'importe quel chromatique</b> » de même rareté : surprise à l'arrivée.")},{id:"shop",ic:"ui/pokemart.png",tab:"shop",name:e("Boutique"),c:"var(--shop)",scene:"60-boutique-pokemon",mons:[52],eyebrow:e("Objets"),tag:e("Bonbons Exp. et objets d’évolution."),intro:e("Dépense tes ₽ en Bonbons Exp. et en objets d'évolution. Un objet trouvé dans l'aventure y est ensuite en vente."),facts:[[e("Monnaie"),e("₽")],[e("Stock"),e("Selon tes trouvailles")],[e("Débloqué"),e("Dès le départ")]],steps:[e("Choisis un objet."),e("Règle la quantité."),e("Il part directement dans ton Sac.")],tip:e("Il te manque une pierre ? Continue l'aventure : une fois trouvée, elle arrive en Boutique.")},{id:"casino",ic:"ui/coin-case.png",tab:"casino",name:e("Casino"),c:"var(--casino)",scene:"55-casino-celadopole",mons:[100,81],eyebrow:e("Jetons & lots"),tag:e("Machine à sous, pachinko et lots rares."),intro:e("Change tes ₽ en jetons à la machine à sous, puis tente ta chance au pachinko pour gagner des baies, des bonbons et des pierres. Chaque région a son Casino et ses lots."),facts:[[e("Monnaie"),e("Jetons")],[e("Lots"),e("Par région")],[e("Pachinko"),e("Après la 1re Ligue")]],steps:[e("Joue à la machine à sous : mise ×1, ×5, ×10 ou ×50, ou mode Auto."),e("Mise tes jetons au pachinko."),e("Échange-les contre les lots de l'onglet Boutique.")],tip:e("Les dresseurs ne donnent pas de jetons : seule la <b>machine à sous</b> en rapporte. Une Ligue gagnée ouvre les lots des Casinos des régions précédentes.")},{id:"under",ic:"ui/explorer-kit.png",tab:"underground",name:e("Souterrain"),c:"var(--under)",scene:"sinnoh-souterrains-sinnoh",mons:[50,74],eyebrow:e("Expéditions"),tag:e("Envoie 3 Pokémon explorer les étages."),intro:e("Une expédition descend étage après étage jusqu'à ce que ton équipe tombe ou que tu la rappelles. À chaque étage, un mur à creuser ; tous les 10 étages, un gardien deux fois plus fort. Chaque expédition a son thème : ses types y vont plus loin."),facts:[[e("Équipe"),e("3 Pokémon")],[e("Par jour"),e("6 expéditions")],[e("Débloqué"),e("Badge Forêt")]],steps:[e("Choisis 3 Pokémon pour un emplacement : chacun part une fois par jour."),e("L'expédition continue sans toi : suis-la étage par étage ou reviens plus tard."),e("Récupère tes Pokémon avec leur XP, des Éclats et des géodes.")],tip:e("Casse les <b>géodes</b> pour trouver des gemmes. Depuis le PC, les gemmes font monter le <b>rang</b> d'un Pokémon au niveau 100 : +15 % de stats par rang, jusqu'au rang V, et il repart du niveau 5.")}]],[e("Défis"),[{id:"raid",ic:"ui/shiny-charm.png",tab:"raid",name:e("Raids"),c:"var(--raid)",scene:"33-arene-giovanni",mons:[143],eyebrow:e("Un boss par jour"),tag:e("Un boss chromatique par région, chaque jour."),intro:e("Chaque jour, un boss chromatique attend dans chaque région. Mets-le K.O., puis lance des Poké Balls : chacune a 1 % de chances de le capturer, sans limite d'essais. Ton temps compte pour le classement."),facts:[[e("Fréquence"),e("1 / jour / région")],[e("Récompense"),e("Le boss ✨ (niv. 5)")],[e("Débloqué"),e("Ligue de Kanto")]],steps:[e("Choisis l'équipe (« Optimiser » prend les meilleurs contre le boss)."),e("Lance le raid : le chrono démarre."),e("Boss K.O. : lance des Poké Balls jusqu'à la capture.")],tip:e("Chaque Poké Ball ratée remplit la <b>jauge Master Ball</b> de la région. Elle repart de zéro chaque jour : au 200e essai de la journée, la capture est garantie.")},{id:"tower",ic:"ui/vs-recorder.png",tab:"tower",name:e("Tour de Combat"),c:"var(--trophy)",scene:"24-route-victoire",mons:[66,106,107],eyebrow:e("Classement"),tag:e("Monte le plus haut possible, étage par étage."),intro:e("Chaque étage oppose tes Pokémon à un dresseur plus fort. Pas d'équipe à choisir : ton PC monte, Pension exceptée, du plus fort au plus faible, à son vrai niveau (100 au plus). Un Pokémon à plus de {n} niveaux sous les adversaires de l'étage reste au repos : la run s'arrête quand plus personne n'est à leur niveau. Ce sont des copies : tes Pokémon ne gagnent pas d'XP et ne sont pas blessés. Ton étage le plus haut compte pour le classement de la semaine.",{n:t.CONFIG.TOWER.MARGIN}),facts:[[e("Remise à zéro"),e("Lundi")],[e("Récompenses"),e("Par rang")],[e("Débloqué"),e("3e Ligue")]],steps:[e("Lance la montée : les 6 plus forts de ton PC combattent."),e("Pas de soin entre les étages : un Pokémon K.O. le reste jusqu'à la fin de la semaine, et le plus fort suivant prend sa place."),e("Un seul chromatique par espèce monte. Tu peux t'arrêter et reprendre : ton meilleur étage est gardé."),e("Les récompenses arrivent le lundi, selon ton rang.")],tip:e("Tous les 10 étages, le thème change (deux types) et une <b>Tête de la Zone de Combat</b> t'attend.")}]]],He=Je=>`assets/pokemon/${Je}.png`,w=Je=>Je==="shiny"?'<i class="shiny-ico"></i>':`<img src="assets/${Je}" alt="">`,x=Je=>document.querySelector(`#tabs [data-screen="${Je.tab}"]`),de=Je=>!x(Je)||x(Je).classList.contains("locked");function H(){const Je=Fe(),k=Je.flatMap(ee=>ee[1]),r=gt();let Rt=0;const oe=c(`<div class="gd-in">
       <div class="dc-head"><img class="gd-head-ic" src="assets/items/adventure-guide.png" alt=""><h2>${e("Guide")}</h2><div class="dc-sum"><span class="gd-read"></span><button class="dc-x" aria-label="${e("Fermer")}">✕</button></div></div>
       <div class="gd-wrap"><nav class="gd-nav"></nav><div class="gd-page"></div></div>
@@ -3875,7 +1285,7 @@ Big batch today: you can finally trade for real, towns come alive and Kanto stil
             <div class="ti-account">${rt()}</div>
           </div>
         </div>
-        <p class="ti-legal">${e("Projet de fan personnel et non commercial. Pokémon et les noms associés sont des marques de Nintendo, Game Freak et Creatures.")}<br>${e("Sprites : Pokémon Showdown, PokéSprite.")}</p>
+        <p class="ti-legal">PokéCatch của Umi · ${e("Hors ligne")}</p>
       </div>`);document.body.appendChild(je),document.body.classList.add("titled"),J()||(a(".ti-logo",je).animate([{transform:"translateY(-40px) scale(.9)",opacity:0},{transform:"translateY(4px) scale(1.02)",opacity:1,offset:.7},{transform:"none",opacity:1}],{duration:520,easing:"cubic-bezier(.2,1.4,.4,1)",fill:"both"}),a(".ti-menu",je).animate([{transform:"translateY(16px)",opacity:0},{transform:"none",opacity:1}],{duration:320,delay:650,easing:"ease-out",fill:"both"})),pe(a(".ti-field",je));const at=()=>{const na=a(".ti-account",je);na.innerHTML=rt();const et=a(".ti-discord",na),K=a(".ti-google",na);et&&(et.onclick=()=>t.Cloud.signIn("discord")),K&&(K.onclick=()=>t.Cloud.signIn("google"))};at();const $t=t.Cloud?.on?.(at);a(".ti-how-btn",je).onclick=()=>{t.Sfx?.unlock?.(),Je()},a(".ti-cl-btn",je).onclick=async()=>{t.Sfx?.unlock?.(),await t.Changelog.open(),a(".ti-cl-btn",je).classList.remove("has-new"),t.Changelog.badge()},a(".ti-go",je).onclick=async()=>{t.Sfx?.unlock?.(),$t?.();const na=!de();na&&Z(),await je.animate([{opacity:1},{opacity:0}],{duration:J()?0:300,fill:"forwards"}).finished,je.remove(),document.body.classList.remove("titled"),na&&(await me(),ke()),ze()}})}const Me=["red","leaf"],Te={red:["Lucas","Hugo","Nathan","Léo","Tom","Enzo","Noah","Jules","Théo","Max","Axel","Sacha","Malo","Nino","Timéo","Adam","Kylian","Elio"],leaf:["Léa","Emma","Chloé","Jade","Lina","Zoé","Inès","Nina","Lou","Mila","Rose","Alba","Iris","Luna","Maya","Elsa","Romy","Lila"]},T=ze=>Te[ze][Math.random()*Te[ze].length|0],le=10;let Se=null;function Z(){return Se=m(`<div class="lab-fx">
       <div class="lab-bg"></div>
       <img class="lab-oak" src="assets/trainers/oak.png" alt="Prof. Chen">
@@ -3888,7 +1298,7 @@ Big batch today: you can finally trade for real, towns come alive and Kanto stil
         <p class="cl-note">${e("Recharge le jeu pour jouer à la nouvelle version. Ta partie est sauvegardée.")}</p>`,actions:[{label:e("Recharger"),cls:"primary",value:!0}],onOpen:Me=>{ut=t.App?.parade?.(Me.querySelector(".sup-banner"))||ut}}).then(()=>{ut(),ee()})}z&&ys(()=>{document.hidden||(Fe?ot():An.now()-w>9e5&&r())},5e3);function Be(){Je=An.now(),ot()}function pe(){try{const ut=sessionStorage.getItem(gt)==="1";return sessionStorage.removeItem(gt),ut}catch{return!1}}async function rt(ut){return!z||(!Fe&&An.now()-w>6e4&&await r(),!Fe||document.hidden||!de&&!oe())?!1:(ee(ut),!0)}return{shown:rt,reloaded:pe,between:Be,get keepTick(){return H}}}(),t.Sleep=function(){const{h:a,esc:m}=t.UI,c=t.Game,ne=5e3,U=1500;let gt=!1,z=Date.now(),J=null,Fe=null,He=0,w=null,x=null,de=0,H=0;const Je=()=>!!c.S&&c.teamMons().length>0&&!document.hidden&&!document.body.classList.contains("titled")&&!document.body.classList.contains("launching")&&!t.TabLock?.lost&&!t.CatchUp?.pending&&t.App?.current!=="admin",k=()=>new Date().toLocaleTimeString(t.I18n?.lang,{hour:"2-digit",minute:"2-digit"});function r(){const T=t.Adventure.state,le=T.nodes?.[T.node];return!T.battle&&!T.event&&le?.type==="gym"&&!t.Adventure.leaderBeaten(le.gym)?{cls:"wait",gym:!0,img:le.gym.sprite?`assets/trainers/${le.gym.sprite}.png`:"",text:e("{name} t'attend",{name:m(e(le.gym.leader))})}:T.pending&&T.pending.type!=="riddle"?{cls:"wait",text:e("Un choix t'attend")}:null}function Rt(){let T=null;for(const le of c.S.mons||[])le.shiny&&!x.has(le.uid)&&(!T||(le.caughtAt||0)>=(T.caughtAt||0))&&(T=le);return T}function oe(){if(!J)return;const T=t.Adventure.state,le=T.nodes?.[T.node],Se=c.S.stats,Z=r(),lt=!Z&&Rt(),me=Z?`<div class="sl-ev ${Z.cls}">${Z.img?`<img src="${Z.img}" alt="">`:""}⏸ ${Z.text}</div>`:lt?`<div class="sl-ev shiny"><img src="assets/pokemon/shiny/${lt.id}.png" alt="">${e("Chromatique capturé")} · ${m(c.DEX[lt.id].name)}</div>`:"",ke=t.Perf.touch;J.querySelector(".sl-in").innerHTML=`<span class="sl-moon" aria-hidden="true">🌙</span><div class="sl-time">${k()}</div>
       ${le&&!T.event?`<div class="sl-where">${m(e(le.name))}</div>`:""}
       <div class="sl-count"><span>${e("<b>{n}</b> combats",{n:t.UI.fmt(Se.battles-w.battles)})}</span><span>${e("<b>{n}</b> captures",{n:t.UI.fmt(Se.caught-w.caught)})}</span></div>${me}`,J.querySelector(".sl-tap").textContent=Z?.gym?e("Touche l'écran pour regarder le combat"):e(ke?"Touche l'écran pour revenir":"Clique ou appuie sur une touche pour revenir"),J.querySelector(".sl-in").style.translate=`${Math.round(Math.random()*16-8)}px ${Math.round(Math.random()*16-8)}px`}function ee(){gt||!Je()||(gt=!0,w={battles:c.S.stats.battles,caught:c.S.stats.caught},x=new Set((c.S.mons||[]).filter(T=>T.shiny).map(T=>T.uid)),J=a(`<div class="sleep-fx" role="button" tabindex="0" aria-label="${e("Mode veille")}"><div class="sl-in"></div><div class="sl-tap"></div></div>`),document.body.appendChild(J),oe(),J.animate([{opacity:0},{opacity:1}],{duration:U,easing:"ease-in",fill:"both"}),J.addEventListener("pointerdown",T=>{T.preventDefault(),ot()}),H=Ya(()=>{H=0,gt&&(Fe=t.App.current,He=t.scrollY,t.Screens[Fe]?.leave?.(),document.querySelector(".screen.active")?.classList.remove("active"),document.documentElement.classList.add("sleeping"))},U),de=ys(oe,5e3))}function ot(){if(!gt)return;gt=!1,z=Date.now(),clearTimeout(H),clearInterval(de),document.documentElement.classList.contains("sleeping")&&(document.documentElement.classList.remove("sleeping"),document.getElementById("screen-"+Fe)?.classList.add("active"),t.Screens[Fe]?.enter?.(),t.Screens[Fe]?.render(),t.App.refreshHeader(),t.scrollTo({top:He,behavior:"instant"}));const T=J;J=null,T.getAnimations().forEach(le=>le.cancel()),T.animate([{opacity:1},{opacity:0}],{duration:250,fill:"forwards"}).finished.catch(()=>{}).then(()=>T.remove())}const Be=()=>{z=Date.now()};for(const T of["pointerdown","wheel","touchstart","mousemove"])addEventListener(T,Be,{capture:!0,passive:!0});addEventListener("keydown",T=>{gt?(T.preventDefault(),T.stopPropagation(),ot()):Be()},{capture:!0}),document.addEventListener("visibilitychange",()=>{document.hidden||Be()}),ys(()=>{const T=t.Perf.get("sleep");!gt&&T&&Date.now()-z>=T&&ee()},ne),document.addEventListener("click",T=>{T.target.closest?.("#sleep-btn")&&ee()});const pe="pokecatch-bat-offer",rt=30*6e4;let ut=Date.now();document.addEventListener("visibilitychange",()=>{document.hidden||(ut=Date.now())});const Me=()=>{try{return!!localStorage.getItem(pe)}catch{return!0}};function Te(T){if(!T&&(!t.Perf.touch||t.Perf.preset()!=="balanced"||Me()||gt||document.hidden||Date.now()-ut<rt))return;const le=document.querySelector("#screen-adventure.active #arena");if(!le||document.querySelector(".bat-offer"))return;const Se=a(`<div class="bat-offer" role="group"><span class="ic" aria-hidden="true">🔋</span><span class="t"><b>${e("Économiser la batterie ?")}</b>${e("Passe en mode Économie : moins d'effets, écran noir quand tu ne touches à rien.")}</span>
-      <button class="btn small ghost" data-v="0">${e("Non")}</button><button class="btn small" data-v="1">${e("Oui")}</button></div>`);le.after(Se),Se.animate([{opacity:0,transform:"translateY(-6px)"},{opacity:1,transform:"none"}],{duration:220,easing:"ease-out"}),Se.querySelectorAll("button").forEach(Z=>Z.onclick=()=>{try{localStorage.setItem(pe,Z.dataset.v)}catch{}Z.dataset.v==="1"&&(t.Perf.set("preset","eco"),t.UI.toast(e("Mode Économie activé"))),Se.animate([{opacity:1},{opacity:0}],180).finished.catch(()=>{}).then(()=>Se.remove())})}return ys(Te,6e4),{sleep:ee,wake:ot,offer:Te,get on(){return gt}}}(),function(){const{$:a,$$:m,fmt:c,modal:ne,esc:U,sprBox:gt}=t.UI,z=t.UI,J=t.Game,Fe=t.CONFIG;let He="adventure",w=null;const x=()=>{const nt=t.Cloud?.community;return nt?e("👥 <b>{n}</b> dresseurs · <b>{on}</b> en jeu",{n:c(nt.players),on:c(nt.online)}):""};function de(){const nt=a("#tb-online"),ie=t.Cloud?.community;if(!nt||(nt.hidden=!ie,!ie))return;const Re=`<i class="dot" aria-hidden="true"></i><b>${c(ie.online)}</b><span class="l">${e("en jeu")}</span>`;nt.innerHTML!==Re&&(nt.innerHTML=Re),nt.title=e("{on} dresseurs en jeu (partie sauvegardée ces 35 dernières minutes) · {n} inscrits",{on:c(ie.online),n:c(ie.players)})}const H="assets/ui/floppy.svg";function Je(){const nt=t.Cloud,ie=nt?.saveState||"off";if(ie==="off")return nt?.ban?e("Sauvegarde en ligne indisponible."):nt?.user?e("Une autre fenêtre du jeu sauvegarde ta partie."):e("Connecte-toi (Options) pour sauvegarder ta partie en ligne. Elle reste sauvegardée sur cet appareil.");if(ie==="lost")return e("Connexion expirée : ta partie n'est plus sauvegardée en ligne. Touche pour te reconnecter.");if(ie==="busy")return e("Sauvegarde en ligne en cours…");if(ie==="error")return e("La sauvegarde en ligne a échoué : nouvel essai automatique.");const Re=Date.now()-nt.pushedAt,jt=nt.saveWait,Ne=nt.pushedAt?Re<6e4?e("Sauvegardé en ligne à l'instant."):e("Sauvegardé en ligne il y a {n} min.",{n:Math.floor(Re/6e4)}):e("Ta partie est sauvegardée en ligne.");return jt?`${Ne} ${e("Prochaine sauvegarde possible dans {n} min.",{n:Math.max(1,Math.ceil(jt/6e4))})}`:Ne}function k(){const nt=a("#save-btn");if(!nt)return;const ie=t.Cloud?.saveState||"off";nt.dataset.state=ie,nt.classList.toggle("wait",ie==="ok"&&t.Cloud.saveWait>0),nt.title=Je()}async function r(){const nt=t.Cloud,ie=nt?.saveState;if(!nt?.user&&window.__pokeOpenAuthModal)return window.__pokeOpenAuthModal("login");if(ie==="lost")return nt.reconnect();if(ie!=="ok"&&ie!=="error"||nt.saveWait>0)return z.toast(Je(),H);J.save();const Re=await nt.saveNow();k(),z.toast(Re==="saved"||Re==="same"?e("Partie sauvegardée en ligne !"):Re==="wait"?Je():e("La sauvegarde en ligne a échoué : nouvel essai automatique."),H)}function Rt(){a("#money").textContent=c(J.S.money),de(),k(),w!==null&&J.S.money!==w&&a("#money").parentElement.animate([{transform:"scale(1)"},{transform:`scale(${J.S.money>w?1.12:.92})`},{transform:"scale(1)"}],220),w=J.S.money;const nt=a(".wallet-reg"),ie=nt.parentElement,Re=J.S.link&&J.currentRegion();if(nt.hidden=!Re,ie.classList.toggle("split",!!Re),Re){const ca=t.STORY,ra=ca.REGIONS.find(aa=>aa.key===J.S.link.to);if(J.S.link.side==="from"){const aa=ca.REGIONS.slice(0,ca.REGIONS.indexOf(Re)+1),B=ca.regionOf(J.S.adv?.chapter??0),ft=aa.includes(B)?B:Re;nt.textContent=e(ft.name),ie.style.setProperty("--rc",ft.color),ie.title=e("Argent et sac partagés par {regions} : ils se relient à ceux de {to} quand tu bats sa Ligue",{regions:aa.map(Jt=>e(Jt.name)).join(" · "),to:e(ra.name)})}else nt.textContent=e(Re.name),ie.style.setProperty("--rc",Re.color),ie.title=e("Argent et sac de {region} : ils se relient à ceux des autres régions quand tu bats la Ligue de {to}",{region:e(Re.name),to:e(ra.name)})}else ie.style.removeProperty("--rc"),ie.title=e("Pokédollars");const jt=a(".topbar .side-wallet");for(const[ca,ra,aa,B,ft]of[["coin",!t.Screens.casino.lockWhy(),J.itemCount("coin"),"assets/ui/coin-case.png",e("Jetons")],["bp",!!t.Tower?.unlocked(),J.S.tower?.bp||0,z.itemSrc("point-card"),e("Points Combat")],["shard",!t.Screens.underground.lockWhy(),J.itemCount("event-shard"),z.itemSrc("event-shard"),e("Éclats")]]){let Jt=jt?.querySelector(`[data-cur="${ca}"]`);if(!Jt&&jt&&(Jt=jt.appendChild(Object.assign(document.createElement("div"),{className:"side-money tb-cur",innerHTML:`<img src="${B}" alt=""><b></b>`})),Jt.dataset.cur=ca),!Jt)continue;Jt.hidden=!ra,Jt.title=ft;const ma=c(aa);Jt.lastChild.textContent!==ma&&(Jt.lastChild.textContent=ma)}t.TrainerCard?.refreshTrigger();const Ne=He==="pokedex"?0:t.Screens.pokedex.newCount(),Et=a('#tabs [data-screen="pokedex"]');let Mt=Et.querySelector(".new");Ne?(Mt||Et.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Ne:Mt?.remove();const Zt=a('#tabs [data-screen="team"]'),Yt=He==="team"?0:t.Screens.team.newCount();let yt=Zt.querySelector(".new");Yt?(yt||Zt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Yt:yt?.remove();const Le=a('#tabs [data-screen="trade"]'),We=He==="trade"?0:t.Screens.trade.npcBadge();let Tt=Le.querySelector(".new");We?(Tt||Le.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=We:Tt?.remove();const Qt=a('#tabs [data-screen="friends"]'),Ue=t.Screens.friends.incoming();let De=Qt.querySelector(".new");Ue?(De||Qt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Ue:De?.remove();const Pt=a('#tabs [data-screen="pension"]'),sa=J.pensionUnlocked();ut(Pt,sa?"":e(Fe.PENSION.UNLOCK_TEXT));const Ut=sa?t.Screens.pension.readyCount():0;let Ca=Pt.querySelector(".new");Ut?(Ca||Pt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Ut:Ca?.remove();const Qe=a('#tabs [data-screen="tower"]');Qe&&ut(Qe,t.Tower?.unlocked()?"":e("Bats la Ligue de Hoenn pour la débloquer"))&&rt();const qt=a('#tabs [data-screen="raid"]');qt&&ut(qt,t.Raids?.unlocked()?"":e("Les raids s'ouvrent après ta victoire à la Ligue de Kanto."))&&rt();const Sa=a('#tabs [data-screen="casino"]');Sa&&ut(Sa,t.Screens.casino.lockWhy())&&rt();const Gt=a('#tabs [data-screen="underground"]'),Xe=t.Screens.underground.readyCount();Gt&&ut(Gt,t.Screens.underground.lockWhy())&&rt();let Ze=Gt?.querySelector(".new");Xe?Gt&&((Ze||Gt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Xe):Ze?.remove();const Wt=a('#tabs [data-screen="market"]');if(Wt){const ca=t.Screens.market.found();Wt.classList.toggle("mk-hidden",!ca),Wt.querySelector(".l").textContent=ca?e("Marché noir"):"???",ut(Wt,ca?"":e("On dit que la Team Rocket fait des affaires en coulisses…"))&&rt()}m("#tabs .nav-grp").forEach(ca=>{const ra=ca.querySelector(".nav-grp-h"),aa=[...ca.querySelectorAll(".nav-grp-in .new")].reduce((ft,Jt)=>ft+(+Jt.textContent||0),0);let B=ra.querySelector(".new");aa?(B||ra.insertBefore(Object.assign(document.createElement("span"),{className:"new"}),ra.querySelector(".nav-chev"))).textContent=aa:B?.remove()})}const oe="pc-nav-open",ee=matchMedia("(max-width: 640px)");let ot={};try{ot=JSON.parse(localStorage.getItem(oe))||{}}catch{}function Be(){m("#tabs .nav-grp").forEach(nt=>{const ie=nt.dataset.grp,Re=ee.matches?nt.classList.contains("sheet"):!!ot[ie],jt=!!nt.querySelector(".nav-grp-in [data-screen].active");ee.matches?nt.classList.remove("open"):(nt.classList.remove("sheet"),nt.classList.toggle("open",Re)),nt.querySelector(".nav-grp-h").setAttribute("aria-expanded",Re),nt.querySelector(".nav-grp-h").classList.toggle("active",jt&&(ee.matches||!Re)),nt.querySelector(".nav-grp-in").inert=!Re}),rt()}const pe=.8;function rt(){const nt=document.createRange();m("#tabs .l").forEach(ie=>{ie.style.fontSize="",nt.selectNodeContents(ie);const Re=nt.getBoundingClientRect().width;if(!ie.clientWidth||Re<=ie.clientWidth-.5)return;const jt=Math.max(pe,(ie.clientWidth-1)/Re);ie.style.fontSize=`${(parseFloat(getComputedStyle(ie).fontSize)*jt).toFixed(1)}px`})}function ut(nt,ie){return nt.classList.contains("locked")===!!ie&&(nt.dataset.why||"")===ie?!1:(nt.classList.toggle("locked",!!ie),nt.classList.toggle("tip-host",!!ie),nt.setAttribute("aria-disabled",!!ie),nt.title="",nt.dataset.why=ie,nt.querySelector(":scope > .info-tip-box")?.remove(),ie&&nt.insertAdjacentHTML("beforeend",`<span class="bag-tip info-tip-box" role="tooltip"><b>${U(nt.querySelector(".l").textContent)}</b><p>${U(ie)}</p></span>`),!0)}function Me(){m("#tabs .nav-grp.sheet").forEach(nt=>nt.classList.remove("sheet")),Be()}function Te(){Rt(),t.Screens[He]?.render(),He!=="adventure"&&t.Screens.adventure.refreshTeam()}function T(nt){He!==nt&&t.Screens[He]?.leave?.(),He=nt,m("#side [data-screen]").forEach(Re=>Re.classList.toggle("active",Re.dataset.screen===nt));const ie=a(`#tabs .nav-grp:has([data-screen="${nt}"])`);if(ie&&!ot[ie.dataset.grp]){ot[ie.dataset.grp]=!0;try{localStorage.setItem(oe,JSON.stringify(ot))}catch{}}m("#tabs .nav-grp.sheet").forEach(Re=>Re.classList.remove("sheet")),Be(),m(".screen").forEach(Re=>Re.classList.toggle("active",Re.id==="screen-"+nt)),t.scrollTo({top:0,behavior:"instant"}),t.Screens[nt]?.enter?.(),t.Screens[nt]?.render(),Rt()}function le(nt){const ie=!!nt.wild,Re=!nt.zone&&!ie,jt=Re||ie?null:t.LegendZones.get(nt.zone),Ne=Re||ie,Et=ie?t.SCENES.css({name:nt.where},nt.ch):Re?t.SCENES.css({...t.Raids.sceneOf(nt.id,nt.reg),name:"Raid"}):t.SCENES.css({...jt,name:jt.near||jt.zone}),Mt=ie?[nt.where&&U(e(nt.where)),e("Nv. {n}",{n:nt.level})].filter(Boolean).join(" · "):Re?e("Rejoint ton PC au Nv. {n}",{n:nt.level??Fe.RAID.CATCH_LEVEL})+(nt.ms?` · ⏱ ${t.EventUI.clockMs(nt.ms)}`:""):`${U(e(jt.zone))} · ${e("Nv. {n}",{n:nt.level??jt.level})}`;return`<div class="oc-trophy${Re||ie?"":" legend"}"><div class="oc-tr-bg" style="background-image:${Et}"></div>
+      <button class="btn small ghost" data-v="0">${e("Non")}</button><button class="btn small" data-v="1">${e("Oui")}</button></div>`);le.after(Se),Se.animate([{opacity:0,transform:"translateY(-6px)"},{opacity:1,transform:"none"}],{duration:220,easing:"ease-out"}),Se.querySelectorAll("button").forEach(Z=>Z.onclick=()=>{try{localStorage.setItem(pe,Z.dataset.v)}catch{}Z.dataset.v==="1"&&(t.Perf.set("preset","eco"),t.UI.toast(e("Mode Économie activé"))),Se.animate([{opacity:1},{opacity:0}],180).finished.catch(()=>{}).then(()=>Se.remove())})}return ys(Te,6e4),{sleep:ee,wake:ot,offer:Te,get on(){return gt}}}(),function(){const{$:a,$$:m,fmt:c,modal:ne,esc:U,sprBox:gt}=t.UI,z=t.UI,J=t.Game,Fe=t.CONFIG;let He="adventure",w=null;const x=()=>{const nt=t.Cloud?.community;return nt?e("👥 <b>{n}</b> dresseurs · <b>{on}</b> en jeu",{n:c(nt.players),on:c(nt.online)}):""};function de(){const nt=a("#tb-online"),ie=t.Cloud?.community;if(!nt||(nt.hidden=!ie,!ie))return;const Re=`<i class="dot" aria-hidden="true"></i><b>${c(ie.online)}</b><span class="l">${e("en jeu")}</span>`;nt.innerHTML!==Re&&(nt.innerHTML=Re),nt.title=e("{on} dresseurs en jeu (partie sauvegardée ces 35 dernières minutes) · {n} inscrits",{on:c(ie.online),n:c(ie.players)})}const H="assets/ui/floppy.svg";function Je(){const nt=t.Cloud,ie=nt?.saveState||"off";if(ie==="off")return nt?.ban?e("Sauvegarde en ligne indisponible."):nt?.user?e("Une autre fenêtre du jeu sauvegarde ta partie."):e("Connecte-toi (Options) pour sauvegarder ta partie en ligne. Elle reste sauvegardée sur cet appareil.");if(ie==="lost")return e("Connexion expirée : ta partie n'est plus sauvegardée en ligne. Touche pour te reconnecter.");if(ie==="busy")return e("Sauvegarde en ligne en cours…");if(ie==="error")return e("La sauvegarde en ligne a échoué : nouvel essai automatique.");const Re=Date.now()-nt.pushedAt,jt=nt.saveWait,Ne=nt.pushedAt?Re<6e4?e("Sauvegardé en ligne à l'instant."):e("Sauvegardé en ligne il y a {n} min.",{n:Math.floor(Re/6e4)}):e("Ta partie est sauvegardée en ligne.");return jt?`${Ne} ${e("Prochaine sauvegarde possible dans {n} min.",{n:Math.max(1,Math.ceil(jt/6e4))})}`:Ne}function k(){const nt=a("#save-btn");if(!nt)return;const ie=t.Cloud?.saveState||"off";nt.dataset.state=ie,nt.classList.toggle("wait",ie==="ok"&&t.Cloud.saveWait>0),nt.title=Je()}async function r(){const nt=t.Cloud,ie=nt?.saveState;if(!nt?.user&&window.__pokeOpenAuthModal)return window.__pokeOpenAuthModal("login");if(ie==="lost")return nt.reconnect();if(ie!=="ok"&&ie!=="error"||nt.saveWait>0)return z.toast(Je(),H);J.save();const Re=await nt.saveNow();k(),z.toast(Re==="saved"||Re==="same"?e("Partie sauvegardée en ligne !"):Re==="wait"?Je():e("La sauvegarde en ligne a échoué : nouvel essai automatique."),H)}function Rt(){a("#money").textContent=c(J.S.money),de(),k(),w!==null&&J.S.money!==w&&a("#money").parentElement.animate([{transform:"scale(1)"},{transform:`scale(${J.S.money>w?1.12:.92})`},{transform:"scale(1)"}],220),w=J.S.money;const nt=a(".wallet-reg"),ie=nt.parentElement,Re=J.S.link&&J.currentRegion();if(nt.hidden=!Re,ie.classList.toggle("split",!!Re),Re){const ca=t.STORY,ra=ca.REGIONS.find(aa=>aa.key===J.S.link.to);if(J.S.link.side==="from"){const aa=ca.REGIONS.slice(0,ca.REGIONS.indexOf(Re)+1),B=ca.regionOf(J.S.adv?.chapter??0),ft=aa.includes(B)?B:Re;nt.textContent=e(ft.name),ie.style.setProperty("--rc",ft.color),ie.title=e("Argent et sac partagés par {regions} : ils se relient à ceux de {to} quand tu bats sa Ligue",{regions:aa.map(Jt=>e(Jt.name)).join(" · "),to:e(ra.name)})}else nt.textContent=e(Re.name),ie.style.setProperty("--rc",Re.color),ie.title=e("Argent et sac de {region} : ils se relient à ceux des autres régions quand tu bats la Ligue de {to}",{region:e(Re.name),to:e(ra.name)})}else ie.style.removeProperty("--rc"),ie.title=e("Pokédollars");const jt=a(".topbar .side-wallet");for(const[ca,ra,aa,B,ft]of[["coin",!t.Screens.casino.lockWhy(),J.itemCount("coin"),"assets/ui/coin-case.png",e("Jetons")],["bp",!!t.Tower?.unlocked(),J.S.tower?.bp||0,z.itemSrc("point-card"),e("Points Combat")],["shard",!t.Screens.underground.lockWhy(),J.itemCount("event-shard"),z.itemSrc("event-shard"),e("Éclats")]]){let Jt=jt?.querySelector(`[data-cur="${ca}"]`);if(!Jt&&jt&&(Jt=jt.appendChild(Object.assign(document.createElement("div"),{className:"side-money tb-cur",innerHTML:`<img src="${B}" alt=""><b></b>`})),Jt.dataset.cur=ca),!Jt)continue;Jt.hidden=!ra,Jt.title=ft;const ma=c(aa);Jt.lastChild.textContent!==ma&&(Jt.lastChild.textContent=ma)}t.TrainerCard?.refreshTrigger();const Ne=He==="pokedex"?0:t.Screens.pokedex.newCount(),Et=a('#tabs [data-screen="pokedex"]');let Mt=Et.querySelector(".new");Ne?(Mt||Et.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Ne:Mt?.remove();const Zt=a('#tabs [data-screen="team"]'),Yt=He==="team"?0:t.Screens.team.newCount();let yt=Zt.querySelector(".new");Yt?(yt||Zt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Yt:yt?.remove();const Le=a('#tabs [data-screen="trade"]'),We=He==="trade"?0:t.Screens.trade.npcBadge();let Tt=Le?.querySelector(".new");We&&Le?(Tt||Le.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=We:Tt?.remove();const Qt=a('#tabs [data-screen="friends"]'),Ue=t.Screens.friends.incoming();let De=Qt?.querySelector(".new");Ue&&Qt?(De||Qt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Ue:De?.remove();const Pt=a('#tabs [data-screen="pension"]'),sa=J.pensionUnlocked();ut(Pt,sa?"":e(Fe.PENSION.UNLOCK_TEXT));const Ut=sa?t.Screens.pension.readyCount():0;let Ca=Pt.querySelector(".new");Ut?(Ca||Pt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Ut:Ca?.remove();const Qe=a('#tabs [data-screen="tower"]');Qe&&ut(Qe,t.Tower?.unlocked()?"":e("Bats la Ligue de Hoenn pour la débloquer"))&&rt();const qt=a('#tabs [data-screen="raid"]');qt&&ut(qt,t.Raids?.unlocked()?"":e("Les raids s'ouvrent après ta victoire à la Ligue de Kanto."))&&rt();const Sa=a('#tabs [data-screen="casino"]');Sa&&ut(Sa,t.Screens.casino.lockWhy())&&rt();const Gt=a('#tabs [data-screen="underground"]'),Xe=t.Screens.underground.readyCount();Gt&&ut(Gt,t.Screens.underground.lockWhy())&&rt();let Ze=Gt?.querySelector(".new");Xe?Gt&&((Ze||Gt.appendChild(Object.assign(document.createElement("span"),{className:"new"}))).textContent=Xe):Ze?.remove();const Wt=a('#tabs [data-screen="market"]');if(Wt){const ca=t.Screens.market.found();Wt.classList.toggle("mk-hidden",!ca),Wt.querySelector(".l").textContent=ca?e("Marché noir"):"???",ut(Wt,ca?"":e("On dit que la Team Rocket fait des affaires en coulisses…"))&&rt()}m("#tabs .nav-grp").forEach(ca=>{const ra=ca.querySelector(".nav-grp-h"),aa=[...ca.querySelectorAll(".nav-grp-in .new")].reduce((ft,Jt)=>ft+(+Jt.textContent||0),0);let B=ra.querySelector(".new");aa?(B||ra.insertBefore(Object.assign(document.createElement("span"),{className:"new"}),ra.querySelector(".nav-chev"))).textContent=aa:B?.remove()})}const oe="pc-nav-open",ee=matchMedia("(max-width: 640px)");let ot={};try{ot=JSON.parse(localStorage.getItem(oe))||{}}catch{}function Be(){m("#tabs .nav-grp").forEach(nt=>{const ie=nt.dataset.grp,Re=ee.matches?nt.classList.contains("sheet"):!!ot[ie],jt=!!nt.querySelector(".nav-grp-in [data-screen].active");ee.matches?nt.classList.remove("open"):(nt.classList.remove("sheet"),nt.classList.toggle("open",Re)),nt.querySelector(".nav-grp-h").setAttribute("aria-expanded",Re),nt.querySelector(".nav-grp-h").classList.toggle("active",jt&&(ee.matches||!Re)),nt.querySelector(".nav-grp-in").inert=!Re}),rt()}const pe=.8;function rt(){const nt=document.createRange();m("#tabs .l").forEach(ie=>{ie.style.fontSize="",nt.selectNodeContents(ie);const Re=nt.getBoundingClientRect().width;if(!ie.clientWidth||Re<=ie.clientWidth-.5)return;const jt=Math.max(pe,(ie.clientWidth-1)/Re);ie.style.fontSize=`${(parseFloat(getComputedStyle(ie).fontSize)*jt).toFixed(1)}px`})}function ut(nt,ie){return nt.classList.contains("locked")===!!ie&&(nt.dataset.why||"")===ie?!1:(nt.classList.toggle("locked",!!ie),nt.classList.toggle("tip-host",!!ie),nt.setAttribute("aria-disabled",!!ie),nt.title="",nt.dataset.why=ie,nt.querySelector(":scope > .info-tip-box")?.remove(),ie&&nt.insertAdjacentHTML("beforeend",`<span class="bag-tip info-tip-box" role="tooltip"><b>${U(nt.querySelector(".l").textContent)}</b><p>${U(ie)}</p></span>`),!0)}function Me(){m("#tabs .nav-grp.sheet").forEach(nt=>nt.classList.remove("sheet")),Be()}function Te(){Rt(),t.Screens[He]?.render(),He!=="adventure"&&t.Screens.adventure.refreshTeam()}function T(nt){He!==nt&&t.Screens[He]?.leave?.(),He=nt,m("#side [data-screen]").forEach(Re=>Re.classList.toggle("active",Re.dataset.screen===nt));const ie=a(`#tabs .nav-grp:has([data-screen="${nt}"])`);if(ie&&!ot[ie.dataset.grp]){ot[ie.dataset.grp]=!0;try{localStorage.setItem(oe,JSON.stringify(ot))}catch{}}m("#tabs .nav-grp.sheet").forEach(Re=>Re.classList.remove("sheet")),Be(),m(".screen").forEach(Re=>Re.classList.toggle("active",Re.id==="screen-"+nt)),t.scrollTo({top:0,behavior:"instant"}),t.Screens[nt]?.enter?.(),t.Screens[nt]?.render(),Rt()}function le(nt){const ie=!!nt.wild,Re=!nt.zone&&!ie,jt=Re||ie?null:t.LegendZones.get(nt.zone),Ne=Re||ie,Et=ie?t.SCENES.css({name:nt.where},nt.ch):Re?t.SCENES.css({...t.Raids.sceneOf(nt.id,nt.reg),name:"Raid"}):t.SCENES.css({...jt,name:jt.near||jt.zone}),Mt=ie?[nt.where&&U(e(nt.where)),e("Nv. {n}",{n:nt.level})].filter(Boolean).join(" · "):Re?e("Rejoint ton PC au Nv. {n}",{n:nt.level??Fe.RAID.CATCH_LEVEL})+(nt.ms?` · ⏱ ${t.EventUI.clockMs(nt.ms)}`:""):`${U(e(jt.zone))} · ${e("Nv. {n}",{n:nt.level??jt.level})}`;return`<div class="oc-trophy${Re||ie?"":" legend"}"><div class="oc-tr-bg" style="background-image:${Et}"></div>
       <div class="oc-tr-txt"><span class="eb">${ie?`<i class="shiny-ico"></i>${e("Chromatique capturé")}`:Re?`<i class="shiny-ico"></i>${e("Raid réussi")}`:e("Légendaire capturé")}</span>
         <span class="nm">${U(J.DEX[nt.id].name)}${Ne?" "+t.UI.shinyIc():""}</span><span class="sub">${Mt}</span></div>
       <div class="oc-tr-mon"><img src="${z.artSrc(nt.id,Ne)}" alt="" style="visibility:hidden"></div></div>`}function Se(nt){const ie=a(".oc-tr-mon img",nt);if(!ie)return;const Re=ie.closest(".oc-trophy"),jt=Re.classList.contains("legend"),Ne=()=>{const Et=jt?matchMedia("(max-width: 640px)").matches?1:2:Math.max(1,Math.min(2,Math.floor((Re.clientHeight-12)/ie.naturalHeight)));ie.style.width=ie.naturalWidth*Et+"px",ie.style.visibility=""};ie.complete&&ie.naturalWidth?Ne():ie.addEventListener("load",Ne,{once:!0}),jt&&z.spriteGlow(ie.src).then(Et=>{Et&&(Re.style.setProperty("--glow",Et),Re.style.setProperty("--l1",`rgb(${Et})`))})}function Z(nt,ie){const Re=Math.round(nt/6e4),jt=Re>=60?e("{h} h {m} min",{h:Math.floor(Re/60),m:String(Re%60).padStart(2,"0")}):e("{m} min",{m:Re}),Ne=Object.entries(ie.levels).map(([sa,Ut])=>({m:J.getMon(sa),n:Ut})).filter(sa=>sa.m),Et=ie.captures.filter(sa=>sa.shiny),Mt=ie.raid?.caught?ie.raid:ie.legend?.caught?ie.legend:Et.length?{...Et[0],wild:!0}:null,Zt=Et.filter(sa=>sa!==Et[0]||!Mt.wild),Yt=ie.captures.filter(sa=>sa.isNew&&!sa.shiny&&sa.id!==Mt?.id),yt=ie.itemList||[],Le=Ne.reduce((sa,Ut)=>sa+Ut.n,0),We=yt.reduce((sa,Ut)=>sa+Ut[1],0),Tt=(sa,Ut)=>gt(sa,Ut,1.25,56),Qt=(sa,Ut)=>`<span class="oc-portrait oc-mon">${gt(sa,Ut,1,52)}</span>`,Ue=(sa,Ut,Ca)=>`<div class="oc-sec"><h4>${sa}<em>${Ut}</em></h4>${Ca}</div>`,De=`<div class="dc-head"><h2>${e("Bon retour !")}</h2><div class="dc-sum">${e("absent {dur}",{dur:jt})}<button class="dc-x" aria-label="${e("Fermer")}">✕</button></div></div>
@@ -3912,13 +1322,7 @@ Big batch today: you can finally trade for real, towns come alive and Kanto stil
       ${Yt.length?Ue(e("Nouveaux au Pokédex"),`<b>${Yt.length}</b>${ie.captures.length>Yt.length?e(" · {n} capturés",{n:ie.captures.length}):""}`,`<div class="oc-grid">${Yt.map((sa,Ut)=>`<div class="oc-tile is-new" style="animation-delay:${Ut*80}ms,${500+Ut*300}ms"><span class="new">${e("NEW")}</span>${Tt(sa.id,sa.shiny)}</div>`).join("")}</div>`):""}
       ${Ne.length?Ue(e("Équipe"),Le>1?e("<b>+{n}</b> niveaux",{n:Le}):e("<b>+{n}</b> niveau",{n:Le}),`<div class="oc-grid">${Ne.map(({m:sa,n:Ut},Ca)=>`<div class="oc-tile" data-i="${Ca}"><span class="gain">+${Ut}</span>${J.levelEvolution(sa)?`<span class="evo" title="${e("Évolution prête")}">▲</span>`:""}
           ${Tt(sa.id,sa.shiny)}<span class="lvl">${e("Nv. {n}",{n:sa.level-Ut})}</span><span class="xpb"><i></i></span></div>`).join("")}</div>`):""}
-      ${yt.length?Ue(e("Objets trouvés"),`<b>${We}</b>`,`<div class="oc-items">${yt.map(([sa,Ut])=>`<span class="oc-chip" title="${U(z.itemName(sa))}"><img src="${z.itemSrc(sa)}" alt=""><b>×${Ut}</b></span>`).join("")}</div>`):""}`;let Pt=()=>{};ne({className:"dexcard-modal oc-modal",body:De,actions:[{label:e("Super !"),cls:"gold"}],onOpen:(sa,Ut)=>{a(".dc-x",sa).onclick=()=>{Pt(),Ut(null)},Se(sa),Pt=z.playLevels(sa,Ne)}}).then(()=>Pt())}const lt=8,me=3e4;let ke=null;const Ve=32,ze=new MessageChannel,je=[];ze.port1.onmessage=()=>je.shift()?.();const at=()=>new Promise(nt=>{je.push(nt),ze.port2.postMessage(0)});let $t=0;const na=()=>{$t=An.now(),ke&&Hn(na)},et=()=>new Promise(nt=>{Hn(nt),Ya(nt,100)}).then(at);let K=null;function Y(){K=document.createElement("div"),K.className="cu-veil cu-launch",document.body.appendChild(K),document.body.classList.add("launching")}function Ce(){K?.remove(),K=null,document.body.classList.remove("launching")}function vt(nt){const ie=nt&&K||document.createElement("div");ie.className=nt?"cu-veil cu-launch":"cu-veil",ie.innerHTML=`<div class="cu-pill" role="status"><span>${e("Rattrapage de ton absence…")}</span><span class="cu-bar"><i></i></span></div>`,ie.isConnected||document.body.appendChild(ie);const Re=ie.querySelector(".cu-bar i");return{set:jt=>{Re.style.width=(jt*100).toFixed(1)+"%"},remove:()=>ie.remove()}}t.addEventListener("keydown",nt=>{ke&&nt.stopImmediatePropagation()},!0),t.addEventListener("visibilitychange",()=>{document.hidden&&ke?.finish()?.()},!0);function xt(nt,ie=0,Re=J.S.lastTick,jt=!1){if(ke)return ke.settled;if(t.Clock&&!t.Clock.sure)return Promise.resolve();const Ne=Math.min(J.time()-(Re||J.time()),Fe.OFFLINE_MAX_MS);if(Ne<nt||!J.teamMons().length)return Promise.resolve();const Et=t.Adventure.offline(Ne);let Mt=!1,Zt=null,Yt;const yt=new Promise(Tt=>{Yt=Tt}),Le=()=>{if(Mt)return;Mt=!0;try{Et.run()}finally{J.holdSave(!1),ke=null,(!jt||Et.failed)&&Zt?.remove(),Yt()}if(Et.failed)return;const Tt=Et.sum,Qt=J.pensionTick();Tt.pension={candies:Qt.filter(De=>De.type==="candy").reduce((De,Pt)=>De+Pt.n,0),eggs:Qt.filter(De=>De.type==="egg").length},Qt.length&&He==="pension"&&t.Screens.pension.tick(Qt),J.S.lastTick=J.time(),J.session.away=Math.round(J.session.away+Ne);const Ue=Tt.captures.some(De=>De.shiny||J.isLegend(De.id));if(J.save(Tt.raid?.caught||Tt.legend?.caught||Tt.tower?.ended||Ue?void 0:{idle:!0}),Tt.steps>5&&Ne>=ie||Tt.raid?.caught||Tt.legend?.caught||Tt.tower?.ended||Ue)return()=>Z(Ne,Tt)};J.holdSave(!0),ke={finish:Le,settled:yt};let We;try{We=Et.run(An.now()+lt)}catch(Tt){throw Le(),Tt}return We?(Le()?.(),Promise.resolve()):(Zt=vt(jt),na(),(async()=>{let Tt;try{for(;!Mt&&!document.hidden&&!Et.run(An.now()+lt);)Zt.set(Et.progress),await(An.now()-$t>Ve?et():at());Zt.set(1),await at()}finally{Tt=Le()}Tt&&(await at(),Tt()),await at()})())}let N=null;t.CatchUp={get busy(){return!!ke},get pending(){return!!N||!!ke},wait:()=>ke?.settled||Promise.resolve(),ready:()=>N||ke?.settled||Promise.resolve()};const V=!0,we="",X=[[1,34],[4,38],[7,34],[25,62],[133,48],[39,26],[52,44],[54,24],[35,30],[58,66],[77,80],[79,14],[143,16],[19,56],[104,32],[113,28],[132,20]];function he(nt,{shiny:ie=!1,lanes:Re=null,min:jt=2,max:Ne=4,gap:Et=[1400,2600]}={}){if(document.body.classList.contains("calm")||matchMedia("(prefers-reduced-motion: reduce)").matches)return()=>{};const Mt=jt,Zt=Ne,Yt=1200,yt=()=>[...nt.querySelectorAll(".sup-walker")],Le=(Ue=0)=>{if(yt().length>=Zt)return;const De=new Set(yt().map(ma=>ma.mon)),Pt=X.filter(ma=>!De.has(ma[0])),[sa,Ut]=Pt[Math.floor(Math.random()*Pt.length)],Ca=Ut*(.85+Math.random()*.3),Qe=Re?Re():[{feet:30,z:1},{feet:12,z:2}],qt=Qe.map((ma,Ta)=>yt().filter(Oa=>Oa.lane===Ta).length),Sa=qt[0]===qt[1]?Math.floor(Math.random()*2):qt.indexOf(Math.min(...qt)),Gt=Qe[Sa],Xe=t.SPRITE_BOUNDS?.[`assets/pokemon/${sa}.png`]||[17,10,51,50],Ze=Xe[0]+Xe[2],Wt=Xe[3]*2,ca=Xe[2]-Xe[0],ra=document.createElement("div");ra.className="sup-walker",ra.lane=Sa,ra.mon=sa,ra.style.cssText=`--fx:${Ze}px;--fy:${Wt}px;--hop:${Math.max(.18,Math.min(.6,15/Ca)).toFixed(2)}s;bottom:${Gt.feet-(112-Wt)}px;z-index:${Gt.z}`,ra.innerHTML=`<i class="shadow"></i><div class="body"><img src="assets/pokemon/${ie?"shiny/":""}${sa}.png" alt=""></div>`,nt.appendChild(ra);const aa=-ca,B=nt.clientWidth+ca,ft=(B-aa)/Ca*1e3,Jt=ra.animate([{transform:`translateX(${aa}px)`},{transform:`translateX(${B}px)`}],{duration:ft,easing:"linear"});Jt.currentTime=Ue*ft,ra.exitAt=An.now()+ft*(1-Ue),Jt.onfinish=()=>ra.remove()};for(let Ue=0;Ue<Mt;Ue++)Le((Ue+.3+Math.random()*.4)/Mt);let We=0;const Tt=()=>{Le(),We=Ya(Tt,Et[0]+Math.random()*Et[1])};We=Ya(Tt,1500+Math.random()*2e3);const Qt=ys(()=>{const Ue=An.now();yt().filter(De=>De.exitAt-Ue>Yt).length<Mt&&Le()},250);return()=>{clearTimeout(We),clearInterval(Qt)}}function S(){const nt=document.querySelector('a.side-disc[href*="discord"]')||document.querySelector(".side-disc"),ie=(Ne,Et)=>`<span class="op-ic ${Ne}">${Et}</span>`,Re=(Ne,Et)=>`<span class="t"><b>${Ne}</b><small>${Et}</small></span>`;let jt=()=>{};t.UI.modal({className:"dexcard-modal sup-modal",body:`<div class="dc-head"><h2>${e("Soutenir le jeu")}</h2><div class="dc-sum"><button class="dc-x" aria-label="${e("Fermer")}">✕</button></div></div>
-      <div class="sup-banner"></div>
-      <div class="sup-rows">
-        <div class="op-card"><a class="op-row" href="https://pokecatch-online.pages.dev/" target="_blank" rel="noopener">${ie("sup-ic-don",'<img src="assets/items/love-ball.png" alt="">')}${Re(e("Soutenir le jeu officiel (France)"),e("Accéder au serveur officiel et soutenir l'auteur"))}<span class="chev">›</span></a></div>
-        <div class="op-card"><a class="op-row" href="${t.UI.esc(nt?.href||"")}" target="_blank" rel="noopener">${ie("",nt?.querySelector("svg")?.outerHTML||"")}${Re(e("Rejoins le Discord"),e("Les nouveautés en avant-première"))}<span class="chev">›</span></a></div>
-        <div class="op-card"><div class="op-row sup-share" role="button" tabindex="0">${ie("sup-ic-share",'<img src="assets/items/friend-ball.png" alt="">')}${Re(e("Fais découvrir le jeu"),e("Plus on est, plus les raids sont animés"))}<span class="chev">›</span></div></div>
-      </div>`,onOpen:(Ne,Et)=>{Ne.querySelector(".dc-x").onclick=()=>Et(null);const Mt=Ne.querySelector(".sup-go");Mt&&(Mt.onclick=()=>t.open(we,"_blank","noopener"));const Zt=Ne.querySelector(".sup-share");Zt.onkeydown=Yt=>{(Yt.key==="Enter"||Yt.key===" ")&&(Yt.preventDefault(),Zt.click())},Zt.onclick=async()=>{const Yt=location.origin+"/";if(navigator.share){try{await navigator.share({title:"Poke'Catch",url:Yt})}catch{}return}try{await navigator.clipboard.writeText(Yt),t.UI.toast(e("Lien copié !"))}catch{t.UI.toast(Yt)}},jt=he(Ne.querySelector(".sup-banner"))}}).then(()=>jt())}function P(){t.UI.modal({className:"dexcard-modal tab-modal",dismissable:!1,body:`<div class="dc-head"><h2>${e("Ouvert dans un autre onglet")}</h2></div><p class="cl-note">${e("Poke'Catch est ouvert dans un autre onglet : ta partie continue là-bas.")}</p>`,actions:[{label:e("Jouer ici"),cls:"primary",value:!0}]}).then(()=>{t.onbeforeunload=null,location.reload()})}const $=/^[\w-]+\.pokecatch-online\.pages\.dev$/.test(location.hostname),R=new URLSearchParams(location.search);function F(){if(!R.has("pc")||!$)return;const nt=(Re,jt)=>{const Ne=J.makeMon(Re,5+Math.floor(Math.random()*56),{shiny:jt});Ne.hp=J.maxHp(Ne),J.receive(Ne)},ie=t.POKEDEX.map(Re=>Re.id);ie.forEach(Re=>nt(Re,!1));for(let Re=0;Re<200;Re++)nt(J.pick(ie),!0);J.save()}function Ee(){if(!$)return;if(R.has("legends")){const ie=t.STORY,Re=t.Adventure.state,jt=ie.CHAPTERS.length-1;Re.unlocked=Math.max(Re.unlocked,jt);const Ne=ie.REGIONS.filter(Zt=>ie.firstChapterOf(Zt.key)>=0);for(const Zt of Ne)Zt.open=!0;J.S.travel={to:Ne.map(Zt=>Zt.key),at:J.S.travel?.at||Date.now()},J.S.link=null,Re.badges=[...new Set([...Re.badges||[],...ie.CHAPTERS.flatMap(Zt=>Zt.steps).filter(Zt=>Zt.kind==="gym"&&Zt.badge).map(Zt=>Zt.badge)])],J.S.zoneDoors={regirock:1,registeel:1,regice:1},J.itemCount("auroraticket")||J.addItem("auroraticket",1);for(const Zt of[...J.S.mons])(J.DEX[Zt.id]?.legendary||J.DEX[Zt.id]?.mythical)&&![243,244,245].includes(Zt.id)&&(J.takeOutMon(Zt.uid),J.S.road&&(J.S.road=J.S.road.filter(Yt=>Yt!==Zt.uid)));for(const Zt of Object.keys(J.S.dex))(Math.floor(Zt/100)===386||+Zt==386)&&delete J.S.dex[Zt];J.S.aurora=null;for(const Zt of t.POKEDEX){if(Zt.mythical||Zt.id>1e4)continue;if(Zt.legendary){J.S.dex[Zt.id]||J.registerDex(Zt.id);continue}if(J.owns(Zt.id))continue;const Yt=J.makeMon(Zt.id,100);Yt.hp=J.maxHp(Yt),J.receive(Yt)}for(const Zt of J.S.mons)Zt.level<100&&(Object.assign(Zt,{level:100,xp:0}),Zt.hp=J.maxHp(Zt));const Et=Zt=>Object.values(J.statsOf(Zt)).reduce((Yt,yt)=>Yt+yt,0),Mt=J.S.mons.filter(Zt=>!J.DEX[Zt.id].legendary&&!J.DEX[Zt.id].mythical).sort((Zt,Yt)=>Et(Yt)-Et(Zt));for(const Zt of Object.keys(J.S.eventTeams||{}))if(Zt.startsWith("zone:")){const Yt=J.eventTeam(Zt);for(const yt of Mt){if(Yt.length>=Fe.TEAM_SIZE)break;Yt.includes(yt.uid)||Yt.push(yt.uid)}}J.healTeam(),J.save()}const nt=R.get("intro");nt&&Ya(()=>t.Screens.adventure.demoIntro("legend",nt),1500)}function l(){if(!new URLSearchParams(location.search).has("debug")||!/^[\w-]+\.pokecatch-online\.pages\.dev$/.test(location.hostname))return;const nt=Object.assign(document.createElement("pre"),{id:"dbg"});nt.style.cssText="position:fixed;left:4px;top:60px;z-index:99999;margin:0;padding:6px 8px;font:11px/1.35 monospace;color:#7f7;background:rgba(0,0,0,.85);pointer-events:none;white-space:pre",document.body.appendChild(nt);const ie=t.VGrid.stats;let Re=null,jt=0,Ne=0;addEventListener("scroll",()=>{const Qt=An.now();Re||(Re={frames:0,blank:0,scrolls:0,gap:0,y0:scrollY,t0:Qt,r0:{...ie}}),Re.scrolls++,jt=Qt},{passive:!0});const Et=()=>[...document.querySelectorAll(".screen.active .vg-pad")].some(Qt=>{const Ue=Qt.getBoundingClientRect();return Ue.height>0&&Ue.bottom>0&&Ue.top<innerHeight});let Mt="défile dans le PC",Zt="",Yt=null;const yt=new URLSearchParams(location.search),Le=[];yt.has("nopx")&&(document.documentElement.classList.remove("px"),Le.push("sans boutons pixel")),yt.has("blur")&&(document.documentElement.classList.add("dbg-blur"),Le.push("avec le flou")),yt.has("nostar")&&(document.head.appendChild(Object.assign(document.createElement("style"),{textContent:".shiny-mk{display:none!important}"})),Le.push("sans étoile shiny"));const We=Le.length?`
+      ${yt.length?Ue(e("Objets trouvés"),`<b>${We}</b>`,`<div class="oc-items">${yt.map(([sa,Ut])=>`<span class="oc-chip" title="${U(z.itemName(sa))}"><img src="${z.itemSrc(sa)}" alt=""><b>×${Ut}</b></span>`).join("")}</div>`):""}`;let Pt=()=>{};ne({className:"dexcard-modal oc-modal",body:De,actions:[{label:e("Super !"),cls:"gold"}],onOpen:(sa,Ut)=>{a(".dc-x",sa).onclick=()=>{Pt(),Ut(null)},Se(sa),Pt=z.playLevels(sa,Ne)}}).then(()=>Pt())}const lt=8,me=3e4;let ke=null;const Ve=32,ze=new MessageChannel,je=[];ze.port1.onmessage=()=>je.shift()?.();const at=()=>new Promise(nt=>{je.push(nt),ze.port2.postMessage(0)});let $t=0;const na=()=>{$t=An.now(),ke&&Hn(na)},et=()=>new Promise(nt=>{Hn(nt),Ya(nt,100)}).then(at);let K=null;function Y(){K=document.createElement("div"),K.className="cu-veil cu-launch",document.body.appendChild(K),document.body.classList.add("launching")}function Ce(){K?.remove(),K=null,document.body.classList.remove("launching")}function vt(nt){const ie=nt&&K||document.createElement("div");ie.className=nt?"cu-veil cu-launch":"cu-veil",ie.innerHTML=`<div class="cu-pill" role="status"><span>${e("Rattrapage de ton absence…")}</span><span class="cu-bar"><i></i></span></div>`,ie.isConnected||document.body.appendChild(ie);const Re=ie.querySelector(".cu-bar i");return{set:jt=>{Re.style.width=(jt*100).toFixed(1)+"%"},remove:()=>ie.remove()}}t.addEventListener("keydown",nt=>{ke&&nt.stopImmediatePropagation()},!0),t.addEventListener("visibilitychange",()=>{document.hidden&&ke?.finish()?.()},!0);function xt(nt,ie=0,Re=J.S.lastTick,jt=!1){if(ke)return ke.settled;if(t.Clock&&!t.Clock.sure)return Promise.resolve();const Ne=Math.min(J.time()-(Re||J.time()),Fe.OFFLINE_MAX_MS);if(Ne<nt||!J.teamMons().length)return Promise.resolve();const Et=t.Adventure.offline(Ne);let Mt=!1,Zt=null,Yt;const yt=new Promise(Tt=>{Yt=Tt}),Le=()=>{if(Mt)return;Mt=!0;try{Et.run()}finally{J.holdSave(!1),ke=null,(!jt||Et.failed)&&Zt?.remove(),Yt()}if(Et.failed)return;const Tt=Et.sum,Qt=J.pensionTick();Tt.pension={candies:Qt.filter(De=>De.type==="candy").reduce((De,Pt)=>De+Pt.n,0),eggs:Qt.filter(De=>De.type==="egg").length},Qt.length&&He==="pension"&&t.Screens.pension.tick(Qt),J.S.lastTick=J.time(),J.session.away=Math.round(J.session.away+Ne);const Ue=Tt.captures.some(De=>De.shiny||J.isLegend(De.id));if(J.save(Tt.raid?.caught||Tt.legend?.caught||Tt.tower?.ended||Ue?void 0:{idle:!0}),Tt.steps>5&&Ne>=ie||Tt.raid?.caught||Tt.legend?.caught||Tt.tower?.ended||Ue)return()=>Z(Ne,Tt)};J.holdSave(!0),ke={finish:Le,settled:yt};let We;try{We=Et.run(An.now()+lt)}catch(Tt){throw Le(),Tt}return We?(Le()?.(),Promise.resolve()):(Zt=vt(jt),na(),(async()=>{let Tt;try{for(;!Mt&&!document.hidden&&!Et.run(An.now()+lt);)Zt.set(Et.progress),await(An.now()-$t>Ve?et():at());Zt.set(1),await at()}finally{Tt=Le()}Tt&&(await at(),Tt()),await at()})())}let N=null;t.CatchUp={get busy(){return!!ke},get pending(){return!!N||!!ke},wait:()=>ke?.settled||Promise.resolve(),ready:()=>N||ke?.settled||Promise.resolve()};const V=!1,we="",X=[[1,34],[4,38],[7,34],[25,62],[133,48],[39,26],[52,44],[54,24],[35,30],[58,66],[77,80],[79,14],[143,16],[19,56],[104,32],[113,28],[132,20]];function he(nt,{shiny:ie=!1,lanes:Re=null,min:jt=2,max:Ne=4,gap:Et=[1400,2600]}={}){if(document.body.classList.contains("calm")||matchMedia("(prefers-reduced-motion: reduce)").matches)return()=>{};const Mt=jt,Zt=Ne,Yt=1200,yt=()=>[...nt.querySelectorAll(".sup-walker")],Le=(Ue=0)=>{if(yt().length>=Zt)return;const De=new Set(yt().map(ma=>ma.mon)),Pt=X.filter(ma=>!De.has(ma[0])),[sa,Ut]=Pt[Math.floor(Math.random()*Pt.length)],Ca=Ut*(.85+Math.random()*.3),Qe=Re?Re():[{feet:30,z:1},{feet:12,z:2}],qt=Qe.map((ma,Ta)=>yt().filter(Oa=>Oa.lane===Ta).length),Sa=qt[0]===qt[1]?Math.floor(Math.random()*2):qt.indexOf(Math.min(...qt)),Gt=Qe[Sa],Xe=t.SPRITE_BOUNDS?.[`assets/pokemon/${sa}.png`]||[17,10,51,50],Ze=Xe[0]+Xe[2],Wt=Xe[3]*2,ca=Xe[2]-Xe[0],ra=document.createElement("div");ra.className="sup-walker",ra.lane=Sa,ra.mon=sa,ra.style.cssText=`--fx:${Ze}px;--fy:${Wt}px;--hop:${Math.max(.18,Math.min(.6,15/Ca)).toFixed(2)}s;bottom:${Gt.feet-(112-Wt)}px;z-index:${Gt.z}`,ra.innerHTML=`<i class="shadow"></i><div class="body"><img src="assets/pokemon/${ie?"shiny/":""}${sa}.png" alt=""></div>`,nt.appendChild(ra);const aa=-ca,B=nt.clientWidth+ca,ft=(B-aa)/Ca*1e3,Jt=ra.animate([{transform:`translateX(${aa}px)`},{transform:`translateX(${B}px)`}],{duration:ft,easing:"linear"});Jt.currentTime=Ue*ft,ra.exitAt=An.now()+ft*(1-Ue),Jt.onfinish=()=>ra.remove()};for(let Ue=0;Ue<Mt;Ue++)Le((Ue+.3+Math.random()*.4)/Mt);let We=0;const Tt=()=>{Le(),We=Ya(Tt,Et[0]+Math.random()*Et[1])};We=Ya(Tt,1500+Math.random()*2e3);const Qt=ys(()=>{const Ue=An.now();yt().filter(De=>De.exitAt-Ue>Yt).length<Mt&&Le()},250);return()=>{clearTimeout(We),clearInterval(Qt)}}function P(){t.UI.modal({className:"dexcard-modal tab-modal",dismissable:!1,body:`<div class="dc-head"><h2>${e("Ouvert dans un autre onglet")}</h2></div><p class="cl-note">${e("Poke'Catch est ouvert dans un autre onglet : ta partie continue là-bas.")}</p>`,actions:[{label:e("Jouer ici"),cls:"primary",value:!0}]}).then(()=>{t.onbeforeunload=null,location.reload()})}const $=/^[\w-]+\.pokecatch-online\.pages\.dev$/.test(location.hostname),R=new URLSearchParams(location.search);function F(){if(!R.has("pc")||!$)return;const nt=(Re,jt)=>{const Ne=J.makeMon(Re,5+Math.floor(Math.random()*56),{shiny:jt});Ne.hp=J.maxHp(Ne),J.receive(Ne)},ie=t.POKEDEX.map(Re=>Re.id);ie.forEach(Re=>nt(Re,!1));for(let Re=0;Re<200;Re++)nt(J.pick(ie),!0);J.save()}function Ee(){if(!$)return;if(R.has("legends")){const ie=t.STORY,Re=t.Adventure.state,jt=ie.CHAPTERS.length-1;Re.unlocked=Math.max(Re.unlocked,jt);const Ne=ie.REGIONS.filter(Zt=>ie.firstChapterOf(Zt.key)>=0);for(const Zt of Ne)Zt.open=!0;J.S.travel={to:Ne.map(Zt=>Zt.key),at:J.S.travel?.at||Date.now()},J.S.link=null,Re.badges=[...new Set([...Re.badges||[],...ie.CHAPTERS.flatMap(Zt=>Zt.steps).filter(Zt=>Zt.kind==="gym"&&Zt.badge).map(Zt=>Zt.badge)])],J.S.zoneDoors={regirock:1,registeel:1,regice:1},J.itemCount("auroraticket")||J.addItem("auroraticket",1);for(const Zt of[...J.S.mons])(J.DEX[Zt.id]?.legendary||J.DEX[Zt.id]?.mythical)&&![243,244,245].includes(Zt.id)&&(J.takeOutMon(Zt.uid),J.S.road&&(J.S.road=J.S.road.filter(Yt=>Yt!==Zt.uid)));for(const Zt of Object.keys(J.S.dex))(Math.floor(Zt/100)===386||+Zt==386)&&delete J.S.dex[Zt];J.S.aurora=null;for(const Zt of t.POKEDEX){if(Zt.mythical||Zt.id>1e4)continue;if(Zt.legendary){J.S.dex[Zt.id]||J.registerDex(Zt.id);continue}if(J.owns(Zt.id))continue;const Yt=J.makeMon(Zt.id,100);Yt.hp=J.maxHp(Yt),J.receive(Yt)}for(const Zt of J.S.mons)Zt.level<100&&(Object.assign(Zt,{level:100,xp:0}),Zt.hp=J.maxHp(Zt));const Et=Zt=>Object.values(J.statsOf(Zt)).reduce((Yt,yt)=>Yt+yt,0),Mt=J.S.mons.filter(Zt=>!J.DEX[Zt.id].legendary&&!J.DEX[Zt.id].mythical).sort((Zt,Yt)=>Et(Yt)-Et(Zt));for(const Zt of Object.keys(J.S.eventTeams||{}))if(Zt.startsWith("zone:")){const Yt=J.eventTeam(Zt);for(const yt of Mt){if(Yt.length>=Fe.TEAM_SIZE)break;Yt.includes(yt.uid)||Yt.push(yt.uid)}}J.healTeam(),J.save()}const nt=R.get("intro");nt&&Ya(()=>t.Screens.adventure.demoIntro("legend",nt),1500)}function l(){if(!new URLSearchParams(location.search).has("debug")||!/^[\w-]+\.pokecatch-online\.pages\.dev$/.test(location.hostname))return;const nt=Object.assign(document.createElement("pre"),{id:"dbg"});nt.style.cssText="position:fixed;left:4px;top:60px;z-index:99999;margin:0;padding:6px 8px;font:11px/1.35 monospace;color:#7f7;background:rgba(0,0,0,.85);pointer-events:none;white-space:pre",document.body.appendChild(nt);const ie=t.VGrid.stats;let Re=null,jt=0,Ne=0;addEventListener("scroll",()=>{const Qt=An.now();Re||(Re={frames:0,blank:0,scrolls:0,gap:0,y0:scrollY,t0:Qt,r0:{...ie}}),Re.scrolls++,jt=Qt},{passive:!0});const Et=()=>[...document.querySelectorAll(".screen.active .vg-pad")].some(Qt=>{const Ue=Qt.getBoundingClientRect();return Ue.height>0&&Ue.bottom>0&&Ue.top<innerHeight});let Mt="défile dans le PC",Zt="",Yt=null;const yt=new URLSearchParams(location.search),Le=[];yt.has("nopx")&&(document.documentElement.classList.remove("px"),Le.push("sans boutons pixel")),yt.has("blur")&&(document.documentElement.classList.add("dbg-blur"),Le.push("avec le flou")),yt.has("nostar")&&(document.head.appendChild(Object.assign(document.createElement("style"),{textContent:".shiny-mk{display:none!important}"})),Le.push("sans étoile shiny"));const We=Le.length?`
 test : ${Le.join(", ")}`:"";addEventListener("pointerup",()=>{const Qt=An.now();Yt={t0:Qt,js:0,first:0,gap:0,prev:0},Ya(()=>{Yt?.t0===Qt&&(Yt.js=An.now()-Qt)},0)},!0);const Tt=Qt=>{Yt&&(!Yt.first&&Yt.js&&(Yt.first=Qt-Yt.t0),Yt.prev&&(Yt.gap=Math.max(Yt.gap,Qt-Yt.prev)),Yt.prev=Qt,Qt-Yt.t0>800&&(Zt=`
 tap : JS ${Math.round(Yt.js)} ms · 1re image ${Math.round(Yt.first)} ms · trou max ${Math.round(Yt.gap)} ms`,Yt=null)),Re&&(Re.frames++,Et()&&Re.blank++,Ne&&(Re.gap=Math.max(Re.gap,Qt-Ne)),Qt-jt>700&&(Mt=`dernier geste : ${Math.round(Math.abs(scrollY-Re.y0))} px en ${Math.round(jt-Re.t0)} ms
 images ${Re.frames} · vides (DOM) ${Re.blank}
@@ -3926,4 +1330,4 @@ scroll ${Re.scrolls} évts · image max ${Math.round(Re.gap)} ms
 rendus ${ie.renders-Re.r0.renders} · cases +${ie.added-Re.r0.added} · max ${Math.round(ie.max)} ms
 cases en page ${ie.live}`,Re=null,ie.max=0)),Ne=Qt,nt.textContent=Mt+(Re?`
 … en cours : vides ${Re.blank}/${Re.frames}`:"")+Zt+We+(O?`
-barre recalée : ${ae} px (${O}×)`:""),Hn(Tt)};Hn(Tt)}function _(){const nt=J.takeLoadMerges();if(!nt.length)return;const ie=Re=>{const jt=J.candyFamily(Re.id),Ne=U(J.DEX[Re.id].name),Et=U(J.DEX[jt].name);return`<li>${t.UI.xpIcon()}${e("{mon} en trop : changé en XP pour la famille {fam}",{mon:Ne,fam:Et})}</li>`};t.UI.modal({className:"dexcard-modal tab-modal merge-dlg",body:`<div class="dc-head"><h2>${e("Doublons en trop")}</h2></div><p class="cl-note">${e("Ces familles dépassaient leurs places : le plus fort de chaque espèce reste, les autres se changent en XP pour leur famille.")}</p><ul class="merge-list">${nt.map(ie).join("")}</ul>`,actions:[{label:e("Compris !"),cls:"gold"}]})}let ae=0,O=0;function re(){const nt=a("#tabs"),ie=t.visualViewport;let Re=0;if(ee.matches&&ie&&Math.abs(ie.scale-1)<.01){const jt=Math.round(ie.offsetTop+ie.height-parseFloat(getComputedStyle(nt).bottom)-(nt.getBoundingClientRect().bottom-ae));jt>2&&jt<=100&&(Re=jt)}Re!==ae&&(ae=Re,Re&&O++,nt.style.translate=Re?`0 ${Re}px`:"")}const te=["CONFIG","TYPES","TYPE_CHART","POKEDEX","EVOLUTIONS","MOVES","ENCOUNTERS","HABITATS","BASE_EXP","LEAGUE_TEAMS","SPECIALS","UNOWN","RAID_SWAPS","ITEM_NAMES"];function tt(){try{t.CONFIG?.BUFF_BERRIES&&Object.setPrototypeOf(t.CONFIG.BUFF_BERRIES,null)}catch(_e){}window.__setInternalPoke?.(t);window.__tempAdminSuitePoke=t;window.__sealPokeEngine=function(){const nt=ie=>{if(ie&&typeof ie=="object"&&!Object.isFrozen(ie)){Object.freeze(ie);for(const Re of Object.values(ie))nt(Re)}};for(const ie of te)nt(t[ie]);nt(J.DEX),Object.freeze(Math),Object.defineProperty(globalThis,"Math",{value:Math,writable:!1,configurable:!1}),t.__seal?.();try{delete window.__poke;delete window.__pokeCore;delete window.__tempAdminSuitePoke;delete window.__setInternalPoke;delete window.__sealPokeEngine}catch(_e){}};setTimeout(()=>window.__sealPokeEngine?.(),1200)}async function Ye(){tt(),t.TabLock.onLost(P),J.load(),t.UI.syncCalm(),t.Cloud.init(),J.teamMons().length&&Y(),t.Update.reloaded()&&J.teamMons().length||await t.Title.show(),await t.Cloud.ready(),await t.Clock.ready(),t.Adventure.ensure(),await xt(15e3,0,J.S.lastTick,!0),l(),F(),Ee(),$&&R.has("wb")&&t.WorldBoss.demo(R.get("wb")||"shield"),_(),$&&["pc","legends","intro","wb"].some(Yt=>R.has(Yt))&&history.replaceState(null,"",location.origin+location.pathname),t.UI.measureSprites(()=>{t.Screens.pokedex.rebuild?.(),Te()}),t.News.init(),t.Events.init();for(const Yt of Object.values(t.Screens))Yt.init?.();if(m("#side [data-screen]").forEach(Yt=>Yt.onclick=()=>{t.Sfx.unlock(),Yt.classList.contains("locked")||T(Yt.dataset.screen)}),m("#tabs .nav-grp-h").forEach(Yt=>Yt.onclick=()=>{const yt=Yt.parentElement,Le=yt.dataset.grp;if(t.Sfx.unlock(),ee.matches){const We=yt.classList.contains("sheet");m("#tabs .nav-grp.sheet").forEach(Tt=>Tt.classList.remove("sheet")),yt.classList.toggle("sheet",!We)}else{ot[Le]=!ot[Le];try{localStorage.setItem(oe,JSON.stringify(ot))}catch{}}Be()}),document.addEventListener("pointerdown",Yt=>{if(!a("#tabs .nav-grp.sheet")||Yt.target.closest("#tabs .nav-grp.sheet")||(Me(),Yt.target.closest("#tabs")))return;const yt=Le=>{Le.preventDefault(),Le.stopPropagation()};document.addEventListener("click",yt,{capture:!0,once:!0}),Ya(()=>document.removeEventListener("click",yt,{capture:!0}),600)}),document.addEventListener("keydown",Yt=>{Yt.key==="Escape"&&a("#tabs .nav-grp.sheet")&&Me()}),ee.addEventListener("change",Me),new ResizeObserver(rt).observe(a("#tabs")),/Android/i.test(navigator.userAgent)){let Yt=0;const yt=()=>{Yt||(Yt=Hn(()=>{Yt=0,re()}))};t.visualViewport?.addEventListener("resize",yt),addEventListener("resize",yt),addEventListener("scrollend",yt),ee.addEventListener("change",yt),yt()}a("#options-btn").onclick=()=>t.Options.open(),V&&a("#support-btn")?.addEventListener("click",S),t.Changelog.badge(),document.addEventListener("pointerdown",()=>t.Sfx.unlock(),{once:!0}),T("adventure"),Rt(),Ce(),t.Cloud.on?.(Rt),t.Gifts.start();const nt=()=>{if(t.Cloud.checking||ke||t.TabLock?.lost)return;const Yt=J.pensionTick();Yt.length&&(J.save({idle:!0}),Rt(),He==="pension"&&t.Screens.pension.tick(Yt))};nt(),ys(nt,5e3),t.TrainerCard.init(),a("#save-btn").onclick=r,t.Cloud?.on(k),ys(()=>{document.hidden||k()},3e4);let ie=!1,Re=!1;const jt=()=>{!Re&&!t.Update?.keepTick&&!ie&&(J.S.lastTick=J.time()),J.save({idle:!0})};t.addEventListener("beforeunload",jt);let Ne=!1;async function Et(Yt){if(!(Ne||t.TabLock?.lost)){Ne=!0,Re=!0;try{if(await t.Update?.shown(Yt)||document.hidden)return;let yt;const Le=N=new Promise(We=>{yt=We});try{if(await t.Cloud.ready(),await t.Clock.ready(),document.hidden)return;Re=!1,await xt(Fe.OFFLINE_STEP_MS,2e4,Yt),Te()}finally{N===Le&&(N=null),yt()}}finally{Ne=!1}}}let Mt=Date.now(),Zt=!0;ys(()=>{const Yt=Date.now()-Mt>me;if(Mt=Date.now(),document.hidden)return;const yt=Zt;if(Zt=!1,Hn(()=>{Zt=!0}),!yt){ie=!0;return}if(Yt||ie){ie=!1,Et(J.S.lastTick);return}Re||(J.S.lastTick=J.time(),J.S.stats.playMs+=5e3,J.session.play+=5e3)},5e3),document.addEventListener("visibilitychange",()=>{if(document.hidden){jt();return}Zt=!0,ie=!1,Et(J.S.lastTick)}),t.Clock.onForward(async()=>{if(document.hidden||N||t.TabLock?.lost)return;const Yt=J.S.lastTick;let yt;const Le=N=new Promise(We=>{yt=We});Re=!0;try{await t.Cloud.ready(),document.hidden||(Re=!1,await xt(Fe.OFFLINE_STEP_MS,2e4,Yt),Te())}finally{N===Le&&(N=null),yt()}})}t.addEventListener("daytime",Te),t.addEventListener("weather",Te),t.App={refresh:Te,refreshHeader:Rt,show:T,communityLine:x,supportOn:V,parade:he,get current(){return He}},Ye()}()})();
+barre recalée : ${ae} px (${O}×)`:""),Hn(Tt)};Hn(Tt)}function _(){const nt=J.takeLoadMerges();if(!nt.length)return;const ie=Re=>{const jt=J.candyFamily(Re.id),Ne=U(J.DEX[Re.id].name),Et=U(J.DEX[jt].name);return`<li>${t.UI.xpIcon()}${e("{mon} en trop : changé en XP pour la famille {fam}",{mon:Ne,fam:Et})}</li>`};t.UI.modal({className:"dexcard-modal tab-modal merge-dlg",body:`<div class="dc-head"><h2>${e("Doublons en trop")}</h2></div><p class="cl-note">${e("Ces familles dépassaient leurs places : le plus fort de chaque espèce reste, les autres se changent en XP pour leur famille.")}</p><ul class="merge-list">${nt.map(ie).join("")}</ul>`,actions:[{label:e("Compris !"),cls:"gold"}]})}let ae=0,O=0;function re(){const nt=a("#tabs"),ie=t.visualViewport;let Re=0;if(ee.matches&&ie&&Math.abs(ie.scale-1)<.01){const jt=Math.round(ie.offsetTop+ie.height-parseFloat(getComputedStyle(nt).bottom)-(nt.getBoundingClientRect().bottom-ae));jt>2&&jt<=100&&(Re=jt)}Re!==ae&&(ae=Re,Re&&O++,nt.style.translate=Re?`0 ${Re}px`:"")}const te=["CONFIG","TYPES","TYPE_CHART","POKEDEX","EVOLUTIONS","MOVES","ENCOUNTERS","HABITATS","BASE_EXP","LEAGUE_TEAMS","SPECIALS","UNOWN","RAID_SWAPS","ITEM_NAMES"];function tt(){try{t.CONFIG?.BUFF_BERRIES&&Object.setPrototypeOf(t.CONFIG.BUFF_BERRIES,null)}catch(_e){}window.__setInternalPoke?.(t);window.__tempAdminSuitePoke=t;window.__sealPokeEngine=function(){const nt=ie=>{if(ie&&typeof ie=="object"&&!Object.isFrozen(ie)){Object.freeze(ie);for(const Re of Object.values(ie))nt(Re)}};for(const ie of te)nt(t[ie]);nt(J.DEX),Object.freeze(Math),Object.defineProperty(globalThis,"Math",{value:Math,writable:!1,configurable:!1}),t.__seal?.();try{delete window.__poke;delete window.__pokeCore;delete window.__tempAdminSuitePoke;delete window.__setInternalPoke;delete window.__sealPokeEngine}catch(_e){}};setTimeout(()=>window.__sealPokeEngine?.(),1200)}async function Ye(){tt(),t.TabLock.onLost(P),J.load(),t.UI.syncCalm(),t.Cloud.init(),J.teamMons().length&&Y(),t.Update.reloaded()&&J.teamMons().length||await t.Title.show(),await t.Cloud.ready(),await t.Clock.ready(),t.Adventure.ensure(),await xt(15e3,0,J.S.lastTick,!0),l(),F(),Ee(),$&&R.has("wb")&&t.WorldBoss.demo(R.get("wb")||"shield"),_(),$&&["pc","legends","intro","wb"].some(Yt=>R.has(Yt))&&history.replaceState(null,"",location.origin+location.pathname),t.UI.measureSprites(()=>{t.Screens.pokedex.rebuild?.(),Te()}),t.News.init(),t.Events.init();for(const Yt of Object.values(t.Screens))Yt.init?.();if(m("#side [data-screen]").forEach(Yt=>Yt.onclick=()=>{t.Sfx.unlock(),Yt.classList.contains("locked")||T(Yt.dataset.screen)}),m("#tabs .nav-grp-h").forEach(Yt=>Yt.onclick=()=>{const yt=Yt.parentElement,Le=yt.dataset.grp;if(t.Sfx.unlock(),ee.matches){const We=yt.classList.contains("sheet");m("#tabs .nav-grp.sheet").forEach(Tt=>Tt.classList.remove("sheet")),yt.classList.toggle("sheet",!We)}else{ot[Le]=!ot[Le];try{localStorage.setItem(oe,JSON.stringify(ot))}catch{}}Be()}),document.addEventListener("pointerdown",Yt=>{if(!a("#tabs .nav-grp.sheet")||Yt.target.closest("#tabs .nav-grp.sheet")||(Me(),Yt.target.closest("#tabs")))return;const yt=Le=>{Le.preventDefault(),Le.stopPropagation()};document.addEventListener("click",yt,{capture:!0,once:!0}),Ya(()=>document.removeEventListener("click",yt,{capture:!0}),600)}),document.addEventListener("keydown",Yt=>{Yt.key==="Escape"&&a("#tabs .nav-grp.sheet")&&Me()}),ee.addEventListener("change",Me),new ResizeObserver(rt).observe(a("#tabs")),/Android/i.test(navigator.userAgent)){let Yt=0;const yt=()=>{Yt||(Yt=Hn(()=>{Yt=0,re()}))};t.visualViewport?.addEventListener("resize",yt),addEventListener("resize",yt),addEventListener("scrollend",yt),ee.addEventListener("change",yt),yt()}a("#options-btn").onclick=()=>t.Options.open(),t.Changelog.badge(),document.addEventListener("pointerdown",()=>t.Sfx.unlock(),{once:!0}),T("adventure"),Rt(),Ce(),t.Cloud.on?.(Rt),t.Gifts.start();const nt=()=>{if(t.Cloud.checking||ke||t.TabLock?.lost)return;const Yt=J.pensionTick();Yt.length&&(J.save({idle:!0}),Rt(),He==="pension"&&t.Screens.pension.tick(Yt))};nt(),ys(nt,5e3),t.TrainerCard.init(),a("#save-btn").onclick=r,t.Cloud?.on(k),ys(()=>{document.hidden||k()},3e4);let ie=!1,Re=!1;const jt=()=>{!Re&&!t.Update?.keepTick&&!ie&&(J.S.lastTick=J.time()),J.save({idle:!0})};t.addEventListener("beforeunload",jt);let Ne=!1;async function Et(Yt){if(!(Ne||t.TabLock?.lost)){Ne=!0,Re=!0;try{if(await t.Update?.shown(Yt)||document.hidden)return;let yt;const Le=N=new Promise(We=>{yt=We});try{if(await t.Cloud.ready(),await t.Clock.ready(),document.hidden)return;Re=!1,await xt(Fe.OFFLINE_STEP_MS,2e4,Yt),Te()}finally{N===Le&&(N=null),yt()}}finally{Ne=!1}}}let Mt=Date.now(),Zt=!0;ys(()=>{const Yt=Date.now()-Mt>me;if(Mt=Date.now(),document.hidden)return;const yt=Zt;if(Zt=!1,Hn(()=>{Zt=!0}),!yt){ie=!0;return}if(Yt||ie){ie=!1,Et(J.S.lastTick);return}Re||(J.S.lastTick=J.time(),J.S.stats.playMs+=5e3,J.session.play+=5e3)},5e3),document.addEventListener("visibilitychange",()=>{if(document.hidden){jt();return}Zt=!0,ie=!1,Et(J.S.lastTick)}),t.Clock.onForward(async()=>{if(document.hidden||N||t.TabLock?.lost)return;const Yt=J.S.lastTick;let yt;const Le=N=new Promise(We=>{yt=We});Re=!0;try{await t.Cloud.ready(),document.hidden||(Re=!1,await xt(Fe.OFFLINE_STEP_MS,2e4,Yt),Te())}finally{N===Le&&(N=null),yt()}})}t.addEventListener("daytime",Te),t.addEventListener("weather",Te),t.App={refresh:Te,refreshHeader:Rt,show:T,communityLine:x,supportOn:V,parade:he,get current(){return He}},Ye()}()})();

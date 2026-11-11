@@ -3,11 +3,18 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, join, extname } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import vm from 'node:vm';
+import { itemCatalog } from './item-catalog.mjs';
 
 const root = resolve(import.meta.dirname, '..', 'dist');
 const parseEntries = data => (Array.isArray(data) ? data : data.files || data.assets || []).map(item => typeof item === 'string' ? item : item.path || item.url);
 const shell = parseEntries(JSON.parse(await readFile(join(root, 'shell-manifest.json'), 'utf8')));
 const assets = parseEntries(JSON.parse(await readFile(join(root, 'assets-manifest.json'), 'utf8')));
+const catalog = itemCatalog(await readFile(join(root, 'bundle/app.f9da276408.js'), 'utf8'));
+for (const item of catalog) assert(assets.includes(item.path), `Missing item icon in offline manifest: ${item.id} (${item.path})`);
+const interfaceSource = await Promise.all(['boot.js', 'bundle/app.f9da276408.js', 'index.html'].map(file => readFile(join(root, file), 'utf8')));
+assert(!/https?:\/\/(?:t\.me|discord\.gg|pokecatch-online\.pages\.dev|pokecatchvn\.xyz)/i.test(interfaceSource.join('\n')), 'An original-project promotional URL remains in the game');
+assert(!interfaceSource[0].includes('class="side-disc"'), 'An original community button remains in the sidebar');
+assert(!interfaceSource[0].includes('data-grp="social"'), 'Unused online community navigation remains');
 assert(shell.includes('index.html') && shell.includes('offline.js'), 'Missing application shell');
 async function walk(dir) {
   const all = [];

@@ -34,6 +34,8 @@ Chơi một người. Lưu tiến trình trên thiết bị. Tải game và tài
 
 Người dùng chọn giữ phong cách game tham chiếu và dùng asset của chính trang đó. Giao diện tiếng Việt. Đây là bản fan game cá nhân, phi thương mại, không phải sản phẩm chính thức của Pokémon hay máy chủ Pokecatch.
 
+Giao diện chỉ giữ liên kết GitHub của dự án TDUmii/Pokecatch. Các nút Telegram, Discord, quảng bá, ủng hộ và bản tin máy chủ gốc đã được gỡ. Thông tin nguồn tài nguyên và giấy phép được giữ trong THIRD_PARTY.md.
+
 ## Evidence on Hand
 
 Trang tham chiếu được tải ngày 10/11/2026. REA đã mở trang trong Chrome 430 x 932, chụp giao diện và thu DOM, không ghi nhận page-error trong lượt khảo sát. HTML, bộ khởi động và bundle được giữ trong `.research/` để khảo sát, không đưa vào bản xuất bản.

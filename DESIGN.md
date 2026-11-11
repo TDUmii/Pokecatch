@@ -156,7 +156,7 @@ Two equal buttons export and import a JSON save. A hidden file picker opens thro
 
 ### Navigation and game containers
 
-Keep the inherited game navigation, scene framing, Pokémon art and local game controls. Server-dependent entries are hidden in this personal edition. The utility does not introduce a competing navigation system.
+Keep the inherited scene framing, Pokémon art and local game controls. The personal edition removes the original server's community navigation, promotional controls and news feed, retaining only its own project link. Keep source attribution in THIRD_PARTY.md. The utility does not introduce a competing navigation system.
 
 ## Do's and Don'ts
 
