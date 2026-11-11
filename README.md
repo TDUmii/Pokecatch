@@ -4,11 +4,23 @@ Game cá nhân của Umi để chơi trên máy tính và điện thoại: khám
 
 Chơi trực tiếp: **https://tdumii.github.io/Pokecatch/**
 
-Bộ tài nguyên gồm 4.871 tệp trong manifest, khoảng 73 MiB: 3.160 PNG, 1.318 GIF, 374 WEBP cùng SVG, intro, font và giấy phép. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Danh mục vật phẩm được kiểm tra đủ 136 biểu tượng, bao gồm các cỡ kẹo EXP. Sự hiện diện của tài nguyên Mega không có nghĩa là tích hợp các chức năng quản trị hoặc mở khóa mọi tính năng của máy chủ gốc.
+Bộ tài nguyên gồm 4.899 tệp trong manifest, khoảng 73 MiB: 3.176 PNG, 1.318 GIF, 374 WEBP, 20 SVG cùng intro, font và giấy phép. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Danh mục vật phẩm gốc được kiểm tra đủ 136 biểu tượng, bổ sung 16 phiến hệ và 12 biểu tượng riêng cho khu quà. Bản nâng cấp hỗ trợ sử dụng 48 dạng Mega/Nguyên thủy, không tích hợp chức năng quản trị của máy chủ gốc.
 
 Giao diện tiếng Việt dùng **Be Vietnam Pro**, có đầy đủ dấu tiếng Việt và được lưu cùng game để chơi offline. Logo Latin giữ nét chữ pixel gốc. Các tệp font và giấy phép nằm trong `assets/fonts/`.
 
 Gói tiếng Việt bao gồm giao diện, mô tả của 493 loài gốc (các dạng dùng chung mô tả của loài), thẻ giới thiệu và 38 bản ghi cập nhật. Tên Pokémon, tên chiêu thức và tên riêng được giữ nguyên. Các thuật ngữ thống nhất: Pokémon khác màu, trận đột kích, Tháp Chiến Đấu, Hầm Ngầm, Điểm Chiến Đấu và chế độ ngoại tuyến.
+
+## Khu quà Umi và tốc độ ×10
+
+Mở **Hoạt động → Khu quà Umi**. Có 3 máy: Tiếp tế (500 ₽), Tiến hóa (2.500 ₽), Pokémon (1 vé). Quay 1 hoặc 10 lượt; ba lượt Pokémon và một thùng tiếp tế được tặng một lần khi dùng bản nâng cấp. Quà được ghi vào bản lưu trước hoạt ảnh, tránh mất quà khi đóng trang.
+
+Tỷ lệ cơ bản: Thường 50%, Ít gặp 30%, Hiếm 15%, Sử thi 4%, Độc đắc 1%. Bộ đếm riêng từng máy bảo đảm ít nhất Hiếm mỗi 10 lượt và Sử thi mỗi 50 lượt. Lượt thường từ bậc Hiếm có 12% cơ hội mở 5 lượt miễn phí; lượt miễn phí có 10% cơ hội nhân đôi quà và không tạo vòng mới.
+
+Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn quà, rương tiến hóa, mảnh Mega, vé chọn Đá Mega, trứng tự chọn, vé săn loài còn thiếu, Bùa chiến lợi phẩm, vé chọn Pokémon khác màu, thùng tiếp tế và thỏi vàng. Trứng nở sau 3 phút hoặc 5 trận thắng. Vé săn ưu tiên cuộc gặp phù hợp tiếp theo trong vùng hiện tại; tỷ lệ bắt vẫn áp dụng bình thường. Bùa tăng phần thưởng sau mỗi 5 trận thắng trong 60 phút. Đồ dư phù hợp có thể tái chế thành mảnh, đặt mục tiêu và đổi phần thưởng.
+
+20 mảnh Mega đổi một vé chọn Đá Mega. Có 48 dạng tương thích với dữ liệu Pokémon của bản này (46 Mega và 2 Nguyên thủy); mở khóa xong, vào mục Đá Mega để trang bị cho đúng loài. Mỗi lúc chỉ một cá thể dùng Mega; thay đổi giữ tỷ lệ HP. Chỉ số, hệ và sprite được dùng trong chiến đấu thật.
+
+Nút **×10** tăng tốc xử lý phiêu lưu thực tế và giữ lựa chọn qua lần mở lại. Các hoạt ảnh mở quà, bắt Pokémon và cảnh giới thiệu có giới hạn riêng để dễ đọc trên điện thoại.
 
 Tiến trình chơi được lưu trong trình duyệt trên từng thiết bị. Bản này không đồng bộ tài khoản, không sử dụng bảng xếp hạng hay giao dịch trực tuyến của trang gốc. Không nhập mật khẩu tài khoản gốc vào bản này.
 

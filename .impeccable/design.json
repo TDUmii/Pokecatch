@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T08:09:31.739564+07:00",
+  "generatedAt": "2026-11-11T09:55:58.099Z",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -19,9 +19,28 @@
       {
         "name": "utility-desktop",
         "value": "901px"
+      },
+      {
+        "name": "arcade-compact",
+        "value": "700px"
+      },
+      {
+        "name": "arcade-narrow",
+        "value": "370px"
       }
     ],
-    "motion": [],
+    "motion": [
+      {
+        "name": "arcade-reels",
+        "value": ".18s linear repeating vertical movement",
+        "reducedMotion": "disabled"
+      },
+      {
+        "name": "arcade-native-reward",
+        "value": "500ms ease-out scale and opacity",
+        "reducedMotion": "disabled; reward remains visible"
+      }
+    ],
     "typographyMeta": {
       "game-body": {
         "displayName": "Vietnamese game body",
@@ -30,6 +49,110 @@
       "game-display": {
         "displayName": "Vietnamese game headings",
         "purpose": "Shared title and former pixel roles use Be Vietnam Pro. Latin brand logo alone retains Jersey 15."
+      }
+    },
+    "arcade": {
+      "scope": ".ua-root / .ua-modal and ua- prefixed descendants",
+      "source": "bundle/umi-arcade.css",
+      "colors": [
+        "#ffcf55",
+        "#64e1ef",
+        "#f58bbc",
+        "#101523",
+        "#566079",
+        "#eef1f8",
+        "#c3cce0",
+        "#252a3d",
+        "#30394f",
+        "#a8dfff",
+        "#3c3425",
+        "#a37b25",
+        "#1c2030",
+        "#0005",
+        "#acb5ff",
+        "#2b2630",
+        "#0007",
+        "#d1d8e8",
+        "#0b0f1c",
+        "#080b13",
+        "#0009",
+        "#e1e7ee",
+        "#758499",
+        "#121d322b",
+        "#10152335",
+        "#ffe49c",
+        "#c18a27",
+        "#ffe18b",
+        "#fff0bf",
+        "#193541",
+        "#b98638",
+        "#393126",
+        "#ffe1a2",
+        "#dce3f1",
+        "#69738c",
+        "#0b101c",
+        "#171e2c",
+        "#c5cee0",
+        "#b6beff",
+        "#332c20",
+        "#414b62",
+        "#ffc7ca",
+        "#3c222d",
+        "#ad6571",
+        "#141826",
+        "#202638",
+        "#6d7895",
+        "#0008",
+        "#090d1bcc"
+      ],
+      "radii": [
+        "3px",
+        "4px",
+        "6px",
+        "7px",
+        "8px",
+        "12px"
+      ],
+      "fontSizes": [
+        "11px",
+        "12px",
+        "13px",
+        "14px",
+        "15px",
+        "17px",
+        "18px",
+        "20px",
+        "21px",
+        "clamp(22px,3vw,30px)",
+        "clamp(15px,3vw,22px)"
+      ],
+      "fontFamily": "Inherited self-hosted Be Vietnam Pro",
+      "availableFontWeights": [
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "cssFontWeights": [
+        600,
+        700,
+        750
+      ],
+      "minimumInteractiveHeight": "44px",
+      "walletNoninteractiveHeights": [
+        "32px",
+        "38px"
+      ],
+      "evidence": {
+        "directory": ".impeccable/review/arcade/",
+        "viewports": [
+          360,
+          390,
+          1366
+        ],
+        "physicalDeviceVerified": false,
+        "notes": "Parent browser QA reports no horizontal overflow, x10 transactions and pity save verified; actual ×10 simulation measured at 10.0004× in isolated Chrome. This documentation update did not rerun browser checks."
       }
     }
   },
@@ -49,6 +172,13 @@
       "description": "Balanced secondary export and import actions.",
       "html": "<div class=\"save-actions\"><button>Xuất bản lưu</button><button>Nhập bản lưu</button></div>",
       "css": ".save-actions{display:flex;gap:10px}.save-actions button{flex:1;min-height:44px;padding:10px 14px;background:#343b55;color:#fff;border:1px solid #737f9f;border-radius:8px;font:650 14px/1.3 \"Be Vietnam Pro\",system-ui,sans-serif;cursor:pointer}.save-actions button:hover{background:#465374}.save-actions button:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}"
+    },
+    {
+      "name": "Umi reward arcade",
+      "kind": "custom",
+      "description": "Scoped ua- operating surface: wallet and five tabs; framed three-reel console with cost and pity meters; actual received-item results; compact inventory actions, scrap goal, history, responsive choice grid and native reward dialog.",
+      "source": "bundle/umi-arcade-ui.js",
+      "cssSource": "bundle/umi-arcade.css"
     }
   ],
   "narrative": {
@@ -59,7 +189,8 @@
       "Warm yellow primary utility action",
       "Self-hosted Be Vietnam Pro for Vietnamese game and utility text",
       "Compact persistent offline entry",
-      "Native modal with clear progress and save transfer"
+      "Native modal with clear progress and save transfer",
+      "Scoped reward arcade follows inherited pixel world with gold/cyan/pink rarity accents, actual item rewards and 44px controls"
     ],
     "rules": [
       {
@@ -71,6 +202,11 @@
         "name": "The Vietnamese Coverage Rule",
         "body": "Use shared self-hosted Be Vietnam Pro for Vietnamese interface and canvas text; retain Jersey 15 only for the Latin brand logo. Preserve the separate game and utility type scales.",
         "section": "typography"
+      },
+      {
+        "name": "Arcade Scope Rule",
+        "body": "Use only ua- scoped extensions; preserve inherited world and self-hosted font. Costs, pity and scrap goals remain readable; result items are functional inventory, not promotional cards. Interactive controls remain at least 44px including final compact overrides.",
+        "section": "components"
       }
     ],
     "dos": [

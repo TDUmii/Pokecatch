@@ -47899,5 +47899,257 @@
     "reasons": [
       "boot.js intro URL"
     ]
+  },
+  {
+    "path": "assets/umi/choice-ticket.svg",
+    "bytes": 394,
+    "sha256": "8a54b9a28ec01f8178cc2ca7193b693e9c2c15c38781ab0bc71d1a05bd9ee90c",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/evolution-chest.svg",
+    "bytes": 484,
+    "sha256": "5ff8b0a70fc2adec7535f37b12dd499b50e2599f8fb63940624c110ac764b140",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/gold-ingot.svg",
+    "bytes": 362,
+    "sha256": "527405e2e44efaf5a88b503456553a1c4e5c5b0cc97b9a40939729fa9efcdd00",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/loot-charm.svg",
+    "bytes": 423,
+    "sha256": "cdfe8fbe0a31a515ccb61ea6c31d0e1105190a7f97d0e6c5a489720707901480",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/mega-selector.svg",
+    "bytes": 381,
+    "sha256": "5ea90b1c7bd8ee20683dc3e9907f244855693a7ca3a4e838643669410315b5d5",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/mega-shard.svg",
+    "bytes": 400,
+    "sha256": "06b9854784620b3e0dcf38286c84fc98b2f10f5bbb4829a0ef499c56b403297f",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/missing-pass.svg",
+    "bytes": 366,
+    "sha256": "bc01724ea68f7961ab38a3f78c29cd8c644ec914ca374a186305477b7769d180",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/selected-egg.svg",
+    "bytes": 472,
+    "sha256": "3b78cc0600877c297b5a7a794fd8238575d9dd1966ef8c7aa1f8f83f7657b5fa",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/shiny-selector.svg",
+    "bytes": 413,
+    "sha256": "3e070ca1675a1f6074e3ff745c5495df7aa6f1d00b3367e3ad64d52c993714c3",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/spin-ticket.svg",
+    "bytes": 400,
+    "sha256": "9a2cbb99d9ee1c9f601cb139c5f2718a9ef389bff7ea48dcf2a7b7ff94fe8dc2",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/supply-crate.svg",
+    "bytes": 503,
+    "sha256": "84131cd72fa8d89ec635cdab19f7feba778d83abab9f04a104973c5e9ff6ce9b",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/umi/ten-ticket.svg",
+    "bytes": 536,
+    "sha256": "ac24d2947441cd1dc521100bfc65a28efa41c3173ac2ddc7dafe494d841c3159",
+    "format": "svg",
+    "reasons": [
+      "Original Umi arcade item icon"
+    ]
+  },
+  {
+    "path": "assets/items/plate-bug.png",
+    "bytes": 233,
+    "sha256": "235d9baffb513c22fed32b836610e9153eaf7a94979be640f7dc9026c49e46d7",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-dark.png",
+    "bytes": 232,
+    "sha256": "fdaea1700e568e941bc15cb9d95c2f30ebba1fbd09b15ff155aafd93280c683c",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-dragon.png",
+    "bytes": 232,
+    "sha256": "f176a5504309bbf3d92d5d35565e48e22564282bd25207de5fad9dd906fff618",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-electric.png",
+    "bytes": 230,
+    "sha256": "ad61995ecb8ee5fe3f21bf280160cc5a80b1dfae3879a687e5a3163aabb8dc57",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-fighting.png",
+    "bytes": 233,
+    "sha256": "80168809adaa6ef4d45b897ac5f65515b089598fc8d0253aebb1263638850f6a",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-fire.png",
+    "bytes": 230,
+    "sha256": "18062e5ec8f44107931bd16ef99f94ecf6ddb572f6d9b59f103d45eb072a60d0",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-flying.png",
+    "bytes": 229,
+    "sha256": "18ef89974fabfe77865462502875ede8918e11953693674fcdc0f64203f2f9a6",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-ghost.png",
+    "bytes": 233,
+    "sha256": "71e0adee601cc6ea9c14141874485801dc4045098fb23ca50e6f37dbbd351629",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-grass.png",
+    "bytes": 232,
+    "sha256": "8f9d4ab9ac3fdb70b03e4ce7d7bea6b502fc0cbc9ac4458705eac18667de2bed",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-ground.png",
+    "bytes": 233,
+    "sha256": "447443b7e859215c9da47d1a7cbb4a39942d97ff4aab1ec73f23dcee1fd306aa",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-ice.png",
+    "bytes": 229,
+    "sha256": "ace79b7798eb734f0686c7229d0942c51642cf38c3cfc0da3cc842a9d63392e5",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-poison.png",
+    "bytes": 232,
+    "sha256": "8bd4417bb83de655f3d91d40a2fccaf55a56205e60313a39719407e0869eee55",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-psychic.png",
+    "bytes": 232,
+    "sha256": "cdce2f95b0f551a66a8d93c2461fd99a0c0daacc0f0d1186e9b1a7493e763576",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-rock.png",
+    "bytes": 233,
+    "sha256": "eed97cdd236c28c08c47ab5385836f041321fe661d6e1b8520c360ee616c6a30",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-steel.png",
+    "bytes": 233,
+    "sha256": "50ae8bd449e4522358bb40421540c97fcd6f3d265b8ca099c103d78956879f45",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
+  },
+  {
+    "path": "assets/items/plate-water.png",
+    "bytes": 231,
+    "sha256": "4436c62422beab7b0732b572eec60542dbf58b3def0926477f6d6f1d8aef2c3c",
+    "format": "png",
+    "reasons": [
+      "Runtime Arceus plate item source rule"
+    ]
   }
 ]

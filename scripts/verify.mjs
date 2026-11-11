@@ -108,3 +108,6 @@ const cached = await trigger('fetch', {request:new Request(scope + 'assets/a.png
 assert.equal(await cached.text(), 'test');
 console.log(`Verified ${files.length} packaged files, ${assets.length} assets; offline failure/retry, concurrency, project scope and cache checks passed.`);
 await import('./verify-localization.mjs');
+await import('./verify-arcade.mjs');
+await import('./verify-arcade-integration.mjs');
+await import('./verify-mega.mjs');

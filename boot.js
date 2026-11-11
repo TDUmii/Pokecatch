@@ -24,6 +24,7 @@
             <b class="nav-grp-t">Activités</b>
             <button data-screen="pension"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAw0lEQVRYw+2VvQ2DMBSEGcWrZA3WYAzalBkhZVpKyqxBmRUcTvDQYT0ljc9RpHfSSciF73s/yF0XCoVC/6qUUmY3D8+vx+ZdzSAQNMxjnpbpBIBvOYSFm48urAYQzqQQuNyCjg7sNigZwGnujrkzEohvANIx4ML5PnwM5bPlea0LYQDWYp6/t5ASgHEFuNx6F6IMB2x1AISzvaoRbJbsQQmBUA62Lsn+Ag7najlcBsDL6FlavfcKlgDNX8WfPsehUKim3sl5viRG5JaPAAAAAElFTkSuQmCC" alt=""></span><span class="l">Pension</span></button>
             <button data-screen="casino" class="locked"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAvElEQVRYw+2WwQ2FIBBELcESaIMjbdjKtmQbHm3FFjBzINmorAILP/nZSSYaE5jHCMZpMplMSnLOxeQQQhweKrlbOM1zXL0XjTa6QGBSBABCMgC6QHCAtwbUAUrDhwDsy3Lz0PqHAZSG/2f9X60KkCaFjoPitvrsvepXsCRYtfaaYDWA2mBVACISnQvnANV74QrAVyxB8DBcMQ5uBuAhT8+fVgngdCK6vAI4V6/KMaz902mqXkNN1ZtMv9AJgDk/D88J+jYAAAAASUVORK5CYII=" alt=""></span><span class="l">Casino</span></button>
+            <button data-screen="umiArcade"><span class="ic"><img src="assets/umi/spin-ticket.svg" alt=""></span><span class="l">Khu quà Umi</span></button>
             <button data-screen="raid"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA1UlEQVRYw+2VsQ1CMQxEM0paRmANSkagpWQNyqxEyQqMkNbIgovMKXT4kL5iyVJSvRfHcUpZsWILUWs1Tin8cHl8AH0vEZnBZyLpAn+XiPntOuQNCRGZAEMgIYPvb33AYhVkAq330Qdmd2t20p7eBVAFh0sEHLA7X18nfgv4Pn0IAeBAhyMhgUqkSMSSIwHnjI2ZVgGWSa8AS/idxyZED6Q3X3xq/AokozY+tTgHUmD82fB/z5PwpwLH1kcC7uvZ7E8pN6AAz+Dpdx7BUjj3QVmxYovxBDn+ZFdOxsTkAAAAAElFTkSuQmCC" alt=""></span><span class="l">Raids</span></button>
             <button data-screen="tower" class="locked"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA/0lEQVRYhe2VsQ3CMBBFMwal16BkhZSUKWkzglegpGSErECZNbLGoQ/60snYBuGzkZBP+pItJL93tmOGoVevXoXlnJNUmsDnReSyiuzP2yMYM1UlsDhBkEBu23M++WtdCcIJZnT3CITMBQg/jJOMJy9Hv7xIAIxgjmMxk9BwCiAYhyI6JjsRg+OsEc5TIsUCqc4pwDF/1yKAFx1DCh4T4C4whO/m9TuBHPydAN+GYji2UneVEzCH8xKFEuEl1F9DMZwCfNX0bY7thv4KTOAUwEL6eY2JmHeuBbAQ/2ByIqadxyRyInx2zeFaIidSFf6JSBN4TqQpPCbyE3ivXn9Xd9ZwpoXxo/riAAAAAElFTkSuQmCC" alt=""></span><span class="l">Tour de Combat</span></button>
             <button data-screen="underground" class="locked"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACQklEQVR4nO1WIZCjMBR9ZSq6rusWieQcdWRVK5FXue44d3W7bitZ17pWVp5EFkkddcUdMhK5da3j5oeGLWwLlOnN3c30zWRCfhLey/+fH4AbbvifYBhGQu2vkbuOnRCuKUKpS76YsGtxXibAOJDz9R6LIAbf7q8qoH0JeXGuDkEYhq1GAgzDSMbD3klyQrB0SomjyAPnEZy5kZSJaJe9JDa/id4yP2zeZgPXD8AGDKfyQtetjFzTdJJaKrRVNll0s6qqsJ5fU1G9HkZPQ9hMze3RzA7GU56KUbfwN7vSMChlAmijbDR2njV407fME7OfLhx3AzzwtP2pz/AYdGIpgjxwN5jBmb/n1tDJ7a97MLODqwoYTzl8aNAYQ7Reid64X30SQW4vimqUAxKWZSUUe4q7hNbtwAtC8eytPITvfez8US5PFi8j0TfOAZmIP16djJyIqVFBspghbFbfQjd6gz2ZCa9I0LgKShU5Gw6hf9EF6SnQHIFEUlh0sy/6YxFlRUupUkinkyc+J0IicN1UVEFEGZQ6pydEv6LcPI1J1LGd1su410W7agERTFceeBBgTjnAmPDKsSjvMJ/tOYSCQLmzaCqABwF87oHHXSyXS2F7+f4obFHcza111PS+sGPkyKvQPud++pzopdy8hz//uIyImIoM1ls8YZfZx7EsybEoVFQl66B1TgDFkzwg6/mgd5cJIFvRAxQamXwyGSUa3Ya62ReN3DgpZL/8KZE5wPe72oWniNa5iSb/fZcQ33DDP4PfSp8qGNcTkbYAAAAASUVORK5CYII=" alt=""></span><span class="l">Souterrain</span></button>
@@ -54,6 +55,7 @@
       </section>
       <section class="screen" id="screen-friends"><div id="friends-root"></div></section>
       <section class="screen" id="screen-leaderboard"><div id="lb-root"></div></section>
+      <section class="screen" id="screen-umiArcade"></section>
       <section class="screen" id="screen-casino"></section>
       <section class="screen active" id="screen-adventure">
         <div class="adv-side">
@@ -77,7 +79,7 @@
             <div class="banner" id="banner"></div>
             <div class="battle-log" id="battle-log">En route pour l'aventure !</div>
             <div class="adv-controls">
-              <div class="seg" id="speed-btns"><button data-speed="1">×1</button><button data-speed="2">×2</button><button data-speed="4">×3</button></div>
+              <div class="seg" id="speed-btns"><button data-speed="1">×1</button><button data-speed="2">×2</button><button data-speed="4">×3</button><button data-speed="10">×10</button></div>
             </div>
             <div class="empty-arena" id="adv-empty" hidden><p>Ton équipe est vide ! Choisis jusqu'à 6 Pokémon dans ton PC.</p><button class="btn gold">Gérer l'équipe</button></div>
           </div>

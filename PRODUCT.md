@@ -28,6 +28,10 @@ Chơi một người. Lưu tiến trình trên thiết bị. Tải game và tài
 - Tài nguyên phải được lưu trong dự án, không phụ thuộc CDN lúc chơi offline.
 - Tiến trình riêng, có xuất và nhập bản lưu.
 - Các tính năng cần người chơi khác hoặc máy chủ không thuộc vòng chơi offline.
+- Khu quà Umi có 3 máy quay, 12 vật phẩm riêng, tỷ lệ quà 50/30/15/4/1, bảo đảm quà Hiếm mỗi 10 lượt và Sử thi mỗi 50 lượt, vòng 5 lượt miễn phí và cơ hội nhân đôi quà.
+- Vé, phần thưởng, mảnh đổi quà, mục tiêu, trứng đang ấp, lịch sử và mở khóa Mega nằm trong cùng bản lưu cá nhân. Chỉ dùng tiền và vật phẩm kiếm trong game.
+- Hỗ trợ 48 dạng Mega/Nguyên thủy có dữ liệu và tài nguyên đã kiểm tra; mỗi lúc trang bị cho một Pokémon trên toàn bộ bộ sưu tập.
+- Tốc độ phiêu lưu có mức ×10; hoạt ảnh vẫn giữ các giới hạn riêng để dễ đọc và giảm tải.
 - Kiểm tra ở kích thước màn hình điện thoại và máy tính; kiểm tra mất mạng bằng trình duyệt. Chưa có bằng chứng chạy trực tiếp trên điện thoại thật của người dùng.
 
 ## Brand Commitments
