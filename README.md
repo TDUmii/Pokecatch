@@ -4,7 +4,7 @@ Game cá nhân của Umi để chơi trên máy tính và điện thoại: khám
 
 Chơi trực tiếp: **https://tdumii.github.io/Pokecatch/**
 
-Bộ tài nguyên gồm 4.899 tệp trong manifest, khoảng 73 MiB: 3.176 PNG, 1.318 GIF, 374 WEBP, 20 SVG cùng intro, font và giấy phép. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Danh mục vật phẩm gốc được kiểm tra đủ 136 biểu tượng, bổ sung 16 phiến hệ và 12 biểu tượng riêng cho khu quà. Bản nâng cấp hỗ trợ sử dụng 48 dạng Mega/Nguyên thủy, không tích hợp chức năng quản trị của máy chủ gốc.
+Bộ tài nguyên gồm 4.899 tệp trong manifest, khoảng 73 MiB: 3.176 PNG, 1.318 GIF, 374 WEBP, 20 SVG cùng intro, font và giấy phép. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Danh mục vật phẩm gốc được kiểm tra đủ 136 biểu tượng, bổ sung 16 phiến hệ và 12 biểu tượng phần thưởng Sòng bạc. Bản nâng cấp hỗ trợ sử dụng 48 dạng Mega/Nguyên thủy, không tích hợp chức năng quản trị của máy chủ gốc.
 
 Giao diện tiếng Việt dùng **Be Vietnam Pro**, có đầy đủ dấu tiếng Việt và được lưu cùng game để chơi offline. Logo Latin giữ nét chữ pixel gốc. Các tệp font và giấy phép nằm trong `assets/fonts/`.
 
@@ -14,7 +14,9 @@ Gói tiếng Việt bao gồm giao diện, mô tả của 493 loài gốc (các 
 
 Mở **Hoạt động → Sòng bạc** và dùng máy quay hoặc Pachinko có sẵn. Không có khu hay ba máy quay riêng. Thuật toán chỉ hỗ trợ kết quả trượt, giữ nguyên các kết quả vốn đã thắng; sau hai lượt trượt liên tiếp, lượt tiếp theo trúng. Kiểm tra 20.000 lượt mỗi cấu hình hàng ghi nhận tỷ lệ trúng khoảng 82-87%, thay vì 7-35% trước đó. Đây là tỷ lệ trúng xu, không phải lợi nhuận theo tiền cược. Túi quà Pachinko rộng gấp ba, hai túi trượt thu hẹp; vị trí và cách chơi gốc được giữ nguyên.
 
-Mỗi lần quay hoặc mua một đợt bóng Pachinko có thêm vật phẩm, ghi vào cùng bản lưu. Mở ngăn **Quà của tôi** ngay dưới Sòng bạc để dùng quà, tái chế, đổi thưởng hoặc trang bị Mega. Quà bổ sung có tỷ lệ cơ bản Thường 50%, Ít gặp 30%, Hiếm 15%, Sử thi 4%, Độc đắc 1%, với bảo đảm quà Hiếm sau 10 lần và Sử thi sau 50 lần. Các lượt thưởng miễn phí và vé cũ chuyển sang lượt quay ở máy Sòng bạc gốc; hệ thống tự dùng vé trước khi trừ tiền cược. Mọi quà, mảnh, mục tiêu và Mega của bản trước được giữ lại.
+Mỗi lần quay hoặc mua một đợt bóng Pachinko có thêm vật phẩm, ghi vào cùng bản lưu. Mở tab **Vé & quà** trên hàng tab Sòng bạc để dùng quà, tái chế, đổi thưởng hoặc trang bị Mega. Quà bổ sung có tỷ lệ cơ bản Thường 50%, Ít gặp 30%, Hiếm 15%, Sử thi 4%, Độc đắc 1%, với bảo đảm quà Hiếm sau 10 lần và Sử thi sau 50 lần. Các lượt thưởng miễn phí và vé cũ chuyển sang lượt quay ở máy Sòng bạc gốc; hệ thống tự dùng vé trước khi trừ tiền cược. Mọi quà, mảnh, mục tiêu và Mega của bản trước được giữ lại.
+
+Hai nút **QUAY ×10** và **QUAY ×100** nằm ngay dưới hàng tab, trước máy quay. Mỗi gói có tổng giá **1.000 ₽** khi còn lượt trả tiền; toàn bộ gói đủ vé thì miễn phí. Máy dành trước lượt miễn phí đang có (lượt thưởng trước, rồi vé), các lượt mới trúng giữ cho lần tiếp theo. Xử lý toàn bộ gói ngay ở mức thưởng ×1, cộng xu và quà thật, hiển thị tổng kết; không chờ hoạt ảnh của từng lượt. Giao dịch lưu một lần và phục hồi dữ liệu nếu có lỗi.
 
 Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn quà, rương tiến hóa, mảnh Mega, vé chọn Đá Mega, trứng tự chọn, vé săn loài còn thiếu, Bùa chiến lợi phẩm, vé chọn Pokémon khác màu, thùng tiếp tế và thỏi vàng. Trứng nở sau 3 phút hoặc 5 trận thắng. Vé săn ưu tiên cuộc gặp phù hợp tiếp theo trong vùng hiện tại; tỷ lệ bắt vẫn áp dụng bình thường. Bùa tăng phần thưởng sau mỗi 5 trận thắng trong 60 phút. Đồ dư phù hợp có thể tái chế thành mảnh, đặt mục tiêu và đổi phần thưởng.
 
@@ -47,3 +49,7 @@ Dữ liệu chơi và tệp ngoại tuyến phụ thuộc bộ nhớ trình duy�
 Workflow `.github/workflows/pages.yml` tự build, kiểm tra rồi xuất bản `dist` khi nhánh `main` thay đổi. Các đường dẫn dùng tương đối để hỗ trợ địa chỉ dạng `/Pokecatch/`. Thư mục `.research` và dữ liệu chơi thử không đưa lên Git. Ứng dụng không cần thư viện npm khi build hoặc chạy.
 
 `scripts/verify.mjs` kiểm tra tệp đóng gói, chữ ký tài nguyên và luồng tải ngoại tuyến. Các kiểm tra tự động không thay thế thử chơi thực tế trên điện thoại.
+
+## Sửa theo tính năng
+
+Xem [bản đồ mô-đun Sòng bạc](docs/CASINO_MODULES.md) trước khi sửa. Giao diện, quay nhanh, cầu nối engine, quà quay thường và thao tác quà có tệp riêng cùng kiểm tra liên quan; không cần đọc lại toàn bộ bundle gốc cho các thay đổi cục bộ. Quy ước này cũng nằm trong [AGENTS.md](AGENTS.md).

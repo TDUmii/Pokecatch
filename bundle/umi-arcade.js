@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const R = window.UmiArcadeRules;
-  let engine, busy = false, mounted = false, normalizedState;
+  let engine, busy = false, normalizedState;
   const G = () => engine.Game;
   const integer = (value, max = 1e9) => Number.isFinite(value) ? Math.max(0, Math.min(max, Math.floor(value))) : 0;
   const fail = message => { throw new Error(message); };
@@ -50,7 +50,7 @@
   }
   function refresh() {
     engine.App?.refreshHeader?.();
-    if (engine.App?.current === 'casino') window.UmiArcadeUI?.render?.();
+    if (engine.App?.current === 'casino') window.UmiCasinoUI?.render?.();
   }
   function transact(action) {
     if (busy) fail('Đang xử lý phần thưởng, hãy đợi một chút.');
@@ -58,19 +58,21 @@
     busy = true;
     state();
     const previous = JSON.stringify(G().S);
+    let result;
     try {
-      const result = action();
+      result = action();
       G().save();
-      refresh();
-      return result;
     } catch (error) {
       const target = G().S;
       for (const key of Object.keys(target)) delete target[key];
       Object.assign(target, JSON.parse(previous));
-      G().save();
+      normalizedState = undefined;
       throw error;
     } finally { busy = false; }
+    refresh();
+    return result;
   }
+
   function spendMoney(amount) {
     if (!Number.isSafeInteger(amount) || amount < 0 || G().S.money < amount) fail('Chưa đủ Pokédollar cho lượt quay này.');
     if (amount) G().spend(amount, 'casino');
@@ -114,7 +116,7 @@
   const choiceRewards = [
     { id: 'training', name: 'Bộ huấn luyện', icon: 'assets/items/exp-candy-xl.png', description: '2 kẹo EXP XL', rewards: [{ kind:'item', id:'exp-candy-xl', qty:2 }] },
     { id: 'evolution', name: 'Rương tiến hóa', icon: R.ITEMS['umi-evolution-chest'].icon, description: 'Tự chọn một vật phẩm tiến hóa', rewards: [{ kind:'item', id:'umi-evolution-chest', qty:1 }] },
-    { id: 'tickets', name: 'Bộ vé Pokémon', icon: R.ITEMS['umi-spin-ticket'].icon, description: '3 vé quay Pokémon', rewards: [{ kind:'item', id:'umi-spin-ticket', qty:3 }] }
+    { id: 'tickets', name: 'Bộ vé miễn phí', icon: R.ITEMS['umi-spin-ticket'].icon, description: '3 lượt quay Sòng bạc miễn phí', rewards: [{ kind:'item', id:'umi-spin-ticket', qty:3 }] }
   ];
   function region() { return G().currentRegion(); }
   function speciesPool({ missing = false, shiny = false } = {}) {
@@ -190,7 +192,7 @@
         if(s.pendingEncounter)fail('Bạn đã có một vé săn đang chờ. Hoàn thành lần gặp đó trước.');
         s.pendingEncounter={id:+option.id,reg:region().key};add(itemId,-1);result.message=`Sẽ gặp ${option.name} ở lần chạm trán hoang dã phù hợp tiếp theo tại ${engine._t(region().name)}. Tỷ lệ bắt áp dụng như bình thường.`;
       } else if (itemId === 'umi-shiny-selector') {
-        const award=receive(+option.id,true,'Khu quay thưởng Umi');add(itemId,-1);result={message:`Đã nhận ${option.name} khác màu!`,mon:award.mon};
+        const award=receive(+option.id,true,'Sòng bạc của Umi');add(itemId,-1);result={message:`Đã nhận ${option.name} khác màu!`,mon:award.mon};
       } else if (itemId === 'umi-loot-charm') {
         const active=s.lootUntil>Date.now();s.lootUntil=Math.max(Date.now(),s.lootUntil)+3600000;
         if(!active)s.lootWins=integer(G().S.stats.wins);
@@ -257,31 +259,9 @@
   function megaOptions(){return{forms:window.UmiMega.catalog,unlocked:window.UmiMega.unlocked(),mons:G().S.mons.filter(mon=>window.UmiMega.catalog.some(form=>form.base===mon.id)).map(mon=>({uid:mon.uid,id:mon.id,name:G().DEX[mon.id].name,level:mon.level,megaKey:mon.umiMegaKey||null,icon:engine.UI.monSrc(mon,mon.shiny)}))};}
   function install(value) {
     engine=value;window.UmiMega.install(engine);
-    const casino=engine.Screens.casino;
-    if(casino){
-      const init=casino.init,render=casino.render;
-      casino.init=function(){init?.call(this);mounted=false;mountCasino()};
-      casino.render=function(){render?.call(this);mountCasino();window.UmiArcadeUI.render()};
-    }
-    window.__umiCasinoStops=R.boostNativeStops;
-    window.__umiCasinoFreeAvailable=()=>state().nativeFree+quantity('umi-spin-ticket')>0;
-    window.__umiCasinoReward=(kind,meta)=>{
-      try{
-        const key=kind==='slots'?meta.spin:meta.batch;
-        if(!Number.isFinite(key)||key<=integer(state().nativeReceipts[kind]))return;
-        transact(()=>{
-          const s=state(),free=kind==='slots'&&meta.cost===0;
-          if(free){if(s.nativeFree>0)s.nativeFree--;else add('umi-spin-ticket',-1)}
-          const machine=kind==='slots'?'supply':'evolution';
-          const result=R.spin(s,machine,{bonus:free});result.rewards.forEach(apply);
-          s.nativeFree+=result.bonusSpins;
-          s.nativeReceipts[kind]=key;s.lastNativeReward={...result,kind,at:Date.now()};
-          s.history[s.history.length-1].at=Date.now();
-        });
-        const bet=document.querySelector('#screen-casino .cs-slots .cs-betv');
-        if(bet&&kind==='slots')bet.textContent=window.__umiCasinoFreeAvailable()?'Miễn phí':`${Number(meta.bet||meta.cost).toLocaleString('vi-VN')} ₽`;
-      }catch(error){console.error('Casino reward:',error);engine.UI.toast('Chưa nhận được quà bổ sung. Các phần thưởng máy gốc vẫn được giữ.');}
-    };
+    window.UmiCasinoRewards.install(engine, api);
+    window.UmiCasinoBatch.install(engine, api, window.UmiCasinoNative);
+    window.UmiCasinoUI.install(engine, api, window.UmiCasinoBatch);
     window.__umiArcadeEncounter=(original,node)=>{
       const s=state(),pending=s.pendingEncounter;
       if(!pending||(!node?.ch&&node?.ch!==0)||region().key!==pending.reg)return original;
@@ -296,10 +276,7 @@
     };
     setInterval(lootTick,2500);
   }
-  function mountCasino(){
-    if(!mounted&&document.getElementById('screen-casino')){mounted=true;window.UmiArcadeUI.mount(engine,api)}
-  }
-  const api=window.UmiArcade={state,snapshot,spin,buyTickets,choices,claim,claimEgg,scrapItem,redeem,setGoal,megaOptions,quantity,itemName,itemIcon,
+  const api=window.UmiArcade={state,snapshot,spin,buyTickets,choices,claim,claimEgg,scrapItem,redeem,setGoal,megaOptions,quantity,itemName,itemIcon,transact,grant:apply,
     equipMega:(uid,key)=>window.UmiMega.equip(uid,key),unequipMega:uid=>window.UmiMega.unequip(uid),
     open:()=>engine.App.show('casino'),install};
   const previous=window.__setInternalPoke;

@@ -1,0 +1,18 @@
+/* Keep the inherited casino cabinet and put its extra actions in normal flow. */
+#screen-casino .cs-tabs{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+#screen-casino .cs-tabs button{min-width:0;min-height:44px;height:auto;padding:8px 5px;white-space:normal;font-size:14px;line-height:1.35}
+#screen-casino .cs-tabs .full{display:inline}#screen-casino .cs-tabs .short{display:none}
+#screen-casino .cs-tabs button:focus-visible,#umi-casino-batch button:focus-visible{outline:3px solid #a8dfff;outline-offset:3px;z-index:2}
+#screen-casino[data-tab=prizes] :is(.cs-stagebox,.cs-shop,.cs-side),#screen-casino:not([data-tab=slots]) #umi-casino-batch{display:none!important}
+#screen-casino[data-tab=prizes] .cs-main{grid-column:1/-1;max-width:none}
+#umi-casino-batch{color:var(--text,#eef1f8);margin:0 0 10px;min-width:0;font-size:13px;line-height:1.5}
+#umi-casino-batch p{margin:7px 0}.uc-free{text-align:center;color:var(--gold-text,#ffe066);font-variant-numeric:tabular-nums}
+.uc-batch-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.uc-batch-buttons button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:48px;padding:8px;border:2px solid #a87828;border-radius:7px;background:#302718;color:#ffe49b;font:inherit;cursor:pointer;touch-action:manipulation}
+.uc-batch-buttons b{font-size:15px}.uc-batch-buttons small{font-size:12px;color:#f4deb0;font-variant-numeric:tabular-nums}
+.uc-batch-buttons button:hover:enabled{background:#44351d;border-color:#ffcb55}.uc-batch-buttons button:disabled{opacity:.5;cursor:not-allowed}
+.uc-batch-help{text-align:center;color:#c3c9d8;font-size:12px}.uc-batch-result{overflow-wrap:anywhere;color:#eef1f8}.uc-batch-result:empty{display:none}
+@media(max-width:640px){#screen-casino .cs-tabs button{font-size:12px;padding:8px 3px}#screen-casino .cs-tabs .full{display:none}#screen-casino .cs-tabs .short{display:inline}#screen-casino .cs-fbody{min-width:0}#screen-casino{padding-bottom:calc(75px + env(safe-area-inset-bottom,0px))}}
+
+#umi-casino-batch .uc-free{margin:0 0 5px;font-size:12px}
+.uc-reward-details{font-size:12px;color:#c3c9d8}.uc-reward-details[hidden]{display:none}.uc-reward-details summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:#ffe49b}.uc-reward-details summary:focus-visible{outline:3px solid #a8dfff;outline-offset:2px}

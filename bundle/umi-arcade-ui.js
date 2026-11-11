@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  let engine, service, host, tab = 'bag', busy = false, notice = '', error = '', dialog;
+  let engine, service, host, tab = 'bag', busy = false, notice = '', error = '', dialog, invoker;
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const fmt = value => Number(value || 0).toLocaleString('vi-VN');
   const img = (src, alt = '') => src ? `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">` : '';
@@ -17,9 +17,10 @@
   }
   function bag(snapshot) {
     const inventory = Array.isArray(snapshot.items) ? snapshot.items : Object.values(definitions()).map(info => ({ ...info, qty: snapshot.state.items?.[info.id] || 0 }));
-    return `${eggView(snapshot)}<section class="ua-panel"><h3>Túi quà riêng</h3><p>Dùng vé, mở rương hoặc tái chế quà thành mảnh đổi thưởng.</p><div class="ua-grid">${inventory.map(info => itemCard({ ...definitions()[info.id], ...info }, info.qty ?? snapshot.state.items?.[info.id] ?? 0)).join('')}</div></section><section class="ua-panel"><h3>Vật phẩm huấn luyện</h3><p>Vật phẩm đang có trong Túi của trò chơi.</p><div class="ua-grid">${(snapshot.inventory || []).map(info => itemCard(info, info.qty, false)).join('') || '<p class="ua-empty">Chưa có vật phẩm phù hợp.</p>'}</div></section>`;
+    return `<section class="ua-panel"><h3>Túi quà riêng</h3><p>Dùng vé, mở rương hoặc tái chế quà thành mảnh đổi thưởng.</p><div class="ua-grid">${inventory.filter(info => (info.qty ?? snapshot.state.items?.[info.id] ?? 0) > 0).map(info => itemCard({ ...definitions()[info.id], ...info }, info.qty ?? snapshot.state.items?.[info.id] ?? 0)).join('') || '<p class="ua-empty">Chưa có quà. Quay máy hoặc chơi Pachinko để nhận quà.</p>'}</div></section>${eggView(snapshot)}<section class="ua-panel"><h3>Vật phẩm huấn luyện</h3><p>Vật phẩm đang có trong Túi của trò chơi.</p><div class="ua-grid">${(snapshot.inventory || []).map(info => itemCard(info, info.qty, false)).join('') || '<p class="ua-empty">Chưa có vật phẩm phù hợp.</p>'}</div></section>`;
   }
   function eggView(snapshot) {
+    if (!(snapshot.eggs || []).length && !snapshot.pendingEncounter && !(snapshot.lootRemainingMs > 0)) return '<section class="ua-panel ua-egg-empty"><h3>Trứng đang ấp</h3><p>Chưa có trứng đang ấp. Dùng Trứng tự chọn trong túi quà để bắt đầu.</p></section>';
     return '<section class="ua-panel"><h3>Trứng đang ấp</h3>' + button('Cập nhật tiến độ', 'refresh') + '<p>Trứng sẵn sàng sau 3 phút hoặc 5 trận thắng. Tiến độ được lưu khi trở lại.</p><div class="ua-grid">' + (snapshot.eggs || []).map(egg => '<article class="ua-item">' + img(egg.icon) + '<h3>' + esc(egg.name) + '</h3><span>' + (egg.ready ? 'Sẵn sàng nở!' : 'Còn ' + Math.ceil((egg.remainingMs || 0) / 60000) + ' phút hoặc ' + fmt(egg.winsLeft) + ' trận thắng') + '</span><div class="ua-item-actions">' + button(egg.ready ? 'Nhận Pokémon' : 'Đang ấp trứng', 'hatch', 'data-key="' + esc(egg.key) + '"', !egg.ready) + '</div></article>').join('') + '</div>' + (!(snapshot.eggs || []).length ? '<p class="ua-empty">Chưa có trứng đang ấp. Dùng Trứng tự chọn để bắt đầu.</p>' : '') + (snapshot.pendingEncounter ? '<p class="ua-bonus-banner">' + esc(snapshot.pendingEncounter.name) + ' sẽ xuất hiện trong cuộc chạm trán hoang dã phù hợp tiếp theo.</p>' : '') + (snapshot.lootRemainingMs > 0 ? '<p class="ua-bonus-banner">Bùa chiến lợi phẩm: còn ' + Math.ceil(snapshot.lootRemainingMs / 60000) + ' phút. Nhận thêm quả mọng hoặc Kẹo Kinh Nghiệm sau mỗi 5 trận thắng.</p>' : '') + '</section>';
   }
   function exchange(snapshot) {
@@ -35,17 +36,20 @@
   }
   function render() {
     if (!host || !service || !host.closest('.active')) return;
+    const focused = host.contains(document.activeElement) ? { ...document.activeElement.dataset } : null;
     try {
       const snapshot = service.snapshot();
       snapshot.state ||= service.state();
-      const wasOpen = host.querySelector('.ua-casino-drawer')?.open || false;
       const giftCount = Object.values(snapshot.state.items || {}).reduce((sum, qty) => sum + Math.max(0, Number(qty) || 0), 0) + (snapshot.eggs || []).length;
       const freeCount = snapshot.customBonusRemaining ?? 0;
-      host.innerHTML = `<p class="ua-casino-help">Máy quay đã dễ trúng hơn: không quá 2 lượt trượt liên tiếp. Vé miễn phí tự dùng khi nhấn QUAY.</p><details class="ua-casino-drawer" ${wasOpen ? 'open' : ''}><summary>Quà của tôi (${fmt(giftCount)}) · ${fmt(freeCount)} lượt miễn phí</summary><p>Quà tích lũy từ máy quay và mỗi lần mua bóng Pachinko. Vé, mảnh và quà cũ được giữ nguyên.</p><div class="ua-wallet"><span class="ua-wallet-chip">${img('assets/umi/spin-ticket.svg')} ${fmt(snapshot.state.items?.['umi-spin-ticket'])} vé</span><span class="ua-wallet-chip">${img('assets/umi/mega-shard.svg')} ${fmt(snapshot.state.scrap)} mảnh</span></div><nav class="ua-tabs" aria-label="Quà Sòng bạc">${[['bag', 'Túi quà'], ['exchange', 'Đổi thưởng'], ['history', 'Lịch sử'], ['mega', 'Đá Mega']].map(([id, name]) => `<button type="button" data-tab="${id}" class="${tab === id ? 'is-active' : ''}" aria-current="${tab === id ? 'page' : 'false'}" ${busy ? 'disabled' : ''}>${name}</button>`).join('')}</nav><div role="status" aria-live="polite">${notice ? `<p class="ua-bonus-banner">${esc(notice)}</p>` : ''}</div>${error ? `<p class="ua-error" role="alert">${esc(error)}</p>` : ''}<div class="ua-view">${tab === 'bag' ? bag(snapshot) : tab === 'exchange' ? exchange(snapshot) : tab === 'history' ? history(snapshot) : mega()}</div></details>`;
+      host.innerHTML = `<header class="ua-header"><div><h2>Quà của tôi</h2><p>${fmt(giftCount)} món quà · ${fmt(freeCount)} lượt miễn phí</p></div></header><p class="ua-gift-help">Vé tự dùng khi quay. Chọn quà để sử dụng.</p><div class="ua-wallet"><span class="ua-wallet-chip">${img('assets/umi/spin-ticket.svg')} ${fmt(snapshot.state.items?.['umi-spin-ticket'])} vé</span><span class="ua-wallet-chip">${img('assets/umi/mega-shard.svg')} ${fmt(snapshot.state.scrap)} mảnh</span></div><nav class="ua-tabs" aria-label="Quà Sòng bạc">${[['bag', 'Túi quà'], ['exchange', 'Đổi thưởng'], ['history', 'Lịch sử'], ['mega', 'Đá Mega']].map(([id, name]) => `<button type="button" data-tab="${id}" class="${tab === id ? 'is-active' : ''}" aria-current="${tab === id ? 'page' : 'false'}" ${busy ? 'disabled' : ''}>${name}</button>`).join('')}</nav><div role="status" aria-live="polite">${notice ? `<p class="ua-bonus-banner">${esc(notice)}</p>` : ''}</div>${error ? `<p class="ua-error" role="alert">${esc(error)}</p>` : ''}<div class="ua-view">${tab === 'bag' ? bag(snapshot) : tab === 'exchange' ? exchange(snapshot) : tab === 'history' ? history(snapshot) : mega()}</div>`;
 
+      if (focused) [...host.querySelectorAll('button')].find(button => Object.entries(focused).every(([key, value]) => button.dataset[key] === value))?.focus({ preventScroll: true });
+      root.UmiCasinoUI?.refresh?.();
     } catch (failure) { host.innerHTML = `<p class="ua-error">${esc(failure.message || 'Không thể mở quà Sòng bạc.')}</p>`; }
   }
   function choose(title, options, execute) {
+    rememberInvoker();
     dialog?.remove();
     dialog = document.createElement('dialog');
     dialog.className = 'ua-modal';
@@ -53,7 +57,7 @@
     dialog.innerHTML = `<header><h2>${esc(title)}</h2><button type="button" class="ua-close" aria-label="Đóng">✕</button></header><p data-dialog-error role="alert"></p><div class="ua-choice-grid">${options.map((option, index) => `<button type="button" class="ua-choice" data-index="${index}">${img(option.icon)}<b>${esc(option.name)}</b><small>${esc(option.description || '')}</small></button>`).join('')}</div>`;
     dialog.querySelector('.ua-close').onclick = () => dialog.close();
     const currentDialog = dialog;
-    dialog.addEventListener('close', () => { currentDialog.remove(); if (dialog === currentDialog) dialog = null; });
+    dialog.addEventListener('close', () => { currentDialog.remove(); if (dialog === currentDialog) dialog = null; restoreInvoker(); });
     dialog.addEventListener('click', event => {
       const target = event.target.closest('[data-index]');
       if (!target || busy) return;
@@ -73,7 +77,17 @@
     if (result?.ok === false) throw new Error(result.message || 'Không thể trang bị Đá Mega.');
     return result;
   }
+  function rememberInvoker() {
+    if (host?.contains(document.activeElement)) invoker = { ...document.activeElement.dataset };
+  }
+  function restoreInvoker() {
+    if (document.querySelector('.ua-modal[open]') || !invoker) return;
+    const button = [...host.querySelectorAll('button')].find(button => !button.disabled && Object.entries(invoker).every(([key, value]) => button.dataset[key] === value));
+    (button || host.querySelector('.ua-tabs .is-active'))?.focus({ preventScroll: true });
+    invoker = null;
+  }
   function showAward(mon) {
+    rememberInvoker();
     const modal = document.createElement('dialog');
     modal.className = 'ua-modal';
     modal.setAttribute('aria-label', 'Pokémon đã gia nhập bộ sưu tập');
@@ -81,7 +95,7 @@
     const art = engine.UI.animSrc?.(mon.id, mon.shiny) || engine.UI.monSrc(mon, mon.shiny);
     modal.innerHTML = '<header><h2>Người bạn mới!</h2><button type="button" class="ua-close" aria-label="Đóng">✕</button></header><div class="ua-choice" style="text-align:center;padding:24px"><img style="width:180px;height:180px;object-fit:contain;image-rendering:pixelated;animation:ua-award-in .5s ease-out" src="' + esc(art) + '" alt="' + esc(name) + '"><h3>' + esc(name) + (mon.shiny ? ' khác màu' : '') + '</h3><p>Đã gia nhập bộ sưu tập · Cấp ' + fmt(mon.level) + '</p></div><style>@keyframes ua-award-in{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}@media(prefers-reduced-motion:reduce){.ua-modal img{animation:none!important}}</style>';
     modal.querySelector('button').onclick = () => modal.close();
-    modal.addEventListener('close', () => { modal.remove(); if (dialog === modal) dialog = null; });
+    modal.addEventListener('close', () => { modal.remove(); if (dialog === modal) dialog = null; restoreInvoker(); });
     document.body.append(modal); dialog = modal; modal.showModal();
   }
   function claim(id) {
@@ -130,7 +144,7 @@
     const screen = document.getElementById('screen-casino');
     if (!screen) throw new Error('Chưa có màn hình Sòng bạc.');
     host = screen.querySelector('#umi-casino-prizes');
-    if (!host) { host = document.createElement('div'); host.id = 'umi-casino-prizes'; screen.append(host); }
+    if (!host) { host = document.createElement('section'); host.id = 'umi-casino-prizes'; host.hidden = true; (screen.querySelector('.cs-main') || screen).append(host); }
     host.classList.add('ua-root');
     host.removeEventListener('click', action);
     host.addEventListener('click', action);
