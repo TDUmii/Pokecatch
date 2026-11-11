@@ -10,7 +10,7 @@
 | Quà kèm quay thường/Pachinko, chống cấp trùng | `bundle/casino-rewards.js` | `scripts/verify-arcade-integration.mjs`, `scripts/verify-native-casino.mjs` |
 | Giao dịch, lưu, cấp và dùng vật phẩm | `bundle/umi-arcade.js` | `scripts/verify-arcade-integration.mjs` |
 | Giá đổi mảnh, danh mục, xác suất, bảo hiểm và chuỗi trượt | `bundle/umi-arcade-rules.js` | `scripts/verify-arcade.mjs`, `scripts/verify-native-casino.mjs` |
-| Trang bị và mở khóa Mega | `bundle/umi-mega.js` | `scripts/verify-mega.mjs` |
+| Trang bị, mở dạng và mở ô Mega | `bundle/umi-mega.js`, `bundle/mega-ui.js`, `bundle/mega-ui.css` | `scripts/verify-mega.mjs`, xem `docs/MEGA_MODULES.md` |
 | Responsive toàn app và quầy Đổi xu gốc | `bundle/responsive.css` | Ảnh/trình duyệt 320, 390, 768, 1366px |
 | Thứ tự tải và gói offline | `index.html`, `scripts/build.mjs`, `sw.js` | Build rồi `scripts/verify.mjs` |
 
@@ -31,7 +31,7 @@ Người dùng yêu cầu bỏ các gói ×10/×100 giá 1.000 tiền vì lỗi.
 - Tiền, xu, Pokémon và thống kê do game gốc sở hữu.
 - `umiArcade.items`, `nativeFree`, `nativeReceipts`, `pity`, `total`, `history`, `lastNativeReward` giữ vật phẩm, lượt miễn phí và lịch sử (tối đa 100 bản ghi).
 - `casinoMerged`, `bonus`, `welcomed` giữ chuyển đổi dữ liệu cũ; không chạy lại gói chào mừng.
-- `scrap`, `goal`, `eggs`, `megaUnlocks`, `pendingEncounter`, `lootUntil`, `lootWins` giữ tiến độ phần thưởng.
+- `scrap`, `goal`, `eggs`, `megaUnlocks`, `megaCapacity`, `pendingEncounter`, `lootUntil`, `lootWins` giữ tiến độ phần thưởng.
 - Không xóa dữ liệu quà cũ khi bỏ nút hoặc đổi giao diện.
 
 ## Kiểm tra tập trung

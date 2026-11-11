@@ -14,3 +14,5 @@ Với lệnh qua PowerShell của Codex Desktop, thêm `rtk` trước CLI đư�
 - Giữ bản lưu hiện có và tương thích dữ liệu cũ. Người dùng đã yêu cầu gỡ gói quay nhanh ×10/×100 giá 1.000 tiền vì lỗi; không thêm lại. Tốc độ phiêu lưu ×10/×20 là tính năng riêng.
 
 - Trước khi sửa Cẩm nang, tooltip thẻ hoặc tốc độ phiêu lưu, đọc `docs/PLAY_GUIDE_MODULES.md` để chọn đúng mô-đun và kiểm tra.
+
+- Trang bị Mega, mở ô và điều kiện: đọc `docs/MEGA_MODULES.md`; giữ giao dịch trong `umi-mega.js`, giao diện trong `mega-ui.js/css`. Không khôi phục hành vi tự tháo Mega khác khi trang bị.

@@ -30,8 +30,7 @@
     return `<section class="ua-panel"><h3>Lịch sử 100 lượt gần nhất</h3><ol class="ua-log">${[...(snapshot.state.history || [])].reverse().map(entry => `<li><b class="ua-tier" data-tier="${entry.tier}">${symbol(entry.tier)} ${esc(rarity(entry.tier).name)}</b> · ${entry.machineId === 'evolution' ? 'Pachinko' : 'Máy quay Sòng bạc'}<small>${(entry.rewards || []).map(reward => reward.kind === 'money' ? `${fmt(reward.amount)} ₽` : `${esc(itemInfo(reward.id).name)} ×${fmt(reward.qty)}`).join(' · ')}${entry.multiplier > 1 ? ' · Quà ×2' : ''}${entry.bonusSpins ? ` · +${entry.bonusSpins} lượt miễn phí` : ''}</small></li>`).join('') || '<li class="ua-empty">Chưa có lượt quay nào.</li>'}</ol></section>`;
   }
   function mega() {
-    const options = service.megaOptions?.() || { forms: [], unlocked: [], mons: [] };
-    return `<section class="ua-panel"><h3>Trang bị Đá Mega</h3><p>Chọn Pokémon và Đá Mega tương thích từ bộ sưu tập đã mở khóa.</p><div class="ua-grid">${options.mons.map(mon => `<article class="ua-item">${img(mon.icon)}<h3>${esc(mon.name)}</h3><span>Cấp ${fmt(mon.level)}</span><p>${mon.megaKey ? `Đang trang bị: ${esc(options.forms.find(form => (form.key || form.id) === mon.megaKey)?.name || mon.megaKey)}` : 'Chưa trang bị Đá Mega'}</p><div class="ua-item-actions">${button('Trang bị', 'equip', `data-uid="${esc(mon.uid)}"`)}${button('Tháo', 'unequip', `data-uid="${esc(mon.uid)}"`, !mon.megaKey)}</div></article>`).join('') || '<p class="ua-empty">Chưa có Pokémon phù hợp.</p>'}</div></section><section class="ua-panel"><h3>Bộ sưu tập Đá Mega</h3><div class="ua-grid">${options.forms.map(form => `<article class="ua-item">${img(form.icon || form.src)}<h3>${esc(form.name)}</h3><span>${options.unlocked.includes(form.key || form.id) ? 'Đã mở khóa' : 'Chưa mở khóa'}</span></article>`).join('')}</div></section>`;
+    return root.UmiMegaUI.render(service.megaOptions(), service.megaProgress(), { esc, fmt, img, button });
   }
   function render() {
     if (!host || !service || !host.closest('.active')) return;
@@ -127,6 +126,7 @@
           choose(`Tái chế ${itemInfo(id).name}`, quantities.map(qty => ({ id: qty, name: `${fmt(qty)} món`, description: qty === max ? 'Toàn bộ số đang có' : 'Đổi thành mảnh thưởng' })), qty => service.scrapItem(id, qty));
           break;
         }
+        case 'unlock-mega-slot': notice = checkResult(service.unlockMegaSlot(Number(target.dataset.capacity)))?.message || 'Đã mở thêm ô Mega.'; break;
         case 'unequip': notice = checkResult(service.unequipMega(target.dataset.uid))?.message || 'Đã tháo Đá Mega.'; break;
         case 'equip': {
           const options = service.megaOptions();

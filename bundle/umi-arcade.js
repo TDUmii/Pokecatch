@@ -277,6 +277,7 @@
   }
   const api=window.UmiArcade={state,snapshot,spin,buyTickets,choices,claim,claimEgg,scrapItem,redeem,setGoal,megaOptions,quantity,itemName,itemIcon,transact,grant:apply,
     equipMega:(uid,key)=>window.UmiMega.equip(uid,key),unequipMega:uid=>window.UmiMega.unequip(uid),
+    megaProgress:()=>window.UmiMega.progress(),unlockMegaSlot:capacity=>window.UmiMega.unlockSlot(capacity),
     open:()=>engine.App.show('casino'),install};
   const previous=window.__setInternalPoke;
   window.__setInternalPoke=value=>{previous?.(value);install(value)};

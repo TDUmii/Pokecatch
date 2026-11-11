@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T14:38:36.803Z",
+  "generatedAt": "2026-11-11T16:55:22.900Z",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -173,6 +173,20 @@
       "scope": ".dexcard.v2 and #umi-pokemon-tooltip",
       "nature": "full-width row after level and HP",
       "tooltip": "fixed viewport-clamped portal"
+    },
+    "mega": {
+      "source": "bundle/mega-ui.js",
+      "cssSource": "bundle/mega-ui.css",
+      "rulesSource": "bundle/umi-mega.js",
+      "scope": ".um-root",
+      "mode": "operate",
+      "capacity": [
+        1,
+        6
+      ],
+      "progression": "unique earned gym badges plus Mega shard cost per slot",
+      "currency": "Mega shards, distinct from exchange scraps",
+      "entry": "casino prizes Mega tab"
     }
   },
   "components": [

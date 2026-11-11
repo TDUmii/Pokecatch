@@ -953,6 +953,8 @@
   }
 ];
   const byKey = new Map(catalog.map(form => [form.key, form]));
+  // Load-time duplicate merging runs before engine installation.
+  window.__pokeProtectMegaDuplicate = mon => { const form=byKey.get(mon?.umiMegaKey); return !!form && form.base===mon.id; };
   for (const form of catalog) { Object.freeze(form.types); Object.freeze(form.stats); Object.freeze(form); }
   Object.freeze(catalog);
   let engine;
@@ -966,7 +968,7 @@
   };
   const owned = () => game()?.S?.mons || [];
   const find = uid => owned().find(mon => mon.uid === uid);
-  const unlocked = () => [...new Set((state()?.megaUnlocks || []).filter(key => byKey.has(key)))];
+  const unlocked = () => [...new Set((Array.isArray(game()?.S?.umiArcade?.megaUnlocks) ? game().S.umiArcade.megaUnlocks : []).filter(key => byKey.has(key)))];
   // Numeric species IDs are intentionally not resolved: two individuals of one species may differ.
   const resolve = mon => {
     if (!mon || typeof mon !== 'object') return null;
@@ -978,7 +980,42 @@
     return mon.hp == null ? 1 : Math.max(0, Math.min(1, mon.hp / Math.max(1, max)));
   };
   const restoreHp = (mon, fraction) => { mon.hp = fraction === 0 ? 0 : Math.max(1, Math.round(game().maxHp(mon) * fraction)); };
-  const refresh = () => { game().save(); engine.App?.refresh?.(); };
+  const SLOT_RULES = [[1,0,0],[2,4,20],[3,8,40],[4,12,60],[5,16,100],[6,24,150]];
+  const capacity = () => Math.max(1, Math.min(6, Math.floor(Number(game()?.S?.umiArcade?.megaCapacity) || 1)));
+  function progress() {
+    const save = game()?.S || {}, data = save.umiArcade || {};
+    const chapters=engine.STORY?.CHAPTERS;
+    const valid=chapters ? new Set(chapters.filter(ch=>!ch.league).flatMap(ch=>(ch.steps||[]).filter(step=>step.kind==='gym' && step.badge && !step.champion).map(step=>step.badge))) : null;
+    const badges = new Set((Array.isArray(save.adv?.badges)?save.adv.badges:[]).filter(value => typeof value === 'string' && value.trim() && (!valid || valid.has(value)))).size;
+    const shards = Math.max(0, Math.floor(Number(data.items?.['umi-mega-shard']) || 0));
+    const cap = capacity(), used = allMons().filter(mon => resolve(mon)).length;
+    const milestones = SLOT_RULES.map(([target,required,cost]) => ({ capacity:target, badges:required, shards:cost, unlocked:target<=cap,
+      available:target===cap+1 && badges>=required && shards>=cost, missingBadges:Math.max(0,required-badges), missingShards:Math.max(0,cost-shards) }));
+    return { capacity:cap, used, milestones, badges, shards, next:milestones.find(slot=>!slot.unlocked)||null };
+  }
+  function transact(action) {
+    if (engine.TabLock?.lost) return { ok:false, message:'Game đang chạy ở cửa sổ khác.' };
+    try {
+      if (window.UmiArcade?.transact) return window.UmiArcade.transact(action);
+      const previous = JSON.stringify(game().S);
+      let result;
+      try { result=action(); game().save(); }
+      catch(error) { const save=game().S; for(const key of Object.keys(save))delete save[key]; Object.assign(save,JSON.parse(previous)); throw error; }
+      try { engine.App?.refresh?.(); } catch(error) { /* State has already been committed. */ }
+      return result;
+    } catch(error) { return { ok:false, message:error.message || 'Chưa thể lưu thay đổi Mega.' }; }
+  }
+  function unlockSlot(target) {
+    const info=progress(), next=info.next;
+    if (!Number.isInteger(target) || !next || target!==next.capacity) return {ok:false,message:'Hãy mở lần lượt từng ô Mega.'};
+    if (!next.available) return {ok:false,message:next.missingBadges ? `Cần thêm ${next.missingBadges} huy hiệu để mở ô này.` : `Cần thêm ${next.missingShards} mảnh Mega để mở ô này.`};
+    return transact(()=>{
+      const latest=progress();
+      if(latest.capacity+1!==target || !latest.next?.available)throw new Error('Điều kiện mở ô Mega đã thay đổi.');
+      const data=state();data.items['umi-mega-shard']-=latest.next.shards;data.megaCapacity=target;
+      return {ok:true,message:`Đã mở ô Mega thứ ${target}.`,capacity:target};
+    });
+  }
   function unlock(key) {
     const data = state();
     if (!data || !byKey.has(key) || data.megaUnlocks.includes(key)) return false;
@@ -990,17 +1027,17 @@
     if (!mon || !form || mon.id !== form.base) return { ok: false, message: 'Dạng Mega này không phù hợp với Pokémon đã chọn.' };
     if (!unlocked().includes(key)) return { ok: false, message: 'Bạn chưa mở khóa dạng Mega này.' };
     if (mon.umiMegaKey === key) return { ok: true, message: 'Pokémon đã dùng dạng Mega này.' };
-    // One equipped individual across the whole collection, including Pokémon sent to Day Care/expeditions.
-    for (const other of allMons()) if (other !== mon && other.umiMegaKey) strip(other);
-    const hp = ratio(mon);
-    mon.umiMegaKey = key;
-    restoreHp(mon, hp);
-    refresh();
-    return { ok: true, message: `${form.name} đã sẵn sàng chiến đấu.` };
+    if (!resolve(mon) && progress().used >= capacity()) return {ok:false,message:'Đã dùng hết ô Mega. Mở thêm ô hoặc tháo một Pokémon trước.'};
+    return transact(()=>{const hp=ratio(mon);
+      // Native setKeep uses this family flag and saves; write it inside our one transaction.
+      const family=game().candyFamily?.(mon.id);
+      if(family!=null){game().S.keepDup||={};game().S.keepDup[family]=1;}
+      mon.umiMegaKey=key;restoreHp(mon,hp);return {ok:true,message:`${form.name} đã sẵn sàng chiến đấu.`};});
   }
   function allMons() {
     const save = game()?.S;
-    return [...new Set([...owned(), ...(save?.pension?.mons || []).map(slot => slot.mon), ...(save?.under?.slots || []).flatMap(slot => slot.mons || []).map(value => value.mon || value)].filter(Boolean))];
+    const seen=new Set();
+    return [...new Set([...owned(), ...(save?.pension?.mons || []).map(slot => slot.mon), ...(save?.under?.slots || []).flatMap(slot => slot.mons || []).map(value => value.mon || value)].filter(Boolean))].filter(mon=>{const key=mon.uid||mon;if(seen.has(key))return false;seen.add(key);return true;});
   }
   function strip(mon) {
     if (!mon?.umiMegaKey) return false;
@@ -1012,8 +1049,8 @@
   function unequip(uid) {
     const mon = allMons().find(value => value.uid === uid);
     if (!mon) return { ok: false, message: 'Không tìm thấy Pokémon.' };
-    if (strip(mon)) refresh();
-    return { ok: true, message: 'Đã trở về dạng thường.' };
+    if (!mon.umiMegaKey) return {ok:true,message:'Pokémon đang ở dạng thường.'};
+    return transact(()=>{strip(mon);return {ok:true,message:'Đã trở về dạng thường.'};});
   }
   function install(value) {
     engine = value;
@@ -1037,5 +1074,5 @@
       return form ? `<span class="mega-rk-badge" title="${form.name}">🧬 ${form.form === 'primal' ? 'NGUYÊN THỦY' : form.form.toUpperCase().replace('-', ' ')}</span>` : '';
     };
   }
-  window.UmiMega = { install, catalog, unlocked, unlock, equip, unequip };
+  window.UmiMega = { install, catalog, unlocked, unlock, equip, unequip, progress, unlockSlot };
 })();

@@ -22,7 +22,7 @@ Quầy **Đổi thưởng** chia quà thành Vé & tiếp tế, Bạn đồng h�
 
 Túi quà có 12 vật phẩm riêng: vé thường, vé 10 lượt, vé chọn quà, rương tiến hóa, mảnh Mega, vé chọn Đá Mega, trứng tự chọn, vé săn loài còn thiếu, Bùa chiến lợi phẩm, vé chọn Pokémon khác màu, thùng tiếp tế và thỏi vàng. Trứng nở sau 3 phút hoặc 5 trận thắng. Vé săn ưu tiên cuộc gặp phù hợp tiếp theo trong vùng hiện tại; tỷ lệ bắt vẫn áp dụng bình thường. Bùa tăng phần thưởng sau mỗi 5 trận thắng trong 60 phút. Đồ dư phù hợp có thể tái chế thành mảnh, đặt mục tiêu và đổi phần thưởng.
 
-20 mảnh Mega đổi một vé chọn Đá Mega. Có 48 dạng tương thích với dữ liệu Pokémon của bản này (46 Mega và 2 Nguyên thủy); mở khóa xong, vào mục Đá Mega để trang bị cho đúng loài. Mỗi lúc chỉ một cá thể dùng Mega; thay đổi giữ tỷ lệ HP. Chỉ số, hệ và sprite được dùng trong chiến đấu thật.
+20 mảnh Mega đổi một vé chọn Đá Mega. Có 48 dạng tương thích với dữ liệu Pokémon của bản này (46 Mega và 2 Nguyên thủy); mở khóa xong, vào mục Đá Mega để trang bị cho đúng loài. Có một ô Mega miễn phí, mở dần tối đa sáu ô bằng huy hiệu đạo quán và mảnh Mega. Không tự tháo dạng của con khác; thay đổi giữ tỷ lệ HP. Chỉ số, hệ và sprite được dùng trong chiến đấu thật.
 
 Nút **×10** và **×20** tăng tốc xử lý phiêu lưu thực tế và giữ lựa chọn qua lần mở lại. Các hoạt ảnh mở quà, bắt Pokémon và cảnh giới thiệu có giới hạn riêng để dễ đọc trên điện thoại.
 
@@ -63,3 +63,19 @@ Trong **Cẩm nang → Khắc hệ**, chọn một hoặc hai hệ để xem t�
 Trong **Cẩm nang → Đội theo bản đồ**, chọn chương để xem tối đa sáu Pokémon đang sở hữu phù hợp với đối thủ và chiêu đã học. Gợi ý tính hệ Mega đang trang bị, cấp hiệu dụng, chỉ số và độ phủ. Có đối thủ cần chú ý và nơi săn thêm đã mở. Đây là xếp hạng hỗ trợ, chưa mô phỏng toàn bộ thời tiết, kỹ năng và trạng thái; không tự đổi đội hay dùng vật phẩm. Trên điện thoại mở Cẩm nang từ Cài đặt → Bản tin & Cẩm nang → Cẩm nang.
 
 Thẻ Pokémon dùng hai ô cấp/HP và một hàng Tính cách rộng. Tooltip nổi ngoài vùng cuộn, hỗ trợ trỏ chuột, bàn phím và chạm, giới hạn trong màn hình. Các mô-đun và kiểm tra liên quan ở [docs/PLAY_GUIDE_MODULES.md](docs/PLAY_GUIDE_MODULES.md).
+
+## Mở nhiều ô Mega
+
+Vào **Hoạt động → Sòng bạc → Vé & quà → Đá Mega**. Ô đầu tiên miễn phí. Mở từng ô sau bằng huy hiệu đạo quán đã đạt (không bị trừ) và mảnh Mega trả một lần:
+
+| Ô | Huy hiệu đạo quán | Mảnh Mega trả cho ô đó |
+| --- | ---: | ---: |
+| 2 | 4 | 20 |
+| 3 | 8 | 40 |
+| 4 | 12 | 60 |
+| 5 | 16 | 100 |
+| 6 | 24 | 150 |
+
+Tổng mở đủ sáu ô là 370 mảnh Mega. Huy hiệu tính qua các vùng, loại mốc Liên đoàn/nhà vô địch và ID không hợp lệ. Ô mở vĩnh viễn, dữ liệu nằm trong bản lưu cá nhân. Mỗi Pokémon cần mở khóa đúng dạng Mega tương thích như trước. Hai Charizard riêng có thể cùng dùng Mega X. Khi đầy ô, con đã trang bị vẫn đổi X/Y được, trang bị con mới cần tháo một con hoặc mở thêm ô. Pokémon ở PC, Nhà trẻ hoặc Hầm Ngầm vẫn chiếm ô vì giới hạn dùng chung bộ sưu tập.
+
+Trang bị Mega tự bật Giữ lại bản trùng cho gia đình Pokémon đó, tránh bị gộp khi mở lại game; tháo Mega không tự tắt tùy chọn này. Cấp, HP và tiến độ cũ được giữ. Logic ở `bundle/umi-mega.js`, giao diện riêng ở `bundle/mega-ui.js` và CSS; xem [docs/MEGA_MODULES.md](docs/MEGA_MODULES.md).

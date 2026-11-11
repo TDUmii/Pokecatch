@@ -195,3 +195,9 @@ Giữ Cẩm nang có sẵn, thêm hai mục Khắc hệ và Đội theo bản đ
 Thẻ Pokémon giữ artwork và vùng cuộn. Cấp và HP đứng cùng hàng; Tính cách chiếm hàng rộng riêng bên dưới. Tooltip được sao chép sang lớp nổi độc lập, đặt gần mục được trỏ và giới hạn trong viewport, không bị header/vùng cuộn cắt. Các tooltip gốc chỉ ẩn trong thẻ đã hỗ trợ; hỗ trợ focus và chạm.
 
 Tốc độ ×20 là lựa chọn phiêu lưu riêng trong nhóm tốc độ; không khôi phục gói quay thưởng đã gỡ. Bộ kiểm tra trích thuật toán gốc xác nhận 200 nhịp/28 giây ở ×20 so với 100 nhịp ở ×10; hoạt ảnh và phần tiến trình khi đóng game giữ giới hạn riêng.
+
+## Tiến trình ô Mega
+
+Đá Mega vẫn nằm trong Vé & quà của Sòng bạc. Phần riêng dùng namespace um- và mega-ui.js/css, không thêm khu mới. Hiển thị số ô đang dùng, số mảnh Mega, ô kế tiếp với cả hai điều kiện và lý do còn thiếu. Các mốc xa và danh mục 48 dạng đặt trong details. Mở ô là hành động chính; danh sách cá thể hỗ trợ Trang bị/Đổi dạng/Tháo. Màn hình hẹp dùng hàng rộng một cột, lớn dùng hai cột, nút tối thiểu 44px.
+
+Ô đầu miễn phí; các ô 2-6 cần 4/8/12/16/24 huy hiệu đạo quán và trả 20/40/60/100/150 mảnh Mega mỗi ô. Huy hiệu không bị tiêu hao. Không tự tháo Mega khác khi trang bị. Mảnh Mega dùng biểu tượng và nhãn riêng, tránh nhầm mảnh đổi thưởng. Hướng dẫn toàn bộ bộ sưu tập và giữ bản trùng đặt trong phần mở rộng để thao tác chính dễ tìm.
