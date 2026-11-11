@@ -1,4 +1,5 @@
 <!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atelier des intros légendaires</title>
+<link rel="stylesheet" href="../bundle/vietnamese-fonts.css">
 
 
 <style>
@@ -13,7 +14,7 @@ button.main{background:#5a2f9a;border-color:#b48cff}label{display:flex;gap:6px;a
 html.player body{background:#000}html.player main{max-width:none;margin:0;padding:0}html.player main>:not(#arena){display:none!important}
 html.player .arena,html.player .arena.phone{width:100vw;height:100vh;aspect-ratio:auto;border:0;border-radius:0}
 /* ---- the arena (game's #arena, 16:9) ---- */
-.arena{--c:#F95587;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:4px solid #2c3446;border-radius:10px;background:#05040d;font-family:'Jersey 10',system-ui,sans-serif;font-size:16px}
+.arena{--c:#F95587;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:4px solid #2c3446;border-radius:10px;background:#05040d;font-family:'Be Vietnam Pro',system-ui,sans-serif;font-size:16px}
 .arena.phone{width:375px}
 #stage{position:absolute;inset:0}
 #bg,#pan{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -7534,7 +7535,7 @@ const WBS_POOL = [1, 4, 7, 25, 26, 35, 37, 39, 52, 54, 58, 63, 66, 74, 77, 79, 8
 .wbs-glow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;display:none}
 .arena canvas.wbs-arc{inset:auto;left:0;top:0;transform-origin:0 0;display:none;opacity:0}
 .wbs-hud{--wk:1;position:absolute;left:0;right:0;top:0;z-index:3;padding:calc(8px*var(--wk)) calc(14px*var(--wk)) calc(16px*var(--wk));background:linear-gradient(rgba(10,12,22,.78),rgba(10,12,22,.4) 65%,transparent);pointer-events:none;display:none;opacity:0}
-.wbs-pct{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-family:'Jersey 15',system-ui,sans-serif;font-weight:400;font-size:calc(30px*var(--wk));line-height:1;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.02em;
+.wbs-pct{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-family:'Be Vietnam Pro',system-ui,sans-serif;font-weight:400;font-size:calc(30px*var(--wk));line-height:1;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.02em;
   text-shadow:2px 0 0 #1b1b22,-2px 0 0 #1b1b22,0 2px 0 #1b1b22,0 -2px 0 #1b1b22,2px 2px 0 #1b1b22,-2px 2px 0 #1b1b22,2px -2px 0 #1b1b22,-2px -2px 0 #1b1b22,3px 4px 0 rgba(0,0,0,.4)}
 .wbs-row{display:flex;align-items:center;gap:calc(8px*var(--wk))}
 .wbs-fb{--hi:#fff3a0;--mid:#ffd84a;--lo:#c99a12;--under:#ff9a2e;position:relative;flex:1;height:calc(34px*var(--wk));border:calc(3px*var(--wk)) solid #1b1b22;border-radius:4px;background:#1d1826;overflow:hidden;
@@ -7546,7 +7547,7 @@ const WBS_POOL = [1, 4, 7, 25, 26, 35, 37, 39, 52, 54, 58, 63, 66, 74, 77, 79, 8
 .wbs-fb .shine{width:0;height:calc(4px*var(--wk));top:calc(3px*var(--wk));bottom:auto;background:rgba(255,255,255,.35)}
 .wbs-fb .sheen{inset:0;right:0;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.4) 50%,transparent 60%);translate:-100% 0}
 .wbs-fb .head{width:calc(6px*var(--wk));background:#fff;opacity:0;box-shadow:0 0 calc(8px*var(--wk)) #fff}
-.wbs-mult{flex:none;min-width:calc(52px*var(--wk));text-align:center;font-family:'Jersey 15',system-ui,sans-serif;font-weight:400;font-size:calc(34px*var(--wk));line-height:1;color:var(--mid,#ffd84a);
+.wbs-mult{flex:none;min-width:calc(52px*var(--wk));text-align:center;font-family:'Be Vietnam Pro',system-ui,sans-serif;font-weight:400;font-size:calc(34px*var(--wk));line-height:1;color:var(--mid,#ffd84a);
   text-shadow:2px 0 0 #1b1b22,-2px 0 0 #1b1b22,0 2px 0 #1b1b22,0 -2px 0 #1b1b22,2px 2px 0 #1b1b22,-2px 2px 0 #1b1b22,3px 4px 0 rgba(0,0,0,.45)}
 @keyframes wbs-sheen{60%,100%{translate:100% 0}}`; document.head.appendChild(st); }
 const wbsGradeEl = Object.assign(document.createElement('div'), { className: 'wbs-grade' }); panCv.after(wbsGradeEl);
@@ -7597,7 +7598,7 @@ function wbsCrowdPlan() {
 function wbsPrep() { return WBS.p ??= wbsLoad(); }
 async function wbsLoad() {
   const plan = wbsCrowdPlan(), srcs = [...new Set([...plan.mons, ...plan.trs].map(e => e.src))];
-  const [fr, sky, top] = await Promise.all([arFrames(), sceneImg(WBS_SKY), sceneImg(WBS_TOP), ...srcs.map(wbsImg), document.fonts?.load("16px 'Jersey 10'").catch(() => {})]);
+  const [fr, sky, top] = await Promise.all([arFrames(), sceneImg(WBS_SKY), sceneImg(WBS_TOP), ...srcs.map(wbsImg), document.fonts?.load("16px 'Be Vietnam Pro'").catch(() => {})]);
   await SPR_READY[493];
   WBS.fr = fr || (SPRS[493] && (() => { const col = new Uint32Array(new Uint8ClampedArray(SPRS[493]).buffer); return { frames: [{ col, ink: arEdge(col.map(arInk), 70, 81), t0: 0 }], total: 1000 }; })());
   WBS.strip = arStrip(sky, top); WBS.sbuf = new Uint32Array(WBS.strip.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, PW, PH * 2).data.buffer);
@@ -7787,7 +7788,7 @@ function wbsCrowdDraw(X, dt) {
   for (const m of P.mons) { if (T < m.tBall || T >= m.tPop) continue; const u = (T - m.tBall) / (m.tPop - m.tBall), a = m.from, b = { x: m.px, y: m.foot - 16 * m.k };
     const x = lerp(a.x, b.x, u), y = lerp(a.y, b.y, u) - m.arc * 4 * u * (1 - u); wbsBall(c, x, y + oy, m.k === 2 ? 2 : 1, T); }
   // the name tags: yours, your friends' (on a wide screen)
-  const kc = arena.clientWidth / WBS_CW, fs = Math.round(clamp(14 / kc, 14, 34)); c.font = `${fs}px 'Jersey 10', system-ui, sans-serif`; c.textBaseline = 'middle'; c.textAlign = 'center';
+  const kc = arena.clientWidth / WBS_CW, fs = Math.round(clamp(14 / kc, 14, 34)); c.font = `${fs}px 'Be Vietnam Pro', system-ui, sans-serif`; c.textBaseline = 'middle'; c.textAlign = 'center';
   for (const t of P.trs) { if (!t.name || T < t.t0 + t.dur || (t.friend && arena.clientWidth < 560)) continue; const a = smooth(0, 260, T - t.t0 - t.dur); if (a <= 0) continue;
     const w = c.measureText(t.name).width + fs * 1.1, hh = Math.round(fs * 1.45), x = Math.round(t.px - w / 2), y = Math.round(t.foot + oy - 74 - hh);
     c.globalAlpha = a * .72; c.fillStyle = '#0c0e16'; c.beginPath(); c.roundRect(x, y, w, hh, hh / 2); c.fill(); c.globalAlpha = a; c.lineWidth = Math.max(2, fs / 7); c.strokeStyle = t.me ? '#ffcb05' : 'rgba(156,204,58,.6)'; c.stroke();

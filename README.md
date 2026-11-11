@@ -6,6 +6,8 @@ Chơi trực tiếp: **https://tdumii.github.io/Pokecatch/**
 
 Bộ tài nguyên đã thu thập gồm 4.839 tệp, khoảng 72,2 MiB: 3.134 PNG, 1.318 GIF, 374 WEBP cùng SVG, intro và font. Sprite bao phủ 556 ID trong dữ liệu game đã khảo sát. Sự hiện diện của tài nguyên Mega không có nghĩa là tích hợp các chức năng quản trị hoặc mở khóa mọi tính năng của máy chủ gốc.
 
+Giao diện tiếng Việt dùng **Be Vietnam Pro**, có đầy đủ dấu tiếng Việt và được lưu cùng game để chơi offline. Logo Latin giữ nét chữ pixel gốc. Các tệp font và giấy phép nằm trong `assets/fonts/`.
+
 Tiến trình chơi được lưu trong trình duyệt trên từng thiết bị. Bản này không đồng bộ tài khoản, không sử dụng bảng xếp hạng hay giao dịch trực tuyến của trang gốc. Không nhập mật khẩu tài khoản gốc vào bản này.
 
 ## Chạy trên máy

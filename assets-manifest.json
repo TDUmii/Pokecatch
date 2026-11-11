@@ -47578,11 +47578,66 @@
   },
   {
     "path": "intros/legend-intros.html",
-    "bytes": 1354703,
-    "sha256": "900654faa542db8affc9c4f09f62a1673891713bed22ebc5057ff290c306b44c",
+    "bytes": 1354790,
+    "sha256": "cb120076ac4afd67b2fb3a2d726d8758a6663a6e226f59284754b32b6d0bc7bf",
     "format": "html",
     "reasons": [
       "boot.js intro URL"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-Bold.ttf",
+    "bytes": 140300,
+    "sha256": "7f738fe5c43c8872807b20e2d30d42163618de8a4daf7f48a939adac32c16847",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Bold.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-ExtraBold.ttf",
+    "bytes": 139680,
+    "sha256": "44dbfa01553d227bec76ba6446c5618870a76a4a3297f41630dde859d0650d02",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-ExtraBold.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-Medium.ttf",
+    "bytes": 135980,
+    "sha256": "b60832bfa0fcd015158112c64d7e3fdad3b0c6287d1823f85a3103636e845268",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Medium.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-OFL.txt",
+    "bytes": 4397,
+    "sha256": "6b7f8f73609a25ea78c891e34cf37b06f8a676b7ea986e941e43b009110f2a85"
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-Regular.ttf",
+    "bytes": 132948,
+    "sha256": "cd1ef6e9d7db28ad5cdb88a65ccbe693870e60d340b791f349d248342b4fe4c3",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-Regular.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
+    ]
+  },
+  {
+    "path": "assets/fonts/BeVietnamPro-SemiBold.ttf",
+    "bytes": 136736,
+    "sha256": "bd8e27eb02720b9d91e59e4f10a90878643219f25ce6a8d9a4f06a8a88d3bb71",
+    "format": "ttf",
+    "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/bevietnampro/BeVietnamPro-SemiBold.ttf",
+    "reasons": [
+      "Vietnamese typography replacement"
     ]
   }
 ]

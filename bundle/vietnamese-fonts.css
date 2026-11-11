@@ -1,0 +1,27 @@
+/* Full Vietnamese glyph coverage, self-hosted for offline play. OFL in assets/fonts. */
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/BeVietnamPro-Regular.ttf") format("truetype")}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/BeVietnamPro-Medium.ttf") format("truetype")}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/BeVietnamPro-SemiBold.ttf") format("truetype")}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/BeVietnamPro-Bold.ttf") format("truetype")}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:800;font-display:swap;src:url("../assets/fonts/BeVietnamPro-ExtraBold.ttf") format("truetype")}
+
+html:root{
+  --font:"Be Vietnam Pro",system-ui,sans-serif;
+  --font-title:var(--font);
+  --font-pixel:var(--font);
+  --fs-micro:11px;
+  --fs-caption:12px;
+  --fs-sm:14px;
+  --fs-body:16px;
+  --fs-title-sm:18px;
+  --fs-title:22px;
+  --fs-display:28px;
+}
+html body{font-family:var(--font);font-weight:500;line-height:1.5}
+html h1,html h2,html h3,html h4{font-weight:700;line-height:1.35}
+html button,html input,html select,html textarea{font-family:var(--font);line-height:1.4}
+html .ti-logo{font-family:"Jersey 15",system-ui,sans-serif;line-height:1}
+html .ti-legal{font-size:11px;line-height:1.6}
+html .battle-log,html .chen-text,html .lk-say{line-height:1.5}
+html .side-nav>button,html .side-nav .nav-grp-h{font-size:14px;line-height:1.35;font-weight:600}
+html .side-nav .l,html .side-nav .nav-grp-in button .l{font-size:14px;line-height:1.35}

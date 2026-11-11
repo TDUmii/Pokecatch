@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T22:54:09.2786411+07:00",
+  "generatedAt": "2026-11-11T08:09:31.739564+07:00",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -21,7 +21,17 @@
         "value": "901px"
       }
     ],
-    "motion": []
+    "motion": [],
+    "typographyMeta": {
+      "game-body": {
+        "displayName": "Vietnamese game body",
+        "purpose": "Self-hosted weights 400/500/600/700/800; shared game ramp 11/12/14/16/18/22/28px. FontTools verified tested precomposed and NFD Vietnamese glyph coverage."
+      },
+      "game-display": {
+        "displayName": "Vietnamese game headings",
+        "purpose": "Shared title and former pixel roles use Be Vietnam Pro. Latin brand logo alone retains Jersey 15."
+      }
+    }
   },
   "components": [
     {
@@ -30,7 +40,7 @@
       "refersTo": "button-primary",
       "description": "The full-width primary action in the native offline dialog.",
       "html": "<button class=\"offline-download\">Tải trọn bộ để chơi offline</button>",
-      "css": ".offline-download{display:block;width:100%;min-height:44px;padding:10px 14px;background:#f3cb53;color:#242334;border:1px solid #f3cb53;border-radius:8px;font:650 14px/1.3 system-ui;cursor:pointer}.offline-download:hover{background:#ffe18b}.offline-download:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}.offline-download:disabled{opacity:.6;cursor:wait}"
+      "css": ".offline-download{display:block;width:100%;min-height:44px;padding:10px 14px;background:#f3cb53;color:#242334;border:1px solid #f3cb53;border-radius:8px;font:650 14px/1.3 \"Be Vietnam Pro\",system-ui,sans-serif;cursor:pointer}.offline-download:hover{background:#ffe18b}.offline-download:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}.offline-download:disabled{opacity:.6;cursor:wait}"
     },
     {
       "name": "Save transfer actions",
@@ -38,16 +48,16 @@
       "refersTo": "button-secondary",
       "description": "Balanced secondary export and import actions.",
       "html": "<div class=\"save-actions\"><button>Xuất bản lưu</button><button>Nhập bản lưu</button></div>",
-      "css": ".save-actions{display:flex;gap:10px}.save-actions button{flex:1;min-height:44px;padding:10px 14px;background:#343b55;color:#fff;border:1px solid #737f9f;border-radius:8px;font:650 14px/1.3 system-ui;cursor:pointer}.save-actions button:hover{background:#465374}.save-actions button:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}"
+      "css": ".save-actions{display:flex;gap:10px}.save-actions button{flex:1;min-height:44px;padding:10px 14px;background:#343b55;color:#fff;border:1px solid #737f9f;border-radius:8px;font:650 14px/1.3 \"Be Vietnam Pro\",system-ui,sans-serif;cursor:pointer}.save-actions button:hover{background:#465374}.save-actions button:focus-visible{outline:3px solid #a8dfff;outline-offset:3px}"
     }
   ],
   "narrative": {
     "northStar": "Hành trình pixel mang theo mình",
-    "overview": "Preserve the inherited dark pixel-game world and use a quiet, readable Vietnamese utility layer for offline downloads and local saves. The document records the scoped implementation and browser screenshots, not a redesign or physical-device test.",
+    "overview": "Preserve the inherited dark pixel-game art and use self-hosted Be Vietnam Pro for Vietnamese text throughout the game, intro and offline utility. The Latin brand logo retains Jersey 15. Utility sizes remain unchanged; browser QA of the font repair is in progress and does not establish physical-device validation.",
     "keyCharacteristics": [
       "Inherited pixel art and dark game panels",
       "Warm yellow primary utility action",
-      "Readable system type for Vietnamese instructions",
+      "Self-hosted Be Vietnam Pro for Vietnamese game and utility text",
       "Compact persistent offline entry",
       "Native modal with clear progress and save transfer"
     ],
@@ -58,8 +68,8 @@
         "section": "colors"
       },
       {
-        "name": "The Readable Instructions Rule",
-        "body": "System type for utility explanations; pixel type for inherited game surfaces.",
+        "name": "The Vietnamese Coverage Rule",
+        "body": "Use shared self-hosted Be Vietnam Pro for Vietnamese interface and canvas text; retain Jersey 15 only for the Latin brand logo. Preserve the separate game and utility type scales.",
         "section": "typography"
       }
     ],

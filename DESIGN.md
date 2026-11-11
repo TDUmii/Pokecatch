@@ -24,22 +24,26 @@ colors:
   danger: "#ff8a8a"
 typography:
   game-display:
-    fontFamily: '"Jersey 15", system-ui, sans-serif'
-    fontSize: "34px"
+    fontFamily: '"Be Vietnam Pro", system-ui, sans-serif'
+    fontSize: "28px"
+    fontWeight: 700
+    lineHeight: 1.35
   game-body:
-    fontFamily: '"Jersey 10", system-ui, sans-serif'
-    fontSize: "20px"
+    fontFamily: '"Be Vietnam Pro", system-ui, sans-serif'
+    fontSize: "16px"
+    fontWeight: 500
+    lineHeight: 1.5
   utility-title:
-    fontFamily: "system-ui, sans-serif"
+    fontFamily: '"Be Vietnam Pro", system-ui, sans-serif'
     fontSize: "23px"
     fontWeight: 750
     lineHeight: 1.25
   utility-body:
-    fontFamily: "system-ui, sans-serif"
+    fontFamily: '"Be Vietnam Pro", system-ui, sans-serif'
     fontSize: "15px"
     lineHeight: 1.6
   utility-label:
-    fontFamily: "system-ui, sans-serif"
+    fontFamily: '"Be Vietnam Pro", system-ui, sans-serif'
     fontSize: "14px"
     fontWeight: 650
     lineHeight: 1.3
@@ -82,7 +86,7 @@ components:
 
 This is a record of the implemented interface, using the established direction in PRODUCT.md. The public Pokecatch VN frontend supplies the dark pixel-game world, Pokémon sprites, scene art, animated battles and dense game navigation. The personal edition adds a compact offline entry and a readable Vietnamese utility dialog. Preserve this division of visual responsibility: game imagery carries the adventure; system text explains local storage and downloads clearly.
 
-The offline addition uses the inherited dark palette with a softer yellow primary action. Its plain system type supports longer Vietnamese instructions. It is intentionally quieter than the colorful game underneath.
+The offline addition uses the inherited dark palette with a softer yellow primary action. Its Be Vietnam Pro type supports longer Vietnamese instructions, matching the repaired game typography. It is intentionally quieter than the colorful game underneath.
 
 **Key Characteristics:**
 
@@ -104,11 +108,13 @@ The normative frontmatter records observed source values. The inherited game has
 
 ## Typography
 
-The game retains embedded Jersey 10 and Jersey 15 fonts and its inherited pixel hierarchy. The offline utility uses the system sans-serif stack for Vietnamese text.
+The game and offline utility use self-hosted **Be Vietnam Pro** with regular, medium, semibold, bold and extra-bold faces (400, 500, 600, 700 and 800) in `assets/fonts/`. The shared `bundle/vietnamese-fonts.css` assigns the body, title and former pixel font roles to this family. The Latin brand logo alone retains Jersey 15. Pixel art, scene framing and game imagery retain their inherited identity.
 
-Utility titles are strong and compact; section headings use a warm light-yellow tint. Body copy has a relaxed line height for instructions. Supporting hints are smaller (12px), attribution smaller again (11px). The persistent entry uses a compact semibold label (12px). These sizes describe the scoped utility, not replacements for game typography.
+The game type ramp is 11, 12, 14, 16, 18, 22 and 28px. Body text uses medium weight with a line height of 1.5; headings use bold weight with a line height of 1.35. Side navigation labels use 14px and line height 1.35, with semibold navigation buttons. Intro styles and canvas text references also use Be Vietnam Pro and the intro links the shared font stylesheet.
 
-**The Readable Instructions Rule.** Preserve system type for save, installation and download explanations; preserve pixel type in inherited game surfaces.
+Utility sizes remain distinct: compact 23px title, 15px body, 14px action labels, 12px hints and entry label, and 11px attribution. Section headings retain their warm light-yellow tint. The font repair changes their family while preserving their existing sizing and rhythm.
+
+**The Vietnamese Coverage Rule.** Use the shared self-hosted family for Vietnamese interface text, including intro and canvas text. Do not restore Jersey fonts to Vietnamese text roles. Source font inspection found 50 missing Vietnamese characters in the old Jersey sample; fontTools checks confirmed the five replacement faces cover the full tested Vietnamese precomposed and NFD strings. Browser QA passed at widths 1366, 390 and 360px with no horizontal overflow or JavaScript errors, and verified font loading after an offline reload. Chrome reported all 72 glyphs of the representative Vietnamese text as the custom Be Vietnam Pro face. This is browser evidence, not physical-phone validation.
 
 ## Layout
 
@@ -164,7 +170,7 @@ Keep the inherited game navigation, scene framing, Pokémon art and local game c
 
 ### Don't:
 
-- **Don't** replace game art or pixel typography with generic dashboard styling.
-- **Don't** apply the utility's system-font sizes across the game engine.
+- **Don't** replace inherited pixel art with generic dashboard styling; the authorized Vietnamese font repair preserves that art.
+- **Don't** apply the utility's text sizes across the game engine; use the shared game type ramp and preserve utility sizing.
 - **Don't** describe unavailable cloud, account or multiplayer features as functional.
 - **Don't** treat a tall full-page screenshot as proof that all content fits simultaneously within a phone screen.

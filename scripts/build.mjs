@@ -24,7 +24,7 @@ for (const path of ['index.html', 'boot.js', 'offline.js', 'offline.css', 'bundl
 for (const required of ['index.html', 'boot.js', 'offline.js', 'offline.css', 'assets-manifest.json']) {
   if (!files.includes(required)) throw new Error(`Missing required game file: ${required}`);
 }
-const shell = files.filter(path => !path.startsWith('assets/') && !path.startsWith('intros/'));
+const shell = files.filter(path => (!path.startsWith('assets/') && !path.startsWith('intros/')) || /^assets\/fonts\/BeVietnamPro-.*\.ttf$/.test(path));
 const hash = createHash('sha256');
 for (const path of shell.filter(path => path !== 'sw.js').sort()) {
   hash.update(path);
