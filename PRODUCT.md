@@ -37,6 +37,8 @@ Chơi một người. Lưu tiến trình trên thiết bị. Tải game và tài
 - Cẩm nang có tra cứu khắc hệ theo engine và gợi ý tối đa sáu Pokémon đang có theo bản đồ/chương; không tự thay đội.
 - Thẻ Pokémon có hàng Tính cách rộng và tooltip nổi trong giới hạn màn hình, hỗ trợ chuột, bàn phím và chạm.
 
+- Có Phòng bí mật được khám phá bằng bảy lần chạm logo màn hình chào. Menu tự chọn Pokémon/vật phẩm trong dữ liệu game, tài nguyên, hồi phục và mở Mega; thao tác rõ ràng, lưu vào bản cá nhân, không tự thay đội.
+
 ## Brand Commitments
 
 Người dùng chọn giữ phong cách game tham chiếu và dùng asset của chính trang đó. Giao diện tiếng Việt. Đây là bản fan game cá nhân, phi thương mại, không phải sản phẩm chính thức của Pokémon hay máy chủ Pokecatch.

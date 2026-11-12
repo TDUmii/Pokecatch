@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T16:55:22.900Z",
+  "generatedAt": "2026-11-12T00:17:15.566Z",
   "title": "Design System: PokéCatch của Umi",
   "extensions": {
     "shadows": [
@@ -187,6 +187,16 @@
       "progression": "unique earned gym badges plus Mega shard cost per slot",
       "currency": "Mega shards, distinct from exchange scraps",
       "entry": "casino prizes Mega tab"
+    },
+    "sandbox": {
+      "source": "bundle/sandbox-ui.js",
+      "cssSource": "bundle/sandbox-ui.css",
+      "rulesSource": "bundle/sandbox-cheats.js",
+      "mode": "operate",
+      "scope": ".us-dialog",
+      "entry": "seven title-logo taps in four seconds; revealed title and personal dialog buttons",
+      "world": "inherited offline utility palette and game sprites",
+      "touchTarget": 44
     }
   },
   "components": [

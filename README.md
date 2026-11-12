@@ -79,3 +79,11 @@ Vào **Hoạt động → Sòng bạc → Vé & quà → Đá Mega**. Ô đầu 
 Tổng mở đủ sáu ô là 370 mảnh Mega. Huy hiệu tính qua các vùng, loại mốc Liên đoàn/nhà vô địch và ID không hợp lệ. Ô mở vĩnh viễn, dữ liệu nằm trong bản lưu cá nhân. Mỗi Pokémon cần mở khóa đúng dạng Mega tương thích như trước. Hai Charizard riêng có thể cùng dùng Mega X. Khi đầy ô, con đã trang bị vẫn đổi X/Y được, trang bị con mới cần tháo một con hoặc mở thêm ô. Pokémon ở PC, Nhà trẻ hoặc Hầm Ngầm vẫn chiếm ô vì giới hạn dùng chung bộ sưu tập.
 
 Trang bị Mega tự bật Giữ lại bản trùng cho gia đình Pokémon đó, tránh bị gộp khi mở lại game; tháo Mega không tự tắt tùy chọn này. Cấp, HP và tiến độ cũ được giữ. Logic ở `bundle/umi-mega.js`, giao diện riêng ở `bundle/mega-ui.js` và CSS; xem [docs/MEGA_MODULES.md](docs/MEGA_MODULES.md).
+
+## Phòng bí mật
+
+Ở màn hình chào, chạm logo **Poke’Catch 7 lần trong 4 giây** để mở Phòng bí mật. Sau khi khám phá, nút xuất hiện ở màn hình chào và trong **Ngoại tuyến → Phòng bí mật**; không cần chạm lại ở thiết bị này. Hãy bắt đầu hoặc tiếp tục hành trình để có nhân vật trước khi nhận quà.
+
+Menu có ba tab: Pokémon (tìm tên/số Pokédex, cấp1-100, số lượng1-100, tùy chọn khác màu), Vật phẩm (tìm mọi vật phẩm có trong bản game và chọn số lượng), Tiện ích (tiền, xu, mảnh đổi thưởng, mảnh Mega, hồi phục đội, mở toàn bộ48 dạng/sáu ô Mega). Mỗi lần bấm áp dụng lưu một giao dịch; mở menu không tự cấp gì. Pokémon được đưa vào PC, không thay đội. Bản thường và khác màu trùng loài được giữ thành các cá thể riêng sau tải lại.
+
+Module và kiểm tra ở [docs/SANDBOX_MODULES.md](docs/SANDBOX_MODULES.md).

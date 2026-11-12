@@ -201,3 +201,9 @@ Tốc độ ×20 là lựa chọn phiêu lưu riêng trong nhóm tốc độ; kh
 Đá Mega vẫn nằm trong Vé & quà của Sòng bạc. Phần riêng dùng namespace um- và mega-ui.js/css, không thêm khu mới. Hiển thị số ô đang dùng, số mảnh Mega, ô kế tiếp với cả hai điều kiện và lý do còn thiếu. Các mốc xa và danh mục 48 dạng đặt trong details. Mở ô là hành động chính; danh sách cá thể hỗ trợ Trang bị/Đổi dạng/Tháo. Màn hình hẹp dùng hàng rộng một cột, lớn dùng hai cột, nút tối thiểu 44px.
 
 Ô đầu miễn phí; các ô 2-6 cần 4/8/12/16/24 huy hiệu đạo quán và trả 20/40/60/100/150 mảnh Mega mỗi ô. Huy hiệu không bị tiêu hao. Không tự tháo Mega khác khi trang bị. Mảnh Mega dùng biểu tượng và nhãn riêng, tránh nhầm mảnh đổi thưởng. Hướng dẫn toàn bộ bộ sưu tập và giữ bản trùng đặt trong phần mở rộng để thao tác chính dễ tìm.
+
+## Phòng bí mật
+
+Easter egg ẩn sau bảy lần chạm logo màn hình chào trong bốn giây, có hỗ trợ Enter/Space. Trước khám phá không có nút menu. Sau đó nút ở màn hình chào và hộp Ngoại tuyến, không thêm thanh điều hướng cố định. Dialog native dùng bảng màu tối, Be Vietnam Pro và ảnh game sẵn có. Ba tab Pokémon/Vật phẩm/Tiện ích, tìm kiếm toàn danh mục nhưng giới hạn bốn mươi kết quả hiển thị, lựa chọn có ảnh, cấp/số lượng/khác màu và phản hồi đã lưu.
+
+Đối tượng chưa có nhân vật được giải thích bắt đầu hành trình, thao tác nhận bị khóa. Menu không tự cấp khi mở. Nút đóng và điều khiển tối thiểu44px; bố cục một cột chính, hai ô số cạnh nhau khi đủ chỗ. Primary hover giữ nền vàng với chữ tối. Namespace us- trong sandbox-ui.js/css; dữ liệu và giao dịch trong sandbox-cheats.js.

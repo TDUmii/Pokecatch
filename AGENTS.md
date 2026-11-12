@@ -16,3 +16,5 @@ Với lệnh qua PowerShell của Codex Desktop, thêm `rtk` trước CLI đư�
 - Trước khi sửa Cẩm nang, tooltip thẻ hoặc tốc độ phiêu lưu, đọc `docs/PLAY_GUIDE_MODULES.md` để chọn đúng mô-đun và kiểm tra.
 
 - Trang bị Mega, mở ô và điều kiện: đọc `docs/MEGA_MODULES.md`; giữ giao dịch trong `umi-mega.js`, giao diện trong `mega-ui.js/css`. Không khôi phục hành vi tự tháo Mega khác khi trang bị.
+
+- Phòng bí mật/easter egg: đọc `docs/SANDBOX_MODULES.md`; giữ giao dịch ở `sandbox-cheats.js`, khám phá và dialog ở `sandbox-ui.js/css`. Không tự cấp quà chỉ vì mở menu hoặc đổi đội khi thêm Pokémon.
