@@ -95,3 +95,11 @@ Vào **Hoạt động → Xưởng chế tạo**, chọn một công thức và 
 Máy dò dấu vết có ba cấp và hai nhánh đổi miễn phí. **Dò loài còn thiếu** cho chọn Pokémon chưa bắt có mặt trên tuyến đường của chương hiện tại. **Dò nguyên liệu hiếm** thưởng Kẹo EXP M sau mỗi 6, 4 hoặc 3 trận thắng hoang dã thường theo cấp máy và thêm Kẹo Hiếm ở mỗi lần nhặt thứ ba. Ổ ấp ấm giảm một nửa thời gian còn lại của một trứng đang ấp ở Nhà trẻ hoặc Sòng bạc. Hộp quả chăm sóc cho 3 Quả Razz và 2 Quả Pinap.
 
 Công thức, trợ thủ và nâng cấp nằm trong `bundle/workshop.js`. Tác dụng ở Phiêu lưu và ấp trứng nằm trong `bundle/workshop-effects.js`. Giao diện dùng `bundle/workshop-ui.js` và `bundle/workshop-ui.css`. Chạy `node scripts/verify-workshop.mjs` và `node scripts/verify-workshop-effects.mjs` để kiểm tra hai phần logic.
+
+## Tiện ích tự động
+
+Trong **Hoạt động → Tiện ích**, bật riêng từng quả tăng hiệu ứng hoặc loại Kẹo EXP. Bạn đặt số lượng dự trữ, chọn Pokémon trong đội nhận kẹo và tắt bất cứ lúc nào. Tác vụ chỉ chạy khi game đang mở ở Phiêu lưu, không trong trận và không ở màn khác. Game giữ lại phần dự trữ, không tự ném Poké Ball và không tự tiến hóa.
+
+Trong **Xưởng chế tạo → Ổ ấp ấm**, mục **Chăm sóc tự động** có hai công tắc. Cho ăn tự động dùng quả Nhà trẻ đã chọn khi có Ditto, Pokémon phù hợp và còn ô trứng. Tự dùng lượt ấp ưu tiên trứng còn nhiều thời gian nhất. Cả hai đều tắt mặc định, lưu theo bản lưu offline và chỉ hoạt động khi trang đang mở.
+
+Mục **Lối tắt** mở nhanh Phiêu lưu, Xưởng, Nhà trẻ, Sòng bạc, Đội hình và Pokédex, kèm nút hồi phục đội, lưu ngay và mở bảng xuất/nhập bản lưu.

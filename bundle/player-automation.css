@@ -1,0 +1,40 @@
+#screen-utilities { padding: 16px; overflow-y: auto; }
+.pu-shell { width: min(880px, 100%); margin: 0 auto; color: var(--text, #eef1f8); }
+.pu-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 18px; border: 1px solid #515a78; border-radius: 14px; background: #1d2233; box-shadow: 0 10px 22px #080a1288; }
+.pu-head h2 { margin: 0; color: #f6cf51; font-size: clamp(22px, 4vw, 30px); }
+.pu-head p, .pu-muted { margin: 5px 0 0; color: #becae4; line-height: 1.55; }
+.pu-mark { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #6c789d; border-radius: 10px; color: #f6cf51; font-size: 22px; }
+.pu-tabs { display: flex; gap: 8px; margin: 12px 0; }
+.pu-tabs button, .pu-secondary, .pu-shortcut { min-height: 44px; border: 1px solid #65708f; border-radius: 9px; background: #2c344d; color: #edf1fb; font: inherit; font-weight: 700; cursor: pointer; }
+.pu-tabs button { padding: 9px 14px; }
+.pu-tabs button[aria-pressed="true"] { border-color: #f6cf51; background: #544b2a; color: #ffe394; }
+.pu-status { min-height: 22px; margin: 8px 2px; color: #a9edc7; font-weight: 650; }
+.pu-status.is-error { color: #ff9a9a; }
+.pu-section { margin: 12px 0 24px; padding: 16px; border: 1px solid #4f5a7b; border-radius: 13px; background: #202639; }
+.pu-section h3 { margin: 0; font-size: 20px; }
+.pu-section h4 { margin: 18px 0 8px; color: #f6cf51; }
+.pu-rules { display: grid; gap: 8px; }
+.pu-rule { display: flex; gap: 11px; align-items: flex-start; padding: 10px; border: 1px solid #4a5575; border-radius: 10px; background: #282f46; }
+.pu-rule-icon { flex: 0 0 36px; display: grid; place-items: center; min-height: 36px; border-radius: 7px; background: #343d59; }
+.pu-rule-icon img { width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated; }
+.pu-rule-copy { min-width: 0; flex: 1; }
+.pu-rule-copy label { display: block; line-height: 1.35; }
+.pu-rule-copy input[type="checkbox"] { accent-color: #f6cf51; transform: translateY(1px); }
+.pu-rule-copy p, .pu-rule-copy small, .pu-target small, .pu-note, .pu-last { margin: 4px 0 0; color: #c7d0e5; line-height: 1.45; }
+.pu-rule-copy input[type="number"] { width: 56px; margin-inline: 3px; padding: 4px; border: 1px solid #7b87a8; border-radius: 5px; background: #141a2a; color: #fff; font: inherit; }
+.pu-target { display: grid; gap: 6px; padding: 11px; border: 1px solid #5c6888; border-radius: 9px; background: #282f46; }
+.pu-target label, .pu-auto-select { display: grid; gap: 5px; font-weight: 700; }
+.pu-target select { max-width: 100%; min-height: 42px; padding: 8px; border: 1px solid #7b87a8; border-radius: 7px; background: #171d2d; color: #fff; font: inherit; }
+.pu-shortcuts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 14px; }
+.pu-shortcut { display: flex; align-items: center; justify-content: flex-start; gap: 9px; padding: 10px; text-align: left; }
+.pu-shortcut img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; }
+.pu-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.pu-secondary { padding: 9px 12px; }
+.pu-tabs button:focus-visible, .pu-secondary:focus-visible, .pu-shortcut:focus-visible, .pu-rule input:focus-visible, .pu-target select:focus-visible { outline: 3px solid #a8dfff; outline-offset: 2px; }
+@media (max-width: 520px) {
+  #screen-utilities { padding: 10px 8px 24px; }
+  .pu-head, .pu-section { padding: 12px; }
+  .pu-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pu-shortcut { font-size: 13px; }
+  .pu-actions > button { flex: 1 1 140px; }
+}

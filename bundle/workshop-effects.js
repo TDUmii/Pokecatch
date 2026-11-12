@@ -4,6 +4,8 @@
   const HUNT_LIMIT = 30;
   const HUNT_CHANCE = [0.35, 0.5, 0.65];
   const MATERIAL_WINS = [6, 4, 3];
+  const FEED_INTERVAL = 60000;
+  const BERRY_RESERVE = 1;
   let engine;
   const game = () => engine.Game;
   const save = () => game().S;
@@ -138,14 +140,93 @@
     }));
   }
 
+  function applyWarmth(entry) {
+    if (!entry) throw new Error('Trứng đã sẵn sàng hoặc đã dùng Ổ ấp ấm.');
+    if (!window.UmiWorkshop.consumeIncubation()) throw new Error('Bạn chưa có lượt dùng Ổ ấp ấm.');
+    entry.egg[entry.field] = entry.now + Math.ceil((entry.egg[entry.field] - entry.now) / 2);
+    entry.egg.workshopWarmed = true;
+  }
+
   function warmEgg(id) {
     return window.UmiArcade.transact(() => {
-      const entry = eggEntries().find(option => option.id === id);
-      if (!entry) throw new Error('Trứng đã sẵn sàng hoặc đã dùng Ổ ấp ấm.');
-      if (!window.UmiWorkshop.consumeIncubation()) throw new Error('Bạn chưa có lượt dùng Ổ ấp ấm.');
-      entry.egg[entry.field] = entry.now + Math.ceil((entry.egg[entry.field] - entry.now) / 2);
-      entry.egg.workshopWarmed = true;
+      applyWarmth(eggEntries().find(option => option.id === id));
       return {ok: true, message: 'Đã giảm một nửa thời gian ấp còn lại.'};
+    });
+  }
+
+  const nurseryBerries = () => engine?.CONFIG?.PENSION?.BERRIES || {};
+  const eggDelay = entry => entry.egg[entry.field] - entry.now;
+  const automatic = () => workshop()?.incubatorAuto;
+  const berryChoice = () => {
+    const choice = automatic()?.berry;
+    return Object.hasOwn(nurseryBerries(), choice) ? choice : 'berry-oran';
+  };
+  function nurseryBlock(berry) {
+    const g = game();
+    const pension = save().pension;
+    if (!g.pensionUnlocked() || !pension?.mons?.length || !g.pensionHasDitto() || !g.pensionEggGoal()) {
+      return 'Cần gửi Ditto và một Pokémon có thể đẻ trứng vào Nhà trẻ.';
+    }
+    if ((pension.eggs?.length || 0) >= g.penOpen('eggs')) return 'Ô ấp Nhà trẻ đang đầy.';
+    if (g.itemCount(berry) <= BERRY_RESERVE) return 'Cần thêm quả đã chọn. Xưởng giữ lại 1 quả.';
+    const progress = (pension.egg || 0) + Math.max(0, g.time() - (pension.tick || g.time()));
+    if (g.pensionEggGoal() - progress < nurseryBerries()[berry].minutes * FEED_INTERVAL) {
+      return 'Sắp đủ tiến độ đẻ trứng. Xưởng giữ quả cho lần sau.';
+    }
+    return '';
+  }
+
+  function autoStatus() {
+    const options = Object.entries(nurseryBerries()).map(([id, berry]) => ({
+      id, name: engine.UI.itemName(id), minutes: berry.minutes
+    }));
+    const config = automatic();
+    const berry = berryChoice();
+    return {
+      feed: config?.feed === true, warm: config?.warm === true, berry, options,
+      available: game().itemCount(berry),
+      feedBlock: config?.feed === true && options.length ? nurseryBlock(berry) : '',
+      nextFeedIn: Math.max(0, (config?.lastFeedAt || 0) + FEED_INTERVAL - Date.now()),
+      lastFeed: config?.lastFeed || '', lastWarm: config?.lastWarm || ''
+    };
+  }
+
+  function setAuto(field, value) {
+    if (field === 'berry' ? !Object.hasOwn(nurseryBerries(), value) :
+      !['feed', 'warm'].includes(field) || typeof value !== 'boolean') {
+      throw new Error('Tùy chọn Ổ ấp không hợp lệ.');
+    }
+    return window.UmiArcade.transact(() => {
+      const state = save().umiWorkshop ||= {};
+      state.incubatorAuto = {...automatic(), [field]: value};
+      return {ok: true};
+    });
+  }
+
+  function tickAuto() {
+    if (!engine || !save()?.trainer || engine.TabLock?.lost) return;
+    const config = automatic();
+    if (!config?.feed && !config?.warm) return;
+    const berry = berryChoice();
+    const now = Date.now();
+    const feed = config.feed === true && Object.hasOwn(nurseryBerries(), berry) &&
+      now - (config.lastFeedAt || 0) >= FEED_INTERVAL && !nurseryBlock(berry);
+    const warm = config.warm === true && workshop().incubationCharges > 0 &&
+      eggEntries().reduce((longest, entry) => !longest || eggDelay(entry) > eggDelay(longest) ? entry : longest, null);
+    if (!feed && !warm) return;
+    return window.UmiArcade.transact(() => {
+      if (feed) {
+        const result = game().usePensionBerry(berry);
+        if (result?.gained > 0) {
+          config.lastFeedAt = now;
+          config.lastFeed = engine.UI.itemName(berry);
+        }
+      }
+      if (warm) {
+        applyWarmth(warm);
+        config.lastWarm = game().DEX[warm.egg.id]?.name || 'Trứng Pokémon';
+      }
+      return {fed: feed, warmed: !!warm};
     });
   }
 
@@ -163,5 +244,7 @@
     };
   };
   window.__umiWorkshopWildWin = onWildWin;
-  window.UmiWorkshopEffects = {targets, hunt, huntChance, startHunt, cancelHunt, materialProgress, eggs, warmEgg};
+  window.UmiWorkshopEffects = {
+    targets, hunt, huntChance, startHunt, cancelHunt, materialProgress, eggs, warmEgg, autoStatus, setAuto, tickAuto
+  };
 })();

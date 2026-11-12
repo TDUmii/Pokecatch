@@ -132,9 +132,18 @@
 
   function eggControls(charges) {
     const eggs = effects()?.eggs() || [];
+    const automatic = effects()?.autoStatus?.();
     const egg = eggs.find(value => String(value.id) === eggId);
     const options = eggs.map(value => '<option value="' + esc(value.id) + '"' +
       (value === egg ? ' selected' : '') + '>' + esc(value.name) + ' · ' + esc(value.source) + '</option>').join('');
+    const berryOptions = (automatic?.options || []).map(value => '<option value="' + esc(value.id) + '"' +
+      (value.id === automatic.berry ? ' selected' : '') + '>' + esc(value.name) + ' · ' + number(value.minutes) + ' phút</option>').join('');
+    const autoPanel = automatic ? '<section class="wk-auto" aria-labelledby="wk-auto-title"><div class="wk-title-row"><img src="assets/ui/berry-oran.png" alt=""><div><h3 id="wk-auto-title">Chăm sóc tự động</h3><p>Chỉ chạy khi game đang mở ở Phiêu lưu. Xưởng giữ lại 1 quả.</p></div></div>' +
+      '<label class="wk-check"><input type="checkbox" data-wk-auto="feed"' + (automatic.feed ? ' checked' : '') + '> Cho ăn tự động ở Nhà trẻ</label>' +
+      '<label class="wk-auto-select">Quả dùng cho Nhà trẻ<select data-wk-auto-berry>' + berryOptions + '</select></label>' +
+      '<p class="wk-hint">Đang có ' + number(automatic.available) + ' quả đã chọn. ' + esc(automatic.feedBlock || (automatic.feed ? 'Đang chờ đủ Pokémon, Ditto và ô trứng.' : 'Bật khi muốn tự dùng quả để tăng tiến độ tạo trứng.')) + '</p>' +
+      '<label class="wk-check"><input type="checkbox" data-wk-auto="warm"' + (automatic.warm ? ' checked' : '') + '> Tự dùng lượt ấp cho trứng lâu nhất</label>' +
+      '<p class="wk-hint">' + (automatic.lastWarm ? 'Lần gần nhất: ' + esc(automatic.lastWarm) : 'Lượt ấp sẽ giảm một nửa thời gian còn lại của trứng đang chờ.') + '</p></section>' : '';
     return '<section class="wk-detector" aria-labelledby="wk-egg-title"><div class="wk-title-row">' +
       icon(art.incubator) + '<div><h3 id="wk-egg-title">Dùng lượt ấp</h3><p>Giảm một nửa thời gian còn lại. Mỗi trứng chỉ dùng được một lượt.</p></div></div>' +
       (!eggs.length ? '<p class="wk-hint">Chưa có trứng đang ấp đủ điều kiện.</p>' :
@@ -142,7 +151,7 @@
         '<option value="">Chọn trứng</option>' + options + '</select></label></div>' +
         (egg ? '<p class="wk-hint">Thời gian còn lại: ' + time(egg.remaining) + '</p>' : '') +
         '<button type="button" class="wk-primary" data-wk-action="warm"' + (egg && charges ? '' : ' disabled') +
-        '>Dùng 1 lượt ấp</button></div>') + '</section>';
+        '>Dùng 1 lượt ấp</button></div>') + '</section>' + autoPanel;
   }
 
   function detectorDetails(recipe) {
@@ -265,6 +274,16 @@
       } else if (target.matches('[data-wk-egg]')) {
         eggId = target.value;
         render('[data-wk-egg]');
+      } else if (target.matches('[data-wk-auto]')) {
+        const result = effects()?.setAuto(target.dataset.wkAuto, target.checked);
+        feedback = result?.message || '';
+        failed = result?.ok === false;
+        render('[data-wk-auto="' + CSS.escape(target.dataset.wkAuto) + '"]');
+      } else if (target.matches('[data-wk-auto-berry]')) {
+        const result = effects()?.setAuto('berry', target.value);
+        feedback = result?.message || '';
+        failed = result?.ok === false;
+        render('[data-wk-auto-berry]');
       }
     });
   }

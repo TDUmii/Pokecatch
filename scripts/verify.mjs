@@ -120,3 +120,5 @@ await import('./verify-pokemon-card.mjs');
 await import('./verify-sandbox-cheats.mjs');
 await import('./verify-workshop.mjs');
 await import('./verify-workshop-effects.mjs');
+await import('./verify-player-automation.mjs');
+await import('./verify-workshop-automation.mjs');

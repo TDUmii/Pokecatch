@@ -171,6 +171,20 @@
 #screen-workshop .wk-hunt { display: grid; gap: 7px; justify-items: start; }
 #screen-workshop .wk-hunt .wk-helper { width: 100%; }
 #screen-workshop progress { accent-color: var(--wk-gold); width: min(100%, 155px); }
+#screen-workshop .wk-auto {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 13px;
+  border: 1px solid var(--wk-edge);
+  border-radius: 12px;
+  background: var(--wk-raised);
+}
+#screen-workshop .wk-auto .wk-title-row img { width: 32px; height: 32px; image-rendering: pixelated; }
+#screen-workshop .wk-check { display: flex; gap: 8px; align-items: center; min-height: 40px; font-weight: 700; }
+#screen-workshop .wk-check input { accent-color: var(--wk-gold); width: 18px; height: 18px; }
+#screen-workshop .wk-auto-select { display: grid; gap: 5px; color: var(--wk-muted); font-size: 13px; font-weight: 700; }
+#screen-workshop .wk-auto-select select { min-height: 42px; padding: 8px; border: 1px solid var(--wk-edge); border-radius: 8px; background: var(--wk-panel); color: var(--wk-ink); font: inherit; }
 @media (max-width: 440px) {
   #screen-workshop .wk-shell { gap: 10px; }
   #screen-workshop .wk-recipe { flex-direction: column; padding-inline: 4px; min-height: 69px; font-size: 12px; }

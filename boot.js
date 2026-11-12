@@ -24,6 +24,7 @@
             <b class="nav-grp-t">Activités</b>
             <button data-screen="pension"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAw0lEQVRYw+2VvQ2DMBSEGcWrZA3WYAzalBkhZVpKyqxBmRUcTvDQYT0ljc9RpHfSSciF73s/yF0XCoVC/6qUUmY3D8+vx+ZdzSAQNMxjnpbpBIBvOYSFm48urAYQzqQQuNyCjg7sNigZwGnujrkzEohvANIx4ML5PnwM5bPlea0LYQDWYp6/t5ASgHEFuNx6F6IMB2x1AISzvaoRbJbsQQmBUA62Lsn+Ag7najlcBsDL6FlavfcKlgDNX8WfPsehUKim3sl5viRG5JaPAAAAAElFTkSuQmCC" alt=""></span><span class="l">Pension</span></button>
             <button data-screen="workshop"><span class="ic"><img src="assets/ui/explorer-kit.png" alt=""></span><span class="l">Xưởng chế tạo</span></button>
+            <button data-screen="utilities"><span class="ic"><img src="assets/ui/floppy.svg" alt=""></span><span class="l">Tiện ích</span></button>
             <button data-screen="casino" class="locked"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAvElEQVRYw+2WwQ2FIBBELcESaIMjbdjKtmQbHm3FFjBzINmorAILP/nZSSYaE5jHCMZpMplMSnLOxeQQQhweKrlbOM1zXL0XjTa6QGBSBABCMgC6QHCAtwbUAUrDhwDsy3Lz0PqHAZSG/2f9X60KkCaFjoPitvrsvepXsCRYtfaaYDWA2mBVACISnQvnANV74QrAVyxB8DBcMQ5uBuAhT8+fVgngdCK6vAI4V6/KMaz902mqXkNN1ZtMv9AJgDk/D88J+jYAAAAASUVORK5CYII=" alt=""></span><span class="l">Casino</span></button>
             <button data-screen="raid"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA1UlEQVRYw+2VsQ1CMQxEM0paRmANSkagpWQNyqxEyQqMkNbIgovMKXT4kL5iyVJSvRfHcUpZsWILUWs1Tin8cHl8AH0vEZnBZyLpAn+XiPntOuQNCRGZAEMgIYPvb33AYhVkAq330Qdmd2t20p7eBVAFh0sEHLA7X18nfgv4Pn0IAeBAhyMhgUqkSMSSIwHnjI2ZVgGWSa8AS/idxyZED6Q3X3xq/AokozY+tTgHUmD82fB/z5PwpwLH1kcC7uvZ7E8pN6AAz+Dpdx7BUjj3QVmxYovxBDn+ZFdOxsTkAAAAAElFTkSuQmCC" alt=""></span><span class="l">Raids</span></button>
             <button data-screen="tower" class="locked"><span class="ic"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA/0lEQVRYhe2VsQ3CMBBFMwal16BkhZSUKWkzglegpGSErECZNbLGoQ/60snYBuGzkZBP+pItJL93tmOGoVevXoXlnJNUmsDnReSyiuzP2yMYM1UlsDhBkEBu23M++WtdCcIJZnT3CITMBQg/jJOMJy9Hv7xIAIxgjmMxk9BwCiAYhyI6JjsRg+OsEc5TIsUCqc4pwDF/1yKAFx1DCh4T4C4whO/m9TuBHPydAN+GYji2UneVEzCH8xKFEuEl1F9DMZwCfNX0bY7thv4KTOAUwEL6eY2JmHeuBbAQ/2ByIqadxyRyInx2zeFaIidSFf6JSBN4TqQpPCbyE3ivXn9Xd9ZwpoXxo/riAAAAAElFTkSuQmCC" alt=""></span><span class="l">Tour de Combat</span></button>
@@ -57,6 +58,7 @@
       <section class="screen" id="screen-leaderboard"><div id="lb-root"></div></section>
       <section class="screen" id="screen-casino"></section>
       <section class="screen" id="screen-workshop"></section>
+      <section class="screen" id="screen-utilities"></section>
       <section class="screen active" id="screen-adventure">
         <div class="adv-side">
           <button class="adv-trigger" id="chapter-btn" title="Choisir une aventure"></button>
@@ -196,3 +198,20 @@
     <div class="bs-body" id="death-counter"></div>
   </aside>
 `,s=document,c=function(){window.BOOT_FAIL&&window.BOOT_FAIL()},i=o.vendor.concat(e,[o.js]);i.forEach(function(A){s.head.appendChild(Object.assign(s.createElement("link"),{rel:"preload",as:"script",href:A}))});var M=new Promise(function(A){s.head.appendChild(Object.assign(s.createElement("link"),{rel:"stylesheet",href:o.css,onload:A,onerror:c}))}),v=window.SW_REG&&navigator.serviceWorker?window.SW_REG.then(function(A){if(!(!A||navigator.serviceWorker.controller))return new Promise(function(a){navigator.serviceWorker.addEventListener("controllerchange",a),setTimeout(a,3e3)})}):null,I=[];M.then(function(){return new Promise(function(A){var a=function(){I.forEach(function(n){n()}),s.body.insertAdjacentHTML("afterbegin",d),A()};s.body?a():s.addEventListener("DOMContentLoaded",a)})}).then(function(){return v}).then(function(){i.forEach(function(A){s.head.appendChild(Object.assign(s.createElement("script"),{src:A,async:!1,onerror:c}))})})}();
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.__umiPlayerAutomationTimer) return;
+  const bindUtilityShortcut = () => {
+    const button = document.querySelector('[data-screen="utilities"]');
+    if (button && !button.dataset.umiUtilityShortcut) {
+      button.dataset.umiUtilityShortcut = 'true';
+      button.addEventListener('click', () => window.PokeOffline?.engine?.App?.show?.('utilities'));
+    }
+  };
+  bindUtilityShortcut();
+  const utilityBinding = setInterval(bindUtilityShortcut, 250);
+  setTimeout(() => clearInterval(utilityBinding), 15000);
+  window.__umiPlayerAutomationTimer = setInterval(() => {
+    try { window.UmiPlayerAutomation?.tick?.(); } catch (error) { console.warn('Tự dùng vật phẩm:', error); }
+    try { window.UmiWorkshopEffects?.tickAuto?.(); } catch (error) { console.warn('Chăm sóc Nhà trẻ:', error); }
+  }, 5000);
+});
