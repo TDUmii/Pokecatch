@@ -1,0 +1,180 @@
+/* Workshop screen uses the game's existing dark panels and self-hosted font. */
+#screen-workshop {
+  --wk-ink: #eef1f8;
+  --wk-muted: #bcc6df;
+  --wk-panel: #1c2030;
+  --wk-raised: #252a3d;
+  --wk-edge: #434d69;
+  --wk-gold: #f3cb53;
+  --wk-success: #a9edc7;
+  --wk-danger: #ffadad;
+  color: var(--wk-ink);
+}
+#screen-workshop .wk-shell {
+  width: min(100%, 850px);
+  margin-inline: auto;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+#screen-workshop :is(h2,h3,h4,p) { margin: 0; }
+#screen-workshop h2 { font-size: clamp(22px, 4vw, 28px); line-height: 1.3; }
+#screen-workshop h3 { font-size: 18px; line-height: 1.4; }
+#screen-workshop h4 { font-size: 14px; line-height: 1.5; }
+#screen-workshop p,
+#screen-workshop .wk-hint { color: var(--wk-muted); font-size: 14px; line-height: 1.55; }
+#screen-workshop img { image-rendering: pixelated; object-fit: contain; display: block; flex: none; }
+#screen-workshop .wk-head {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 17px 18px;
+  min-height: 105px;
+  border: 1px solid var(--wk-edge);
+  border-radius: 14px;
+  background: linear-gradient(90deg, #171c30 35%, #171c30b8 100%),
+    url("../assets/bg/scenes/51-labo-cramois-710x400.webp") center 44% / cover;
+}
+#screen-workshop .wk-head h2 { color: var(--wk-gold); margin-bottom: 3px; }
+#screen-workshop .wk-wallet {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--wk-edge);
+  border-radius: 14px;
+  background: var(--wk-panel);
+  font-size: 14px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+#screen-workshop .wk-wallet img { width: 21px; height: 21px; }
+#screen-workshop .wk-status {
+  padding: 9px 12px;
+  background: var(--wk-panel);
+  border: 1px solid var(--wk-edge);
+  color: var(--wk-success);
+  border-radius: 8px;
+  font-size: 14px;
+}
+#screen-workshop .wk-status:empty { display: none; }
+#screen-workshop .wk-status[data-error] { color: var(--wk-danger); }
+#screen-workshop :is(.wk-job,.wk-craft,.wk-detector) {
+  min-width: 0;
+  border: 1px solid var(--wk-edge);
+  border-radius: 14px;
+  background: var(--wk-panel);
+  padding: 14px;
+}
+#screen-workshop :is(.wk-job,.wk-action-row,.wk-tracking,.wk-title-row) {
+  display: flex;
+  align-items: center;
+  gap: 8px 12px;
+}
+#screen-workshop :is(.wk-job,.wk-action-row,.wk-tracking) {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#screen-workshop .wk-job p { flex: 1 1 195px; }
+#screen-workshop :is(.wk-craft,.wk-detector) { display: grid; gap: 12px; }
+#screen-workshop .wk-title-row img { width: 46px; height: 46px; }
+#screen-workshop :is(.wk-countdown,.wk-duration) {
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--wk-gold);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+#screen-workshop .wk-action-row .wk-hint { display: block; }
+#screen-workshop :is(button,select) {
+  min-height: 44px;
+  min-width: 0;
+  padding: 8px 11px;
+  border: 1px solid #626b87;
+  border-radius: 8px;
+  background: var(--wk-raised);
+  color: var(--wk-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#screen-workshop button { cursor: pointer; font-weight: 700; }
+#screen-workshop select { display: block; width: 100%; color-scheme: dark; margin-top: 4px; }
+#screen-workshop :is(button,select):focus-visible { outline: 3px solid #a8dfff; outline-offset: 2px; }
+#screen-workshop button:enabled:hover { background: #343b55; }
+#screen-workshop button:disabled { cursor: default; opacity: .58; }
+#screen-workshop .wk-primary { background: var(--wk-gold); color: #242334; border-color: var(--wk-gold); }
+#screen-workshop .wk-primary:enabled:hover { background: #ffe18b; }
+#screen-workshop .wk-recipes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+#screen-workshop .wk-recipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px 8px;
+  overflow-wrap: anywhere;
+}
+#screen-workshop .wk-recipe img { width: 25px; height: 25px; }
+#screen-workshop :is(.wk-recipe,.wk-branch)[aria-pressed="true"] {
+  border-color: var(--wk-gold);
+  background: #343b55;
+  color: #ffe18b;
+}
+#screen-workshop .wk-ingredients {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 5px 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#screen-workshop .wk-ingredients li {
+  display: flex;
+  align-items: center;
+  gap: 4px 7px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--wk-raised);
+  font-size: 14px;
+}
+#screen-workshop .wk-ingredients img { width: 22px; height: 22px; }
+#screen-workshop .wk-ingredients b { margin-left: auto; white-space: nowrap; color: var(--wk-success); font-variant-numeric: tabular-nums; }
+#screen-workshop .wk-ingredients .wk-short b { color: var(--wk-danger); }
+#screen-workshop .wk-helper { display: flex; align-items: center; gap: 8px; min-width: 0; }
+#screen-workshop .wk-helper img { width: 44px; height: 44px; }
+#screen-workshop .wk-helper label { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; }
+#screen-workshop .wk-helper .wk-hint { display: block; margin-top: 5px; font-weight: 400; }
+#screen-workshop .wk-branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(210px,100%),1fr));
+  gap: 7px;
+}
+#screen-workshop .wk-branch {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  text-align: left;
+}
+#screen-workshop .wk-branch img { width: 24px; height: 24px; }
+#screen-workshop .wk-branch small { display: block; color: var(--wk-muted); font-size: 12px; font-weight: 500; }
+#screen-workshop .wk-active {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--wk-gold);
+  white-space: nowrap;
+}
+#screen-workshop .wk-hunt { display: grid; gap: 7px; justify-items: start; }
+#screen-workshop .wk-hunt .wk-helper { width: 100%; }
+#screen-workshop progress { accent-color: var(--wk-gold); width: min(100%, 155px); }
+@media (max-width: 440px) {
+  #screen-workshop .wk-shell { gap: 10px; }
+  #screen-workshop .wk-recipe { flex-direction: column; padding-inline: 4px; min-height: 69px; font-size: 12px; }
+  #screen-workshop .wk-head { padding: 12px; }
+  #screen-workshop :is(.wk-job,.wk-craft,.wk-detector) { padding: 11px; }
+  #screen-workshop :is(.wk-action-row,.wk-job,.wk-hunt) .wk-primary { width: 100%; }
+}

@@ -118,3 +118,5 @@ await import('./verify-adventure-presentation.mjs');
 await import('./verify-guide-rules.mjs');
 await import('./verify-pokemon-card.mjs');
 await import('./verify-sandbox-cheats.mjs');
+await import('./verify-workshop.mjs');
+await import('./verify-workshop-effects.mjs');

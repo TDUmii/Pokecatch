@@ -87,3 +87,11 @@ Trang bị Mega tự bật Giữ lại bản trùng cho gia đình Pokémon đó
 Menu có ba tab: Pokémon (tìm tên/số Pokédex, cấp1-100, số lượng1-100, tùy chọn khác màu), Vật phẩm (tìm mọi vật phẩm có trong bản game và chọn số lượng), Tiện ích (tiền, xu, mảnh đổi thưởng, mảnh Mega, hồi phục đội, mở toàn bộ48 dạng/sáu ô Mega). Mỗi lần bấm áp dụng lưu một giao dịch; mở menu không tự cấp gì. Pokémon được đưa vào PC, không thay đội. Bản thường và khác màu trùng loài được giữ thành các cá thể riêng sau tải lại.
 
 Module và kiểm tra ở [docs/SANDBOX_MODULES.md](docs/SANDBOX_MODULES.md).
+
+## Xưởng chế tạo
+
+Vào **Hoạt động → Xưởng chế tạo**, chọn một công thức và một Pokémon trong PC. Hệ Điện hợp Máy dò dấu vết, hệ Lửa hợp Ổ ấp ấm và hệ Cỏ hợp Hộp quả chăm sóc. Trợ thủ hợp hệ giảm 25% thời gian. Xưởng làm một món mỗi lần, lưu thời điểm hoàn thành để bạn quay lại nhận sau khi đóng game.
+
+Máy dò dấu vết có ba cấp và hai nhánh đổi miễn phí. **Dò loài còn thiếu** cho chọn Pokémon chưa bắt có mặt trên tuyến đường của chương hiện tại. **Dò nguyên liệu hiếm** thưởng Kẹo EXP M sau mỗi 6, 4 hoặc 3 trận thắng hoang dã thường theo cấp máy và thêm Kẹo Hiếm ở mỗi lần nhặt thứ ba. Ổ ấp ấm giảm một nửa thời gian còn lại của một trứng đang ấp ở Nhà trẻ hoặc Sòng bạc. Hộp quả chăm sóc cho 3 Quả Razz và 2 Quả Pinap.
+
+Công thức, trợ thủ và nâng cấp nằm trong `bundle/workshop.js`. Tác dụng ở Phiêu lưu và ấp trứng nằm trong `bundle/workshop-effects.js`. Giao diện dùng `bundle/workshop-ui.js` và `bundle/workshop-ui.css`. Chạy `node scripts/verify-workshop.mjs` và `node scripts/verify-workshop-effects.mjs` để kiểm tra hai phần logic.
